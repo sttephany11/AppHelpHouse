@@ -27,7 +27,7 @@ import styles from '../css/bemVindoCss'; // Importa o arquivo de estilos
                 <Text style={styles.text}>Nosso app utiliza sua</Text>
                 <Text style={styles.text}>localização para</Text>
                 <Text style={styles.text}>encontrar profissionais</Text>
-                <Text style={styles.text}>perto de você!</Text>
+                <Text style={styles.text}>perto de você</Text>
             </View>
         </View>
 

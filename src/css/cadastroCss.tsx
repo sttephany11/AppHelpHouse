@@ -1,24 +1,34 @@
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',     
+    alignItems: 'center',    
+      overflow:'hidden', 
   },
+ 
   fundo: {
     height: '100%',
     width: '140%',
     backgroundColor: '#FF8F49',
     position: 'absolute', 
-    top: '20%',            
+    top: '17%',            
     left: '-20%',         
     borderRadius: 250,
     zIndex: -1,
+    overflow:'hidden',
   },
   scrollContainer: {
 
 },
   title: {
+    width: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',    
+    height:'10%'
+  },
+
+  titleCadastro: {
     width: '100%',
     justifyContent: 'flex-end',
     alignItems: 'center',    
@@ -34,8 +44,9 @@ const styles = StyleSheet.create({
   containerCadastro: {
     width: '100%',
     height:'100%',
-   flexDirection:'column' ,
+    flexDirection:'column' ,
     alignItems: 'center',  
+    overflow:'hidden',
      
   },
   titulo2:{
@@ -44,13 +55,13 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   pessoais:{
-        color:'#004AAD'
+        color:'#004AAD',
   },
   input:{
     width:280,
     height:60,
     position:'relative',
-    top:60
+    top:30
   
    },
   
@@ -61,7 +72,7 @@ const styles = StyleSheet.create({
     height:50,
     justifyContent:'center',
     alignItems:'center',
-    marginTop:'30%',
+    marginTop:'10%',
     marginLeft:'22%',
     width:160,  
   },
@@ -89,6 +100,23 @@ const styles = StyleSheet.create({
     color:'#fff',
    
     
+  },
+
+  //teste de input
+  title3:{
+  fontSize:20,
+  marginTop:5,
+  color:'#fff',
+  fontWeight:'bold',
+  },
+
+  input3:{
+  borderBottomWidth:5,
+borderColor: '#fff',
+height:40,
+marginBottom:10,
+fontSize:16,
+color:'#fff',
   },
 });
 

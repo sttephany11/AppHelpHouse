@@ -5,6 +5,12 @@ import BemVindo from '../views/bemVindo';
 import login from '../views/login';
 import ConfirmedId from '../views/confirmeId'
 import cadastro from '../views/cadastro'
+import { NavigationContainer } from '@react-navigation/native';
+import CadastroScreen3 from '../views/cadastro3';
+import CadastroScreen2 from '../views/cadastro2';
+import Home from '../views/home';
+import Pesquisar from '../views/pesquisar';
+
 
 
 
@@ -40,16 +46,30 @@ const Tabs = () => {
         />
          <Tab.Screen 
         name="Cadastro2" 
-        component={cadastro} 
+        component={CadastroScreen2} 
         options={{headerShown:false}} 
         />
            <Tab.Screen 
         name="Cadastro3" 
-        component={cadastro} 
+        component={CadastroScreen3} 
         options={{headerShown:false}} 
         />
+        <Tab.Screen 
+        name="Home" 
+        component={Home} 
+        options={{headerShown:false}} 
+        />
+        <Tab.Screen 
+        name="Pesquisar" 
+        component={Pesquisar} 
+        options={{headerShown:false}} 
+        />
+        
       </Tab.Navigator>
+
     );
   };
   
   export default Tabs;
+
+

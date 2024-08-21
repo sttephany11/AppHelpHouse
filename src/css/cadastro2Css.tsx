@@ -81,24 +81,78 @@ const styles = StyleSheet.create({
 
 
 
-  //view de rua e num
-  inputRow: {
-    flexDirection: 'row',  // Coloca os inputs em uma linha
-    width: 190,      // Usa todo o espaço disponível
-    alignItems: 'center',  // Alinha verticalmente os inputs
-  },
-  inputNum: {
-    width: 69,
-    marginLeft: 20,
-    flexDirection:'column',
-    marginRight:10,
-  },
+
 
   //buton buscar cep 
   buttonEnviar: {
   margin:10,
-  }
+  },
 
+
+  // inputs
+  title3:{
+    fontSize:20,
+    marginTop:5,
+    color:'#fff',
+    fontWeight:'bold',
+    },
+  
+    input3:{
+    borderBottomWidth:5,
+    borderColor: '#fff',
+    height:40,
+    marginBottom:10,
+    fontSize:16,
+    color:'#fff',
+    },
+
+
+      //view de complemento e num
+  
+  inputNum:{
+    borderBottomWidth:5,
+    borderColor: '#fff',
+    height:40,
+    marginBottom:10,
+    fontSize:16,
+    color:'#fff',
+    marginTop:5,
+    width:80,
+    justifyContent:'flex-start',
+    },
+    inputComple:{
+      borderBottomWidth:5,
+      borderColor: '#fff',
+      height:40,
+      marginBottom:10,
+      fontSize:16,
+      color:'#fff',
+      marginTop:5,
+      width:120,
+      justifyContent:'flex-start',
+      },
+
+//icon
+icon:{
+color:'#fff',
+
+
+},
+    //button buscar
+
+    inputsCep:{
+      flexDirection:'row',
+    },
+ 
+
+      title4:{
+        fontSize:20,
+        marginTop:5,
+        color:'#fff',
+        fontWeight:'bold',
+        marginLeft:150,
+        },
+      
 });
 
 export default styles;

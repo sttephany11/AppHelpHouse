@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text ,TouchableOpacity, Alert,Image} from 'react-native';
+import { View, Text ,TouchableOpacity, Alert,TextInput} from 'react-native';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { TextInputMask } from 'react-native-masked-text';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
@@ -9,6 +9,7 @@ import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';  // Importando o MapView e Marker
 import Map from '../../componentes/Map/map';  // Importe o componente Map
 import Api from '../../componentes/apiCep/api'
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 
@@ -67,7 +68,7 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-          
+             
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
@@ -76,186 +77,55 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
                     </View>
 
                     <View style={styles.input}>
-
+                   
                             {/* Cep */}
-                    <FloatingLabelInput
-                        label="Cep"
-                        value={Cep}
-                        keyboardType="numeric"
-                        maxLength={9}
-                        onChangeText={handleCepChange}
-                        containerStyles={{
-                            borderBottomWidth: 5,
-                            borderColor: '#fff',
-                            marginTop: 20,
-                            marginBottom: 10,
-                        }}
-                        customLabelStyles={{
-                            topFocused: -20,
-                            colorFocused: '#fff',  // Cor do label quando o input está em foco
-                            fontSizeFocused: 16,
-                            colorBlurred: '#004AAD',  // Cor do label quando o input não está em foco
-                        }}
-                        labelStyles={{
-                            paddingHorizontal: 5,
-                            fontWeight: 'bold',
-                        }}
-                        inputStyles={{
-                            color: '#fff',
-                            fontSize: 16,
-                        }}
-                        
-                    />
-
-                        <FloatingLabelInput
-                        label="Bairro"
-                        value={Bairro}
-                        onChangeText={value => setBairro(value)}
-                        containerStyles={{
-                            borderBottomWidth: 5,
-                            borderColor: '#fff',
-                            marginTop: 20,
-                            marginBottom: 10,
-                        }}
-                        customLabelStyles={{
-                            topFocused: -20,
-                            colorFocused: '#fff',
-                            colorBlurred: '#004AAD',  // Cor do label quando o input não está em foco
-
-                            fontSizeFocused: 16,
-                        }}
-                        labelStyles={{
-                            paddingHorizontal: 5,
-                            color: '#FF8F49',
-                            fontWeight: 'bold'
-                        }}
-                        inputStyles={{
-                            color: '#fff',
-                            fontSize: 16,
-                        }}
-                    />
-
-                        <View style={styles.inputRow}>
-                        {/* Rua */}
-                        <FloatingLabelInput
-                            label="Rua"
-                            value={Rua}
-                            onChangeText={value => setRua(value)}
-                            containerStyles={{
-                                borderBottomWidth: 5,
-                                borderColor: '#fff',
-                                marginTop: 20,
-                                marginBottom: 10,
-
-
-                            }}
-                            customLabelStyles={{
-                                topFocused: -20,
-                                colorFocused: '#fff',
-                                fontSizeFocused: 16,
-                                colorBlurred: '#004AAD',  // Cor do label quando o input não está em foco
-
-                            }}
-                            labelStyles={{
-                                paddingHorizontal: 5,
-                                color: '#FF8F49',
-                                fontWeight: 'bold'
-
-                            }}
-                            inputStyles={{
-                                color: '#fff',
-                                fontSize: 16,
-                            }}
-                        />
-                        <View style={styles.inputNum}>
-
-                            {/* Numero */}
-                            <FloatingLabelInput
-                                label="Número"
-                                value={Numero}
-
-                                onChangeText={value => setNumero(value)}
-                                keyboardType="numeric"
-                                containerStyles={{
-                                    borderBottomWidth: 5,
-                                    borderColor: '#fff',
-                                    marginTop: 20,
-                                    marginBottom: 10,
-                                    marginLeft: 10,  // Espaçamento entre os inputs
-                                    width: 60,       // Largura fixa para o campo de número
-                                }}
-                                
-                                customLabelStyles={{
-                                    topFocused: -20,
-                                    colorFocused: '#fff',
-                                    fontSizeFocused: 16,
-                                    colorBlurred: '#004AAD',  // Cor do label quando o input não está em foco
-                                  
-
-                                }}
-                                labelStyles={{
-                                    paddingHorizontal: 1,
-                                    color: '#FF8F49',
-                                    fontWeight: 'bold'
-
-                                }}
-                                inputStyles={{
-                                    color: '#fff',
-                                    fontSize: 16,
-                                }}
-
-
+                            <View style={styles.inputsCep}>
+                            <Text style={styles.title3}> CEP  </Text>
+                            <Text style={styles.title4}> <AntDesign style={styles.icon} name="search1" size={24} color="black" onPress={buscarCep} /></Text>
+                            </View> 
+                            <TextInput style={styles.input3} 
+                             placeholder="Digite seu cep..." 
+                             value={Cep}
+                             keyboardType="numeric"
+                             maxLength={8}
+                             onChangeText={value => setCep(value)} 
+                            
+                            />
+ 
+                            <Text style={styles.title3}> Bairro</Text>
+                            <TextInput placeholder=""
+                             value={Bairro}
+                             onChangeText={value => setBairro(value)} 
+                            style={styles.input3}
                             />
 
+                  
 
-
-                        </View>
-
-                    </View>
-
-                        {/* Complemento */}
-                        <FloatingLabelInput
-                            label="Complemento"
-                            value={Complemento}
-                            onChangeText={value => setComplemento(value)}
-                            containerStyles={{
-                                borderBottomWidth: 5,
-                                borderColor: '#fff',
-                                marginTop: 20,
-                                marginBottom: 10,
-                                width: 0,
-
-
-                            }}
-                            customLabelStyles={{
-                                topFocused: -20,
-                                colorFocused: '#fff',
-                                fontSizeFocused: 16,
-                                colorBlurred: '#004AAD',  // Cor do label quando o input não está em foco
-
-                            }}
-                            labelStyles={{
-                                paddingHorizontal: 5,
-                                color: '#FF8F49',
-                                fontWeight: 'bold'
-
-                            }}
-                            inputStyles={{
-                                color: '#fff',
-                                fontSize: 16,
-                            }}
-                        />
+                        {/* Rua */}
+                        <Text style={styles.title3}> Rua</Text>
+                            <TextInput placeholder=""
+                             value={Rua}
+                             onChangeText={value => setRua(value)} 
+                            style={styles.input3}
+                            />
+                     
+                        
+                      
+                            {/* Numero */}
+                            <Text style={styles.title3}> Número</Text>
+                            <TextInput placeholder="..."
+                             value={Numero}
+                             onChangeText={value => setNumero(value)}
+                             keyboardType="numeric"
+                            style={styles.inputNum}
+                            
+                            />
+                     
+                        {/* Complemento, tem que ser feito */}
+                     
+                           
                    
-                   <Button
-                        style={[styles.buttonEnviar, {
-                            backgroundColor: '#004AAD',
-                            width: '40%'
-                        }]} // Defina a cor de fundo desejada aqui
-                        color='#FF914D'
-                        variant="primary"
-                        title="Buscar Cep"
-                        onPress={buscarCep}
-                    />
+               
                  <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro3')}>
                 <Text style={styles.buttonText2}>Próximo</Text>
                 </TouchableOpacity>
@@ -263,6 +133,7 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
                     </View>
                 </View>
             </View>
+    
         </View>
     );
 };

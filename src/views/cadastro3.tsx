@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text ,TouchableOpacity, Alert,Image} from 'react-native';
+import { View, Text ,TouchableOpacity, Alert,Image,ScrollView} from 'react-native';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
 import * as ImagePicker from 'expo-image-picker';
-import {ImageLibraryOptions,  launchImageLibrary} from 'react-native-image-picker';
 import Imagens from '../../img/img';
 import styles from '../css/cadastro3Css';
 
 
-const CadastroScreen3: React.FC<{ navigation: any }> = ({ navigation }) => {
-    const [Cep, setCep] = useState('');
-    const [Bairro, setBairro] = useState('');
-    const [Rua, setRua] = useState('');
-    const [Numero, setNumero] = useState('');
-    const [Complemento, setComplemento] = useState('');
+    const CadastroScreen3: React.FC<{ navigation: any }> = ({ navigation }) => {
+        const [Cep, setCep] = useState('');
+        const [Bairro, setBairro] = useState('');
+
+
 
     return(
         <View style={styles.container}>
-         
+          <ScrollView>
          <View style={styles.containerPerfil}>
                    
                    <TouchableOpacity>
@@ -29,13 +27,14 @@ const CadastroScreen3: React.FC<{ navigation: any }> = ({ navigation }) => {
                    </View>
    
 
-                   <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro3')}>
+                   <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('homeStack')}>
                 <Text style={styles.buttonText2}>Próximo</Text>
                 </TouchableOpacity>
 
+                </ScrollView>
                     </View>
              
             );
-        };
+    }
 
 export default CadastroScreen3;

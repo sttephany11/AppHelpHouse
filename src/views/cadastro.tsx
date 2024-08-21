@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity,TextInput } from 'react-native';
+import { View, Text, TouchableOpacity,TextInput, ScrollView } from 'react-native';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { TextInputMask } from 'react-native-masked-text';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
@@ -9,81 +9,41 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [Nome, setNome] = useState('');
     const [Sobrenome, setSobrenome] = useState('');
     const [Nascimento, setNascimento] = useState('');
-    const [phone, setPhone] = useState('');
+    const [tel, setTel] = useState('');
     const [Cpf, setCpf] = useState('');
     const [Email, setEmail] = useState('');
     const [Senha, setSenha] = useState('');
 
+
     return (
         <View style={styles.container}>
-            <View style={styles.title}>
-                <Text style={styles.titulo}>CADASTRE-SE</Text>
+            <View style={styles.titleCadastro}>
+                <Text style={styles.titulo}>CADASTRO</Text>
             </View>
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
                         <Text style={styles.titulo2}>Dados <Text style={styles.pessoais}>Pessoais</Text></Text>
                     </View>
+                    <ScrollView>
                     <View style={styles.input}>
 
                         {/* Nome */}
-                        <FloatingLabelInput
-                            label="Nome"
+                            <Text style={styles.title3}>Nome</Text>
+                            <TextInput placeholder="Digite seu nome..."
                             value={Nome}
                             onChangeText={value => setNome(value)}
-                            containerStyles={{
-                                borderBottomWidth: 5,
-                                borderColor: '#fff',
-                                marginTop: 5,
-                            }}
-                            customLabelStyles={{
-                                topFocused: -20,  // Move o label para cima 20px quando focado
-                                colorFocused: '#fff',
-                                fontSizeFocused: 20,
-                               
-                            }}
-                            labelStyles={{
-                                paddingHorizontal:5,
-                                color: '#fff',
-                                fontWeight:900,
-                                fontSize: 50,
-                                
-                            }}
-                            inputStyles={{
-                                color: '#fff',
-                                fontSize: 20,
-                            }}
-                        />
+                            style={styles.input3}
+                            />
 
-                        {/* Sobrenome */}
-                        <FloatingLabelInput
-                            label="Sobrenome"
-                            value={Sobrenome}
-                            onChangeText={value => setSobrenome(value)}
-                            containerStyles={{
-                                borderBottomWidth: 5,
-                                borderColor: '#fff',
-                                marginTop: 35,
-                            }}
-                            customLabelStyles={{
-                                topFocused: -20,  // Move o label para cima 20px quando focado
-                                colorFocused: '#fff',
-                                fontSizeFocused: 20,
-                            }}
-                            labelStyles={{
-                                paddingHorizontal: 5,
-                                color: '#FF8F49',
-                                fontWeight:900,
-                                fontSize: 25,
-                            }}
-                            inputStyles={{
-                                color: '#fff',
-                                fontSize: 19,
-                                marginTop:5
-                            }}
-                        />
+                        <Text style={styles.title3}>CPF</Text>
+                            <TextInput placeholder="Digite seu cpf..."
+                             value={Sobrenome}
+                             onChangeText={value => setSobrenome(value)} 
+                            style={styles.input3}
+                            />
 
-                        {/* Data de Nascimento */}
+                        <Text style={styles.title3}> Data de Nascimento</Text>
                         <TextInputMask
                             type={'datetime'}
                             options={{
@@ -91,35 +51,11 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                             }}
                             value={Nascimento}
                             onChangeText={text => setNascimento(text)}
-                            customTextInput={FloatingLabelInput}
-                            customTextInputProps={{
-                                label: "Data de Nascimento",
-                                containerStyles: {
-                                    borderBottomWidth: 5,
-                                    borderColor: '#fff',
-                                    marginTop: 30,
-                                    fontWeight:800
-                                },
-                                customLabelStyles: {
-                                    topFocused: -20,  // Move o label para cima 20px quando focado
-                                    colorFocused: '#fff',
-                                    fontSizeFocused: 16,
-                                },
-                                labelStyles: {
-                                    paddingHorizontal: 5,
-                                    color: '#FF8F49',
-                                    fontWeight:900,
-                                    fontSize: 25,
-                                },
-                                inputStyles: {
-                                
-                                    fontSize: 18,
-                                    color: '#fff',
-                                },
-                            }}
-                        />
-
-                        {/* Telefone */}
+                            placeholder="DD/MM/YYYY"
+                            style={styles.input3}
+                            />
+                            
+                        <Text style={styles.title3}> Telefone</Text> 
                         <TextInputMask
                             type={'cel-phone'}
                             options={{
@@ -127,106 +63,34 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                                 withDDD: true,
                                 dddMask: '(99) ',
                             }}
-                            value={phone}
-                            onChangeText={text => setPhone(text)}
-                            customTextInput={FloatingLabelInput}
-                            customTextInputProps={{
-                                label: "Telefone",
-                                containerStyles: {
-                                    borderBottomWidth: 5,
-                                    borderColor: '#fff',
-                                    marginTop: 30,
-                                },
-                                customLabelStyles: {
-                                    topFocused: -20,  // Move o label para cima 20px quando focado
-                                    colorFocused: '#fff',
-                                    fontSizeFocused: 16,
-                                },
-                                labelStyles: {
-                                    paddingHorizontal: 5,
-                                    color: '#FF8F49',
-                                    fontWeight:900,
-                                     fontSize: 25,
-                                },
-                                inputStyles: {
-                                  
-                                    fontSize: 18,
-                                    color: '#fff',
-                                },
-                            }}
-                        />
-                     {/* Email */}
-                     <FloatingLabelInput
-                            label="Email"
-                            value={Email}
-                            hint="exemple@exemple.com"
-                            onChangeText={value => setNome(value)}
-                            containerStyles={{
-                                borderBottomWidth: 5,
-                                borderColor: '#fff',
-                                marginTop: 30,
-                            }}
-                            customLabelStyles={{
-                                topFocused: -20,  // Move o label para cima 20px quando focado
-                                colorFocused: '#fff',
-                                fontSizeFocused: 20,
-                               
-                            }}
-                            labelStyles={{
-                                paddingHorizontal:5,
-                                color: '#fff',
-                                fontWeight:900,
-                                fontSize: 50,
-                                
-                            }}
-                            inputStyles={{
-                                color: '#fff',
-                                fontSize: 20,
-                            }}
-                        />
-
-
-                         {/* Senha */}
-                         <FloatingLabelInput
-                            label="Senha"
-                            isPassword
-                            value={Senha}
+                            value={tel}
+                            onChangeText={text => setTel(text)}
+                            placeholder="(XX) XXXX-XXXX" 
+                            style={styles.input3} 
+                            />
                             
-                            onChangeText={value => setNome(value)}
-                            containerStyles={{
-                                borderBottomWidth: 5,
-                                borderColor: '#fff',
-                                marginTop: 30,
-                            }}
-                            customLabelStyles={{
-                                topFocused: -20,  // Move o label para cima 20px quando focado
-                                colorFocused: '#fff',
-                                fontSizeFocused: 20,
-                               
-                            }}
-                            labelStyles={{
-                                paddingHorizontal:5,
-                                color: '#fff',
-                                fontWeight:900,
-                                fontSize: 50,
-                                
-                            }}
-                            inputStyles={{
-                                color: '#fff',
-                                fontSize: 20,
-                            }}
-                        />
+                                    
+                        <Text style={styles.title3}> Email</Text>
+                            <TextInput placeholder="Digite um email..."
+                             value={Email}
+                             onChangeText={value => setEmail(value)} 
+                            style={styles.input3}
+                            />
+                                    
+                        <Text style={styles.title3}> Senha</Text>
+                            <TextInput placeholder="Sua senha..."
+                             value={Senha}
+                             onChangeText={value => setSenha(value)} 
+                             style={styles.input3}
+                             
+                            />
 
-
-                       
-
-
-               
                  <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro2')}>
                 <Text style={styles.buttonText2}>Próximo</Text>
                 </TouchableOpacity>
 
                     </View>
+                    </ScrollView>
                 </View>
             </View>
         </View>

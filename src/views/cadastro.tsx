@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity,TextInput, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity,TextInput, ScrollView, KeyboardAvoidingView , Platform} from 'react-native';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { TextInputMask } from 'react-native-masked-text';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
@@ -7,7 +7,6 @@ import styles from '../css/cadastroCss';
 
 const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [Nome, setNome] = useState('');
-    const [Sobrenome, setSobrenome] = useState('');
     const [Nascimento, setNascimento] = useState('');
     const [tel, setTel] = useState('');
     const [Cpf, setCpf] = useState('');
@@ -16,7 +15,10 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView 
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={60}
+        style={styles.container}>
             <View style={styles.titleCadastro}>
                 <Text style={styles.titulo}>CADASTRO</Text>
             </View>
@@ -38,22 +40,16 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
 
                         <Text style={styles.title3}>CPF</Text>
                             <TextInput placeholder="Digite seu cpf..."
-                             value={Sobrenome}
-                             onChangeText={value => setSobrenome(value)} 
+                             value={Cpf}
+                            keyboardType="number-pad"
+                            returnKeyType='done'
+                            maxLength={11}
+                            onChangeText={value => setCpf(value)} 
                             style={styles.input3}
-                            />
 
-                        <Text style={styles.title3}> Data de Nascimento</Text>
-                        <TextInputMask
-                            type={'datetime'}
-                            options={{
-                                format: 'DD/MM/YYYY',
-                            }}
-                            value={Nascimento}
-                            onChangeText={text => setNascimento(text)}
-                            placeholder="DD/MM/YYYY"
-                            style={styles.input3}
                             />
+ 
+                  
                             
                         <Text style={styles.title3}> Telefone</Text> 
                         <TextInputMask
@@ -63,27 +59,36 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                                 withDDD: true,
                                 dddMask: '(99) ',
                             }}
+                            returnKeyType='done'
                             value={tel}
                             onChangeText={text => setTel(text)}
                             placeholder="(XX) XXXX-XXXX" 
                             style={styles.input3} 
                             />
                             
-                                    
+                
                         <Text style={styles.title3}> Email</Text>
                             <TextInput placeholder="Digite um email..."
                              value={Email}
                              onChangeText={value => setEmail(value)} 
                             style={styles.input3}
+                           
                             />
+                       
                                     
                         <Text style={styles.title3}> Senha</Text>
                             <TextInput placeholder="Sua senha..."
                              value={Senha}
                              onChangeText={value => setSenha(value)} 
                              style={styles.input3}
-                             
                             />
+                                
+                        {/* <Text style={styles.title3}> Confirme Senha</Text>
+                            <TextInput placeholder="Sua senha..."
+                             value={Senha}
+                             onChangeText={value => setSenha(value)} 
+                             style={styles.input3}
+                            />    */}
 
                  <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro2')}>
                 <Text style={styles.buttonText2}>Próximo</Text>
@@ -93,7 +98,7 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                     </ScrollView>
                 </View>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 

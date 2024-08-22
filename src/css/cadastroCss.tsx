@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
  
   fundo: {
-    height: '100%',
+    height: '120%',
     width: '140%',
     backgroundColor: '#FF8F49',
     position: 'absolute', 
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     borderRadius: 250,
     zIndex: -1,
     overflow:'hidden',
+    flex:1,
   },
   scrollContainer: {
 
@@ -91,32 +92,24 @@ const styles = StyleSheet.create({
  
 
   },
-  input2:{
-    borderBottomWidth:5,
-    borderColor: '#fff',
-    height:40,
-    marginBottom:12,
-    fontSize:18,
-    color:'#fff',
-   
-    
-  },
 
-  //teste de input
+  // códigos input 
   title3:{
   fontSize:20,
   marginTop:5,
   color:'#fff',
   fontWeight:'bold',
+ 
   },
 
   input3:{
   borderBottomWidth:5,
-borderColor: '#fff',
-height:40,
-marginBottom:10,
-fontSize:16,
-color:'#fff',
+  borderColor: '#fff',
+  height:40,
+  marginBottom:10,
+  fontSize:16,
+  color:'#fff',
+  paddingHorizontal:10,
   },
 });
 

@@ -41,8 +41,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '800',
     marginTop:8,
-    marginLeft:5
+    marginLeft:5,
+    justifyContent:'center',
+    alignItems:'center',
   },
+  
   passos:{
         color:'#fff'
   },
@@ -104,6 +107,7 @@ const styles = StyleSheet.create({
     marginBottom:10,
     fontSize:16,
     color:'#fff',
+
     },
 
 
@@ -138,6 +142,10 @@ color:'#fff',
 
 
 },
+
+containerIcon:{
+
+},
     //button buscar
 
     inputsCep:{
@@ -152,7 +160,7 @@ color:'#fff',
         fontWeight:'bold',
         marginLeft:150,
         },
-      
+     
 });
 
 export default styles;

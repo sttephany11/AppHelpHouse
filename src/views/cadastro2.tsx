@@ -12,8 +12,6 @@ import Api from '../../componentes/apiCep/api'
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
-
-
 const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [Cep, setCep] = useState('');
     const [Bairro, setBairro] = useState('');
@@ -84,9 +82,10 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
                             <Text style={styles.title4}> <AntDesign style={styles.icon} name="search1" size={24} color="black" onPress={buscarCep} /></Text>
                             </View> 
                             <TextInput style={styles.input3} 
-                             placeholder="Digite seu cep..." 
+                             placeholder="XXXXX-XX" 
                              value={Cep}
                              keyboardType="numeric"
+                             returnKeyType='done'
                              maxLength={8}
                              onChangeText={value => setCep(value)} 
                             
@@ -115,6 +114,7 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
                             <Text style={styles.title3}> Número</Text>
                             <TextInput placeholder="..."
                              value={Numero}
+                            returnKeyType='done'
                              onChangeText={value => setNumero(value)}
                              keyboardType="numeric"
                             style={styles.inputNum}
@@ -123,7 +123,7 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
                      
                         {/* Complemento, tem que ser feito */}
                      
-                           
+                          
                    
                
                  <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro3')}>

@@ -15,6 +15,8 @@ import CadastroScreen3 from '../views/cadastro3';
 import HomeScreen from '../views/home';
 import PesquisarScreen from '../views/pesquisar';
 import consultaScreen from '../views/consulta';
+import insertScreen from '../views/insert'; 
+import { isNewExpression } from 'typescript';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,7 +34,8 @@ const Tabs = () => {
 // Navegador Principal
 const AppNavigator = () => {
   return (
-      <Stack.Navigator initialRouteName="consulta">
+      <Stack.Navigator initialRouteName="insert">
+        <Stack.Screen name="insert" component={insertScreen} options={{ headerShown: false }} />
         <Stack.Screen name="consulta" component={consultaScreen} options={{ headerShown: false }} />
         <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />

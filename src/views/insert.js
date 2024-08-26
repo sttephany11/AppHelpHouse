@@ -3,16 +3,22 @@ import { View, Text, TextInput, Button, Alert } from 'react-native';
 
 export default function App() {  
   const [nomeContratante, setNomeContratante] = useState('');
-  const [sobrenomeContratante, setSobrenomeContratante] = useState('');
+  //const [sobrenomeContratante, setSobrenomeContratante] = useState('');
   const [cpfContratante, setCpfContratante] = useState('');
   const [password, setPassword] = useState('');
   const [emailContratante, setEmailContratante] = useState('');
   const [telefoneContratante, setTelefoneContratante] = useState('');
-  const [idEndereco, setIdEndereco] = useState('');
-
+  const [ruaContratante, setRuaContratante] = useState('');
+  const [cepContratante, setCepContratante] = useState('');
+  const [numCasaContratante, setNumCasaContratante] = useState('');
+  const [complementoContratante, setComplementoContratante] = useState('');
+  const [bairroContratante, setBairroContratante] = useState('');
+  const [ufContratante, setUfContratante] = useState('');
+  const [cidadeContratante, setCidadeContratante] = useState('');
+	
   const verificar = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/clii', {
+      const response = await fetch('http://localhost:8000/api/clii', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -20,12 +26,17 @@ export default function App() {
         },
         body: JSON.stringify({
           nomeContratante: nomeContratante,
-          sobrenomeContratante:sobrenomeContratante,
           cpfContratante:cpfContratante,
           password:password,
           emailContratante:emailContratante,
           telefoneContratante:telefoneContratante,
-          idEndereco:idEndereco
+          ruaContratante:ruaContratante,
+          cepContratante:cepContratante,
+          numCasaContratante:numCasaContratante,
+          complementoContratante:complementoContratante,
+          bairroContratante:bairroContratante,
+          ufContratante:ufContratante,
+          cidadeContratante:cidadeContratante,
         }),
       });
 
@@ -51,11 +62,6 @@ export default function App() {
         onChangeText={text => setNomeContratante(text)}
       />
       <TextInput
-        placeholder="Digite o sobrenome do Profissional"
-        placeholderTextColor="#888"
-        onChangeText={text => setSobrenomeContratante(text)}
-      />
-      <TextInput
         placeholder="Digite o cpf do Profissional"
         placeholderTextColor="#888"
         onChangeText={text => setCpfContratante(text)}
@@ -76,9 +82,42 @@ export default function App() {
         onChangeText={text => setTelefoneContratante(text)}
       />
       <TextInput
-        placeholder="Endereço"
+        placeholder="Rua"
         placeholderTextColor="#888"
-        onChangeText={text => setIdEndereco(text)}
+        onChangeText={text => setRuaContratante(text)}
+      />
+      <TextInput
+        placeholder="Cep"
+        placeholderTextColor="#888"
+        onChangeText={text => setCepContratante(text)}
+      />
+       <TextInput
+        placeholder="numCasa"
+        placeholderTextColor="#888"
+        onChangeText={text => setNumCasaContratante(text)}
+      />
+       <TextInput
+        placeholder="complemento"
+        placeholderTextColor="#888"
+        onChangeText={text => setComplementoContratante(text)}
+      />
+      
+      <TextInput
+        placeholder="bairro"
+        placeholderTextColor="#888"
+        onChangeText={text => setBairroContratante(text)}
+      />
+      
+      <TextInput
+        placeholder="uf"
+        placeholderTextColor="#888"
+        onChangeText={text => setUfContratante(text)}
+      />
+      
+      <TextInput
+        placeholder="cidade"
+        placeholderTextColor="#888"
+        onChangeText={text => setCidadeContratante(text)}
       />
       <Button title="Salvar" onPress={verificar} />
     </View>

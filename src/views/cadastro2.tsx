@@ -12,34 +12,81 @@ import Api from '../../componentes/apiCep/api'
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
-const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
-    const [Cep, setCep] = useState('');
-    const [Bairro, setBairro] = useState('');
-    const [Rua, setRua] = useState('');
-    const [Numero, setNumero] = useState('');
-    const [Complemento, setComplemento] = useState('');
+const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navigation }) => {
+    const {nomeContratante,cpfContratante,telefoneContratante,emailContratante,password}= route.params;
+    const [cepContratante, setCepContratante] = useState('');
+    const [bairroContratante, setBairroContratante] = useState('');
+    const [ruaContratante, setRuaContratante] = useState('');
+    const [numCasaContratante    , setNumCasaContratante] = useState('');
+    const [complementoContratante, setComplementoContratante] = useState('');
 
-    async function buscarCep() {
+    const verificar = async () => {
+        try {
+          const response = await fetch('http://localhost:8000/api/clii', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              nomeContratante: nomeContratante,
+              cpfContratante: cpfContratante,
+              password: password,
+              emailContratante: emailContratante,
+              telefoneContratante: telefoneContratante,
+              ruaContratante: ruaContratante,
+              cepContratante: cepContratante,
+              numCasaContratante: numCasaContratante,
+              complementoContratante: complementoContratante,
+              bairroContratante: bairroContratante
+            }),
+          });
+      
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Erro na resposta da API:', errorData);
+            throw new Error(`Erro ${response.status}: ${errorData.error}`);
+          }
+      
+          const result = await response.json();
+          Alert.alert('Success', 'Dados salvos com sucesso!');
+          console.log(result);
+        } catch (error) {
+          Alert.alert('Error', 'Ocorreu um erro ao salvar os dados.');
+          console.error('Error:', error);
+        }
+      };
+      
+
+
+
+
+
+
+        //função para chamar o cep do clinete.(bem nítido ne amigão)
+       async function buscarCep() {
         // Se Cep for vazio vai aparecer um alerta
-        if (Cep == "") {
+        if (cepContratante == "") {
             Alert.alert('Cep inválido')
-            setCep("")
+            setCepContratante("")
         }
         try {
             // await serve para esperar a resposta que vai ser passada
-            const response = await Api.get(`/${Cep}/json/`)
+            const response = await Api.get(`/${cepContratante}/json/`)
             //Esse get, serve para puxar a info la do servidor da API 
 
 
             //Os set São as infos que você vai pegar da API
-            setBairro(response.data.bairro)
-            setRua(response.data.logradouro);
-
+            setBairroContratante(response.data.bairro)
+            setRuaContratante(response.data.logradouro);
+       
+            
             // Caso não carregue retornara um erro
         } catch (error) {
             console.log('ERROGAY' + error)
         }
     }
+    
 
     const formatCep = (text: string) => {
         // Remove todos os caracteres que não são números
@@ -59,10 +106,9 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
     };
 
 
-    const handleCepChange = (text) => {
-        setCep(formatCep(text));
+    const handleCepChange = (text: string) => {
+        setCepContratante(formatCep(text));
     };
-
 
     return (
         <View style={styles.container}>
@@ -83,18 +129,18 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
                             </View> 
                             <TextInput style={styles.input3} 
                              placeholder="XXXXX-XX" 
-                             value={Cep}
+                             value={cepContratante}
                              keyboardType="numeric"
                              returnKeyType='done'
                              maxLength={8}
-                             onChangeText={value => setCep(value)} 
+                             onChangeText={value => setCepContratante(value)} 
                             
                             />
  
                             <Text style={styles.title3}> Bairro</Text>
                             <TextInput placeholder=""
-                             value={Bairro}
-                             onChangeText={value => setBairro(value)} 
+                             value={bairroContratante}
+                             onChangeText={value => setBairroContratante(value)} 
                             style={styles.input3}
                             />
 
@@ -103,8 +149,8 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
                         {/* Rua */}
                         <Text style={styles.title3}> Rua</Text>
                             <TextInput placeholder=""
-                             value={Rua}
-                             onChangeText={value => setRua(value)} 
+                             value={ruaContratante}
+                             onChangeText={value => setRuaContratante(value)} 
                             style={styles.input3}
                             />
                      
@@ -113,20 +159,31 @@ const CadastroScreen2: React.FC<{ navigation: any }> = ({ navigation }) => {
                             {/* Numero */}
                             <Text style={styles.title3}> Número</Text>
                             <TextInput placeholder="..."
-                             value={Numero}
+                             value={numCasaContratante}
                             returnKeyType='done'
-                             onChangeText={value => setNumero(value)}
+                             onChangeText={value => setNumCasaContratante(value)}
                              keyboardType="numeric"
                             style={styles.inputNum}
                             
                             />
                      
                         {/* Complemento, tem que ser feito */}
+                        <Text style={styles.title3}> Complemento</Text>
+                            <TextInput placeholder="..."
+                             value={complementoContratante}
+                            returnKeyType='done'
+                             onChangeText={value => setComplementoContratante(value)}
+                            style={styles.inputNum}
+                            
+                            />
                      
                           
                    
                
-                 <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro3')}>
+                 <TouchableOpacity style={styles.button2}  onPress={async () => {
+                            await verificar();// Aguarda a conclusão da verificação
+                            navigation.navigate('login'); // Navega para a tela 'login'
+                            }}>
                 <Text style={styles.buttonText2}>Próximo</Text>
                 </TouchableOpacity>
 

@@ -15,11 +15,10 @@ const styles = StyleSheet.create({
 
 },
   title: {
-    width: '100%',
-    marginTop:'10%',
-    justifyContent: 'flex-end',
+    marginTop:'13%',
+    justifyContent: 'center',
     alignItems: 'center',    
-    height:'14%'
+    
   },
 
   containerCadastro: {
@@ -33,7 +32,9 @@ const styles = StyleSheet.create({
     color: '#004AAD',
     fontSize: 35,
     fontWeight: '900',
-    marginEnd:'11%'
+    justifyContent:'center',
+    alignItems:'center',
+   
   },
   
   titulo3:{
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '800',
     marginTop:8,
-    marginLeft:5,
+    marginLeft:'13%',
     justifyContent:'center',
     alignItems:'center',
   },

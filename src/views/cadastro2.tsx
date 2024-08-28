@@ -132,7 +132,7 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
                             
                             />
  
-                            <Text style={styles.title3}> Bairro</Text>
+                            <Text style={styles.title3}> Bairroo</Text>
                             <TextInput placeholder=""
                              value={bairroContratante}
                              onChangeText={value => setBairroContratante(value)} 

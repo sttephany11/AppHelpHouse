@@ -53,6 +53,9 @@ const styles = StyleSheet.create({
         width:160,
         color:'#004AAD'
       },
+      errorMessage:{
+        color:'#FF0000'
+      }
       
    
    

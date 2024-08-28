@@ -41,7 +41,7 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                     <View style={styles.title}>
                         <Text style={styles.titulo2}>Dados <Text style={styles.pessoais}>Pessoais</Text></Text>
                     </View>
-                    <ScrollView>
+                 
                     <View style={styles.input}>
 
                         {/* Nome */}
@@ -103,7 +103,7 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                 </TouchableOpacity>
 
                     </View>
-                    </ScrollView>
+            
                 </View>
             </View>
         </KeyboardAvoidingView>

@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     },
 
     containerPrincipal: {
-        
+
     },
     boasVindas: {
         color: 'white',
@@ -19,26 +19,25 @@ const styles = StyleSheet.create({
         fontFamily: 'bold',
     },
     container2: {
-
     },
     circulo: {
-        width:55 ,
-        height:55,
+        width: 55,
+        height: 55,
         backgroundColor: 'white',
-        borderRadius:100,
-        left:'79%',
-        top:35,
-        borderColor:'blue',
+        borderRadius: 100,
+        left: '79%',
+        top: 35,
+        borderColor: 'blue',
         borderWidth: 2,
     },
-   pesquisa:{
-    justifyContent: 'center',
-    height: '49%',
-    width:'90%',
-    display: 'flex',
- 
+    pesquisa: {
+        justifyContent: 'center',
+        height: '39%',
+        width: '90%',
+        display: 'flex',
 
-   },
+
+    },
     pesquisa1: {
         left: '19%',
         height: '19%',
@@ -50,8 +49,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: '12%',
         color: '#004aad',
         backgroundColor: '#fff',
-        bottom:15,
-         fontWeight:'bold'
+        bottom: 15,
+        fontWeight: 'bold'
     },
 
     lupa: {
@@ -60,14 +59,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         display: 'flex',
         zIndex: 1,
-        top: 85,
-        left:'22%',
-        
+        top: 92,
+        left: '22%',
+
     },
 
     //trabalhos
     trabalhos: {
-        bottom:455
+        bottom: 570
     },
     pedreiro: {
         width: 75,
@@ -85,15 +84,15 @@ const styles = StyleSheet.create({
     },
     pedreiroImg: {
         width: 70,
-        height:80,
-        bottom:12
+        height: 80,
+        bottom: 12
     },
     name1: {
         color: '#fff',
         fontSize: 13,
         fontWeight: '900',
         top: 63,
-        left:'8%',
+        left: '8%',
         zIndex: 2
     },
     mecanico: {
@@ -109,12 +108,12 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 9 },
         shadowOpacity: 0.5,
-        bottom:159
+        bottom: 159
     },
     mecanicoImg: {
         width: 50,
         height: 65,
-        bottom:10,
+        bottom: 10,
         left: '8%',
     },
     name2: {
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 9 },
         shadowOpacity: 0.5,
-        bottom:318
+        bottom: 318
     },
     eletricistaImg: {
         width: 60,
@@ -153,7 +152,7 @@ const styles = StyleSheet.create({
         top: 63,
         left: '3%',
         zIndex: 1,
-       
+
     },
     jadineiro: {
         width: 75,
@@ -168,12 +167,12 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 9 },
         shadowOpacity: 0.5,
-        bottom:479
+        bottom: 479
     },
     jardineiroImg: {
         width: 70,
         height: 85,
-        bottom:9,
+        bottom: 9,
     },
     name4: {
         color: '#fff',
@@ -196,12 +195,12 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 9 },
         shadowOpacity: 0.5,
-        bottom:535
+        bottom: 535
     },
     encanadorImg: {
         width: 69,
         height: 92,
-        bottom:10,
+        bottom: 10,
     },
     name5: {
         color: '#fff',
@@ -214,7 +213,7 @@ const styles = StyleSheet.create({
     diaristaImg: {
         width: 48,
         height: 60,
-        bottom:22,
+        bottom: 22,
         left: '15%'
     },
     diarista: {
@@ -230,9 +229,9 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 9 },
         shadowOpacity: 0.5,
-        bottom:693
+        bottom: 693
     },
-    domestico:{
+    domestico: {
         color: '#fff',
         fontSize: 12,
         fontWeight: '900',
@@ -261,7 +260,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 9 },
         shadowOpacity: 0.5,
-        bottom:852
+        bottom: 852
     },
     pintorImg: {
         width: 50,
@@ -269,7 +268,7 @@ const styles = StyleSheet.create({
         top: -17,
         left: '15%'
     },
-    name7:{
+    name7: {
         color: '#fff',
         fontSize: 12,
         fontWeight: '900',
@@ -291,7 +290,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 9 },
         shadowOpacity: 0.5,
-        bottom:1010
+        bottom: 1010
     },
     instalacaoImg: {
         width: 50,
@@ -299,7 +298,7 @@ const styles = StyleSheet.create({
         bottom: 10,
         left: '15%'
     },
-    name8:{
+    name8: {
         color: '#fff',
         fontSize: 12,
         fontWeight: '900',
@@ -311,34 +310,82 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
         fontWeight: '900',
-        bottom:290,
+        bottom: 290,
         textAlign: 'center'
     },
-    
+
     //meio da pagina meus pedidos 
-    brancoMeio:{
-       backgroundColor:'#fff',
-       width: '90%',
-       height: '15%',
-       borderRadius: 22,
-       left:'4%'
-    
+    brancoMeio: {
+        backgroundColor: '#fff',
+        width: '90%',
+        height: '8%',
+        borderRadius: 22,
+        left: '4%',
+        bottom: 130
     },
-    pedidos:{
+    pedidos: {
         color: '#004aad',
         fontSize: 20,
         fontWeight: '900',
         textAlign: 'center',
-        right:'25%',
-        top:15
+        right: '25%',
+        top: 18
+
     },
-    acompanhe:{
+    acompanhe: {
         color: '#004aad',
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: '700',
         textAlign: 'center',
-        top:25,
-        right:'9%'
+        top: 25,
+        right: '8%'
     },
+    //alguns dos serviços mais procurados ultimamente
+    fundoAzul: {
+        backgroundColor: '#004aad',
+        width: '90%',
+        height: '87%',
+        borderRadius: 22,
+        left: '4%',
+        bottom: 789
+    },
+    ponto: {
+        color: '#fff',
+        fontSize: 35,
+        fontWeight: '900',
+        textAlign: 'center',
+        top: 10,
+        left: '37%'
+    },
+    alguns: {
+        color: '#fff',
+        fontSize: 20,
+        letterSpacing:0.4,
+        marginRight:15,
+        fontWeight: '900',
+        textAlign: 'center',
+        bottom: 15,
+        right: '15%'
+    },
+    alguns1: {
+        color: '#fff',
+        fontSize: 20,
+        letterSpacing:0.8,
+        fontWeight: '900',
+        textAlign: 'center',
+        bottom: 10,
+        right: '8%'
+    },
+    azulClaro: {
+        opacity:0.6,
+        backgroundColor: '#5169a2',
+        top: 12,
+        width: '90%',
+        height: '4.5%',
+        borderRadius: 22,
+        left: '5%',
+      
+    },
+
 });
 export default styles;

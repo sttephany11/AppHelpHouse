@@ -1,8 +1,9 @@
-
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, ImageBackground } from 'react-native';
 import Imagens from "../../img/img";
 import styles from '../css/loadingCss';
+
 
 function Loading() {
  

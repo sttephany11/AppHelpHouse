@@ -37,11 +37,6 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
                         </View>
                     </View>
 
-                    <View style={styles.brancoMeio}>
-                        <Text style={styles.pedidos}> Meus pedidos</Text>
-                        <Text style={styles.acompanhe}> Acompanhe seus pedidos...</Text>
-
-                    </View>
 
                     <View style={styles.trabalhos}>
 
@@ -87,15 +82,24 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
                             <Image source={Imagens.instalacao} style={styles.instalacaoImg} />
                         </View>
 
+                        <View style={styles.brancoMeio}>
+                            <Text style={styles.pedidos}> Meus pedidos</Text>
+                            <Text style={styles.acompanhe}> Acompanhe seus pedidos...</Text>
 
-                        <View style={styles.fundoAzul}>
-                             <Text style={styles.ponto}>...</Text>
+                        </View>
+
+
+                         <View style={styles.fundoAzul}>
+                            <Text style={styles.ponto}>...</Text>
                             <Text style={styles.alguns}>Alguns serviços mais</Text>
                             <Text style={styles.alguns1}>procurados ultimamente.</Text>
                             <View style={styles.azulClaro}>
-                            <Image source={Imagens.instalacao} style={styles.instalacaoImg}/>
                             </View>
-                        </View>
+                            <View style={styles.azulClaro2}>
+                            </View>
+                            <Image source={Imagens.mestreDeObra} style={styles.mestreDeObra} />
+                        </View> 
+
                     </View>
 
                 </ScrollView>

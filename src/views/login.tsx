@@ -18,29 +18,36 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
 
    // Defina a função handleLoginPress para campos obrigatórios
 
-    const handleLogin = async () =>{
-        if (emailContratante == null || password == null){
-            console.log('Preencha os campos');
-            return
+
+   const handleLogin = async () => {
+    if (!emailContratante || !password) {
+        setMessage('Preencha todos os campos');
+        return;
+    }
+
+    console.log("Email:", emailContratante);
+    console.log("Password:", password);
+
+    try {
+        const response = await axios.post('http://localhost:8000/api/auth', {
+            emailContratante:emailContratante,
+            password:password,
+        });
+
+        console.log("Resposta da API:", response.data);
+
+        if (response.data && response.data.status === 'Sucesso') {
+            navigation.navigate('homeStack', { screen: 'home' });
+        } else {
+            setMessage('Credenciais incorretas, tente novamente.');
         }
- 
 
-    //authenticate 
-    await axios.post('http//localhost:8000/api/auth', {
-        emailContratante, password
-    }).then(res=> {
-        setMessage(res.data.message)
-        console.log(res.data);
-        // navigation.navigate('confirmeid')
-    }).catch(error => {
-        console.log(error);
-    })
+    } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        setMessage('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
+    }
+};
     
-    
-}
-    
- 
-
     return (
         <View style={styles.container}>
             <Image source={Imagens.helpHouse} style={styles.help} />
@@ -78,7 +85,8 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
                     }}
                     onChangeText={setEmailContratante}
                 />
-                <Text>{message}</Text>
+                     <Text style={styles.errorMessage}>{message}</Text> 
+
             </View>
 
             <View style={styles.input}>
@@ -148,3 +156,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
 };
 
 export default Login;
+function setError(arg0: string) {
+    throw new Error('Function not implemented.');
+}
+

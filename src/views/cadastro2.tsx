@@ -30,6 +30,7 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
             },
             body: JSON.stringify({
               nomeContratante: nomeContratante,
+              
               cpfContratante: cpfContratante,
               password: password,
               emailContratante: emailContratante,
@@ -57,11 +58,6 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
         }
       };
       
-
-
-
-
-
 
         //função para chamar o cep do clinete.(bem nítido ne amigão)
        async function buscarCep() {
@@ -182,7 +178,7 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
                
                  <TouchableOpacity style={styles.button2}  onPress={async () => {
                             await verificar();// Aguarda a conclusão da verificação
-                            navigation.navigate('login'); // Navega para a tela 'login'
+                            navigation.navigate('homeStack'); // Navega para a tela 'login'
                             }}>
                 <Text style={styles.buttonText2}>Próximo</Text>
                 </TouchableOpacity>

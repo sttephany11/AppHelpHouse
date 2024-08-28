@@ -1,159 +1,344 @@
-import { ScrollView, StyleSheet } from 'react-native';
-
+import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',    
-  },
- 
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-},
-
-container2: {
-     
-    flexDirection: 'row',
-  },
-  buttomEncanamento:{
-    flexDirection:'row',
-    alignItems:'center',
-    backgroundColor:'white',
-    borderRadius:8,
-},
-
-coluna1:{
-    backgroundColor:'white',
-    width: 340,
-    height: 120,
-    borderRadius: 15,
-    alignItems:'center',
-    justifyContent:'center', 
-    textAlign:'center',   
-    marginTop:80,
-    flexDirection:'row',
-    
-},
-texto1:{
-    color:'#3669a4',
-    fontSize:23,
-    fontWeight:700,
-    marginLeft:20,
-    justifyContent:'center',
-    alignContent:'center',
-    textAlign:'center',
-   
-},
-lupaGrande:{
-    height:60,
-    width:68,
-    marginRight:20,
-    justifyContent: 'center',
-    alignItems: 'center',
-},
-propaganda: {
-    height: 150,
-    width: 300,
-    marginTop: 19,
-   
-    flex:1,
-  },
-
-  titulo: {
-    color: '#3669a4',
-    
-    fontSize: 33,
-    fontWeight: '700',
-    marginTop:20,
-  },
-  subtitulo: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: '700',
-
-  },
-  colunaOpcao:{
-    backgroundColor:'white',
-    width: 340,
-    height: 70,
-    borderRadius: 15,
-    alignItems:'center',
-    marginTop:3,
-    flexDirection:'row',
-  },
-  colunaOpcao2:{
-    backgroundColor:'white',
-    width: 340,
-    height: 70,
-    borderRadius: 15,
-    
-    alignItems:'center',
-    
-    marginTop:8,
-    marginBottom:5,
-    flexDirection:'row',
-    flex:1,
-  },
-
-  encanadorImg:{
-    height:60,
-    width:70,
-    justifyContent:'flex-start',
-    marginLeft:10
-  },
-  textoOption:{
-    color: '#3669a4',
-    marginLeft: 9,
-    fontSize: 25,
-    fontWeight: '600',
-   
-  },
-    textoOpcao:{
-        color: '#3669a4',
-       justifyContent:'flex-start',
-        fontSize: 25,
-        marginLeft:10,
-        fontWeight: '600',
+    //fundo
+    background: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
     },
-    colunaServico:{
-        backgroundColor:'#004aad',
-        width: 340,
-        height: 200,
-        borderRadius: 15,
-        alignItems:'center',
-        justifyContent:'center', 
-        textAlign:'center',
-        marginTop:22,
-       
-        flexDirection:'column',
-        flex:1,
+
+    containerPrincipal: {
+        
     },
-    texto2:{
+    boasVindas: {
         color: 'white',
-        marginBottom:14,
-        fontSize: 20,
-        fontWeight: '700',
-        justifyContent:'center',
-        textAlign:'center',
+        fontSize: 33,
+        fontWeight: '900',
+        left: '12%',
+        top: 85,
+        fontFamily: 'bold',
     },
-    servicosProcurado:{
-        flexDirection:'row',
+    container2: {
+
     },
-    chuveiroImg: {
-        width: 80,
-        height: 80,
-        borderRadius: 13,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 10,
-       //justifyContent: 'space-between',
+    circulo: {
+        width:55 ,
+        height:55,
+        backgroundColor: 'white',
+        borderRadius:100,
+        left:'79%',
+        top:35,
+        borderColor:'blue',
+        borderWidth: 2,
+    },
+   pesquisa:{
+    justifyContent: 'center',
+    height: '49%',
+    width:'90%',
+    display: 'flex',
+ 
+
+   },
+    pesquisa1: {
+        left: '19%',
+        height: '19%',
+        width: '75%',
+        borderColor: 'white',
+        fontSize: 15,
+        borderWidth: 1,
+        borderRadius: 159,
+        paddingHorizontal: '12%',
+        color: '#004aad',
+        backgroundColor: '#fff',
+        bottom:15,
+         fontWeight:'bold'
+    },
+
+    lupa: {
+        width: 30,
+        height: 38,
+        position: 'absolute',
+        display: 'flex',
+        zIndex: 1,
+        top: 85,
+        left:'22%',
+        
+    },
+
+    //trabalhos
+    trabalhos: {
+        bottom:455
+    },
+    pedreiro: {
+        width: 75,
+        height: 82,
+        backgroundColor: '#004aad',
+        borderRadius: 22,
+        marginTop: 77,
+        left: '5%',
+        borderColor: '#8cb3e7',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+    },
+    pedreiroImg: {
+        width: 70,
+        height:80,
+        bottom:12
+    },
+    name1: {
+        color: '#fff',
+        fontSize: 13,
+        fontWeight: '900',
+        top: 63,
+        left:'8%',
+        zIndex: 2
+    },
+    mecanico: {
+        width: 75,
+        height: 82,
+        backgroundColor: '#004aad',
+        borderRadius: 22,
+        marginTop: 77,
+        left: '28%',
+        borderColor: '#8cb3e7',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        bottom:159
+    },
+    mecanicoImg: {
+        width: 50,
+        height: 65,
+        bottom:10,
+        left: '8%',
+    },
+    name2: {
+        color: '#fff',
+        fontSize: 13,
+        fontWeight: '900',
+        top: 63,
+        left: '4%',
+        zIndex: 1
+    },
+    eletricista: {
+        width: 75,
+        height: 82,
+        backgroundColor: '#004aad',
+        borderRadius: 22,
+        marginTop: 77,
+        left: '50%',
+        borderColor: '#8cb3e7',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        bottom:318
+    },
+    eletricistaImg: {
+        width: 60,
+        height: 100,
+        top: -7,
+        left: '10%'
+    },
+    name3: {
+        color: '#fff',
+        fontSize: 12,
+        fontWeight: '900',
+        top: 63,
+        left: '3%',
+        zIndex: 1,
        
-      },
-      posicao:{
+    },
+    jadineiro: {
+        width: 75,
+        height: 82,
+        backgroundColor: '#004aad',
+        borderRadius: 22,
+        marginTop: 77,
+        left: '74%',
+        borderColor: '#8cb3e7',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        bottom:479
+    },
+    jardineiroImg: {
+        width: 70,
+        height: 85,
+        bottom:9,
+    },
+    name4: {
+        color: '#fff',
+        fontSize: 12,
+        fontWeight: '900',
+        top: 63,
+        left: '7%',
+        zIndex: 1
+    },
+    encanador: {
+        width: 75,
+        height: 82,
+        backgroundColor: '#004aad',
+        borderRadius: 22,
+        marginTop: 77,
+        left: '74%',
+        borderColor: '#8cb3e7',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        bottom:535
+    },
+    encanadorImg: {
+        width: 69,
+        height: 92,
+        bottom:10,
+    },
+    name5: {
+        color: '#fff',
+        fontSize: 12,
+        fontWeight: '900',
+        top: 65,
+        left: '4%',
+        zIndex: 1
+    },
+    diaristaImg: {
+        width: 48,
+        height: 60,
+        bottom:22,
+        left: '15%'
+    },
+    diarista: {
+        width: 75,
+        height: 82,
+        backgroundColor: '#004aad',
+        borderRadius: 22,
+        marginTop: 77,
+        left: '50%',
+        borderColor: '#8cb3e7',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        bottom:693
+    },
+    domestico:{
+        color: '#fff',
+        fontSize: 12,
+        fontWeight: '900',
+        top: 61,
+        left: '0%',
+        zIndex: 1
+    },
+    name6: {
+        color: '#fff',
+        fontSize: 12,
+        fontWeight: '900',
+        top: 63,
+        left: '14%',
+        zIndex: 1
+    },
+    pintor: {
+        width: 75,
+        height: 82,
+        backgroundColor: '#004aad',
+        borderRadius: 22,
+        marginTop: 77,
+        left: '28%',
+        borderColor: '#8cb3e7',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        bottom:852
+    },
+    pintorImg: {
+        width: 50,
+        height: 70,
+        top: -17,
+        left: '15%'
+    },
+    name7:{
+        color: '#fff',
+        fontSize: 12,
+        fontWeight: '900',
+        top: 66,
+        left: '20%',
+        zIndex: 1
+    },
 
-      },
-
+    instalacao: {
+        width: 75,
+        height: 82,
+        backgroundColor: '#004aad',
+        borderRadius: 22,
+        marginTop: 77,
+        left: '5%',
+        borderColor: '#8cb3e7',
+        borderWidth: 2,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        bottom:1010
+    },
+    instalacaoImg: {
+        width: 50,
+        height: 70,
+        bottom: 10,
+        left: '15%'
+    },
+    name8:{
+        color: '#fff',
+        fontSize: 12,
+        fontWeight: '900',
+        top: 65,
+        left: '5%',
+        zIndex: 1
+    },
+    aindaNao: {
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: '900',
+        bottom:290,
+        textAlign: 'center'
+    },
+    
+    //meio da pagina meus pedidos 
+    brancoMeio:{
+       backgroundColor:'#fff',
+       width: '90%',
+       height: '15%',
+       borderRadius: 22,
+       left:'4%'
+    
+    },
+    pedidos:{
+        color: '#004aad',
+        fontSize: 20,
+        fontWeight: '900',
+        textAlign: 'center',
+        right:'25%',
+        top:15
+    },
+    acompanhe:{
+        color: '#004aad',
+        fontSize: 15,
+        fontWeight: '700',
+        textAlign: 'center',
+        top:25,
+        right:'9%'
+    },
 });
-
 export default styles;

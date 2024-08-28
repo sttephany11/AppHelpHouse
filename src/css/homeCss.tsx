@@ -35,13 +35,11 @@ const styles = StyleSheet.create({
         height: '39%',
         width: '90%',
         display: 'flex',
-
-
     },
     pesquisa1: {
-        left: '19%',
-        height: '19%',
-        width: '75%',
+        left: '20%',
+        height: '15%',
+        width: '70%',
         borderColor: 'white',
         fontSize: 15,
         borderWidth: 1,
@@ -52,21 +50,18 @@ const styles = StyleSheet.create({
         bottom: 15,
         fontWeight: 'bold'
     },
-
     lupa: {
         width: 30,
         height: 38,
         position: 'absolute',
         display: 'flex',
         zIndex: 1,
-        top: 92,
-        left: '22%',
-
+        top: 100,
+        left: '24%',
     },
-
     //trabalhos
     trabalhos: {
-        bottom: 570
+        bottom:510
     },
     pedreiro: {
         width: 75,
@@ -318,10 +313,10 @@ const styles = StyleSheet.create({
     brancoMeio: {
         backgroundColor: '#fff',
         width: '90%',
-        height: '8%',
+        height: '6%',
         borderRadius: 22,
         left: '4%',
-        bottom: 130
+        bottom: 970
     },
     pedidos: {
         color: '#004aad',
@@ -340,14 +335,15 @@ const styles = StyleSheet.create({
         top: 25,
         right: '8%'
     },
+
     //alguns dos serviços mais procurados ultimamente
     fundoAzul: {
         backgroundColor: '#004aad',
-        width: '90%',
-        height: '87%',
+        width: '89%',
+        height: '21%',
         borderRadius: 22,
-        left: '4%',
-        bottom: 789
+        left: '5%',
+        bottom: 945
     },
     ponto: {
         color: '#fff',
@@ -359,33 +355,48 @@ const styles = StyleSheet.create({
     },
     alguns: {
         color: '#fff',
-        fontSize: 20,
+        fontSize: 22,
         letterSpacing:0.4,
         marginRight:15,
         fontWeight: '900',
         textAlign: 'center',
         bottom: 15,
-        right: '15%'
+        right: '10%'
     },
     alguns1: {
         color: '#fff',
-        fontSize: 20,
+        fontSize: 22,
         letterSpacing:0.8,
         fontWeight: '900',
         textAlign: 'center',
         bottom: 10,
-        right: '8%'
+        right: '4%'
     },
     azulClaro: {
         opacity:0.6,
         backgroundColor: '#5169a2',
         top: 12,
         width: '90%',
-        height: '4.5%',
+        height: '29%',
         borderRadius: 22,
         left: '5%',
       
     },
-
+    azulClaro2: {
+        opacity:0.6,
+        backgroundColor: '#5169a2',
+        top: 25,
+        width: '90%',
+        height: '29%',
+        borderRadius: 22,
+        left: '5%',
+    },
+    mestreDeObra:{
+        width: '34%',
+        height: '60%',
+        borderRadius: 24,
+        bottom:220,
+        left:'10%',
+    },
 });
 export default styles;

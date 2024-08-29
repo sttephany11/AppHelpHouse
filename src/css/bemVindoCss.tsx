@@ -9,16 +9,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-
         marginTop: 140,
         backgroundColor: 'rgba(0, 0, 0, 0.0)',
         paddingHorizontal: 20,
     },
     title: {
-        fontSize: 33,
+        fontSize: 36,
         fontWeight: 'bold',
         color: '#fff',
-        marginBottom: 10,
+        top:18,
         textAlign: 'center',
     },
     voce: {
@@ -37,11 +36,9 @@ const styles = StyleSheet.create({
     localFilho: {
         display: 'flex',
         alignItems: 'center',
-        
-        
     },
     text:{
-        fontSize:21,
+        fontSize:23,
         color:'rgba(0, 0, 0, 0.5);',
         fontWeight: 'bold',
     },
@@ -60,17 +57,20 @@ const styles = StyleSheet.create({
         color:'#004AAD',
         marginTop:'30%',
         height:50,
-        
       },
 
       button2:{
         backgroundColor:'#004AAD',
-        borderRadius:25,
-        height:50,
+        borderRadius:30,
+        height:'7%',
+        width:'45%',
         justifyContent:'center',
         alignItems:'center',
         marginTop:'30%',
-        width:230,  
+        shadowColor: 'black',
+      shadowRadius: 5,
+      shadowOffset: { width: 0, height: 9 },
+      shadowOpacity: 0.5,
       },
       buttonText2:{
         color:'#fff',

@@ -7,9 +7,6 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 
-    containerPrincipal: {
-
-    },
     boasVindas: {
         color: 'white',
         fontSize: 33,
@@ -17,10 +14,6 @@ const styles = StyleSheet.create({
         left: '12%',
         top: 85,
         fontFamily: 'bold',
-    },
-    container2: {
-        flex:1,
-        
     },
     circulo: {
         width: 55,
@@ -39,8 +32,9 @@ const styles = StyleSheet.create({
         display: 'flex',
     },
     pesquisa1: {
-        left: '20%',
-        height: '15%',
+        marginBottom:645,
+        marginLeft:'20%',
+        height: '5.4%',
         width: '70%',
         borderColor: 'white',
         fontSize: 15,
@@ -49,8 +43,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: '12%',
         color: '#004aad',
         backgroundColor: '#fff',
-        bottom: 15,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        zIndex:1
     },
     lupa: {
         width: 30,
@@ -58,12 +52,12 @@ const styles = StyleSheet.create({
         position: 'absolute',
         display: 'flex',
         zIndex: 1,
-        top: 100,
-        left: '24%',
+        top:79,
+        left: '23%',
     },
     //trabalhos
     trabalhos: {
-        bottom:510,
+        bottom:770,
     },
     pedreiro: {
         width: 75,
@@ -342,7 +336,7 @@ const styles = StyleSheet.create({
     fundoAzul: {
         backgroundColor: '#004aad',
         width: '89%',
-        height: '21%',
+        height: '19%',
         borderRadius: 22,
         left: '5%',
         bottom: 945
@@ -352,27 +346,27 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontWeight: '900',
         textAlign: 'center',
-        top: 10,
-        left: '37%'
+        top:2,
+        left: '39%'
     },
     alguns: {
         color: '#fff',
-        fontSize: 22,
+        fontSize: 19,
         letterSpacing:0.4,
         marginRight:15,
         fontWeight: '900',
         textAlign: 'center',
-        bottom: 15,
+        bottom: 29,
         right: '10%'
     },
     alguns1: {
         color: '#fff',
-        fontSize: 22,
+        fontSize: 19,
         letterSpacing:0.8,
         fontWeight: '900',
         textAlign: 'center',
-        bottom: 10,
-        right: '4%'
+        bottom: 25,
+        right: '5%'
     },
     azulClaro: {
         opacity:0.6,
@@ -387,18 +381,36 @@ const styles = StyleSheet.create({
     azulClaro2: {
         opacity:0.6,
         backgroundColor: '#5169a2',
-        top: 25,
+        top: 20,
         width: '90%',
         height: '29%',
         borderRadius: 22,
         left: '5%',
+    
     },
     mestreDeObra:{
-        width: '34%',
+        width: '25%',
+        height: '40%',
+        borderRadius: 24,
+        bottom:105,
+        left:'10%',
+    },
+
+    eletricistaa:{
+        width: '29%',
+        height: '45%',
+        borderRadius: 24,
+        bottom:448,
+        left:'37%',
+    },
+
+    torneira:{
+        width: '29%',
         height: '60%',
         borderRadius: 24,
-        bottom:220,
-        left:'10%',
+        marginLeft:'25%',
+        left:'41%',
+        bottom:270,
     },
 });
 export default styles;

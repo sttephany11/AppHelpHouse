@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     position: 'absolute', 
     top: '17%',            
     left: '-20%',         
-    borderRadius: 250,
+    borderRadius: 310,
     zIndex: -1,
     overflow:'hidden',
     flex:1,
@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
     color: '#FF8F49',
     fontSize: 30,
     fontWeight: '900',
- 
-    
   },
   containerCadastro: {
     width: '100%',
@@ -59,15 +57,15 @@ const styles = StyleSheet.create({
         color:'#004AAD',
   },
   input:{
-    width:280,
-    height:60,
+    width:'49%',
+    height:600,
     position:'relative',
-    top:30
-  
+    top:30,
    },
   
  
   button2:{
+    
     backgroundColor:'#004AAD',
     borderRadius:25,
     height:50,
@@ -76,37 +74,40 @@ const styles = StyleSheet.create({
     marginTop:'10%',
     marginLeft:'22%',
     width:160,  
+    shadowColor: 'black',
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 0.5,
+    
   },
   buttonText2:{
     color:'#fff',
     fontSize:20,
     fontWeight:'bold'
   },
-
-
   title2:{
     fontSize:20,
     marginTop:20,
     color:'#004AAD',
     fontWeight:'bold',
- 
 
   },
 
   // códigos input 
   title3:{
-  fontSize:20,
-  marginTop:5,
-  color:'#fff',
-  fontWeight:'bold',
- 
+    fontWeight:'700',
+    color: 'white',
+    marginBottom:15,
+    fontSize:18,
+    right:2,
+    top:9
   },
 
   input3:{
-  borderBottomWidth:5,
+  borderBottomWidth:2,
   borderColor: '#fff',
   height:40,
-  marginBottom:10,
+  marginBottom:5,
   fontSize:16,
   color:'#fff',
   paddingHorizontal:10,

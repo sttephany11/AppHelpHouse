@@ -12,11 +12,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
 },
-container2: {
+  container2: {
     flexDirection: 'row',
   },
   scrollView: {
-    marginHorizontal: 20,
+    
   },
 
   input:{
@@ -61,7 +61,7 @@ colunaTitulo:{
       alignItems:'center',
       borderRadius:16,
       backgroundColor:'white',
-      marginTop:30,
+      marginTop:'30%',
      
   },
   colunaOpcao:{

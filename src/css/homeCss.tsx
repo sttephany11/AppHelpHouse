@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
         fontFamily: 'bold',
     },
     container2: {
+        flex:1,
+        
     },
     circulo: {
         width: 55,
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     },
     //trabalhos
     trabalhos: {
-        bottom:510
+        bottom:510,
     },
     pedreiro: {
         width: 75,

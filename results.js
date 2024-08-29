@@ -1,7 +1,7 @@
 export default [
     {
         id: 1,
-        name: 'Pequenos reparos',
+        name: 'Casaaaaa',
         avatar: 'https://i.pravatar.cc./150?img=31'
     },
     {

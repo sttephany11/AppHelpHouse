@@ -20,7 +20,6 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
             <View style={styles.containerPrincipal}>
                 <ScrollView>
 
-                    <View style={styles.container2}>
                         <Text style={styles.boasVindas}>Boas-vindas!</Text>
 
                         <View style={styles.circulo}></View>
@@ -33,9 +32,9 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
                                 placeholderTextColor='#004aad'
                                 keyboardType='default'
                             />
-
+                            
                         </View>
-                    </View>
+                
 
 
                     <View style={styles.trabalhos}>

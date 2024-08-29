@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#5169a2',
         top: 12,
         width: '90%',
-        height: '29%',
+        height: '33%',
         borderRadius: 22,
         left: '5%',
       
@@ -386,31 +386,30 @@ const styles = StyleSheet.create({
         height: '29%',
         borderRadius: 22,
         left: '5%',
-    
     },
     mestreDeObra:{
         width: '25%',
         height: '40%',
         borderRadius: 24,
-        bottom:105,
+        bottom:84,
         left:'10%',
     },
 
     eletricistaa:{
-        width: '29%',
+        width: '27.9%',
         height: '45%',
         borderRadius: 24,
-        bottom:448,
+        bottom:350,
         left:'37%',
     },
 
     torneira:{
-        width: '29%',
+        width: '28.5%',
         height: '60%',
         borderRadius: 24,
         marginLeft:'25%',
         left:'41%',
-        bottom:270,
+        bottom:212,
     },
 });
 export default styles;

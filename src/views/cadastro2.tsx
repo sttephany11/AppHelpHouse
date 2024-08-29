@@ -58,11 +58,6 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
       };
       
 
-
-
-
-
-
         //função para chamar o cep do clinete.(bem nítido ne amigão)
        async function buscarCep() {
         // Se Cep for vazio vai aparecer um alerta
@@ -128,7 +123,7 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
                             <Text style={styles.title4}> <AntDesign style={styles.icon} name="search1" size={24} color="black" onPress={buscarCep} /></Text>
                             </View> 
                             <TextInput style={styles.input3} 
-                             placeholder="XXXXX-XX" 
+                             placeholder="" 
                              value={cepContratante}
                              keyboardType="numeric"
                              returnKeyType='done'
@@ -158,7 +153,7 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
                       
                             {/* Numero */}
                             <Text style={styles.title3}> Número</Text>
-                            <TextInput placeholder="..."
+                            <TextInput placeholder=""
                              value={numCasaContratante}
                             returnKeyType='done'
                              onChangeText={value => setNumCasaContratante(value)}
@@ -169,7 +164,7 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
                      
                         {/* Complemento, tem que ser feito */}
                         <Text style={styles.title3}> Complemento</Text>
-                            <TextInput placeholder="..."
+                            <TextInput placeholder=""
                              value={complementoContratante}
                             returnKeyType='done'
                              onChangeText={value => setComplementoContratante(value)}

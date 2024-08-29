@@ -34,8 +34,7 @@ const Tabs = () => {
 // Navegador Principal
 const AppNavigator = () => {
   return (
-      <Stack.Navigator initialRouteName="home">
-       
+      <Stack.Navigator initialRouteName="homeStack">
         <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />
         <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />
@@ -44,6 +43,7 @@ const AppNavigator = () => {
         <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
         <Stack.Screen name="cadastro3" component={CadastroScreen3} options={{ headerShown: false }} />
         <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
+     
       </Stack.Navigator>
   );
 };

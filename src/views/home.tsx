@@ -9,6 +9,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 import styles from '../css/homeCss';
 const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
+    
 
     return (
         <ImageBackground
@@ -18,7 +19,7 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
         >
 
             <ScrollView>
-                <Text style={styles.boasVindas}>Boas-vindas!</Text>
+                <Text style={styles.boasVindas}>Boas-vindas! </Text>
 
                 <View style={styles.circulo}></View>
                 <View style={styles.pesquisa}>

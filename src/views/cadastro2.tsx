@@ -149,7 +149,19 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
                             style={styles.input3}
                             />
                      
-                        
+               
+                     
+                        {/* Complemento, tem que ser feito */}
+                        <Text style={styles.title3}> Complemento</Text>
+                            <TextInput placeholder=""
+                             value={complementoContratante}
+                            returnKeyType='done'
+                             onChangeText={value => setComplementoContratante(value)}
+                            style={styles.input3}
+                            
+                            />
+                     
+                                   
                       
                             {/* Numero */}
                             <Text style={styles.title3}> Número</Text>
@@ -161,18 +173,6 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
                             style={styles.inputNum}
                             
                             />
-                     
-                        {/* Complemento, tem que ser feito */}
-                        <Text style={styles.title3}> Complemento</Text>
-                            <TextInput placeholder=""
-                             value={complementoContratante}
-                            returnKeyType='done'
-                             onChangeText={value => setComplementoContratante(value)}
-                            style={styles.inputNum}
-                            
-                            />
-                     
-                          
                    
                
                  <TouchableOpacity style={styles.button2}  onPress={async () => {

@@ -23,10 +23,6 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
         });
               
     }
-    
-          
-      
-
 
     return (
         <KeyboardAvoidingView 
@@ -53,7 +49,7 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                             />
 
                         <Text style={styles.title3}>CPF</Text>
-                            <TextInput placeholder="Digite seu cpf..."
+                            <TextInput placeholder="Digite seu CPF..."
                              value={cpfContratante}
                             keyboardType="number-pad"
                             returnKeyType='done'
@@ -62,8 +58,6 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                             style={styles.input3}
 
                             />
- 
-                  
                             
                         <Text style={styles.title3}> Telefone</Text> 
                         <TextInput          

@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '800',
     marginTop:8,
-    marginLeft:'13%',
+    marginLeft:'8%',
     justifyContent:'center',
     alignItems:'center',
   },

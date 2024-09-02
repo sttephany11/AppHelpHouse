@@ -1,7 +1,9 @@
+
+
 export default [
     {
         id: 1,
-        name: 'Casaaaaa',
+        name: 'Chuveiro',
         avatar: 'https://i.pravatar.cc./150?img=31'
     },
     {

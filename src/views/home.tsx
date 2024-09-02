@@ -9,6 +9,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 import styles from '../css/homeCss';
 const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
+    
 
     return (
         <ImageBackground
@@ -17,9 +18,10 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
             resizeMode="cover"   // Ajusta a imagem para cobrir a tela
         >
 
-            <View style={styles.containerPrincipal}>
-                <ScrollView>
+            <ScrollView>
+                <Text style={styles.boasVindas}>Boas-vindas! </Text>
 
+<<<<<<< HEAD
                         <Text style={styles.boasVindas}>Boas-vindas!</Text>
 
                      
@@ -37,74 +39,90 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
                             
                         </View>
                 
+=======
+                <View style={styles.circulo}></View>
+                <View style={styles.pesquisa}>
+                 
+                    <TextInput
+                        placeholder='O que você precisa?'
+                        style={styles.pesquisa1}
+                        placeholderTextColor='#004aad'
+                        keyboardType='default'
+                    />
+                       <Image source={Imagens.lupaAzul} style={styles.lupa} />
+                </View>
+>>>>>>> 23f57a661df01de1fc5df957857510bc028b4294
 
 
-                    <View style={styles.trabalhos}>
 
-                        <View style={styles.pedreiro}>
-                            <Text style={styles.name1}>Pedreiro</Text>
-                            <Image source={Imagens.pedreiro} style={styles.pedreiroImg} />
-                        </View>
+                <View style={styles.trabalhos}>
 
-                        <View style={styles.mecanico}>
-                            <Text style={styles.name2}>Mecânico</Text>
-                            <Image source={Imagens.mecanico} style={styles.mecanicoImg} />
-                        </View>
+                    <View style={styles.pedreiro}>
+                        <Text style={styles.name1}>Pedreiro</Text>
+                        <Image source={Imagens.pedreiro} style={styles.pedreiroImg} />
+                    </View>
 
-                        <View style={styles.eletricista}>
-                            <Text style={styles.name3}>Eletricista</Text>
-                            <Image source={Imagens.eletricista} style={styles.eletricistaImg} />
-                        </View>
+                    <View style={styles.mecanico}>
+                        <Text style={styles.name2}>Mecânico</Text>
+                        <Image source={Imagens.mecanico} style={styles.mecanicoImg} />
+                    </View>
 
-                        <View style={styles.jadineiro}>
-                            <Text style={styles.name4}>Jadineiro</Text>
-                            <Image source={Imagens.jardineiro} style={styles.jardineiroImg} />
-                        </View>
+                    <View style={styles.eletricista}>
+                        <Text style={styles.name3}>Eletricista</Text>
+                        <Image source={Imagens.eletricista} style={styles.eletricistaImg} />
+                    </View>
 
+                    <View style={styles.jadineiro}>
+                        <Text style={styles.name4}>Jadineiro</Text>
+                        <Image source={Imagens.jardineiro} style={styles.jardineiroImg} />
+                    </View>
 
-                        <View style={styles.encanador}>
-                            <Text style={styles.name5}>Encanador</Text>
-                            <Image source={Imagens.encanadorK} style={styles.encanadorImg} />
-                        </View>
+                    <View style={styles.encanador}>
+                        <Text style={styles.name5}>Encanador</Text>
+                        <Image source={Imagens.encanadorK} style={styles.encanadorImg} />
+                    </View>
 
-                        <View style={styles.diarista}>
-                            <Text style={styles.name6}>Serviço</Text>
-                            <Text style={styles.domestico}>doméstico</Text>
-                            <Image source={Imagens.diarista} style={styles.diaristaImg} />
-                        </View>
+                    <View style={styles.diarista}>
+                        <Text style={styles.name6}>Serviço</Text>
+                        <Text style={styles.domestico}>doméstico</Text>
+                        <Image source={Imagens.diarista} style={styles.diaristaImg} />
+                    </View>
 
-                        <View style={styles.pintor}>
-                            <Text style={styles.name7}>Pintor</Text>
-                            <Image source={Imagens.pintor} style={styles.pintorImg} />
-                        </View>
+                    <View style={styles.pintor}>
+                        <Text style={styles.name7}>Pintor</Text>
+                        <Image source={Imagens.pintor} style={styles.pintorImg} />
+                    </View>
 
-                        <View style={styles.instalacao}>
-                            <Text style={styles.name8}>Instalação</Text>
-                            <Image source={Imagens.instalacao} style={styles.instalacaoImg} />
-                        </View>
+                    <View style={styles.instalacao}>
+                        <Text style={styles.name8}>Instalação</Text>
+                        <Image source={Imagens.instalacao} style={styles.instalacaoImg} />
+                    </View>
 
-                        <View style={styles.brancoMeio}>
-                            <Text style={styles.pedidos}> Meus pedidos</Text>
-                            <Text style={styles.acompanhe}> Acompanhe seus pedidos...</Text>
-
-                        </View>
-
-
-                         <View style={styles.fundoAzul}>
-                            <Text style={styles.ponto}>...</Text>
-                            <Text style={styles.alguns}>Alguns serviços mais</Text>
-                            <Text style={styles.alguns1}>procurados ultimamente.</Text>
-                            <View style={styles.azulClaro}>
-                            </View>
-                            <View style={styles.azulClaro2}>
-                            </View>
-                            <Image source={Imagens.mestreDeObra} style={styles.mestreDeObra} />
-                        </View> 
+                    <View style={styles.brancoMeio}>
+                        <Text style={styles.pedidos}> Meus pedidos</Text>
+                        <Text style={styles.acompanhe}> Acompanhe seus pedidos...</Text>
 
                     </View>
 
-                </ScrollView>
-            </View>
+                    <View style={styles.fundoAzul}>
+                        <Text style={styles.ponto}>...</Text>
+                        <Text style={styles.alguns}>Alguns serviços mais</Text>
+                        <Text style={styles.alguns1}>procurados ultimamente.</Text>
+                        <View style={styles.azulClaro}>
+                        </View>
+                        {/* <View style={styles.azulClaro2}>
+                        </View> */}
+
+                        <Image source={Imagens.mestreDeObra} style={styles.mestreDeObra} />
+
+                        <Image source={Imagens.torneira} style={styles.torneira} />
+
+                        <Image source={Imagens.eletricistaa} style={styles.eletricistaa} />
+                    </View>
+
+                </View>
+
+            </ScrollView>
         </ImageBackground>
     );
 };

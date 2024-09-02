@@ -37,10 +37,11 @@ const styles = StyleSheet.create({
         height: '39%',
         width: '90%',
         display: 'flex',
+        bottom:'10%'
     },
     pesquisa1: {
-        left: '20%',
-        height: '15%',
+        marginLeft:'20%',
+        height: '10%',
         width: '70%',
         borderColor: 'white',
         fontSize: 15,
@@ -50,20 +51,21 @@ const styles = StyleSheet.create({
         color: '#004aad',
         backgroundColor: '#fff',
         bottom: 15,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        justifyContent:'center',
+        
     },
     lupa: {
         width: 30,
         height: 38,
-        position: 'absolute',
-        display: 'flex',
-        zIndex: 1,
-        top: 100,
-        left: '24%',
+        marginLeft:'75%',
+        bottom:53,
+     
     },
     //trabalhos
     trabalhos: {
         bottom:510,
+        marginTop:'5%',
     },
     pedreiro: {
         width: 75,
@@ -379,7 +381,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#5169a2',
         top: 12,
         width: '90%',
-        height: '29%',
+        height: '35%',
         borderRadius: 22,
         left: '5%',
       
@@ -397,7 +399,7 @@ const styles = StyleSheet.create({
         width: '34%',
         height: '60%',
         borderRadius: 24,
-        bottom:220,
+        bottom:160,
         left:'10%',
     },
 });

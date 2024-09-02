@@ -22,16 +22,18 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
 
                         <Text style={styles.boasVindas}>Boas-vindas!</Text>
 
-                        <View style={styles.circulo}></View>
+                     
 
                         <View style={styles.pesquisa}>
-                            <Image source={Imagens.lupaAzul} style={styles.lupa} />
-                            <TextInput
+                        <TextInput 
                                 placeholder='O que você precisa?'
                                 style={styles.pesquisa1}
                                 placeholderTextColor='#004aad'
                                 keyboardType='default'
+                                
                             />
+                            <Image source={Imagens.lupaAzul} style={styles.lupa} />
+                            
                             
                         </View>
                 

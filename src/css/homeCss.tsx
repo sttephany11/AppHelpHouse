@@ -33,14 +33,8 @@ const styles = StyleSheet.create({
         bottom:'10%'
     },
     pesquisa1: {
-<<<<<<< HEAD
         marginLeft:'20%',
         height: '10%',
-=======
-        marginBottom:645,
-        marginLeft:'20%',
-        height: '5.4%',
->>>>>>> 23f57a661df01de1fc5df957857510bc028b4294
         width: '70%',
         borderColor: 'white',
         fontSize: 15,
@@ -49,20 +43,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: '12%',
         color: '#004aad',
         backgroundColor: '#fff',
-<<<<<<< HEAD
         bottom: 15,
         fontWeight: 'bold',
         justifyContent:'center',
         
-=======
-        fontWeight: 'bold',
-        zIndex:1
->>>>>>> 23f57a661df01de1fc5df957857510bc028b4294
     },
     lupa: {
         width: 30,
         height: 38,
-<<<<<<< HEAD
         marginLeft:'75%',
         bottom:53,
      
@@ -71,17 +59,6 @@ const styles = StyleSheet.create({
     trabalhos: {
         bottom:510,
         marginTop:'5%',
-=======
-        position: 'absolute',
-        display: 'flex',
-        zIndex: 1,
-        top:79,
-        left: '23%',
-    },
-    //trabalhos
-    trabalhos: {
-        bottom:770,
->>>>>>> 23f57a661df01de1fc5df957857510bc028b4294
     },
     pedreiro: {
         width: 75,
@@ -397,11 +374,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#5169a2',
         top: 12,
         width: '90%',
-<<<<<<< HEAD
         height: '35%',
-=======
-        height: '33%',
->>>>>>> 23f57a661df01de1fc5df957857510bc028b4294
         borderRadius: 22,
         left: '5%',
       
@@ -435,14 +408,8 @@ const styles = StyleSheet.create({
         width: '28.5%',
         height: '60%',
         borderRadius: 24,
-<<<<<<< HEAD
         bottom:160,
         left:'10%',
-=======
-        marginLeft:'25%',
-        left:'41%',
-        bottom:212,
->>>>>>> 23f57a661df01de1fc5df957857510bc028b4294
     },
 });
 export default styles;

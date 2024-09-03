@@ -21,7 +21,6 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
             <ScrollView>
                 <Text style={styles.boasVindas}>Boas-vindas! </Text>
 
-<<<<<<< HEAD
                         <Text style={styles.boasVindas}>Boas-vindas!</Text>
 
                      
@@ -39,19 +38,6 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
                             
                         </View>
                 
-=======
-                <View style={styles.circulo}></View>
-                <View style={styles.pesquisa}>
-                 
-                    <TextInput
-                        placeholder='O que você precisa?'
-                        style={styles.pesquisa1}
-                        placeholderTextColor='#004aad'
-                        keyboardType='default'
-                    />
-                       <Image source={Imagens.lupaAzul} style={styles.lupa} />
-                </View>
->>>>>>> 23f57a661df01de1fc5df957857510bc028b4294
 
 
 

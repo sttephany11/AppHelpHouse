@@ -4,7 +4,6 @@ import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { TextInputMask } from 'react-native-masked-text';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
 import styles from '../css/cadastro2Css';
-import Imagens from '../../img/img';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';  // Importando o MapView e Marker
 import Map from '../../componentes/Map/map';  // Importe o componente Map

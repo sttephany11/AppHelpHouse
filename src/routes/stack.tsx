@@ -17,6 +17,7 @@ import PesquisarScreen from '../views/pesquisar';
 import consultaScreen from '../views/consulta';
 import insertScreen from '../views/insert'; 
 import { isNewExpression } from 'typescript';
+import perfilScreen from '../views/perfil';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

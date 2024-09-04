@@ -9,6 +9,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 import styles from '../css/homeCss';
 const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
+    
 
     return (
         <ImageBackground
@@ -18,19 +19,25 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
         >
 
             <ScrollView>
-                <Text style={styles.boasVindas}>Boas-vindas!</Text>
+                <Text style={styles.boasVindas}>Boas-vindas! </Text>
 
-                <View style={styles.circulo}></View>
-                <View style={styles.pesquisa}>
-                 
-                    <TextInput
-                        placeholder='O que você precisa?'
-                        style={styles.pesquisa1}
-                        placeholderTextColor='#004aad'
-                        keyboardType='default'
-                    />
-                       <Image source={Imagens.lupaAzul} style={styles.lupa} />
-                </View>
+                        <Text style={styles.boasVindas}>Boas-vindas!</Text>
+
+                     
+
+                        <View style={styles.pesquisa}>
+                        <TextInput 
+                                placeholder='O que você precisa?'
+                                style={styles.pesquisa1}
+                                placeholderTextColor='#004aad'
+                                keyboardType='default'
+                                
+                            />
+                            <Image source={Imagens.lupaAzul} style={styles.lupa} />
+                            
+                            
+                        </View>
+                
 
 
 

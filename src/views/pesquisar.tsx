@@ -70,7 +70,7 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
                             </TouchableOpacity>
                             </View>
                      
-                        <FlatList
+                         <FlatList
                          data={list}
                          style={styles.list}
                          renderItem={({ item }) => <ListItem data={item}/>} 
@@ -78,7 +78,40 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
                          keyExtractor={(item) => item.avatar}
                          />
 
-                     
+                      <TouchableOpacity>
+                                 <View style={styles.colunaOpcao}>
+                                    <Image style={styles.img} source={Imagens.capacete} />
+                                     <Text style={styles.textoOption}>Pequenos reparos</Text>
+                                 </View>
+                         </TouchableOpacity>
+
+                         <TouchableOpacity>
+                                 <View style={styles.colunaOpcao2}>
+                                 <Image style={styles.img} source={Imagens.mercenaria} />
+                                     <Text style={styles.textoOption}>Mercenária</Text>
+                                 </View>
+                         </TouchableOpacity>
+
+                         <TouchableOpacity>
+                                 <View style={styles.colunaOpcao2}>
+                                 <Image style={styles.img} source={Imagens.eletricidade} />
+                                     <Text style={styles.textoOption}>Elétrica</Text>
+                                 </View>
+                         </TouchableOpacity>
+
+                            <TouchableOpacity>
+                                 <View style={styles.colunaOpcao2}>
+                                 <Image style={styles.img} source={Imagens.iconEncanamento} />
+                                     <Text style={styles.textoOption}>Encanamento</Text>
+                                 </View>                         
+                         </TouchableOpacity>
+
+                         <TouchableOpacity>
+                                 <View style={styles.colunaRosa}>
+                                    <Image style={styles.img} source={Imagens.usuarioFeminino} />
+                                     <Text style={styles.textoEncontreMulheres}>Encontre profissionais mulheres perto de você!!</Text>
+                                 </View>                         
+                         </TouchableOpacity>
                         </View>
                     </View>
 

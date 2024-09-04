@@ -29,6 +29,9 @@ const Imagens = {
     lupaBranca: require("../assets/imgApp/lupaBranca.png"),
     lupaAzul: require("../assets/imgApp/lupaAzul.png"),
     mestreDeObra: require("../assets/imgApp/mestreDeObra.png"),
+    fundo: require("../assets/imgApp/fundo.png"),
+    eletricistaa: require("../assets/imgApp/eletricistaa.png"),
+    torneira: require("../assets/imgApp/torneira.png"),
 }
 export default Imagens;
 

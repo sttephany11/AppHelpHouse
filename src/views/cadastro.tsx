@@ -5,7 +5,8 @@ import { TextInputMask } from 'react-native-masked-text';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
 import styles from '../css/cadastroCss';
 
-const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
+const Cadastro: React.FC<{route: any, navigation: any }> = ({route, navigation }) => {
+    const {fotoContratante}= route.params;
     const [nomeContratante, setNomeContratante] = useState('');
     const [cpfContratante, setCpfContratante] = useState('');
     const [password, setPassword] = useState('');
@@ -18,15 +19,12 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
            cpfContratante:cpfContratante,
            telefoneContratante:telefoneContratante,
            emailContratante:emailContratante,
-           password:password
+           password:password,
+           fotoContratante:fotoContratante
 
         });
               
     }
-    
-          
-      
-
 
     return (
         <KeyboardAvoidingView 
@@ -53,7 +51,7 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                             />
 
                         <Text style={styles.title3}>CPF</Text>
-                            <TextInput placeholder="Digite seu cpf..."
+                            <TextInput placeholder="Digite seu CPF..."
                              value={cpfContratante}
                             keyboardType="number-pad"
                             returnKeyType='done'
@@ -62,8 +60,6 @@ const Cadastro: React.FC<{ navigation: any }> = ({ navigation }) => {
                             style={styles.input3}
 
                             />
- 
-                  
                             
                         <Text style={styles.title3}> Telefone</Text> 
                         <TextInput          

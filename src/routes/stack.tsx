@@ -17,6 +17,7 @@ import PesquisarScreen from '../views/pesquisar';
 import consultaScreen from '../views/consulta';
 import insertScreen from '../views/insert'; 
 import { isNewExpression } from 'typescript';
+import perfilScreen from '../views/perfil';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,7 +35,8 @@ const Tabs = () => {
 // Navegador Principal
 const AppNavigator = () => {
   return (
-      <Stack.Navigator initialRouteName="bemvindo">
+      <Stack.Navigator initialRouteName="perfil">
+        <Stack.Screen name="perfil" component={perfilScreen} />
         <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />
         <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />

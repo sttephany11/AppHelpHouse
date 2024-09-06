@@ -3,17 +3,17 @@
 export default [
     {
         id: 1,
-        name: 'Chuveiro',
+        name: 'Encanador',
         avatar: 'https://i.pravatar.cc./150?img=31'
     },
     {
         id: 2,
-        name: 'Manutenção',
+        name: 'Pintor',
         avatar: 'https://i.pravatar.cc./150?img=32'
     },
     {
         id: 3,
-        name: 'Encanamento',
+        name: 'Diarista',
         avatar: 'https://i.pravatar.cc./150?img=33'
     },
     {
@@ -23,7 +23,7 @@ export default [
     },
     {
         id: 5,
-        name: 'Pintura',
+        name: 'Marido de Aluguel',
         avatar: 'https://i.pravatar.cc./150?img=35'
     },
 ];

@@ -32,6 +32,7 @@ const Imagens = {
     fundo: require("../assets/imgApp/fundo.png"),
     eletricistaa: require("../assets/imgApp/eletricistaa.png"),
     torneira: require("../assets/imgApp/torneira.png"),
+    setaAzul: require("../assets/imgApp/setaAzul.png"),
 }
 export default Imagens;
 

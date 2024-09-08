@@ -51,7 +51,30 @@ const styles = StyleSheet.create({
         bottom: 65,
     },
 
-
-});
+    // container: {
+    //   flex: 1,
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    // },
+    button: {
+      backgroundColor: '#007BFF',
+      padding: 10,
+      borderRadius: 5,
+      marginTop: 20,
+    },
+    buttonText: {
+      color: '#FFF',
+      fontSize: 16,
+    },
+    image: {
+      width: 200,
+      height: 200,
+      marginTop: 20,
+    },
+    imageContainer: {
+      marginTop: 20,
+      alignItems: 'center',
+    },
+   });
 export default styles;
 

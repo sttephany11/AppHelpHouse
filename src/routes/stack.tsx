@@ -38,7 +38,7 @@ const Tabs = () => {
 // Navegador Principal
 const AppNavigator = () => {
   return (
-      <Stack.Navigator initialRouteName="perfil">
+      <Stack.Navigator initialRouteName="telaPerfil">
         <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />
         <Stack.Screen name="loading" component={LoadingScreen} options={{ headerShown: false }} />
@@ -46,7 +46,7 @@ const AppNavigator = () => {
         <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />
         <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
         <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
-        <Stack.Screen name="perfil" component={perfilScreen} />
+        <Stack.Screen name="telaPerfil" component={telaPerfilScreen}   options={{ headerShown: false }}/>
       </Stack.Navigator>
   );
 };

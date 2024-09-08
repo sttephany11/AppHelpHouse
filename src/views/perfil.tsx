@@ -39,6 +39,7 @@ function Perfil({ navigation }: { navigation: any }) {
        result.assets[0].uri.lastIndexOf('/') + 1,
        result.assets[0].uri.length
       );
+      console.log(filename)
       const formData = new FormData();
       formData.append('file', JSON.parse(JSON.stringify({
           name: filename,
@@ -47,7 +48,7 @@ function Perfil({ navigation }: { navigation: any }) {
       })));
 
       try{
-        const cpp = await axios.post('http://127.0.0.1:8000/api/fotoPerfil',
+        const cpp = await axios.post('http://localhost:8000/api/fotoPerfil',
           formData, 
           {
             headers:
@@ -61,7 +62,7 @@ function Perfil({ navigation }: { navigation: any }) {
           Alert.alert('Erro', 'Não foi possovel enviar sua imagem. por favor, tente novamente.')
         }else{
           Alert.alert('Sucesso', 'foi possovel enviar sua imagem')
-          const response = await fetch('http://127.0.0.1:8000/api/fotoPerfilGet');
+          const response = await fetch('http://localhost:8000/api/fotoPerfilGet');
           const jsno = await response.json();
           setFotoPerfil(jsno)
           

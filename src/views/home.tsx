@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, Image, ImageBackground, TouchableOpacity, FlatList } from 'react-native';
 import Imagens from "../../img/img";
 import AntDesign from '@expo/vector-icons/AntDesign';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import results from '../../results';
 import ListItem from '../../componentes/flat/listItem.js';
@@ -53,7 +54,7 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
         >
             <ScrollView>
             <View style={styles.containerBoasVindas}> 
-                <Text style={styles.boasVindas}>Boas vindas! </Text>
+                <Text style={styles.boasVindas}>Olá,Clodoaldo! </Text>
                 <TouchableOpacity>
                 <Image  style={styles.ImgPerfil} source={Imagens.perfil} />
                 </TouchableOpacity>
@@ -61,23 +62,17 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
 
            <View style={styles.containerFrase}>
            <Text style={styles.frase}>O que você procura? </Text>
-           <Image  style={styles.lupa} source={Imagens.lupaAzul} />
+          
            </View>
 
            <View style={styles.containerInput}>
            <TextInput 
             style={styles.input}
-            placeholder='Categoria'
+            placeholder='Buscar serviço'
             value={searchText}
             onChangeText={(t) => setSearchText(t)}
             />
 
-          <TextInput 
-            style={styles.input2}
-            placeholder='Região'
-            value={searchText}
-            onChangeText={(t) => setSearchText(t)}
-            />
          
         
          <View style={styles.containerProfissoes}>
@@ -126,10 +121,13 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
        
         <View style={styles.containerPedidos}>
         <View style={styles.fundoPedidos}>
-          <Text style={styles.textPedidos}>Meus pedidos</Text>
+          <Text style={styles.textPedidos}>Meus pedidos  </Text>
           <Text style={styles.textPedidos2}>Acompanhe seus pedidos... </Text>
+          <AntDesign name="rightcircle" size={50} color="#004aad"  style={{marginLeft:260, bottom:100}}/>
         </View>
         </View>
+
+
        
         <View style={styles.containerPedidos}>
         <View style={styles.fundoAzul}>
@@ -146,13 +144,7 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
         <Image source={Imagens.eletricistaa} style={styles.imgs2}/>
         </View>
 
-        <View style={styles.containerImgs}>
-        <Image source={Imagens.eletricistaa} style={styles.imgs}/>
-        <Image source={Imagens.eletricistaa} style={styles.imgs2}/>
-        <Image source={Imagens.eletricistaa} style={styles.imgs2}/>
-        </View>
        
-
            </View>
         </View>
 

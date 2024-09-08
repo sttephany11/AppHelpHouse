@@ -19,17 +19,18 @@ const styles = StyleSheet.create({
     },
     boasVindas: {
         color: 'white',
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: '600',
         justifyContent:'center',
         alignItems:'center',
         marginTop: 80,
-        marginEnd:40,
+        marginLeft:25
+  
   
     },
     frase: {
         color: '#004aad',
-        fontSize: 30,
+        fontSize: 35,
         fontWeight: '800',
         justifyContent:'center',
         alignItems:'center',
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     //inputs
 
     containerInput:{
-        marginTop:30,
+        marginTop:20,
         justifyContent:'center',
         alignItems:'center',
     },
@@ -70,9 +71,12 @@ const styles = StyleSheet.create({
         fontWeight:500,
         fontSize:19,
         backgroundColor:'white',
-        borderColor:'white'
+        borderColor:'white',
+        marginBottom:5,
+       
       
       }, 
+      //se tiver outro input
       input2:{
         height:50,
         width:350,
@@ -164,10 +168,7 @@ const styles = StyleSheet.create({
         marginBottom:50,
       },
 
-      setaAzul:{
-      marginLeft:250,
-      marginBottom:10,
-      },
+ 
 
       //fundo azul com ultimos serviços procurados
 
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
       fundoAzul:{
         backgroundColor:'#004aad',
         width:350,
-        height:450,
+        height:330,
         borderRadius:25,
         marginTop:30,
         marginBottom:30,

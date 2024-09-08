@@ -6,27 +6,206 @@ const styles = StyleSheet.create({
 
     },
 
+    containerBoasVindas:{
+        justifyContent:'center',
+        alignItems:'center',
+        flexDirection:'row',
+    },
+    containerFrase:{
+        marginTop:30,
+        justifyContent:'center',
+        alignItems:'center',
+        flexDirection:'row',
+    },
     boasVindas: {
         color: 'white',
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: '600',
-        left: '40%',
-        marginTop: 90,
-       
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop: 80,
+        marginLeft:25
+  
+  
     },
-    container1:{
-        flexDirection:'row',
+    frase: {
+        color: '#004aad',
+        fontSize: 35,
+        fontWeight: '800',
+        justifyContent:'center',
+        alignItems:'center',
+      
+  
+    },
 
-    },
     ImgPerfil:{
         borderRadius:50,
         width:70,
         height:70,
         borderColor:'white',
-        marginLeft:'35%',
-        top: 77,
+        marginTop: 80,
+        marginEnd:15,
+        marginLeft:10,
 
     },
+    lupa:{
+        width:35,
+        height:35,
+        marginEnd:10,
+        
+    },
+    //inputs
+
+    containerInput:{
+        marginTop:20,
+        justifyContent:'center',
+        alignItems:'center',
+    },
      
+    input:{
+        height:50,
+        width:350,
+        paddingLeft:2,
+        paddingRight:1,
+        borderWidth:3,
+        fontWeight:500,
+        fontSize:19,
+        backgroundColor:'white',
+        borderColor:'white',
+        marginBottom:5,
+       
+      
+      }, 
+      //se tiver outro input
+      input2:{
+        height:50,
+        width:350,
+        paddingLeft:2,
+        paddingRight:1,
+        borderWidth:3,
+        fontWeight:500,
+        fontSize:19,
+        backgroundColor:'white',
+        borderColor:'white',
+        marginTop:15,
+      }, 
+
+      filtroImg:{
+        width:36,
+        height:35,
+        marginRight:7,
+      },
+      list:{
+
+      },
+
+      //butons profissoes com rolagem lateral
+      buttonProfissoes:{
+        backgroundColor:'#ede6e6',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius:25,
+      },
+
+      buttonProfissoes2:{
+        backgroundColor:'#ede6e6',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius:25,
+        marginLeft:10
+      },
+
+
+      textButton:{
+        justifyContent:'center',
+        alignItems:'center',
+        color:'#5169a2',
+        fontSize:17
+      },
+
+      containerProfissoes:{
+        flexDirection:'row',
+        marginLeft:30,
+        marginTop:30,
+      },
+      containerProfissoes2:{
+        flexDirection:'row',
+        marginLeft:30,
+        marginTop:15,
+      },
+
+
+      //parte do meus pedidos
+
+      containerPedidos:{
+        justifyContent:'center',
+        alignItems:'center',
+      },
+
+      fundoPedidos:{
+        backgroundColor:'white',
+        width:350,
+        height:130,
+        borderRadius:25,
+        marginTop:30,
+        
+
+      },
+
+      textPedidos:{
+        color:'#004aad',
+        fontSize:30,
+        marginLeft:40,
+        marginTop:30,
+        fontWeight:'bold',
+      },
+
+      textPedidos2:{
+        color:'#004aad',
+        fontSize:15,
+        marginLeft:40,
+        marginTop:5, 
+        marginBottom:50,
+      },
+
+ 
+
+      //fundo azul com ultimos serviços procurados
+
+      containerImgs:{
+        flexDirection:'row',
+      },
+   
+      
+      fundoAzul:{
+        backgroundColor:'#004aad',
+        width:350,
+        height:330,
+        borderRadius:25,
+        marginTop:30,
+        marginBottom:30,
+        
+      },
+      frasePedidos:{
+        color:'white',
+        fontSize:25,
+        marginLeft:25,
+        marginTop:10,
+        marginBottom:10,
+        fontWeight:'bold',
+      },
+      imgs:{
+        marginTop:5,
+        width:100,
+        height:120,
+        marginLeft:15
+      },
+      imgs2:{
+        marginTop:5,
+        width:100,
+        height:120,
+        marginLeft:5
+      },
+
 });
 export default styles;

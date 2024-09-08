@@ -6,7 +6,6 @@ import { Button } from "../../componentes/Button/Button"; // Verifique se o cami
 import styles from '../css/cadastroCss';
 
 const Cadastro: React.FC<{route: any, navigation: any }> = ({route, navigation }) => {
-    const {fotoContratante}= route.params;
     const [nomeContratante, setNomeContratante] = useState('');
     const [cpfContratante, setCpfContratante] = useState('');
     const [password, setPassword] = useState('');
@@ -20,7 +19,7 @@ const Cadastro: React.FC<{route: any, navigation: any }> = ({route, navigation }
            telefoneContratante:telefoneContratante,
            emailContratante:emailContratante,
            password:password,
-           fotoContratante:fotoContratante
+          
 
         });
               

@@ -7,8 +7,6 @@ import styles from '../css/loginCss';
 import axios from 'axios';
 
 
-
-
 const Login: React.FC<{ navigation: any }> = ({navigation}) => {
     const [emailContratante, setEmailContratante] = useState('');
     const [password, setPassword] = useState('');

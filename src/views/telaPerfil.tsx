@@ -6,11 +6,12 @@ import * as ImagePicker from 'expo-image-picker';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../firebase';
 import styles from '../css/telaPerfilCss';
+import { useImage } from '../ImageContext'; // Ajuste o caminho conforme necessário
 
 const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [image, setImage] = useState<string | null>(null); // Imagem selecionada pelo usuário
-  const [uploading, setUploading] = useState<boolean>(false); // Estado de carregamento
-  const [imageUrl, setImageUrl] = useState<string | null>(null); // URL da imagem carregada no Firebase
+  const [image, setImage] = useState<string | null>(null);
+  const [uploading, setUploading] = useState<boolean>(false);
+  const { imageUrl, setImageUrl } = useImage(); 
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -21,7 +22,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri); // Armazena a URI da imagem local
+      setImage(result.assets[0].uri);
     }
   };
 
@@ -42,17 +43,24 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
       await uploadBytes(storageRef, blob);
 
-      // Recuperar a URL da imagem após o upload
       const url = await getDownloadURL(storageRef);
-      setImageUrl(url); // Atualiza o estado com a URL da imagem enviada
+      setImageUrl(url); // Atualiza a URL da imagem no contexto
 
-      setImage(null); // Limpa a seleção de imagem após o upload
+      setImage(null);
       Alert.alert('Sucesso', 'Imagem enviada com sucesso!');
     } catch (error) {
       console.error('Erro ao enviar a imagem:', error);
       Alert.alert('Erro', 'Falha ao enviar a imagem.');
     } finally {
       setUploading(false);
+    }
+  };
+
+  const goToOutraTela = () => {
+    if (imageUrl) {
+      navigation.navigate('perfilProfissional'); // Navegar para a tela desejada
+    } else {
+      Alert.alert('Erro', 'Nenhuma imagem para exibir.');
     }
   };
 
@@ -64,22 +72,18 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     >
       <View style={styles.fundoBranco}>
         <View style={styles.container}>
-        
-    {/* Exibe a URL da imagem carregada no Firebase ou a imagem padrão */}
-    {imageUrl ? (
-      <Image source={{ uri: imageUrl }} style={styles.imgPerfil} />
-    ) : (
-      <Image source={Imagens.perfil} style={styles.imgPerfil} />
-    )}
+          {imageUrl ? (
+            <Image source={{ uri: imageUrl }} style={styles.imgPerfil} />
+          ) : (
+            <Image source={Imagens.perfil} style={styles.imgPerfil} />
+          )}
 
-    {/* Ícone de câmera, aqui seleciona a imagem */}
-    <View style={styles.cameraIcon}>
-      <TouchableOpacity onPress={pickImage}>
-        <Entypo name="camera" size={24} color="white" />
-      </TouchableOpacity>
-    </View>
+          <View style={styles.cameraIcon}>
+            <TouchableOpacity onPress={pickImage}>
+              <Entypo name="camera" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
         </View>
-
 
         <View style={styles.container}>
           <Text style={styles.nome}>Clodoaldo Oliveira</Text>
@@ -87,15 +91,15 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             <Entypo name="location-pin" size={24} color="red" /> São Paulo, Guaianazes
           </Text>
 
-          {/* Exibe a imagem selecionada e o botão para enviá-la */}
           {image && <Image source={{ uri: image }} style={styles.image} />}
           {image && (
             <TouchableOpacity onPress={uploadMedia} style={styles.button} disabled={uploading}>
               <Text style={styles.buttonText}>{uploading ? 'Enviando...' : 'Enviar Imagem'}</Text>
             </TouchableOpacity>
           )}
-
-          
+          <TouchableOpacity onPress={goToOutraTela} style={styles.button}>
+            <Text style={styles.buttonText}>Ir para Perfil Profissional</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>

@@ -3,6 +3,7 @@ import { View, Text, TextInput, ScrollView, Image, ImageBackground, TouchableOpa
 import Imagens from "../../img/img";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useImage } from '../ImageContext.js';
 
 import results from '../../results';
 import ListItem from '../../componentes/flat/listItem.js';

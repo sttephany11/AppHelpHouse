@@ -75,6 +75,16 @@ const styles = StyleSheet.create({
       marginTop: 20,
       alignItems: 'center',
     },
+
+    cameraIcon: {
+      position: 'absolute',
+      top: 50,
+      right: 10,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      borderRadius: 20,
+      padding: 5,
+      marginRight:100
+    },
    });
 export default styles;
 

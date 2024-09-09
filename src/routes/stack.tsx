@@ -13,10 +13,9 @@ import LoginScreen from '../views/login'; // Renomeado para seguir a convenção
 import CadastroScreen2 from '../views/cadastro2';
 import CadastroScreen3 from '../views/cadastro3';
 import HomeScreen from '../views/home';
-import telaPerfilScreen from '../views/telaPerfil';
+import TelaPerfilScreen from '../views/telaPerfil';
 import PesquisarScreen from '../views/pesquisar';
-import consultaScreen from '../views/consulta';
-import insertScreen from '../views/insert'; 
+import PerfilProfissionalScreen from '../views/perfilProfissional';
 import { isNewExpression } from 'typescript';
 
 //import perfilScreen from '../views/perfil';
@@ -29,16 +28,17 @@ const Tabs = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="home" component={HomeScreen}   options={{ headerShown: false }} />
-      <Tab.Screen name="pesquisar" component={PesquisarScreen}   options={{ headerShown: false }}/>
-      <Tab.Screen name="perfil" component={telaPerfilScreen}   options={{ headerShown: false }}/>
+      <Tab.Screen name="perfilProfissional" component={PerfilProfissionalScreen}   options={{ headerShown: false }}/>
+      <Tab.Screen name="perfil" component={TelaPerfilScreen}   options={{ headerShown: false }}/>
     </Tab.Navigator>
   );
 };
 
+
 // Navegador Principal
 const AppNavigator = () => {
   return (
-      <Stack.Navigator initialRouteName="telaPerfil">
+      <Stack.Navigator initialRouteName="homeStack">
         <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />
         <Stack.Screen name="loading" component={LoadingScreen} options={{ headerShown: false }} />
@@ -46,7 +46,7 @@ const AppNavigator = () => {
         <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />
         <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
         <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
-        <Stack.Screen name="telaPerfil" component={telaPerfilScreen}   options={{ headerShown: false }}/>
+        <Stack.Screen name="telaPerfil" component={TelaPerfilScreen}   options={{ headerShown: false }}/>
       </Stack.Navigator>
   );
 };

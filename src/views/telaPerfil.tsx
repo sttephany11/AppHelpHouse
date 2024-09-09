@@ -7,7 +7,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../firebase';
 import styles from '../css/telaPerfilCss';
 
-const telaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [image, setImage] = useState<string | null>(null); // Imagem selecionada pelo usuário
   const [uploading, setUploading] = useState<boolean>(false); // Estado de carregamento
   const [imageUrl, setImageUrl] = useState<string | null>(null); // URL da imagem carregada no Firebase
@@ -64,26 +64,28 @@ const telaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     >
       <View style={styles.fundoBranco}>
         <View style={styles.container}>
-          <TouchableOpacity>
-            {/* Exibe a URL da imagem carregada no Firebase ou a imagem padrão */}
-            {imageUrl ? (
-              <Image source={{ uri: imageUrl }} style={styles.imgPerfil} />
-            ) : (
-              <Image source={Imagens.perfil} style={styles.imgPerfil} />
-            )}
-          </TouchableOpacity>
+        
+    {/* Exibe a URL da imagem carregada no Firebase ou a imagem padrão */}
+    {imageUrl ? (
+      <Image source={{ uri: imageUrl }} style={styles.imgPerfil} />
+    ) : (
+      <Image source={Imagens.perfil} style={styles.imgPerfil} />
+    )}
+
+    {/* Ícone de câmera, aqui seleciona a imagem */}
+    <View style={styles.cameraIcon}>
+      <TouchableOpacity onPress={pickImage}>
+        <Entypo name="camera" size={24} color="white" />
+      </TouchableOpacity>
+    </View>
         </View>
+
 
         <View style={styles.container}>
           <Text style={styles.nome}>Clodoaldo Oliveira</Text>
           <Text style={styles.textLocalizacao}>
             <Entypo name="location-pin" size={24} color="red" /> São Paulo, Guaianazes
           </Text>
-
-          {/* Botão para selecionar uma nova imagem */}
-          <TouchableOpacity onPress={pickImage} style={styles.button}>
-            <Text style={styles.buttonText}>Escolher Imagem</Text>
-          </TouchableOpacity>
 
           {/* Exibe a imagem selecionada e o botão para enviá-la */}
           {image && <Image source={{ uri: image }} style={styles.image} />}
@@ -100,4 +102,4 @@ const telaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   );
 };
 
-export default telaPerfilScreen;
+export default TelaPerfilScreen;

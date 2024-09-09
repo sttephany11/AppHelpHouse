@@ -74,6 +74,7 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
             placeholder='Buscar serviço'
             value={searchText}
             onChangeText={(t) => setSearchText(t)}
+            
           />
 
           <View style={styles.containerProfissoes}>

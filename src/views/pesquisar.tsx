@@ -4,6 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Imagens from "../../img/img";
 import styles from '../css/pesquisarCss';
+import Entypo from '@expo/vector-icons/Entypo';
+import { Ionicons } from '@expo/vector-icons';
+
 
 import results from '../../results';
 import ListItem from '../../componentes/flat/listItem.js';
@@ -49,76 +52,44 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
     return (
         <ImageBackground 
         source={Imagens.fundoBemVindo}
-        style={styles.background}  // Define o estilo para a imagem de fundo
-        resizeMode="cover"   // Ajusta a imagem para cobrir a tela 
+        style={styles.background}  
+        resizeMode="cover"   
         >
-        <SafeAreaView style={styles.container}>
-             <ScrollView style={styles.scrollView}>
-                <View style={styles.container}>
-                    
-                    <View style={styles.container2}>
-                        <View style={styles.colunaPesquisa}>
-                          <View style={styles.area}>
-                            <TextInput 
-                            style={styles.input}
-                            placeholder='pesquise aqui'
-                            value={searchText}
-                            onChangeText={(t) => setSearchText(t)}
-                            />
-                            <TouchableOpacity onPress={handleOrderClick} >
-                             <Image style={styles.filtroImg} source={Imagens.filtro} />
-                            </TouchableOpacity>
-                            </View>
-                     
-                         <FlatList
-                         data={list}
-                         style={styles.list}
-                         renderItem={({ item }) => <ListItem data={item}/>} 
-                         //keyExtractor={(item) => item.id}
-                         keyExtractor={(item) => item.avatar}
+          
+          <View style={styles.fundoBranco}>
+            <View style={styles.containerInput}>
+            <View style={styles.inputContainer}>
+            <Ionicons name="search" size={24} color="white" style={styles.searchIcon} />
+            <TextInput
+              style={styles.input}
+              placeholder='Encontre um profissional'
+              value={searchText}
+              onChangeText={(t) => setSearchText(t)}
+            />
+           </View>
+
+           <View style={styles.inputContainer}>
+           <Entypo name="location-pin" size={24} color="white" style={styles.searchIcon} />
+            <TextInput
+              style={styles.input}
+              placeholder='Encontre por região'
+              value={searchText}
+              onChangeText={(t) => setSearchText(t)}
+            />
+           </View>
+
+          <Text style={styles.textSugestao}> Sugestões para Você </Text>
+           </View>
+
+            <FlatList
+            data={list}
+            style={styles.list}
+            renderItem={({ item }) => <ListItem data={item}/>} 
+            //keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.avatar}
                          />
 
-                      <TouchableOpacity>
-                                 <View style={styles.colunaOpcao}>
-                                    <Image style={styles.img} source={Imagens.capacete} />
-                                     <Text style={styles.textoOption}>Pequenos reparos</Text>
-                                 </View>
-                         </TouchableOpacity>
-
-                         <TouchableOpacity>
-                                 <View style={styles.colunaOpcao2}>
-                                 <Image style={styles.img} source={Imagens.mercenaria} />
-                                     <Text style={styles.textoOption}>Mercenária</Text>
-                                 </View>
-                         </TouchableOpacity>
-
-                         <TouchableOpacity>
-                                 <View style={styles.colunaOpcao2}>
-                                 <Image style={styles.img} source={Imagens.eletricidade} />
-                                     <Text style={styles.textoOption}>Elétrica</Text>
-                                 </View>
-                         </TouchableOpacity>
-
-                            <TouchableOpacity>
-                                 <View style={styles.colunaOpcao2}>
-                                 <Image style={styles.img} source={Imagens.iconEncanamento} />
-                                     <Text style={styles.textoOption}>Encanamento</Text>
-                                 </View>                         
-                         </TouchableOpacity>
-
-                         <TouchableOpacity>
-                                 <View style={styles.colunaRosa}>
-                                    <Image style={styles.img} source={Imagens.usuarioFeminino} />
-                                     <Text style={styles.textoEncontreMulheres}>Encontre profissionais mulheres perto de você!!</Text>
-                                 </View>                         
-                         </TouchableOpacity>
-                        </View>
-                    </View>
-
-                </View>
-
-            </ScrollView>
-        </SafeAreaView>
+          </View>
 
         </ImageBackground>
     );

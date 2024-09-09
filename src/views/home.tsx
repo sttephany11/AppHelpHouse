@@ -3,6 +3,7 @@ import { View, Text, TextInput, ScrollView, Image, ImageBackground, TouchableOpa
 import Imagens from "../../img/img";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useImage } from '../ImageContext.js';
 
 import results from '../../results';
 import ListItem from '../../componentes/flat/listItem.js';
@@ -11,6 +12,7 @@ import styles from '../css/homeCss';
 const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
         const [searchText, setSearchText] = useState('');
         const [list, setList] = useState(results);
+        const {imageUrl} = useImage();
     
         useEffect(()=>{
           if(searchText === ''){
@@ -56,7 +58,7 @@ const AreaAtuacao: React.FC<{ navigation: any }> = ({ navigation }) => {
             <View style={styles.containerBoasVindas}> 
                 <Text style={styles.boasVindas}>Olá,Clodoaldo! </Text>
                 <TouchableOpacity>
-                <Image  style={styles.ImgPerfil} source={Imagens.perfil} />
+                <Image  source={imageUrl ? { uri: imageUrl } : Imagens.perfil} style={styles.ImgPerfil} />
                 </TouchableOpacity>
            </View>
 

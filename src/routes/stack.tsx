@@ -1,4 +1,4 @@
-// Importes
+// AppNavigator.js
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -16,9 +16,7 @@ import HomeScreen from '../views/home';
 import TelaPerfilScreen from '../views/telaPerfil';
 import PesquisarScreen from '../views/pesquisar';
 import PerfilProfissionalScreen from '../views/perfilProfissional';
-import { isNewExpression } from 'typescript';
-
-//import perfilScreen from '../views/perfil';
+import { ImageProvider } from '../ImageContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,27 +25,28 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="home" component={HomeScreen}   options={{ headerShown: false }} />
-      <Tab.Screen name="perfilProfissional" component={PerfilProfissionalScreen}   options={{ headerShown: false }}/>
-      <Tab.Screen name="perfil" component={TelaPerfilScreen}   options={{ headerShown: false }}/>
+      <Tab.Screen name="home" component={HomeScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="perfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
 };
 
-
 // Navegador Principal
 const AppNavigator = () => {
   return (
-      <Stack.Navigator initialRouteName="homeStack">
-        <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="loading" component={LoadingScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
-        <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
-        <Stack.Screen name="telaPerfil" component={TelaPerfilScreen}   options={{ headerShown: false }}/>
-      </Stack.Navigator>
+      <ImageProvider>
+        <Stack.Navigator initialRouteName="homeStack">
+          <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="loading" component={LoadingScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="login" component={LoginScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
+          <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
+          <Stack.Screen name="telaPerfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </ImageProvider>
   );
 };
 

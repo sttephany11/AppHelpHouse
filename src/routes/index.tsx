@@ -1,16 +1,14 @@
-import { NavigationContainer } from "@react-navigation/native";
-import AppNavigator from "./stack";
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigator from './stack'; 
+import { ImageProvider } from '../ImageContext'; 
 
-
-
-
-export default function  App(){
+export default function App() {
   return (
-
     <NavigationContainer>
-      <AppNavigator />
+      <ImageProvider>
+        <AppNavigator />
+      </ImageProvider>
     </NavigationContainer>
-    
-    );
+  );
 }

@@ -12,7 +12,7 @@ import LoadingScreen from '../views/loading';
 import LoginScreen from '../views/login'; // Renomeado para seguir a convenção
 import CadastroScreen2 from '../views/cadastro2';
 import CadastroScreen3 from '../views/cadastro3';
-import HomeScreen from '../views/home';
+import Home from '../views/home';
 import TelaPerfilScreen from '../views/telaPerfil';
 import PesquisarScreen from '../views/pesquisar';
 import PerfilProfissionalScreen from '../views/perfilProfissional';
@@ -25,7 +25,7 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="home" component={HomeScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
       <Tab.Screen name="perfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
     </Tab.Navigator>

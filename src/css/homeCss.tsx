@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop: 80,
         marginLeft:25
-  
-  
     },
     frase: {
         color: '#004aad',
@@ -34,8 +32,6 @@ const styles = StyleSheet.create({
         fontWeight: '800',
         justifyContent:'center',
         alignItems:'center',
-      
-  
     },
 
     ImgPerfil:{
@@ -46,26 +42,31 @@ const styles = StyleSheet.create({
         marginTop: 80,
         marginEnd:15,
         marginLeft:10,
-
     },
     lupa:{
         width:35,
         height:35,
         marginEnd:10,
-        
     },
-    //inputs
 
+    //inputs
     containerInput:{
         marginTop:20,
         justifyContent:'center',
         alignItems:'center',
     },
-     
+
+    lupaAzul:{
+      width:30,
+      height:35,
+      left:45,
+      top:58,
+      zIndex:1
+    },
     input:{
         height:50,
         width:350,
-        paddingLeft:2,
+        paddingLeft:45,
         paddingRight:1,
         borderWidth:3,
         fontWeight:500,
@@ -73,9 +74,9 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         borderColor:'white',
         marginBottom:5,
-       
-      
-      }, 
+        borderRadius:55,
+        color:'#3669a4'
+      },
       //se tiver outro input
       input2:{
         height:50,
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         borderColor:'white',
         marginTop:15,
-      }, 
+      },
 
       filtroImg:{
         width:36,
@@ -115,7 +116,6 @@ const styles = StyleSheet.create({
         marginLeft:10
       },
 
-
       textButton:{
         justifyContent:'center',
         alignItems:'center',
@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
         marginTop:15,
       },
 
-
       //parte do meus pedidos
 
       containerPedidos:{
@@ -144,39 +143,34 @@ const styles = StyleSheet.create({
 
       fundoPedidos:{
         backgroundColor:'white',
-        width:350,
-        height:130,
+        width:380,
+        height:118,
         borderRadius:25,
         marginTop:30,
-        
-
       },
 
       textPedidos:{
         color:'#004aad',
         fontSize:30,
-        marginLeft:40,
-        marginTop:30,
+        top:25,
         fontWeight:'bold',
+        left:18
       },
 
       textPedidos2:{
         color:'#004aad',
         fontSize:15,
-        marginLeft:40,
-        marginTop:5, 
+        top:24,
+        left:29,
         marginBottom:50,
       },
-
- 
 
       //fundo azul com ultimos serviços procurados
 
       containerImgs:{
         flexDirection:'row',
       },
-   
-      
+
       fundoAzul:{
         backgroundColor:'#004aad',
         width:350,
@@ -184,7 +178,7 @@ const styles = StyleSheet.create({
         borderRadius:25,
         marginTop:30,
         marginBottom:30,
-        
+
       },
       frasePedidos:{
         color:'white',
@@ -206,6 +200,7 @@ const styles = StyleSheet.create({
         height:120,
         marginLeft:5
       },
+
 
 });
 export default styles;

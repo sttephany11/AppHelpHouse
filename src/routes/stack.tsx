@@ -12,7 +12,7 @@ import LoadingScreen from '../views/loading';
 import LoginScreen from '../views/login'; 
 import CadastroScreen2 from '../views/cadastro2';
 import CadastroScreen3 from '../views/cadastro3';
-import HomeScreen from '../views/home';
+import Home from '../views/home';
 import TelaPerfilScreen from '../views/telaPerfil';
 import PesquisarScreen from '../views/pesquisar';
 import PerfilProfissionalScreen from '../views/perfilProfissional';
@@ -25,7 +25,7 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="home" component={HomeScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
       <Tab.Screen name="perfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
     </Tab.Navigator>
@@ -36,7 +36,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="homeStack">
+        <Stack.Navigator initialRouteName="pesquisar">
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />
           <Stack.Screen name="loading" component={LoadingScreen} options={{ headerShown: false }} />
@@ -45,6 +45,7 @@ const AppNavigator = () => {
           <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
           <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
           <Stack.Screen name="telaPerfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="pesquisar" component={PesquisarScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </ImageProvider>
   );

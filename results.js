@@ -1,29 +1,52 @@
 
-
 export default [
     {
         id: 1,
         name: 'Encanador',
-        avatar: 'https://i.pravatar.cc./150?img=31'
     },
     {
         id: 2,
-        name: 'Pintor',
-        avatar: 'https://i.pravatar.cc./150?img=32'
+        name: 'Marido de Aluguel',
+        
     },
     {
         id: 3,
         name: 'Diarista',
-        avatar: 'https://i.pravatar.cc./150?img=33'
+      
     },
     {
         id: 4,
         name: 'Eletrica',
-        avatar: 'https://i.pravatar.cc./150?img=34'
+       
     },
     {
         id: 5,
-        name: 'Marido de Aluguel',
-        avatar: 'https://i.pravatar.cc./150?img=35'
+        name: 'Pintor',
+       
+    },
+    {
+        id: 6,
+        name: 'Instalador de Papel de Parede',
+       
+    },
+    {
+        id: 7,
+        name: 'Jardinagem',
+       
+    },
+    {
+        id: 8,
+        name: 'Montador de Móveis',
+       
+    },
+    {
+        id: 9,
+        name: 'Vidraceiro',
+       
+    },
+    {
+        id: 10,
+        name: 'Pedreiro',
+       
     },
 ];

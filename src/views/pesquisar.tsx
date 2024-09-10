@@ -7,13 +7,14 @@ import styles from '../css/pesquisarCss';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Ionicons } from '@expo/vector-icons';
 
-
 import results from '../../results';
+import results2 from '../../results2.js';
 import ListItem from '../../componentes/flat/listItem.js';
 
 const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [searchText, setSearchText] = useState('');
     const [list, setList] = useState(results);
+    const [searchText2, setSearchText2] = useState('');
 
     useEffect(()=>{
       if(searchText === ''){
@@ -30,6 +31,22 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
         )
       }
     }, [searchText]);
+
+    useEffect(()=>{
+      if(searchText2 === ''){
+        setList(results2);
+      }else {
+        setList(
+          results2.filter(item=>{
+            if(item.name.toLowerCase().indexOf(searchText2.toLowerCase()) > -1){
+              return true;
+            }else {
+              return false;
+            }
+          })
+        )
+      }
+    }, [searchText2]);
 
     const handleOrderClick = () => {
       let newList = [...results];
@@ -73,21 +90,20 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder='Encontre por região'
-              value={searchText}
-              onChangeText={(t) => setSearchText(t)}
+              value={searchText2}
+              onChangeText={(t) => setSearchText2(t)}
             />
            </View>
 
           <Text style={styles.textSugestao}> Sugestões para Você </Text>
            </View>
 
-            <FlatList
-            data={list}
-            style={styles.list}
-            renderItem={({ item }) => <ListItem data={item}/>} 
-            //keyExtractor={(item) => item.id}
-            keyExtractor={(item) => item.avatar}
-                         />
+           <FlatList
+              data={list}
+              renderItem={({ item }) => <ListItem data={item} />}
+              keyExtractor={(item) => item.id.toString()} // Use a propriedade 'id' como chave
+            />
+
 
           </View>
 

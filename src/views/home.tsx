@@ -7,6 +7,7 @@ import { useImage } from '../ImageContext.js';
 import results from '../../results';
 import ListItem from '../../componentes/flat/listItem.js';
 import styles from '../css/homeCss';
+import Pesquisar from './pesquisar.js';
 
 const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
   const [searchText, setSearchText] = useState('');
@@ -33,6 +34,11 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
     navigation.navigate('telaPerfil'); // Nome correto da tela
   };
 
+  const pesquisar = () => {
+    navigation.navigate('pesquisar'); // Nome correto da tela
+  };
+
+
   return (
     <ImageBackground
       source={Imagens.fundoBemVindo}
@@ -53,12 +59,8 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
             style={styles.input}
             placeholder='Buscar serviço'
             value={searchText}
-<<<<<<< HEAD
-            onChangeText={(t) => setSearchText(t)}
+            onPress={pesquisar}
             
-=======
-            onChangeText={setSearchText}
->>>>>>> 80406c801962430d8883c130eea6e610f9c9c7aa
           />
 
           <View style={styles.containerProfissoes}>

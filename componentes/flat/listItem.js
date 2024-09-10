@@ -11,13 +11,25 @@ import {
     ImageBackground,
     TextInput,
   } from 'react-native'; 
-  
+  import Imagens from "../../img/img";
+
 
   const ListItem = ({ data }) => {
     return(
         <TouchableOpacity style={styles.coihbhb}>
             <View style={styles.colunaOpcao}>
-                <Image source={{ uri: data.avatar}} style={styles.img}/>
+                <Image source={Imagens.perfil2} style={styles.img}/>
+                <Text style={styles.textoOption}>{data.name}</Text>
+            </View>
+        </TouchableOpacity>
+    );
+  };
+
+  const ListItem2 = ({ data }) => {
+    return(
+        <TouchableOpacity style={styles.coihbhb}>
+            <View style={styles.colunaOpcao}>
+                <Image source={Imagens.perfil2} style={styles.img}/>
                 <Text style={styles.textoOption}>{data.name}</Text>
             </View>
         </TouchableOpacity>
@@ -26,29 +38,26 @@ import {
 
   const styles = StyleSheet.create({
     colunaOpcao:{
-        backgroundColor:'#e9e9e7',
         width: 300,
         height: 60,
         borderRadius: 15,
-        alignItems:'flex-start',
-        marginTop:15,
+        alignItems:'center',
+        marginTop:20,
         flexDirection:'row',
-       
       },
       img:{
-        height:60,
-        width:60,
+        height:40,
+        width:40,
         borderRadius:30,
         justifyContent:'flex-start',
-        marginLeft:10
+        marginLeft:35
       },
       textoOption:{
-        color: '#3669a4',
-        marginLeft: 9,
-        marginTop:15,
+        color: 'black',
+        marginLeft: 11,
         fontSize: 20,
         fontWeight: '730',
-       
+
       },
   });
   export default ListItem;

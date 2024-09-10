@@ -42,9 +42,9 @@ inputContainer: {
   borderRadius:30,
   fontWeight:500,
   fontSize:19,
-  backgroundColor:'#fabd8c',
+  backgroundColor:'#faae70',
   borderColor:'#fff',
-  color:'white',
+  color:'red',
   marginTop:25,
   paddingHorizontal: 20,
   paddingVertical: 10,
@@ -56,21 +56,14 @@ searchIcon: {
 },
 input: {
   flex: 1, // Ocupa o espaço restante
-  borderColor:'#fff',
+  borderColor:'black',
   color:'white',
   fontSize:16,
   fontWeight:'bold',
 },
 
 list:{
-
-  borderColor:'#fff',
-  color:'white',
-  marginTop:25,
-  paddingHorizontal: 20,
-  paddingVertical: 10,
-  height:50,
-  width:300,
+flex:1,
 }
 
 });

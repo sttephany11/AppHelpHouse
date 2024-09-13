@@ -1,7 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import { View, Text, TouchableOpacity,TextInput, SafeAreaView, ScrollView, ImageBackground, StatusBar, Image, FlatList} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Text, TouchableOpacity,TextInput, ScrollView, ImageBackground, Image, FlatList} from 'react-native';
 import Imagens from "../../img/img";
 import styles from '../css/pesquisarCss';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -11,11 +9,32 @@ import results from '../../results';
 import results2 from '../../results2.js';
 import ListItem from '../../componentes/flat/listItem.js';
 
-const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
-    const [searchText, setSearchText] = useState('');
-    const [list, setList] = useState(results);
-    const [searchText2, setSearchText2] = useState('');
 
+const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
+    
+  const [searchText, setSearchText] = useState('');
+  const [searchText2, setSearchText2] = useState('');
+    const [list, setList] = useState(results);
+    const [list2, setList2] = useState(results2);
+
+    const handleItemSelect = (value) => {
+      setSearchText(value); // essas duas const Leva o valor selecionado para o input
+    };
+    const handleItemSelect2 = (value) => {
+      setSearchText2(value); 
+    };
+
+    //aqui faz a ligação direta para a próxima tela
+    useEffect(() => {
+      if (searchText && searchText2) {
+        // Verifica se ambos os inputs têm valores preenchidos
+        navigation.navigate('profissionais', { valor1: searchText, valor2: searchText2 });
+      }
+    }, [searchText, searchText2]);
+  
+
+    
+ 
     useEffect(()=>{
       if(searchText === ''){
         setList(results);
@@ -32,11 +51,13 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
       }
     }, [searchText]);
 
+    
+
     useEffect(()=>{
       if(searchText2 === ''){
-        setList(results2);
+        setList2(results2);
       }else {
-        setList(
+        setList2(
           results2.filter(item=>{
             if(item.name.toLowerCase().indexOf(searchText2.toLowerCase()) > -1){
               return true;
@@ -48,23 +69,6 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
       }
     }, [searchText2]);
 
-    const handleOrderClick = () => {
-      let newList = [...results];
-
-    newList.sort((a, b)=>{
-      if(a.name > b.name){
-      return 1;
-      } else {
-      if(b.name > a.name){
-        return -1;
-      } else {
-        return 0;
-      }
-      }
-    })
-    
-      setList(newList);  
-    };
 
     return (
         <ImageBackground 
@@ -95,14 +99,28 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
             />
            </View>
 
+        
+
           <Text style={styles.textSugestao}> Sugestões para Você </Text>
            </View>
 
            <FlatList
-              data={list}
-              renderItem={({ item }) => <ListItem data={item} />}
-              keyExtractor={(item) => item.id.toString()} // Use a propriedade 'id' como chave
-            />
+            data={list}
+            renderItem={({ item }) => (
+              <ListItem data={item} onSelect={handleItemSelect}  />
+            )}
+            keyExtractor={(item) => item.id.toString()}
+          />
+
+            <FlatList
+            data={list2}
+            renderItem={({ item }) => (
+              <ListItem data={item} onSelect={handleItemSelect2}  />
+            )}
+            keyExtractor={(item) => item.id.toString()}
+          />
+
+            
 
 
           </View>

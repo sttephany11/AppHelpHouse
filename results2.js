@@ -3,17 +3,17 @@
 export default [
     {
         id: 1,
-        name: 'rj',
+        name: 'Rio de Janeiro',
         
     },
     {
         id: 2,
-        name: 'bahia',
+        name: 'Bahia',
 
     },
     {
         id: 3,
-        name: 'Sao paulo',
+        name: 'São paulo',
       
     },
  

@@ -2,21 +2,22 @@ import React from 'react'
 import {
     StyleSheet,
     Text,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
     Image,
     TouchableOpacity,
     View,
-    ImageBackground,
-    TextInput,
+    
   } from 'react-native'; 
   import Imagens from "../../img/img";
 
 
-  const ListItem = ({ data }) => {
+  const ListItem = ({ data, onSelect }) => {
+    const handleItemPress = () => {
+      // Chame a função 'onSelect' passando o valor do item selecionado
+      onSelect(data.name);
+    };
+    
     return(
-        <TouchableOpacity style={styles.coihbhb}>
+        <TouchableOpacity  onPress={handleItemPress} style={styles.coihbhb}>
             <View style={styles.colunaOpcao}>
                 <Image source={Imagens.perfil2} style={styles.img}/>
                 <Text style={styles.textoOption}>{data.name}</Text>
@@ -25,9 +26,13 @@ import {
     );
   };
 
-  const ListItem2 = ({ data }) => {
+  const ListItem2 = ({ data, onSelect }) => {
+    const handleItemPress2 = () => {
+      // Chame a função 'onSelect' passando o valor do item selecionado
+      onSelect(data.regiao);
+    };
     return(
-        <TouchableOpacity style={styles.coihbhb}>
+        <TouchableOpacity  onPress={handleItemPress2} style={styles.coihbhb}>
             <View style={styles.colunaOpcao}>
                 <Image source={Imagens.perfil2} style={styles.img}/>
                 <Text style={styles.textoOption}>{data.name}</Text>
@@ -35,6 +40,8 @@ import {
         </TouchableOpacity>
     );
   };
+
+ 
 
   const styles = StyleSheet.create({
     colunaOpcao:{

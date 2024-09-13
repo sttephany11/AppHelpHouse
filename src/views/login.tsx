@@ -16,7 +16,6 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
 
    // Defina a função handleLoginPress para campos obrigatórios
 
-
    const handleLogin = async () => {
     if (!emailContratante || !password) {
         setMessage('Preencha todos os campos');

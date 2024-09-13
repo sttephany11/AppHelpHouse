@@ -19,8 +19,6 @@ const Cadastro: React.FC<{route: any, navigation: any }> = ({route, navigation }
            telefoneContratante:telefoneContratante,
            emailContratante:emailContratante,
            password:password,
-          
-
         });
               
     }

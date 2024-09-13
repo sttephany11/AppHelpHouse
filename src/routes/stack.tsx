@@ -17,6 +17,7 @@ import TelaPerfilScreen from '../views/telaPerfil';
 import PesquisarScreen from '../views/pesquisar';
 import PerfilProfissionalScreen from '../views/perfilProfissional';
 import { ImageProvider } from '../ImageContext';
+import Profissionais from '../views/profissionais';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,6 +47,7 @@ const AppNavigator = () => {
           <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
           <Stack.Screen name="telaPerfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
           <Stack.Screen name="pesquisar" component={PesquisarScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="profissionais" component={Profissionais} options={{ headerShown: false }} />
         </Stack.Navigator>
       </ImageProvider>
   );

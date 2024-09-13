@@ -9,7 +9,7 @@ import BemVindoScreen from '../views/bemVindo';
 import CadastroScreen from '../views/cadastro';
 import ConfirmedIdScreen from '../views/confirmeId';
 import LoadingScreen from '../views/loading';
-import LoginScreen from '../views/login'; // Renomeado para seguir a convenção
+import LoginScreen from '../views/login'; 
 import CadastroScreen2 from '../views/cadastro2';
 import CadastroScreen3 from '../views/cadastro3';
 import Home from '../views/home';

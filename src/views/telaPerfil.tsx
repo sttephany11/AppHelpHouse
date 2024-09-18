@@ -7,11 +7,13 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../firebase';
 import styles from '../css/telaPerfilCss';
 import { useImage } from '../ImageContext'; // Ajuste o caminho conforme necessário
+import { useUser } from '../cliContext';
 
 const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [image, setImage] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
-  const { imageUrl, setImageUrl } = useImage(); 
+  const { imageUrl, setImageUrl } = useImage();
+  const { userData } = useUser(); // Altere para userData
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -37,15 +39,12 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     try {
       const response = await fetch(image);
       const blob = await response.blob();
-
       const filename = image.substring(image.lastIndexOf('/') + 1);
       const storageRef = ref(storage, `images/${filename}`);
 
       await uploadBytes(storageRef, blob);
-
       const url = await getDownloadURL(storageRef);
       setImageUrl(url); // Atualiza a URL da imagem no contexto
-
       setImage(null);
       Alert.alert('Sucesso', 'Imagem enviada com sucesso!');
     } catch (error) {
@@ -86,9 +85,13 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         </View>
 
         <View style={styles.container}>
-          <Text style={styles.nome}>Clodoaldo Oliveira</Text>
+          {/* Exibindo as informações do usuário */}
+          <Text style={styles.nome}>
+            {userData ? userData.nomeContratante : 'Nome não disponível'}
+          </Text>
           <Text style={styles.textLocalizacao}>
-            <Entypo name="location-pin" size={24} color="red" /> São Paulo, Guaianazes
+            <Entypo name="location-pin" size={24} color="red" /> 
+            {userData && userData.bairroContratante ? userData.bairroContratante : 'Localização não disponível'}
           </Text>
 
           {image && <Image source={{ uri: image }} style={styles.image} />}

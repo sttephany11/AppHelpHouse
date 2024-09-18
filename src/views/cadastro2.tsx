@@ -1,104 +1,107 @@
 import React, { useState } from 'react';
-import { View, Text ,TouchableOpacity, Alert,TextInput} from 'react-native';
-import { FloatingLabelInput } from 'react-native-floating-label-input';
-import { TextInputMask } from 'react-native-masked-text';
-import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
+import { View, Text, TouchableOpacity, Alert, TextInput } from 'react-native';
 import styles from '../css/cadastro2Css';
-import * as Location from 'expo-location';
-import MapView, { Marker } from 'react-native-maps';  // Importando o MapView e Marker
-import Map from '../../componentes/Map/map';  // Importe o componente Map
-import Api from '../../componentes/apiCep/api'
+import Api from '../../componentes/apiCep/api';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useUser } from '../cliContext';
 
-
-const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navigation }) => {
-    const {nomeContratante,cpfContratante,telefoneContratante,emailContratante,password}= route.params;
+const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
+    const { nomeContratante, cpfContratante, telefoneContratante, emailContratante, password } = route.params;
     const [cepContratante, setCepContratante] = useState('');
     const [bairroContratante, setBairroContratante] = useState('');
     const [ruaContratante, setRuaContratante] = useState('');
-    const [numCasaContratante    , setNumCasaContratante] = useState('');
+    const [numCasaContratante, setNumCasaContratante] = useState('');
     const [complementoContratante, setComplementoContratante] = useState('');
+    
+    // Desestruturando corretamente
+    const { userId, setUserId, setUserData } = useUser();
 
     const verificar = async () => {
         try {
-          const response = await fetch('http://localhost:8000/api/clii', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              nomeContratante: nomeContratante,
-              cpfContratante: cpfContratante,
-              password: password,
-              emailContratante: emailContratante,
-              telefoneContratante: telefoneContratante,
-              ruaContratante: ruaContratante,
-              cepContratante: cepContratante,
-              numCasaContratante: numCasaContratante,
-              complementoContratante: complementoContratante,
-              bairroContratante: bairroContratante
-            }),
-          });
-      
-          if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Erro na resposta da API:', errorData);
-            throw new Error(`Erro ${response.status}: ${errorData.error}`);
-          }
-      
-          const result = await response.json();
-          Alert.alert('Success', 'Dados salvos com sucesso!');
-          console.log(result);
+            const response = await fetch('http://localhost:8000/api/clii', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nomeContratante,
+                    cpfContratante,
+                    password,
+                    emailContratante,
+                    telefoneContratante,
+                    ruaContratante,
+                    cepContratante,
+                    numCasaContratante,
+                    complementoContratante,
+                    bairroContratante,
+                }),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(`Erro ${response.status}: ${errorData.error}`);
+            }
+    
+            const result = await response.json();
+            console.log('Resultado da criação:', result); // Log para depuração
+    
+            const idCli = result.data.idContratante; // Acesse idContratante dentro de data
+    
+            if (idCli) {
+                setUserId(idCli); // Armazena o ID do usuário no contexto
+                console.log('Chamando fetchDadosCli com ID:', idCli); // Para depuração
+                await fetchDadosCli(idCli);
+            } else {
+                console.error('ID do contratante não foi retornado. Resposta:', result);
+            }
+    
+            Alert.alert('Success', 'Dados salvos com sucesso!');
+            navigation.navigate('login'); // Navega para a tela 'login'
         } catch (error) {
-          Alert.alert('Error', 'Ocorreu um erro ao salvar os dados.');
-          console.error('Error:', error);
+            Alert.alert('Error', 'Ocorreu um erro ao salvar os dados.');
+            console.error('Error:', error);
         }
-      };
-      
+    };
+        
+    
+    
+    const fetchDadosCli = async (idCli) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/cli/${idCli}`); // Chamada à API com o ID do usuário
+            const data = await response.json();
+    
+            if (response.ok) {
+                setUserData(data); // Armazena os dados do usuário no contexto
+            } else {
+                console.error('Error fetching user data:', data.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };  
 
-        //função para chamar o cep do clinete.(bem nítido ne amigão)
-       async function buscarCep() {
-        // Se Cep for vazio vai aparecer um alerta
-        if (cepContratante == "") {
-            Alert.alert('Cep inválido')
-            setCepContratante("")
+    const buscarCep = async () => {
+        if (cepContratante === "") {
+            Alert.alert('Cep inválido');
+            return;
         }
         try {
-            // await serve para esperar a resposta que vai ser passada
-            const response = await Api.get(`/${cepContratante}/json/`)
-            //Esse get, serve para puxar a info la do servidor da API 
-
-
-            //Os set São as infos que você vai pegar da API
-            setBairroContratante(response.data.bairro)
+            const response = await Api.get(`/${cepContratante}/json/`);
+            setBairroContratante(response.data.bairro);
             setRuaContratante(response.data.logradouro);
-       
-            
-            // Caso não carregue retornara um erro
         } catch (error) {
-            console.log('ERROGAY' + error)
+            console.log('Erro ao buscar CEP:', error);
         }
-    }
-    
-
-    const formatCep = (text: string) => {
-        // Remove todos os caracteres que não são números
-        let cleaned = text.replace(/\D/g, '');
-
-        // Aplica a formatação para CEP
-        if (cleaned.length > 5) {
-            // Formato completo: XXXXX-XXX
-            cleaned = cleaned.replace(/(\d{5})(\d{3})/, '$1-$2');
-        } else {
-            // Caso ainda não tenha 8 dígitos, apenas retorna os números sem formatação
-            cleaned = cleaned.slice(0, 5);
-        }
-
-        // Retorna o CEP formatado ou parcialmente formatado
-        return cleaned;
     };
 
+    const formatCep = (text: string) => {
+        let cleaned = text.replace(/\D/g, '');
+        if (cleaned.length > 5) {
+            cleaned = cleaned.replace(/(\d{5})(\d{3})/, '$1-$2');
+        }
+        return cleaned;
+    };
 
     const handleCepChange = (text: string) => {
         setCepContratante(formatCep(text));
@@ -106,7 +109,6 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
 
     return (
         <View style={styles.container}>
-             
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
@@ -115,79 +117,61 @@ const CadastroScreen2: React.FC<{route: any, navigation: any }> = ({route, navig
                     </View>
 
                     <View style={styles.input}>
-                   
-                            {/* Cep */}
-                            <View style={styles.inputsCep}>
-                            <Text style={styles.title3}> CEP  </Text>
-                            <Text style={styles.title4}> <AntDesign style={styles.icon} name="search1" size={24} color="black" onPress={buscarCep} /></Text>
-                            </View> 
-                            <TextInput style={styles.input3} 
-                             placeholder="" 
-                             value={cepContratante}
-                             keyboardType="numeric"
-                             returnKeyType='done'
-                             maxLength={8}
-                             onChangeText={value => setCepContratante(value)} 
-                            
-                            />
- 
-                            <Text style={styles.title3}> Bairro</Text>
-                            <TextInput placeholder=""
-                             value={bairroContratante}
-                             onChangeText={value => setBairroContratante(value)} 
+                        <View style={styles.inputsCep}>
+                            <Text style={styles.title3}>CEP</Text>
+                            <AntDesign style={styles.icon} name="search1" size={24} color="black" onPress={buscarCep} />
+                        </View>
+                        <TextInput
                             style={styles.input3}
-                            />
-
-                  
-
-                        {/* Rua */}
-                        <Text style={styles.title3}> Rua</Text>
-                            <TextInput placeholder=""
-                             value={ruaContratante}
-                             onChangeText={value => setRuaContratante(value)} 
-                            style={styles.input3}
-                            />
-                     
-               
-                     
-                        {/* Complemento, tem que ser feito */}
-                        <Text style={styles.title3}> Complemento</Text>
-                            <TextInput placeholder=""
-                             value={complementoContratante}
+                            placeholder=""
+                            value={cepContratante}
+                            keyboardType="numeric"
                             returnKeyType='done'
-                             onChangeText={value => setComplementoContratante(value)}
+                            maxLength={10}
+                            onChangeText={handleCepChange}
+                        />
+
+                        <Text style={styles.title3}>Bairro</Text>
+                        <TextInput
+                            placeholder=""
+                            value={bairroContratante}
+                            onChangeText={setBairroContratante}
                             style={styles.input3}
-                            
-                            />
-                     
-                                   
-                      
-                            {/* Numero */}
-                            <Text style={styles.title3}> Número</Text>
-                            <TextInput placeholder=""
-                             value={numCasaContratante}
-                            returnKeyType='done'
-                             onChangeText={value => setNumCasaContratante(value)}
-                             keyboardType="numeric"
+                        />
+
+                        <Text style={styles.title3}>Rua</Text>
+                        <TextInput
+                            placeholder=""
+                            value={ruaContratante}
+                            onChangeText={setRuaContratante}
+                            style={styles.input3}
+                        />
+
+                        <Text style={styles.title3}>Complemento</Text>
+                        <TextInput
+                            placeholder=""
+                            value={complementoContratante}
+                            onChangeText={setComplementoContratante}
+                            style={styles.input3}
+                        />
+
+                        <Text style={styles.title3}>Número</Text>
+                        <TextInput
+                            placeholder=""
+                            value={numCasaContratante}
+                            onChangeText={setNumCasaContratante}
+                            keyboardType="numeric"
                             style={styles.inputNum}
-                            
-                            />
-                   
-               
-                 <TouchableOpacity style={styles.button2}  onPress={async () => {
-                            await verificar();// Aguarda a conclusão da verificação
-                            navigation.navigate('login'); // Navega para a tela 'login'
-                            }}>
-                <Text style={styles.buttonText2}>Próximo</Text>
-                </TouchableOpacity>
+                        />
 
+                        <TouchableOpacity style={styles.button2} onPress={verificar}>
+                            <Text style={styles.buttonText2}>Próximo</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
-    
         </View>
     );
 };
-    
 
 export default CadastroScreen2;

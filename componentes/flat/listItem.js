@@ -34,7 +34,7 @@ import {
     return(
         <TouchableOpacity  onPress={handleItemPress2} style={styles.coihbhb}>
             <View style={styles.colunaOpcao}>
-                <Image source={Imagens.perfil2} style={styles.img}/>
+                <Image source={Imagens.iconLocalizacaoPerfil} style={styles.img}/>
                 <Text style={styles.textoOption}>{data.name}</Text>
             </View>
         </TouchableOpacity>

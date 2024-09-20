@@ -9,16 +9,17 @@ import results from '../../results';
 import results2 from '../../results2.js';
 import ListItem from '../../componentes/flat/listItem.js';
 
-
 const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
     
   const [searchText, setSearchText] = useState('');
   const [searchText2, setSearchText2] = useState('');
-    const [list, setList] = useState(results);
-    const [list2, setList2] = useState(results2);
+  const [list, setList] = useState(results);
+  const [list2, setList2] = useState(results2);
+  const [showList, setShowList] = useState(true); 
 
-    const handleItemSelect = (value) => {
-      setSearchText(value); // essas duas const Leva o valor selecionado para o input
+    const handleItemSelect = (value) => { // essas duas const Leva o valor selecionado para o input
+      setSearchText(value);
+      setShowList(false); 
     };
     const handleItemSelect2 = (value) => {
       setSearchText2(value); 
@@ -78,6 +79,7 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
         >
           
           <View style={styles.fundoBranco}>
+        
             <View style={styles.containerInput}>
             <View style={styles.inputContainer}>
             <Ionicons name="search" size={24} color="white" style={styles.searchIcon} />
@@ -93,7 +95,7 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
            <Entypo name="location-pin" size={24} color="white" style={styles.searchIcon} />
             <TextInput
               style={styles.input}
-              placeholder='Encontre por região'
+              placeholder='Encontre por bairro ou cidade'
               value={searchText2}
               onChangeText={(t) => setSearchText2(t)}
             />
@@ -103,7 +105,7 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
 
           <Text style={styles.textSugestao}> Sugestões para Você </Text>
            </View>
-
+          
            <FlatList
             data={list}
             renderItem={({ item }) => (
@@ -119,9 +121,8 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
             )}
             keyExtractor={(item) => item.id.toString()}
           />
-
+  
             
-
 
           </View>
 

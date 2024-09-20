@@ -1,17 +1,46 @@
 import React from 'react';
-import { View, Text,  } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import styles from '../css/profissionaisCss';
+import Imagens from "../../img/img";
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-import Pesquisar from './pesquisar';
+
 
 const Profissionais: React.FC<{ navigation: any, route: any }> = ({ route }) => {
 
   const { valor1, valor2} = route.params || {}; //rota para trazer os valores
 
     return (
-      <View style={{marginTop:50}}>
-      <Text>Valor do primeiro input:{valor1} </Text>
-      <Text>Valor do segundo input:{valor2}</Text>
-    </View>
+      <ImageBackground
+      source={Imagens.fundoBemVindo}
+      style={styles.background}
+      resizeMode="cover"
+    >
+    
+      <View style={styles.fundoBranco}>
+      <View style={styles.inputContainer}>
+        <AntDesign name="leftcircle" size={24} color="white" style={styles.searchIcon} />
+        <Text style={styles.input}>{valor1}  -   {valor2}</Text>
+      </View>
+
+      <View style={styles.containerProfissionais}>
+     
+     </View>
+
+     <View style={styles.margin}></View>
+
+     <View style={styles.containerProfissionais}>
+    
+     </View>
+
+
+
+
+
+
+
+      </View>
+    </ImageBackground>
     );
 };
 

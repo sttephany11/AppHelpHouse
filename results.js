@@ -4,7 +4,7 @@ export default [
     {
         id: 1,
         name: 'Encanador',
-        
+        avatar: 'https://i.pravatar.cc./150?img=31'
     },
     {
         id: 2,

@@ -3,33 +3,24 @@
 export default [
     {
         id: 1,
-        name: 'Rio de Janeiro',
+        name: 'Zona Norte',
         
     },
     {
         id: 2,
-        name: 'Bahia',
+        name: 'Zona Sul ',
 
     },
     {
         id: 3,
-        name: 'São paulo',
+        name: 'Zona Leste',
       
     },
     {
         id: 4,
-        name: 'São paulo',
+        name: 'Zona Oeste',
       
     },
-    {
-        id: 5,
-        name: 'São paulo',
-      
-    },
-    {
-        id: 6,
-        name: 'São paulo',
-      
-    },
+    
  
 ];

@@ -52,21 +52,66 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         width:310,
-        height:180,
+        height:150,
         backgroundColor:'#e9e9e7',
         marginLeft:28,
         marginTop:30,
         borderRadius:25,
       },
       margin:{
-        marginTop:15,
+        marginTop:5,
       },
 
       imgPerfilPro:{
-        width:50,
-        height:50,
+        width:60,
+        height:60,
         borderRadius:50,
+       
+       
       },
+      containerDados:{
+        width:300,
+        height:80,
+        marginLeft:20,
+        bottom:20,
+        marginTop:30
+      },
+      NomeProfissional:{
+        fontWeight:'bold',
+        fontSize:17,
+        marginLeft:70,
+        bottom:60
+      },
+      descrPerfil:{
+        marginLeft:70,
+        bottom:60,
+        //fontWeight:'bold',
+      },
+
+      //parte das estrelas
+      containerAvaliacao:{
+        flexDirection:'row',
+        bottom:30,
+        marginRight:90,
+      },
+      textOpinioes:{
+        marginLeft:5,
+        fontSize:10,
+        top:4
+      },
+
+      //parte da regiao
+      containerRegiao:{
+        flexDirection:'row',
+        bottom:20,
+        marginRight:170,
+        fontWeight:'bold'
+      }
+      
+
+
+
+
 });
 
 export default styles;

@@ -95,7 +95,7 @@ const Pesquisar: React.FC<{ navigation: any }> = ({ navigation }) => {
            <Entypo name="location-pin" size={24} color="white" style={styles.searchIcon} />
             <TextInput
               style={styles.input}
-              placeholder='Encontre por bairro ou cidade'
+              placeholder='Encontre por região'
               value={searchText2}
               onChangeText={(t) => setSearchText2(t)}
             />

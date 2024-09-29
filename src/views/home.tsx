@@ -8,11 +8,14 @@ import results from '../../results';
 import ListItem from '../../componentes/flat/listItem.js';
 import styles from '../css/homeCss';
 import Pesquisar from './pesquisar.js';
+import { useUser } from '../cliContext';
+
 
 const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [list, setList] = useState(results);
   const { imageUrl } = useImage();
+  const { userData } = useUser(); // Altere para userData
 
   useEffect(() => {
     if (searchText === '') {
@@ -47,7 +50,9 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
     >
       <ScrollView>
         <View style={styles.containerBoasVindas}>
-          <Text style={styles.boasVindas}>Olá, Clodoaldo!</Text>
+          <Text style={styles.boasVindas}>Olá, 
+          {userData ? userData.nomeContratante : 'Nome não disponível'}
+            </Text>
           <TouchableOpacity onPress={perfilNav}>
             <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfil} style={styles.ImgPerfil} />
           </TouchableOpacity>

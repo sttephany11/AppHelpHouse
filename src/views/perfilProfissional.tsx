@@ -4,10 +4,13 @@ import styles from '../css/perfilProfissionalCss';
 import Imagens from "../../img/img";
 import Entypo from '@expo/vector-icons/Entypo';
 import { useImage } from '../ImageContext'; // Ajuste o caminho conforme necessário
+import { useUser } from '../cliContext';
+
 
 const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ route, navigation }) => {
     const [searchText, setSearchText] = useState('');
     const { imageUrl } = useImage(); // Obtém a URL da imagem do contexto
+    const { userData } = useUser(); // Altere para userData
 
     return (
         <ScrollView>
@@ -27,12 +30,16 @@ const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ ro
                     <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfil} style={styles.imgPerfil} />
                 </TouchableOpacity>
                 
-                <Text style={styles.nome}>Clodoaldo Oliveira</Text>
+                <Text style={styles.nome}>
+                                {userData ? userData.nomeContratante : 'Nome não disponível'}
+</Text>
                 <Text style={styles.textBiografia}>
                     Trabalhando como eletricista a mais de{'\n'} 15 anos, formado em eletrotécnica.
                 </Text>
                 <Text style={styles.textLocalizacao}>
-                    <Entypo name="location-pin" size={24} color="red" /> Atua em São Paulo, Guaianazes
+                    <Entypo name="location-pin" size={24} color="red" /> Atua em 
+                    {userData && userData.bairroContratante ? userData.bairroContratante : 'Localização não disponível'}
+
                 </Text>
                 
                 <Text style={styles.vejaMais}>Veja mais de Clodoaldo</Text>

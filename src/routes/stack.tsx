@@ -18,6 +18,8 @@ import PesquisarScreen from '../views/pesquisar';
 import PerfilProfissionalScreen from '../views/perfilProfissional';
 import { ImageProvider } from '../ImageContext';
 import Profissionais from '../views/profissionais';
+import PedidoScreen from '../views/PedidoScreen';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,6 +31,8 @@ const Tabs = () => {
       <Tab.Screen name="home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
       <Tab.Screen name="perfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
+
     </Tab.Navigator>
   );
 };
@@ -37,7 +41,8 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="pesquisar">
+        <Stack.Navigator initialRouteName="home">
+         <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />
           <Stack.Screen name="loading" component={LoadingScreen} options={{ headerShown: false }} />

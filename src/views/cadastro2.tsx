@@ -127,7 +127,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                             value={cepContratante}
                             keyboardType="numeric"
                             returnKeyType='done'
-                            maxLength={10}
+                            maxLength={9}
                             onChangeText={handleCepChange}
                         />
 

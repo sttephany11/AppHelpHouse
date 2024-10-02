@@ -27,6 +27,7 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
             emailContratante: emailContratante,
             password: password,
             nascContratante:nascContratante , // Data convertida no formato correto
+            
         });
     }
     

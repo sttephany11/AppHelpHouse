@@ -11,6 +11,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     const [bairroContratante, setBairroContratante] = useState('');
     const [ruaContratante, setRuaContratante] = useState('');
     const [numCasaContratante, setNumCasaContratante] = useState('');
+    const [regiaoContratante, setRegiaoContratante] = useState('');
     const [complementoContratante, setComplementoContratante] = useState('');
     
     // Desestruturando corretamente
@@ -34,6 +35,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     cepContratante,
                     numCasaContratante,
                     complementoContratante,
+                    regiaoContratante,
                     bairroContratante,
                 }),
             });
@@ -90,6 +92,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             const response = await Api.get(`/${cepContratante}/json/`);
             setBairroContratante(response.data.bairro);
             setRuaContratante(response.data.logradouro);
+            setRegiaoContratante(response.data.regiao);
         } catch (error) {
             console.log('Erro ao buscar CEP:', error);
         }
@@ -146,6 +149,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                             onChangeText={setRuaContratante}
                             style={styles.input3}
                         />
+            
 
                         <Text style={styles.title3}>Complemento</Text>
                         <TextInput

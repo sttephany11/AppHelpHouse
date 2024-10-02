@@ -1,8 +1,7 @@
 import React,{useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert  } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert, TextInput  } from 'react-native';
 import styles from '../css/criarPedidoCss';
-import { SelectWithGroupsShowcase } from '../../componentes/SelectGroup';
-import { InputSizeShowcase } from '../../componentes/Input';
+
 
 
 
@@ -26,7 +25,7 @@ const PedidoScreen = () => {
         },
         body: JSON.stringify({
           descricaoPedido,
-          idServicos,
+         
           // Inclua outros dados necessários, como idContratante
         }),
       });
@@ -68,14 +67,18 @@ const PedidoScreen = () => {
         </Text>
         <Text style={styles.category}>
            Categoria:
-           <SelectWithGroupsShowcase />
+     
            {/*<Text style={styles.categoryText}>Pintura</Text> */}
         </Text>
         <Text style={styles.location}>São Paulo, Guainases <Text style={styles.distance}>A 2 km de você</Text></Text>
 
         {/* Request Description */}
         <View style={styles.requestDescription}>
-         <InputSizeShowcase/>
+              <TextInput 
+              style={styles.inputDesc}
+              />
+
+             
         </View>
 
         {/* Submit Button */}

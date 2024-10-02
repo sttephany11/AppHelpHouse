@@ -138,6 +138,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
       },
+      inputDesc:{
+        width:360,
+        height:150
+      },
     });
     
 

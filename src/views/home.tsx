@@ -9,7 +9,7 @@ import ListItem from '../../componentes/flat/listItem.js';
 import styles from '../css/homeCss';
 import Pesquisar from './pesquisar.js';
 import { useUser } from '../cliContext';
-
+import {ModalWithBackdropShowcase} from '../../componentes/Modal';
 
 const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
   const [searchText, setSearchText] = useState('');
@@ -60,13 +60,9 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
 
         <Image source={Imagens.lupaAzul} style={styles.lupaAzul} />
         <View style={styles.containerInput}>
-          <TextInput
-            style={styles.input}
-            placeholder='Buscar serviço'
-            value={searchText}
-            onPress={pesquisar}
-            
-          />
+
+          <ModalWithBackdropShowcase/>
+
 
           <View style={styles.containerProfissoes}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>

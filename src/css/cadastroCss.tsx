@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
 
   input3:{
-  borderBottomWidth:2,
+  borderBottomWidth:3,
   borderColor: '#fff',
   height:40,
   marginBottom:5,

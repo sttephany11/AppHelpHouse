@@ -108,6 +108,8 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
     const handleCepChange = (text: string) => {
         setCepContratante(formatCep(text));
+
+        
     };
 
     return (
@@ -115,13 +117,13 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
-                        <Text style={styles.titulo2}>Últimos <Text style={styles.passos}>Passos</Text></Text>
-                        <Text style={styles.titulo3}>Já estamos acabando, adicione as últimas informações para construirmos sua conta!</Text>
+                        <Text style={styles.titulo2}>Adicione <Text style={styles.passos}> seu endereço</Text></Text>
+                       
                     </View>
 
                     <View style={styles.input}>
                         <View style={styles.inputsCep}>
-                            <Text style={styles.title3}>CEP</Text>
+                            <Text style={styles.title3}>Cep</Text>
                             <AntDesign style={styles.icon} name="search1" size={24} color="black" onPress={buscarCep} />
                         </View>
                         <TextInput
@@ -169,7 +171,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                         />
 
                         <TouchableOpacity style={styles.button2} onPress={verificar}>
-                            <Text style={styles.buttonText2}>Próximo</Text>
+                            <Text style={styles.buttonText2}>Finalizar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

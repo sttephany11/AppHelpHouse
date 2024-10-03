@@ -37,8 +37,8 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
     navigation.navigate('telaPerfil'); // Nome correto da tela
   };
 
-  const pesquisar = () => {
-    navigation.navigate('pesquisar'); // Nome correto da tela
+  const profissionais = () => {
+    navigation.navigate('profissionais'); // Nome correto da tela
   };
 
 
@@ -54,14 +54,17 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
           {userData ? userData.nomeContratante : 'Nome não disponível'}
             </Text>
           <TouchableOpacity onPress={perfilNav}>
-            <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfil} style={styles.ImgPerfil} />
+            <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfilUsuario} style={styles.ImgPerfil} />
           </TouchableOpacity>
         </View>
 
         <Image source={Imagens.lupaAzul} style={styles.lupaAzul} />
         <View style={styles.containerInput}>
 
-          <ModalWithBackdropShowcase/>
+        <TouchableOpacity style={styles.input} onPress={ profissionais} >
+      <Text style={styles.textInput}>Encontre um profissional</Text>
+      </TouchableOpacity>
+
 
 
           <View style={styles.containerProfissoes}>
@@ -102,7 +105,7 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
             <View style={styles.fundoPedidos}>
               <Text style={styles.textPedidos}>Meus pedidos</Text>
               <Text style={styles.textPedidos2}>Acompanhe seus pedidos...</Text>
-              <AntDesign name="rightcircle" size={50} color="#004aad" style={{ marginLeft: 300, bottom: 75 }} />
+              <AntDesign name="rightcircle" size={50} color="#004aad" style={{ marginLeft: 280, bottom: 75 }} />
             </View>
           </View>
 
@@ -111,24 +114,18 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
               <Text style={styles.frasePedidos}>Alguns dos serviços mais procurados ultimamente.</Text>
               <View style={styles.containerImgs}>
                 <Image source={Imagens.eletricistaa} style={styles.imgs} />
-                <Image source={Imagens.mestreDeObra} style={styles.imgs2} />
-                <Image source={Imagens.eletricistaa} style={styles.imgs2} />
+                <Image source={Imagens.chuveiro} style={styles.imgs2} />
+                <Image source={Imagens.kitEletrico} style={styles.imgs2} />
               </View>
               <View style={styles.containerImgs}>
-                <Image source={Imagens.eletricistaa} style={styles.imgs} />
+                <Image source={Imagens.manutencao} style={styles.imgs} />
                 <Image source={Imagens.eletricistaa} style={styles.imgs2} />
                 <Image source={Imagens.eletricistaa} style={styles.imgs2} />
               </View>
             </View>
           </View>
 
-          {/* Descomente o FlatList se necessário */}
-          {/* <FlatList
-            data={list}
-            style={styles.list}
-            renderItem={({ item }) => <ListItem data={item} />}
-            keyExtractor={(item) => item.avatar}
-          /> */}
+         
         </View>
       </ScrollView>
     </ImageBackground>

@@ -74,7 +74,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           {imageUrl ? (
             <Image source={{ uri: imageUrl }} style={styles.imgPerfil} />
           ) : (
-            <Image source={Imagens.perfil} style={styles.imgPerfil} />
+            <Image source={Imagens.perfilUsuario} style={styles.imgPerfil} />
           )}
 
           <View style={styles.cameraIcon}>
@@ -88,6 +88,9 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           {/* Exibindo as informações do usuário */}
           <Text style={styles.nome}>
             {userData ? userData.nomeContratante : 'Nome não disponível'}
+          </Text>
+          <Text style={styles.textEmail}>
+            ste@gmail.com
           </Text>
           <Text style={styles.textLocalizacao}>
             <Entypo name="location-pin" size={24} color="red" /> 

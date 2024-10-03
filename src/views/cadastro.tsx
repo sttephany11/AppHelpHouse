@@ -16,9 +16,6 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
     const [nascContratante, setNascContratante] = useState('');
 
     const dadosCli = () => {
-        // Converte a data de 'DD/MM/YYYY' para 'YYYY-MM-DD'
-
-    
         // Agora envia para a próxima tela com a data convertida
         navigation.navigate('cadastro2', {
             nomeContratante: nomeContratante,
@@ -27,6 +24,7 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
             emailContratante: emailContratante,
             password: password,
             nascContratante:nascContratante , // Data convertida no formato correto
+            
         });
     }
     
@@ -77,14 +75,14 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
                                 height: 40,
                                 marginBottom: 5,
                                 fontSize: 16,
-                                color: '#fff',
+                                
                                 paddingHorizontal: 10,
                             }}
                             placeholder="Digite a data em que nasceu..."
                             placeholderTextColor="#fff"
                         />
 
-                        <Text style={styles.title3}>CPF</Text>
+                        <Text style={styles.title3}>Cpf</Text>
                         <TextInputMask
                             type={'cpf'}
                             placeholder="Digite seu CPF..."

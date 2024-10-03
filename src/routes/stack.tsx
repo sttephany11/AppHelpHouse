@@ -29,9 +29,8 @@ const Tabs = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="home" component={Home} options={{ headerShown: false }} />
-      <Tab.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
       <Tab.Screen name="perfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
-      <Tab.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
+
 
     </Tab.Navigator>
   );

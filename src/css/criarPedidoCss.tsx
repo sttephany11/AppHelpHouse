@@ -63,6 +63,27 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
       },
+        // Estilo para o contêiner do campo de entrada (inputWrapper)
+  inputWrapper: {
+    marginVertical: 10, // Espaçamento vertical para separar os inputs
+    paddingHorizontal: 10, // Padding nas laterais
+    backgroundColor: '#fff', // Fundo branco para o campo
+    borderRadius: 8, // Bordas arredondadas
+    borderWidth: 1, // Borda fina
+    borderColor: '#ddd', // Cor da borda
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2, // Sombras para Android
+  },
+  // Estilo do campo de entrada (input)
+  input: {
+    height: 40, // Altura do input
+    paddingHorizontal: 10, // Padding dentro do input
+    fontSize: 16, // Tamanho da fonte
+    color: '#333', // Cor do texto
+  },
       tabs: {
         flexDirection: 'row',
         justifyContent: 'center',

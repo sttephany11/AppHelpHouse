@@ -113,14 +113,14 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
             <View style={styles.fundoAzul}>
               <Text style={styles.frasePedidos}>Alguns dos serviços mais procurados ultimamente.</Text>
               <View style={styles.containerImgs}>
-                <Image source={Imagens.eletricistaa} style={styles.imgs} />
-                <Image source={Imagens.chuveiro} style={styles.imgs2} />
-                <Image source={Imagens.kitEletrico} style={styles.imgs2} />
+                <Image source={Imagens.img1} style={styles.imgs} />
+                <Image source={Imagens.img2} style={styles.imgs2} />
+                <Image source={Imagens.img3} style={styles.imgs2} />
               </View>
               <View style={styles.containerImgs}>
-                <Image source={Imagens.manutencao} style={styles.imgs} />
-                <Image source={Imagens.eletricistaa} style={styles.imgs2} />
-                <Image source={Imagens.eletricistaa} style={styles.imgs2} />
+                <Image source={Imagens.img4} style={styles.imgs} />
+                <Image source={Imagens.img5} style={styles.imgs2} />
+                <Image source={Imagens.img6} style={styles.imgs2} />
               </View>
             </View>
           </View>

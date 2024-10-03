@@ -38,6 +38,16 @@ const Imagens = {
     perfil2:require("../assets/imgApp/perfil2.png"),
    perfilUsuario:require("../assets/perfilUsuario.jpg"),
    perfilUsuario2:require("../assets/perfilUsuario2.png"),
+   //imagens home 
+   img1: require("../assets/imgApp/1.png"),
+   img2: require("../assets/imgApp/2.png"),
+   img3: require("../assets/imgApp/3.png"),
+   img4: require("../assets/imgApp/4.png"),
+   img5: require("../assets/imgApp/5.png"),
+   img6: require("../assets/imgApp/6.png"),
+   //imgs tab bar
+   iconTab: require("../assets/iconTab.png"),
+   iconTab2: require("../assets/iconTab2.png"),
 }
 export default Imagens;
 

@@ -13,7 +13,6 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
     const [password, setPassword] = useState('');
     const [show, setShow] = useState(false);
     const [message, setMessage]= useState ('')
-    const [senha, setSenha] = useState('');
     const [loading, setLoading] = useState(false);
    // Defina a função handleLoginPress para campos obrigatórios
 

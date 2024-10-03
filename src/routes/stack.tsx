@@ -65,7 +65,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="homeStack">
+        <Stack.Navigator initialRouteName="loading">
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />

@@ -142,12 +142,13 @@ const styles = StyleSheet.create({
 
       containerImgs:{
         flexDirection:'row',
+        marginLeft:8
       },
 
       fundoAzul:{
         backgroundColor:'#004aad',
         width:360,
-        height:330,
+        height:360,
         borderRadius:25,
         marginTop:30,
         marginBottom:30,
@@ -162,16 +163,18 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
       },
       imgs:{
-        marginTop:5,
+        marginTop:8,
         width:100,
         height:120,
-        marginLeft:15
+        marginLeft:18,
+        borderRadius:10,
       },
       imgs2:{
-        marginTop:5,
+        marginTop:8,
         width:100,
         height:120,
-        marginLeft:5
+        marginLeft:5,
+        borderRadius:10,
       },
 
 

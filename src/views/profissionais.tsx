@@ -8,6 +8,7 @@ import styles from "../css/profissionaisCss";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import Imagens from "../../img/img";
+import PedidoScreen from "./PedidoScreen";
 
 // Tipagem dos dados do profissional
 interface Professional {
@@ -75,6 +76,7 @@ const List: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     getPro(setData, setLoading, setError);
   }, []);
+
 
   return (
     <>
@@ -146,6 +148,8 @@ const List: React.FC<Props> = ({ navigation }) => {
                   <Picker.Item label="Pedreiro" value="Pedreiro" />
                   <Picker.Item label="Remoção de Entulho" value="Remoção de Entulho" />
                   <Picker.Item label="Diarista" value="Diarista" />
+                  <Picker.Item label="Mecânico" value="Mecânico" />
+
 
                   {/* Adicione mais profissões conforme necessário */}
                 </Picker>
@@ -155,9 +159,9 @@ const List: React.FC<Props> = ({ navigation }) => {
               {data
                 .filter(filterProfessionals)
                 .map((data, i) => (
-                  <View key={i} style={styles.containerProfissionais}>
+                  <View key={i} style={styles.containerProfissionais} >
                     <View style={styles.containerDados}>
-                      <TouchableOpacity>
+                      <TouchableOpacity onPress={() => navigation.navigate('pedidoScreen')} >
                         <Text style={styles.NomeProfissional}>
                           {data.nomeContratado} {data.sobrenomeContratado}
                         </Text>

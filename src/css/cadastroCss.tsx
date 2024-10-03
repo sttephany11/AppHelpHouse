@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   fundo: {
     height: '120%',
     width: '140%',
-    backgroundColor: '#FF8F49',
+    backgroundColor: '#ff8e49',
     position: 'absolute', 
     top: '17%',            
     left: '-20%',         

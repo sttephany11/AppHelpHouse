@@ -3,7 +3,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import Imagens from "../../img/img";
 // Telas
 import BemVindoScreen from '../views/bemVindo';
 import CadastroScreen from '../views/cadastro';
@@ -19,6 +19,8 @@ import PerfilProfissionalScreen from '../views/perfilProfissional';
 import { ImageProvider } from '../ImageContext';
 import Profissionais from '../views/profissionais';
 import PedidoScreen from '../views/PedidoScreen';
+import { Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,11 +29,34 @@ const Tab = createBottomTabNavigator();
 // Componente Tabs
 const Tabs = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="home" component={Home} options={{ headerShown: false }} />
-      <Tab.Screen name="perfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
-
-
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: '#e9e9e7', 
+          height: 60,                 
+        },
+      }}
+    >
+      <Tab.Screen 
+        name="home" 
+        component={Home} 
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <Image source={Imagens.iconTab} style={{ width: 44, height: 44 }} />
+          ),
+        }} 
+      />
+      <Tab.Screen 
+        name="perfil" 
+        component={TelaPerfilScreen} 
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <Image source={Imagens.iconTab2} style={{ width: 44, height: 40 }} />
+          ),
+        }} 
+      />
     </Tab.Navigator>
   );
 };
@@ -40,7 +65,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="bemvindo">
+        <Stack.Navigator initialRouteName="homeStack">
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />

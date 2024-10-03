@@ -5,6 +5,7 @@ import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
 import styles from '../css/loginCss';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Importa AsyncStorage para armazenar o token
 
 
 const Login: React.FC<{ navigation: any }> = ({navigation}) => {
@@ -13,27 +14,32 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
     const [show, setShow] = useState(false);
     const [message, setMessage]= useState ('')
     const [senha, setSenha] = useState('');
-
+    const [loading, setLoading] = useState(false);
    // Defina a função handleLoginPress para campos obrigatórios
 
+   // Função para fazer login
    const handleLogin = async () => {
     if (!emailContratante || !password) {
         setMessage('Preencha todos os campos');
         return;
     }
 
-    console.log("Email:", emailContratante);
-    console.log("Password:", password);
-
+    setLoading(true); // Inicia o estado de loading
     try {
         const response = await axios.post('http://localhost:8000/api/auth', {
-            emailContratante:emailContratante,
-            password:password,
+            emailContratante,
+            password,
         });
 
-        console.log("Resposta da API:", response.data);
+        // Verifica se o login foi bem-sucedido e se o token está presente
+        if (response.data && response.data.status === 'Sucesso' && response.data.token) {
+            console.log("Token recebido:", response.data.token);
+            console.log("Seja bem vindo novamente! ")
 
-        if (response.data && response.data.status === 'Sucesso') {
+            // Armazena o token no AsyncStorage
+            await AsyncStorage.setItem('authToken', response.data.token);
+
+            // Navega para a próxima tela após login bem-sucedido
             navigation.navigate('homeStack', { screen: 'home' });
         } else {
             setMessage('Credenciais incorretas, tente novamente.');
@@ -42,6 +48,8 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
     } catch (error) {
         console.error('Erro ao fazer login:', error);
         setMessage('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
+    } finally {
+        setLoading(false); // Desativa o estado de loading
     }
 };
     

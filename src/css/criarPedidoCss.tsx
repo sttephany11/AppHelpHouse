@@ -38,6 +38,22 @@ const styles = StyleSheet.create({
         
     
       },
+      successText: {
+        color: 'green', // Cor verde para sucesso
+        fontSize: 16, // Tamanho de fonte
+        fontWeight: 'bold', // Texto em negrito
+        textAlign: 'center', // Centraliza o texto
+        marginTop: 10, // Espaçamento superior
+      },
+      
+      // Estilo para mensagens de erro
+      errorText: {
+        color: 'red', // Cor vermelha para erro
+        fontSize: 16, // Tamanho de fonte
+        fontWeight: 'bold', // Texto em negrito
+        textAlign: 'center', // Centraliza o texto
+        marginTop: 10, // Espaçamento superior
+      },
       filterButton: {
         backgroundColor: '#FF6F00',
         borderRadius: 50,

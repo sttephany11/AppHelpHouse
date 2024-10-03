@@ -1,10 +1,10 @@
 import api from "../../axios"
 
-export const getPro = async (setData, setLoading, setError) =>{
+export const getServicos = async (setData, setLoading, setError) =>{
 setLoading(true);
 
 try{
-    const response = await api.get("/pro");
+    const response = await api.get("/Servicos");
     setData(response?.data);
     setLoading(false)
 }catch (e){

@@ -30,7 +30,7 @@ const Tabs = () => {
     <Tab.Navigator>
       <Tab.Screen name="home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen name="perfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
-
+      <Tab.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }}  />
 
     </Tab.Navigator>
   );
@@ -40,7 +40,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="bemvindo">
+        <Stack.Navigator initialRouteName="loading">
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />

@@ -7,6 +7,7 @@ import { useImage } from '../ImageContext'; // Ajuste o caminho conforme necess√
 import { useUser } from '../cliContext';
 
 
+
 const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ route, navigation }) => {
     const [searchText, setSearchText] = useState('');
     const { imageUrl } = useImage(); // Obt√©m a URL da imagem do contexto

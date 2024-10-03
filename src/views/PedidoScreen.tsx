@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import styles from '../css/criarPedidoCss';
 import api from "../../axios"; // Importa a instância do Axios
+import {getServicos} from '../functions/getServico';
 
 // Definição de tipos para os parâmetros da função postPedido
 interface PostPedidoParams {
@@ -20,6 +21,10 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
   const [error, setError] = useState<boolean>(false); // Estado de erro
   const [token, setToken] = useState<string | null>(null); // Token de autenticação
 
+  // // Chama a API para buscar os profissionais
+  // useEffect(() => {
+  //   getServicos (setData, setLoading, setError);
+  // }, []);
 
   useEffect(() => {
     const fetchToken = async () => {

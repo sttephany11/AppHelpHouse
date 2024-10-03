@@ -23,6 +23,7 @@ const SelectOption: React.FC = () => {
     'Marmoraria e Granitos',
     'Remoção de Entulho',
     'Poço Artesiano',
+    'Encanador',
   ];
 
   const filteredOptions = options.filter(option =>

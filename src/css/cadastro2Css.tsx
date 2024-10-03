@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 },
   title: {
-    marginTop:'13%',
+    marginTop:'19%',
     justifyContent: 'center',
     alignItems: 'center',    
     
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   titulo2:{
     color: '#004AAD',
-    fontSize: 35,
+    fontSize: 30,
     fontWeight: '900',
     justifyContent:'center',
     alignItems:'center',
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
   
     input3:{
-    borderBottomWidth:5,
+    borderBottomWidth:3,
     borderColor: '#fff',
     height:40,
     marginBottom:10,

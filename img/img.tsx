@@ -36,7 +36,8 @@ const Imagens = {
     //tela de perfil do profissional
     fotoFundo: require("../assets/imgApp/fotoFundo.jpg"),
     perfil2:require("../assets/imgApp/perfil2.png"),
-   
+   perfilUsuario:require("../assets/perfilUsuario.jpg"),
+   perfilUsuario2:require("../assets/perfilUsuario2.png"),
 }
 export default Imagens;
 

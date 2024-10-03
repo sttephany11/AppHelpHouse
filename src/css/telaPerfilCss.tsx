@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         width:350,
         borderRadius:25,
-        marginTop:'40%',
+        marginTop:'30%',
         marginLeft:33,
         flex:1
     },
@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
     textLocalizacao:{
         bottom: 65,
     },
+    textEmail:{
+      bottom: 65,
+  },
 
     // mais procurados
     maisProcurados:{

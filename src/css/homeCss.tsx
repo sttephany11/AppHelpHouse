@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         height:70,
         borderColor:'white',
         marginTop: 80,
-        marginEnd:15,
+        marginEnd:30,
         marginLeft:10,
     },
     lupa:{
@@ -63,34 +63,7 @@ const styles = StyleSheet.create({
       top:58,
       zIndex:1
     },
-    input:{
-        height:50,
-        width:350,
-        paddingLeft:45,
-        paddingRight:1,
-        borderWidth:3,
-        fontWeight:500,
-        fontSize:19,
-        backgroundColor:'white',
-        borderColor:'white',
-        marginBottom:5,
-        borderRadius:55,
-        color:'#3669a4'
-      },
-      //se tiver outro input
-      input2:{
-        height:50,
-        width:350,
-        paddingLeft:2,
-        paddingRight:1,
-        borderWidth:3,
-        fontWeight:500,
-        fontSize:19,
-        backgroundColor:'white',
-        borderColor:'white',
-        marginTop:15,
-      },
-
+    
       filtroImg:{
         width:36,
         height:35,
@@ -130,7 +103,7 @@ const styles = StyleSheet.create({
       },
       containerProfissoes2:{
         flexDirection:'row',
-        marginLeft:30,
+        marginLeft:90,
         marginTop:15,
       },
 
@@ -143,7 +116,7 @@ const styles = StyleSheet.create({
 
       fundoPedidos:{
         backgroundColor:'white',
-        width:380,
+        width:360,
         height:118,
         borderRadius:25,
         marginTop:30,
@@ -173,7 +146,7 @@ const styles = StyleSheet.create({
 
       fundoAzul:{
         backgroundColor:'#004aad',
-        width:350,
+        width:360,
         height:330,
         borderRadius:25,
         marginTop:30,
@@ -199,6 +172,29 @@ const styles = StyleSheet.create({
         width:100,
         height:120,
         marginLeft:5
+      },
+
+
+      input:{
+        height:50,
+        width:350,
+        paddingLeft:45,
+        paddingRight:1,
+        borderWidth:3,
+        backgroundColor:'white',
+        borderColor:'white',
+        marginBottom:5,
+        borderRadius:55,
+        color:'#3669a4',
+        justifyContent:'center',
+        alignItems:'center',
+      },
+
+      textInput:{
+        marginRight:60,
+        fontWeight:500,
+        fontSize:19,
+        color:'#3669a4',
       },
 
 

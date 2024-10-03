@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         width:370,
         borderRadius:25,
-        marginTop:50,
+        marginTop:40,
         marginLeft:22,
         flex:1
     },
@@ -73,23 +73,23 @@ const styles = StyleSheet.create({
         width:300,
         height:80,
         marginLeft:20,
-        bottom:20,
         marginTop:30
       },
       NomeProfissional:{
         fontWeight:'bold',
         fontSize:17,
-        marginLeft:70,
-        bottom:60
+        marginLeft:80,
+        bottom:40
       },
       descrPerfil:{
-        marginLeft:70,
-        bottom:60,
+        marginLeft:80,
+        bottom:40,
         //fontWeight:'bold',
       },
 
       //parte das estrelas
       containerAvaliacao:{
+        marginTop:5,
         flexDirection:'row',
         bottom:30,
         marginRight:90,
@@ -106,7 +106,50 @@ const styles = StyleSheet.create({
         bottom:20,
         marginRight:170,
         fontWeight:'bold'
-      }
+      },
+
+
+      //check box 
+      checkboxContainer:{
+        flexDirection:'column',
+        width:200,
+      },
+
+    
+
+      filtro:{
+        color:'#ff914d',
+        fontWeight:'bold',
+        fontSize:23,
+        marginLeft:14,
+        top:15
+      },
+      searchIcon2: {
+        marginLeft:320,
+      bottom:10,
+       },
+       tituloselect:{
+        fontSize:19,
+        color:'#ff914d',
+        marginBottom:10,
+        marginTop:10,
+        marginLeft:15,
+        
+       },
+       row:{
+        flexDirection:'row',
+        marginLeft:27
+       },
+       pickerContainer:{
+        marginLeft:20,
+       
+       },
+       marginCheck:{
+        marginTop:10,
+       },
+       marginInput:{
+        marginTop:20,
+       }
       
 
 

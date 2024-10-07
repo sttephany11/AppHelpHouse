@@ -11,11 +11,13 @@ import Imagens from "../../img/img";
 import PedidoScreen from "./PedidoScreen";
 
 // Tipagem dos dados do profissional
-interface Professional {
+interface Profissional {
+  bairroContratado: any;
   nomeContratado: string;
   sobrenomeContratado: string;
   descContratado: string;
   regiaoContratado: string;
+  idContratado:string;
 }
 
 interface Props {
@@ -23,7 +25,7 @@ interface Props {
 }
 
 const List: React.FC<Props> = ({ navigation }) => {
-  const [data, setData] = useState<Professional[]>([]);
+  const [data, setData] = useState<Profissional[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
@@ -47,7 +49,7 @@ const List: React.FC<Props> = ({ navigation }) => {
   };
 
   // Função para filtrar os profissionais pela zona e profissão
-  const filterProfessionals = (pro: Professional) => {
+  const filterProfessionals = (pro: Profissional) => {
     const { regiaoContratado, descContratado } = pro;
 
     // Filtro por zona
@@ -96,34 +98,34 @@ const List: React.FC<Props> = ({ navigation }) => {
 
               <Text style={styles.tituloselect}>Escolha a região:</Text>
               <View style={styles.checkboxContainer}>
-              <View style={styles.row}>
-                <CheckBox
-                  checked={selectedZones.leste}
-                  onChange={() => toggleZone("leste")}
-                >
-                  Zona Leste
-                </CheckBox>
-                <CheckBox
-                  checked={selectedZones.oeste}
-                  onChange={() => toggleZone("oeste")}
-                >
-                  Zona Oeste
-                </CheckBox>
+                <View style={styles.row}>
+                  <CheckBox
+                    checked={selectedZones.leste}
+                    onChange={() => toggleZone("leste")}
+                  >
+                    Zona Leste
+                  </CheckBox>
+                  <CheckBox
+                    checked={selectedZones.oeste}
+                    onChange={() => toggleZone("oeste")}
+                  >
+                    Zona Oeste
+                  </CheckBox>
                 </View>
                 <View style={styles.marginCheck}></View>
                 <View style={styles.row}>
-                <CheckBox
-                  checked={selectedZones.norte}
-                  onChange={() => toggleZone("norte")}
-                >
-                  Zona Norte
-                </CheckBox>
-                <CheckBox
-                  checked={selectedZones.sul}
-                  onChange={() => toggleZone("sul")}
-                >
-                  Zona Sul
-                </CheckBox>
+                  <CheckBox
+                    checked={selectedZones.norte}
+                    onChange={() => toggleZone("norte")}
+                  >
+                    Zona Norte
+                  </CheckBox>
+                  <CheckBox
+                    checked={selectedZones.sul}
+                    onChange={() => toggleZone("sul")}
+                  >
+                    Zona Sul
+                  </CheckBox>
                 </View>
               </View>
 
@@ -135,7 +137,7 @@ const List: React.FC<Props> = ({ navigation }) => {
                 <Picker
                   selectedValue={selectedProfession}
                   onValueChange={(itemValue) => setSelectedProfession(itemValue)}
-                  style={{ height: 50, width: 320, borderColor:'#ff914d' }}
+                  style={{ height: 50, width: 320, borderColor: '#ff914d' }}
                 >
                   <Picker.Item label="Selecione" value="" />
                   <Picker.Item label="Encanador" value="encanador" />
@@ -161,7 +163,13 @@ const List: React.FC<Props> = ({ navigation }) => {
                 .map((data, i) => (
                   <View key={i} style={styles.containerProfissionais} >
                     <View style={styles.containerDados}>
-                      <TouchableOpacity onPress={() => navigation.navigate('pedidoScreen')} >
+                      <TouchableOpacity onPress={() => navigation.navigate('pedidoScreen', {
+                              nomeContratado: data.nomeContratado,
+                              bairroContratado: data.bairroContratado,
+                              idContratado: data.idContratado,
+                       })
+                      }
+                    >
                         <Text style={styles.NomeProfissional}>
                           {data.nomeContratado} {data.sobrenomeContratado}
                         </Text>

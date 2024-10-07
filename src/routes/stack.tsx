@@ -21,7 +21,7 @@ import Profissionais from '../views/profissionais';
 import PedidoScreen from '../views/PedidoScreen';
 import { Image } from 'react-native';
 import { StyleSheet } from 'react-native';
-
+import List from '../functions/testeGet';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -72,6 +72,16 @@ const Tabs = () => {
           ),
         }}
       />
+       <Tab.Screen 
+        name="profissionais" 
+        component={Profissionais} 
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <Image source={Imagens.iconTab2} style={{ width: 44, height: 40 }} />
+          ),
+        }} 
+      />
     </Tab.Navigator>
   );
 };
@@ -80,7 +90,8 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="homeStack">
+        <Stack.Navigator initialRouteName="bemvindo">
+        <Stack.Screen name="List" component={List} options={{ headerShown: false }} />
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />

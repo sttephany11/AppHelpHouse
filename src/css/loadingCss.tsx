@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   voce: {
-    color: '#FF914D',
+    color: '#004AAD',
   },
 });
 

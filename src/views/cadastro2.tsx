@@ -70,7 +70,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     
     const fetchDadosCli = async (idCli) => {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/cli/${idCli}`); // Chamada à API com o ID do usuário
+            const response = await fetch(`http://localhost:8000/api/cli/${idCli}`); // Chamada à API com o ID do usuário
             const data = await response.json();
     
             if (response.ok) {

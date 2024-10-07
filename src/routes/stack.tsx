@@ -32,30 +32,45 @@ const Tabs = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: '#e9e9e7', 
-          height: 60,                 
+          backgroundColor: '#e9e9e7',
+          height: 60,
         },
+        tabBarShowLabel: false,  // Oculta os rótulos das abas
       }}
     >
-      <Tab.Screen 
-        name="home" 
-        component={Home} 
+      <Tab.Screen
+        name="HomeScreen" 
+        component={Home}
         options={{
           headerShown: false,
-          tabBarIcon: () => (
-            <Image source={Imagens.iconTab} style={{ width: 44, height: 44 }} />
+          tabBarIcon: ({ focused }) => ( // esse focused está importada para não aparecer o titulo
+            <Image 
+              source={Imagens.iconTab} 
+              style={{
+                width: 44, 
+                height: 44,
+              
+              }} 
+            />
           ),
-        }} 
+        }}
       />
-      <Tab.Screen 
-        name="perfil" 
-        component={TelaPerfilScreen} 
+      <Tab.Screen
+        name="PerfilScreen"
+        component={TelaPerfilScreen}
         options={{
           headerShown: false,
-          tabBarIcon: () => (
-            <Image source={Imagens.iconTab2} style={{ width: 44, height: 40 }} />
+          tabBarIcon: ({ focused }) => (
+            <Image 
+              source={Imagens.iconTab2} 
+              style={{
+                width: 44, 
+                height: 44, 
+               
+              }} 
+            />
           ),
-        }} 
+        }}
       />
     </Tab.Navigator>
   );

@@ -26,10 +26,12 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
 
     setLoading(true); // Inicia o estado de loading
     try {
-        const response = await axios.post('http://localhost:8000/api/auth', {
+        const response = await axios.post('http://172.20.10.2:8000/api/auth', {
             emailContratante,
             password,
         });
+
+        console.log('datata',response);
 
         // Verifica se o login foi bem-sucedido e se o token está presente
         if (response.data && response.data.status === 'Sucesso' && response.data.token) {

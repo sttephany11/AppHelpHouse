@@ -75,11 +75,12 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
                                 height: 40,
                                 marginBottom: 5,
                                 fontSize: 16,
-                                
+                                color:'#fff',
                                 paddingHorizontal: 10,
                             }}
                             placeholder="Digite a data em que nasceu..."
                             placeholderTextColor="#fff"
+                            returnKeyType='done'
                         />
 
                         <Text style={styles.title3}>Cpf</Text>

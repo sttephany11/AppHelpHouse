@@ -4,34 +4,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import styles from '../css/criarPedidoCss';
 import api from "../../axios"; // Importa a instância do Axios
-import {getServicos} from '../functions/getServico';
-
-// Definição de tipos para os parâmetros da função postPedido
-interface PostPedidoParams {
-  descricaoPedido: string;
-  idServicos: string | number;
-  token: string;
-}
+import { getServicos } from "../functions/getServico";
 
 const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
-  const [descricaoPedido, setDescricaoPedido] = useState<string>(''); // Descrição do pedido
-  const [idServicos, setIdServicos] = useState<string | number>(1); // ID do serviço
-  const [data, setData] = useState<any>(null); // Resposta da API
-  const [loading, setLoading] = useState<boolean>(false); // Estado de carregamento
-  const [error, setError] = useState<boolean>(false); // Estado de erro
-  const [token, setToken] = useState<string | null>(null); // Token de autenticação
+  const { nomeContratado, bairroContratado, idContratado } = route.params; // Recebe o idContratado
+  const [descricaoPedido, setDescricaoPedido] = useState<string>('');
+  const [tituloPedido, setTituloPedido] = useState<string>('');
+  const [idServicos, setIdServicos] = useState<string | number>(1);
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [token, setToken] = useState<string | null>(null);
+  const [pedidoEnviado, setPedidoEnviado] = useState<boolean>(false);
 
-  // // Chama a API para buscar os profissionais
-  // useEffect(() => {
-  //   getServicos (setData, setLoading, setError);
-  // }, []);
-
+  // Busca o token armazenado no AsyncStorage
   useEffect(() => {
     const fetchToken = async () => {
       try {
         const savedToken = await AsyncStorage.getItem('authToken');
         if (savedToken) {
-          setToken(savedToken); // Armazena o token no estado
+          setToken(savedToken); // Armazena o token
           console.log('Token obtido do AsyncStorage:', savedToken);
         } else {
           console.log('Nenhum token encontrado no AsyncStorage');
@@ -43,14 +35,15 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
     fetchToken();
   }, []);
 
+  // Chama a API para buscar os serviços
+  useEffect(() => {
+    getServicos(setData, setLoading, setError);
+  }, []);
+
   // Função para fazer o POST do pedido
   const postPedido = async ({ descricaoPedido, idServicos }: { descricaoPedido: string; idServicos: string | number }) => {
     setLoading(true);
-
-    // Verifique se o token foi carregado
     const savedToken = await AsyncStorage.getItem('authToken');
-
-    console.log('Token que será enviado:', savedToken);
 
     if (!savedToken) {
       Alert.alert('Erro', 'Token de autenticação não encontrado.');
@@ -61,33 +54,24 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
     try {
       const response = await api.post(
         "/pedido",
-        { descricaoPedido, idServicos }, // Corpo da requisição
+        { descricaoPedido, idServicos, idContratado, tituloPedido }, // Inclui idContratado e tituloPedido
         {
           headers: {
-            Authorization: `Bearer ${savedToken}`, // Usa o token correto
+            Authorization: `Bearer ${savedToken}`,
             'Content-Type': 'application/json',
           },
         }
       );
 
-      setData(response.data); // Armazena a resposta da API
+      setData(response.data);
+      setPedidoEnviado(true);
       setLoading(false);
     } catch (error: any) {
       console.error('Erro ao enviar o pedido:', error);
-
-      if (error.response) {
-        console.log('Erro na resposta da API:', error.response.data);
-        Alert.alert('Erro', error.response.data.message || 'Erro ao enviar o pedido.');
-      } else {
-        Alert.alert('Erro', 'Falha ao conectar ao servidor.');
-      }
-
-      setError(true); // Define erro no estado
-      setLoading(false); // Para o indicador de carregamento
+      setError(true);
+      setLoading(false);
     }
   };
-
-
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -106,10 +90,10 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
 
       <View style={styles.card}>
         <Text style={styles.cardTitle}>
-          Solicitação para <Text style={styles.highlightedText}>Leila Pereira</Text>
+          Solicitação para <Text style={styles.highlightedText}>{nomeContratado}</Text>
         </Text>
         <Text style={styles.category}>Categoria:</Text>
-        <Text style={styles.location}>São Paulo, Guainases <Text style={styles.distance}>A 2 km de você</Text></Text>
+        <Text style={styles.location}>São Paulo, {bairroContratado} <Text style={styles.distance}>A 2 km de você</Text></Text>
 
         <View style={styles.requestDescription}>
           <TextInput
@@ -119,14 +103,21 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
             onChangeText={setDescricaoPedido}
           />
         </View>
+        <TextInput
+          style={styles.inputTitulo}
+          placeholder="Título"
+          value={tituloPedido}
+          onChangeText={setTituloPedido}
+        />
 
         <Picker
           selectedValue={idServicos}
           onValueChange={(itemValue) => setIdServicos(itemValue as number)}
         >
-          <Picker.Item label="Selecione um serviço"  />  {/* Default invalid option */}
-          <Picker.Item label="Pedreiro" value={1} /> {/* ID 1 should correspond to a valid service */}
-           {/*<Picker.Item label="Eletricista" value={2} /> Example for other services */}
+          <Picker.Item label="Selecione um serviço" value="" />
+          {Array.isArray(data) && data.map((servico, i) => (
+            <Picker.Item key={i} label={servico.nomeServicos} value={servico.idServicos} />
+          ))}
         </Picker>
 
         {loading ? (
@@ -138,7 +129,7 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
         )}
 
         {error && <Text style={styles.errorText}>Ocorreu um erro ao enviar o pedido.</Text>}
-        {data && <Text style={styles.successText}>Pedido enviado com sucesso!</Text>}
+        {pedidoEnviado && <Text style={styles.successText}>Pedido enviado com sucesso!</Text>}
       </View>
     </ScrollView>
   );

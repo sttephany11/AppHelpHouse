@@ -179,6 +179,10 @@ const styles = StyleSheet.create({
         width:360,
         height:150
       },
+      inputTitulo:{
+        width:360,
+        height:70
+      }
     });
     
 

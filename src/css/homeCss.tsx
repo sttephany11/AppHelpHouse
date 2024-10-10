@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     lupaAzul:{
       width:30,
       height:35,
-      left:45,
+      left:28,
       top:58,
       zIndex:1
     },
@@ -98,12 +98,12 @@ const styles = StyleSheet.create({
 
       containerProfissoes:{
         flexDirection:'row',
-        marginLeft:30,
+        marginLeft:20,
         marginTop:30,
       },
       containerProfissoes2:{
         flexDirection:'row',
-        marginLeft:90,
+        marginLeft:20,
         marginTop:15,
       },
 
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
 
       fundoPedidos:{
         backgroundColor:'white',
-        width:360,
+        width:370,
         height:118,
         borderRadius:25,
         marginTop:30,
@@ -127,14 +127,14 @@ const styles = StyleSheet.create({
         fontSize:30,
         top:25,
         fontWeight:'bold',
-        left:18
+        left:28
       },
 
       textPedidos2:{
         color:'#004aad',
         fontSize:15,
         top:24,
-        left:29,
+        left:31,
         marginBottom:50,
       },
 
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
 
       fundoAzul:{
         backgroundColor:'#004aad',
-        width:360,
+        width:370,
         height:360,
         borderRadius:25,
         marginTop:30,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
       frasePedidos:{
         color:'white',
         fontSize:25,
-        marginLeft:25,
+        marginLeft:37,
         marginTop:10,
         marginBottom:10,
         fontWeight:'bold',
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
 
       input:{
         height:50,
-        width:350,
+        width:380,
         paddingLeft:45,
         paddingRight:1,
         borderWidth:3,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
       textInput:{
         marginRight:60,
         fontWeight:500,
-        fontSize:19,
+        fontSize:17,
         color:'#3669a4',
       },
 

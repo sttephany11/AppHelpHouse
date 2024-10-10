@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         width:370,
         borderRadius:25,
-        marginTop:40,
+        marginTop:50,
         marginLeft:22,
         flex:1
     },
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         marginLeft:28,
         marginTop:30,
         borderRadius:25,
+        top:120,
       },
       margin:{
         marginTop:5,
@@ -79,7 +80,8 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:17,
         marginLeft:80,
-        bottom:40
+        bottom:40,
+     
       },
       descrPerfil:{
         marginLeft:80,
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
        tituloselect:{
         fontSize:19,
         color:'#ff914d',
-        marginBottom:10,
+
         marginTop:10,
         marginLeft:15,
         
@@ -149,7 +151,8 @@ const styles = StyleSheet.create({
        },
        marginInput:{
         marginTop:20,
-       }
+       },
+     
       
 
 

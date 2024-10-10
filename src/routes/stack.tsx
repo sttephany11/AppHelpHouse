@@ -14,7 +14,6 @@ import CadastroScreen2 from '../views/cadastro2';
 import CadastroScreen3 from '../views/cadastro3';
 import Home from '../views/home';
 import TelaPerfilScreen from '../views/telaPerfil';
-import PesquisarScreen from '../views/pesquisar';
 import PerfilProfissionalScreen from '../views/perfilProfissional';
 import { ImageProvider } from '../ImageContext';
 import Profissionais from '../views/profissionais';
@@ -22,6 +21,7 @@ import PedidoScreen from '../views/PedidoScreen';
 import { Image } from 'react-native';
 import { StyleSheet } from 'react-native';
 import List from '../functions/testeGet';
+import MeusPedidos from '../views/MeusPedidos';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,7 +33,7 @@ const Tabs = () => {
       screenOptions={{
         tabBarStyle: {
           backgroundColor: '#e9e9e7',
-          height: 60,
+          height: 80,
         },
         tabBarShowLabel: false,  // Oculta os rótulos das abas
       }}
@@ -62,10 +62,10 @@ const Tabs = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image 
-              source={Imagens.iconTab2} 
+              source={Imagens.iconTab3} 
               style={{
-                width: 44, 
-                height: 44, 
+                width: 46, 
+                height: 46, 
                
               }} 
             />
@@ -73,8 +73,8 @@ const Tabs = () => {
         }}
       />
        <Tab.Screen 
-        name="profissionais" 
-        component={Profissionais} 
+        name="perfil" 
+        component={TelaPerfilScreen} 
         options={{
           headerShown: false,
           tabBarIcon: () => (
@@ -90,7 +90,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="bemvindo">
+        <Stack.Navigator initialRouteName="meusPedidos">
         <Stack.Screen name="List" component={List} options={{ headerShown: false }} />
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
@@ -101,8 +101,8 @@ const AppNavigator = () => {
           <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
           <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
           <Stack.Screen name="telaPerfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="pesquisar" component={PesquisarScreen} options={{ headerShown: false }} />
           <Stack.Screen name="profissionais" component={Profissionais} options={{ headerShown: false }} />
+          <Stack.Screen name="meusPedidos" component={MeusPedidos} options={{ headerShown: false }} />
         </Stack.Navigator>
       </ImageProvider>
   );

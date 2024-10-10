@@ -5,11 +5,9 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useImage } from '../ImageContext.js';
 import results from '../../results';
-import ListItem from '../../componentes/flat/listItem.js';
 import styles from '../css/homeCss';
-import Pesquisar from './pesquisar.js';
 import { useUser } from '../cliContext';
-import {ModalWithBackdropShowcase} from '../../componentes/Modal';
+
 
 const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
   const [searchText, setSearchText] = useState('');
@@ -41,6 +39,10 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
     navigation.navigate('profissionais'); // Nome correto da tela
   };
 
+  const meusPedidos = () => {
+    navigation.navigate('meusPedidos'); // Nome correto da tela
+  };
+
 
   return (
     <ImageBackground
@@ -62,7 +64,7 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
         <View style={styles.containerInput}>
 
         <TouchableOpacity style={styles.input} onPress={ profissionais} >
-      <Text style={styles.textInput}>Encontre um profissional</Text>
+      <Text style={styles.textInput}>Encontre um profissional ou serviço</Text>
       </TouchableOpacity>
 
 
@@ -102,11 +104,11 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
           </View>
 
           <View style={styles.containerPedidos}>
-            <View style={styles.fundoPedidos}>
+          <TouchableOpacity style={styles.fundoPedidos} onPress={ meusPedidos}>
               <Text style={styles.textPedidos}>Meus pedidos</Text>
               <Text style={styles.textPedidos2}>Acompanhe seus pedidos...</Text>
               <AntDesign name="rightcircle" size={50} color="#004aad" style={{ marginLeft: 280, bottom: 75 }} />
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.containerPedidos}>

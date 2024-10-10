@@ -1,3 +1,5 @@
+
+
 import { getPro } from "../functions/getPro";
 import React, { useState, useEffect } from "react";
 import { Loading } from "../../componentes";
@@ -14,7 +16,7 @@ import PedidoScreen from "./PedidoScreen";
 interface Profissional {
   bairroContratado: any;
   nomeContratado: string;
-  sobrenomeContratado: string;
+  sobrenomeContratado: string;  
   descContratado: string;
   regiaoContratado: string;
   idContratado:string;
@@ -137,7 +139,7 @@ const List: React.FC<Props> = ({ navigation }) => {
                 <Picker
                   selectedValue={selectedProfession}
                   onValueChange={(itemValue) => setSelectedProfession(itemValue)}
-                  style={{ height: 50, width: 320, borderColor: '#ff914d' }}
+                  style={{ height: 50, width: 320, borderColor: '#ff914d',bottom:20 }}
                 >
                   <Picker.Item label="Selecione" value="" />
                   <Picker.Item label="Encanador" value="encanador" />
@@ -156,7 +158,7 @@ const List: React.FC<Props> = ({ navigation }) => {
                   {/* Adicione mais profissões conforme necessário */}
                 </Picker>
               </View>
-
+              <View style={styles.marginInput}></View>
               {/* Lista de Profissionais Filtrados */}
               {data
                 .filter(filterProfessionals)

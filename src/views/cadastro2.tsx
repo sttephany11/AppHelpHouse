@@ -19,7 +19,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
     const verificar = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/clii', {
+            const response = await fetch('http://172.20.10.14:8000/api/clii', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

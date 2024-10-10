@@ -48,6 +48,7 @@ const Imagens = {
    //imgs tab bar
    iconTab: require("../assets/iconTab.png"),
    iconTab2: require("../assets/iconTab2.png"),
+   iconTab3: require("../assets/iconTab3.png"),
 }
 export default Imagens;
 

@@ -76,6 +76,9 @@ const styles = StyleSheet.create({
     marginTop:'30%',
     marginLeft:'22%',
     width:160,  
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 0.5, 
   },
   buttonText2:{
     color:'#fff',

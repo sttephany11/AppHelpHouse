@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import Imagens from "../../img/img";
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
@@ -58,7 +58,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
         <View style={styles.container}>
             <Image source={Imagens.helpHouse} style={styles.help} />
 
-            <View style={[styles.input, { width: 340, height:70 }]}>
+            <View style={[styles.input, { width: 350, height:70 }]}>
                 <FloatingLabelInput
                     label="Email"
                     value={emailContratante}
@@ -84,7 +84,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
                         backgroundColor: '#fff',
                         paddingHorizontal: 5,
                         color: '#FF8F49',
-                        fontSize:20
+                        fontSize:22
                     }}
                     inputStyles={{
                         color: '#000',
@@ -96,7 +96,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
 
             </View>
 
-            <View style={[styles.input, { width: 340 }]}>
+            <View style={[styles.input, { width: 350 }]}>
                 <FloatingLabelInput
                     label="Senha"
                     isPassword
@@ -125,7 +125,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
                         backgroundColor: '#fff',
                         paddingHorizontal: 5,
                         color: '#FF8F49',
-                        fontSize:20
+                        fontSize:22
                     }}
                     inputStyles={{
                         color: '#000',
@@ -133,17 +133,9 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
                     }}
                 />
             </View>
-
-            <Button
-                style={styles.button}
-                color='#004AAD'
-                variant="primary"
-                title="Entrar" 
-                //onPress={() => navigation.navigate('cadastro')} 
-
-                 onPress={handleLogin} 
-    />
-
+                <TouchableOpacity style={styles.button3} onPress={handleLogin} >
+                            <Text style={styles.buttonText2}>Entrar</Text>
+                 </TouchableOpacity>
 
                 <View>
                     <View style={[styles.conta ]}>
@@ -152,13 +144,10 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
                     </View>
                 </View>
                     
-                <Button
-                style={[styles.buttonCad, { backgroundColor: '#004AAD' }]} // Defina a cor de fundo desejada aqui
-                color='#004AAD'
-                variant="primary"
-                title="Cadastre-se" 
-                onPress={() => navigation.navigate('cadastro')} 
-    />
+               
+                <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro')} >
+                            <Text style={styles.buttonText2}>Cadastre-se</Text>
+                 </TouchableOpacity>
         </View>
     );
 };

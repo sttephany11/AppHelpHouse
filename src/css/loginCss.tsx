@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
       },
       conta:{
-          marginTop:'10%'
+          top:70,
       },
       helpText:{
         color:'#004AAD'
@@ -55,9 +55,41 @@ const styles = StyleSheet.create({
       },
       errorMessage:{
         color:'#FF0000'
-      }
+      },
       
-   
+      button2:{
+        backgroundColor:'#004AAD',
+        borderRadius:25,
+        height:50,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:80,
+        width:160,  
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        
+      },
+      button3:{
+        backgroundColor:'#FF8F49',
+        borderRadius:25,
+        height:50,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:20,
+        width:160,  
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5,
+        
+      },
+      buttonText2:{
+        color:'#fff',
+        fontSize:20,
+        fontWeight:'bold'
+      },
    
 });
 

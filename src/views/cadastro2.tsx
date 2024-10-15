@@ -18,7 +18,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
     const verificar = async () => {
         try {
-            const response = await fetch('http://172.20.10.14:8000/api/clii', {
+            const response = await fetch('http://localhost:8000/api/clii', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -34,8 +34,8 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     cepContratante,
                     numCasaContratante,
                     complementoContratante,
-                   
                     bairroContratante,
+                    cidadeContratante,
                 }),
             });
     
@@ -84,7 +84,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             const response = await Api.get(`/${cepContratante.replace(/\D/g, '')}/json/`);
             setBairroContratante(response.data.bairro);
             setRuaContratante(response.data.logradouro);
-            setRegiaoContratante(response.data.regiao);
+            setCidadeContratante(response.data.estado);
         } catch (error) {
             console.log('Erro ao buscar CEP:', error);
         }

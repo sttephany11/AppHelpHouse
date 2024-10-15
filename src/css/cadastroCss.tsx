@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'flex-end',
     alignItems: 'center',    
-    height:'10%'
+    height:'10%',
+    marginTop:15,
   },
 
   titleCadastro: {
@@ -57,10 +58,10 @@ const styles = StyleSheet.create({
         color:'#004AAD',
   },
   input:{
-    width:'49%',
+    width:310,
     height:600,
     position:'relative',
-    top:30,
+    marginTop:50,
    },
   
  
@@ -71,8 +72,8 @@ const styles = StyleSheet.create({
     height:50,
     justifyContent:'center',
     alignItems:'center',
-    marginTop:'10%',
-    marginLeft:'22%',
+    marginTop:60,
+    marginLeft:75,
     width:160,  
     shadowColor: 'black',
     shadowRadius: 5,
@@ -97,10 +98,11 @@ const styles = StyleSheet.create({
   title3:{
     fontWeight:'700',
     color: 'white',
-    marginBottom:15,
+    marginBottom:10,
     fontSize:18,
     right:2,
-    top:9
+    top:9,
+    marginTop:10,
   },
 
   input3:{

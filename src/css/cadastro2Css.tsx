@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
   },
   titulo2:{
     color: '#004AAD',
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: '900',
     justifyContent:'center',
     alignItems:'center',
-   
+   marginLeft:20,
   },
   
   titulo3:{
@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
         color:'#fff'
   },
   input:{
-    width:280,
+    width:310,
     height:60,
     position:'relative',
-    top:60
+    marginTop:30,
   
    },
    buttonCad:{
@@ -95,20 +95,24 @@ const styles = StyleSheet.create({
 
   // inputs
   title3:{
+    fontWeight:'700',
+    color: 'white',
+    marginBottom:10,
     fontSize:20,
-    marginTop:5,
-    color:'#fff',
-    fontWeight:'bold',
+    right:2,
+    top:9,
+   marginTop:10,
     },
   
     input3:{
-    borderBottomWidth:3,
-    borderColor: '#fff',
-    height:40,
-    marginBottom:10,
-    fontSize:16,
-    color:'#fff',
-
+      borderBottomWidth:3,
+      borderColor: '#fff',
+      height:40,
+      marginBottom:5,
+      fontSize:16,
+      color:'#fff',
+      paddingHorizontal:10,
+   
     },
 
 

@@ -10,19 +10,15 @@ import dayjs from 'dayjs';
 const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
     const [nomeContratante, setNomeContratante] = useState('');
     const [cpfContratante, setCpfContratante] = useState('');
-    const [password, setPassword] = useState('');
-    const [emailContratante, setEmailContratante] = useState('');
     const [telefoneContratante, setTelefoneContratante] = useState('');
     const [nascContratante, setNascContratante] = useState('');
 
     const dadosCli = () => {
         // Agora envia para a próxima tela com a data convertida
-        navigation.navigate('cadastro2', {
+        navigation.navigate('cadastro3', {
             nomeContratante: nomeContratante,
             cpfContratante: cpfContratante,
             telefoneContratante: telefoneContratante,
-            emailContratante: emailContratante,
-            password: password,
             nascContratante:nascContratante , // Data convertida no formato correto
             
         });
@@ -60,7 +56,7 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
                         <TextInputMask
                              type={'datetime'}
                              options={{
-                               format: 'YYYY/MM/DD'
+                               format: 'DD/MM/YYYY'
                              }}
                            
                      
@@ -79,7 +75,7 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
                                 paddingHorizontal: 10,
                             }}
                             placeholder="Digite a data em que nasceu..."
-                            placeholderTextColor="#fff"
+                            //placeholderTextColor="#fff"
                             returnKeyType='done'
                         />
 
@@ -112,28 +108,6 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
                         />
 
 
-                        <Text style={styles.title3}> Email</Text>
-                        <TextInput placeholder="Digite um email..."
-                            value={emailContratante}
-                            onChangeText={value => setEmailContratante(value)}
-                            style={styles.input3}
-
-                        />
-
-
-                        <Text style={styles.title3}> Senha</Text>
-                        <TextInput placeholder="Sua senha..."
-                            value={password}
-                            onChangeText={value => setPassword(value)}
-                            style={styles.input3}
-                        />
-
-                        {/* <Text style={styles.title3}> Confirme Senha</Text>
-                            <TextInput placeholder="Sua senha..."
-                             value={Senha}
-                             onChangeText={value => setSenha(value)} 
-                             style={styles.input3}
-                            />    */}
 
                         <TouchableOpacity style={styles.button2} onPress={dadosCli} >
                             <Text style={styles.buttonText2}>Próximo</Text>

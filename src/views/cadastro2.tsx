@@ -6,7 +6,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useUser } from '../cliContext';
 
 const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
-    const { nomeContratante, cpfContratante, telefoneContratante, emailContratante, password } = route.params;
+    const { nomeContratante, cpfContratante, telefoneContratante, nascContratante, emailContratante, password } = route.params;
     const [cepContratante, setCepContratante] = useState('');
     const [bairroContratante, setBairroContratante] = useState('');
     const [ruaContratante, setRuaContratante] = useState('');
@@ -19,7 +19,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
     const verificar = async () => {
         try {
-            const response = await fetch('http://172.20.10.14:8000/api/clii', {
+            const response = await fetch('http://192.168.1.13:8000/api/clii', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -37,6 +37,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     complementoContratante,
                     regiaoContratante,
                     bairroContratante,
+                    nascContratante,
                 }),
             });
     
@@ -107,9 +108,13 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     };
 
     const handleCepChange = (text: string) => {
-        setCepContratante(formatCep(text));
+        const formattedCep = formatCep(text);
+        setCepContratante(formattedCep);
 
-        
+        // Chama a função buscarCep automaticamente quando o CEP tiver 8 dígitos
+        if (formattedCep.replace(/\D/g, '').length === 8) {
+            buscarCep();
+        }
     };
 
     return (
@@ -117,7 +122,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
-                        <Text style={styles.titulo2}>Adicione <Text style={styles.passos}> seu endereço</Text></Text>
+                        <Text style={styles.titulo2}>Para finalizar,<Text style={styles.passos}>  adicione </Text><Text style={styles.passos}>seu endereço</Text></Text>
                        
                     </View>
 
@@ -128,17 +133,17 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                         </View>
                         <TextInput
                             style={styles.input3}
-                            placeholder=""
+                            placeholder="Digite seu cep"
                             value={cepContratante}
                             keyboardType="numeric"
                             returnKeyType='done'
                             maxLength={9}
-                            onChangeText={handleCepChange}
+                            onChangeText={handleCepChange} // Usa a função handleCepChange
                         />
 
                         <Text style={styles.title3}>Bairro</Text>
                         <TextInput
-                            placeholder=""
+                            placeholder="Seu bairro..."
                             value={bairroContratante}
                             onChangeText={setBairroContratante}
                             style={styles.input3}
@@ -146,7 +151,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
                         <Text style={styles.title3}>Rua</Text>
                         <TextInput
-                            placeholder=""
+                            placeholder="Sua Rua..."
                             value={ruaContratante}
                             onChangeText={setRuaContratante}
                             style={styles.input3}
@@ -155,7 +160,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
                         <Text style={styles.title3}>Complemento</Text>
                         <TextInput
-                            placeholder=""
+                            placeholder="Digite um complemento..."
                             value={complementoContratante}
                             onChangeText={setComplementoContratante}
                             style={styles.input3}
@@ -163,11 +168,12 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
                         <Text style={styles.title3}>Número</Text>
                         <TextInput
-                            placeholder=""
+                            placeholder="Seu número..."
                             value={numCasaContratante}
                             onChangeText={setNumCasaContratante}
                             keyboardType="numeric"
                             style={styles.inputNum}
+                            returnKeyType='done'
                         />
 
                         <TouchableOpacity style={styles.button2} onPress={verificar}>

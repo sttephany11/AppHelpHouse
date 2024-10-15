@@ -11,33 +11,99 @@ const styles = StyleSheet.create({
   justifyContent:'center',
   alignItems:'center',
   },
+  fundo:{
+    height: '100%',
+    width: '100%',
+    backgroundColor: '#FF8F49',
+  },
+
+  title: {
+    marginTop:'19%',
+    justifyContent: 'center',
+    alignItems: 'center',    
+    
+  },
+
+  containerCadastro: {
+    width: '100%',
+    height:'100%',
+    flexDirection:'column' ,
+    alignItems: 'center',  
+     
+  },
+
+  titulo2:{
+    color: '#004AAD',
+    fontSize: 35,
+    fontWeight: '900',
+    justifyContent:'center',
+    alignItems:'center',
+   
+  },
+
+  passos:{
+    color:'#fff'
+},
+
+subtitulo:{
+    color:'#fff',
+    justifyContent:'center',
+    alignItems:'center',
+    fontSize:20,
+    fontWeight: '700',
+    marginTop:10,
+},
 
   photo:{
-    width:130,
-    height:130,
+    width:170,
+    height:170,
     borderRadius:100,
-    marginTop:'30%',
-    borderColor:'#fff',
+    marginTop:50,
+    borderColor:'#004AAD',
     borderWidth:5,
     margin:10,
   },
 
+  cameraIcon: {
+    position: 'absolute',
+    top: 185,
+    left: 127,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 20,
+    padding: 5,
+    marginRight:100
+  },
+
+
+    // códigos input 
+    title3:{
+      fontWeight:'700',
+      color: 'white',
+      marginBottom:10,
+      fontSize:18,
+      right:2,
+      top:9,
+     marginTop:10,
+    },
   
-  button:{
-    backgroundColor:'#004AAD',
-    borderRadius:25,
-    height:50,
-    justifyContent:'center',
-    alignItems:'center',
-    marginTop:'10%',
-    marginLeft:'5%',
-    width:160,  
-  },
-  buttonText:{
+    input3:{
+    borderBottomWidth:3,
+    borderColor: '#fff',
+    height:40,
+    marginBottom:5,
+    fontSize:16,
     color:'#fff',
-    fontSize:20,
-    fontWeight:'bold'
-  },
+    paddingHorizontal:10,
+    },
+
+    input:{
+      width:310,
+      height:600,
+      position:'relative',
+      top:30,
+     },
+  
+
 
 
 
@@ -49,9 +115,13 @@ const styles = StyleSheet.create({
     height:50,
     justifyContent:'center',
     alignItems:'center',
-    marginTop:'30%',
-    marginLeft:'22%',
-    width:160,  
+    marginTop:45,
+    marginLeft:75,
+    width:160, 
+    shadowColor: 'black',
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 0.5, 
   },
   buttonText2:{
     color:'#fff',

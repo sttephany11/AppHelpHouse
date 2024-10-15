@@ -90,7 +90,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="meusPedidos">
+        <Stack.Navigator initialRouteName="bemvindo">
         <Stack.Screen name="List" component={List} options={{ headerShown: false }} />
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
@@ -99,6 +99,7 @@ const AppNavigator = () => {
           <Stack.Screen name="login" component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />
           <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
+          <Stack.Screen name="cadastro3" component={CadastroScreen3} options={{ headerShown: false }} />
           <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
           <Stack.Screen name="telaPerfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
           <Stack.Screen name="profissionais" component={Profissionais} options={{ headerShown: false }} />

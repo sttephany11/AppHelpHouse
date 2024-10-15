@@ -80,7 +80,7 @@ subtitulo:{
       fontWeight:'700',
       color: 'white',
       marginBottom:10,
-      fontSize:18,
+      fontSize:20,
       right:2,
       top:9,
      marginTop:10,
@@ -115,7 +115,7 @@ subtitulo:{
     height:50,
     justifyContent:'center',
     alignItems:'center',
-    marginTop:45,
+    marginTop:60,
     marginLeft:75,
     width:160, 
     shadowColor: 'black',
@@ -128,6 +128,35 @@ subtitulo:{
     fontSize:20,
     fontWeight:'bold'
   },
+
+  button3:{
+    backgroundColor:'#004AAD',
+    borderRadius:25,
+    height:40,
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:10,
+    width:160, 
+    shadowColor: 'black',
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 0.5, 
+  }, 
+
+  passwordContainer: {
+    position: 'relative',  
+    width: '100%',         
+},
+
+eyeIcon: {
+    position: 'absolute',
+    right: 10,             
+    top: 5,           
+    zIndex: 1,             
+},
+
+
+
 });
 
 export default styles;

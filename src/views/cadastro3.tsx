@@ -8,11 +8,14 @@ import Imagens from '../../img/img';
 import styles from '../css/cadastro3Css';
 import { useImage } from '../ImageContext';
 import Entypo from '@expo/vector-icons/Entypo';
+import { MaterialIcons } from '@expo/vector-icons'; // Ícone de olhinho
 
 const CadastroScreen3: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
     const [uploading, setUploading] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const { imageUrl, setImageUrl } = useImage();
+    const [showPassword, setShowPassword] = useState<boolean>(false); // Estado para mostrar/ocultar senha
+    const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false); // Estado para o campo de confirmar senha
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -85,13 +88,21 @@ const CadastroScreen3: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
                     <View style={styles.containerPerfil}>
                         <TouchableOpacity>
-                            <Image source={selectedImage ?{ uri: selectedImage } : { uri: imageUrl }} style={styles.photo} />
+                            <Image 
+                                source={selectedImage ? { uri: selectedImage } : imageUrl ? { uri: imageUrl } : Imagens.perfilUsuario4} 
+                                style={styles.photo} 
+                            />
                             <View style={styles.cameraIcon}>
                                 <TouchableOpacity onPress={pickImage}>
                                     <Entypo name="camera" size={26} color="white" />
                                 </TouchableOpacity>
                             </View>
                         </TouchableOpacity>
+                        {selectedImage && (
+                            <TouchableOpacity onPress={uploadMedia} style={styles.button3} disabled={uploading}>
+                            <Text style={styles.buttonText2}>{uploading ? 'Confirmando...' : 'Confirmar foto'}</Text>
+                            </TouchableOpacity>
+                        )}
                     </View>
 
                     <View style={styles.input}>
@@ -104,28 +115,33 @@ const CadastroScreen3: React.FC<{ route: any; navigation: any }> = ({ route, nav
                         />
 
                         <Text style={styles.title3}> Senha</Text>
-                        <TextInput 
-                            placeholder="Sua senha..."
-                            value={password}
-                            onChangeText={value => setPassword(value)}
-                            style={styles.input3}
-                            secureTextEntry={true} // Oculta o texto para a senha
-                        />
+                        <View style={styles.passwordContainer}>
+                            <TextInput 
+                                placeholder="Sua senha..."
+                                value={password}
+                                onChangeText={value => setPassword(value)}
+                                style={styles.input3}
+                                secureTextEntry={!showPassword} // Controla a exibição da senha
+                            />
+                            <TouchableOpacity style={styles.eyeIcon} onPress={() => setShowPassword(!showPassword)}>
+                                <MaterialIcons name={showPassword ? "visibility" : "visibility-off"} size={24} color="gray" />
+                            </TouchableOpacity>
+                        </View>
 
                         <Text style={styles.title3}> Confirmar Senha</Text>
-                        <TextInput 
-                            placeholder="Confirme sua senha..."
-                            value={confirmPassword}
-                            onChangeText={value => setConfirmPassword(value)}
-                            style={styles.input3}
-                            secureTextEntry={true} 
-                        />
-
-                        {selectedImage && (
-                            <TouchableOpacity onPress={uploadMedia} style={styles.button2} disabled={uploading}>
-                            <Text style={styles.buttonText2}>{uploading ? 'Confirmando...' : 'Confirmar foto'}</Text>
+                        <View style={styles.passwordContainer}>
+                            <TextInput 
+                                placeholder="Confirme sua senha..."
+                                value={confirmPassword}
+                                onChangeText={value => setConfirmPassword(value)}
+                                style={styles.input3}
+                                secureTextEntry={!showConfirmPassword} // Controla a exibição da senha
+                            />
+                            <TouchableOpacity style={styles.eyeIcon} onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+                                <MaterialIcons name={showConfirmPassword ? "visibility" : "visibility-off"} size={24} color="gray" />
                             </TouchableOpacity>
-                        )}
+                        </View>
+
                         <TouchableOpacity style={styles.button2} onPress={dadosCli}>
                             <Text style={styles.buttonText2}>Próximo</Text>
                         </TouchableOpacity>

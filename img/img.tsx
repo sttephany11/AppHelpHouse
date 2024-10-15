@@ -37,7 +37,8 @@ const Imagens = {
     fotoFundo: require("../assets/imgApp/fotoFundo.jpg"),
     perfil2:require("../assets/imgApp/perfil2.png"),
    perfilUsuario:require("../assets/perfilUsuario.jpg"),
-   perfilUsuario2:require("../assets/perfilUsuario2.png"),
+   perfilUsuario3:require("../assets/perfilUsuario3.png"),
+   perfilUsuario4:require("../assets/perfilUsuario4.png"),
    //imagens home 
    img1: require("../assets/imgApp/1.png"),
    img2: require("../assets/imgApp/2.png"),

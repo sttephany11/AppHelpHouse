@@ -10,8 +10,8 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     const [cepContratante, setCepContratante] = useState('');
     const [bairroContratante, setBairroContratante] = useState('');
     const [ruaContratante, setRuaContratante] = useState('');
+    const [cidadeContratante, setCidadeContratante] = useState('');
     const [numCasaContratante, setNumCasaContratante] = useState('');
-    const [regiaoContratante, setRegiaoContratante] = useState('');
     const [complementoContratante, setComplementoContratante] = useState('');
     
     // Desestruturando corretamente
@@ -19,7 +19,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
     const verificar = async () => {
         try {
-            const response = await fetch('http://172.20.10.14:8000/api/clii', {
+            const response = await fetch('http://localhost:8000/api/clii', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -35,8 +35,9 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     cepContratante,
                     numCasaContratante,
                     complementoContratante,
-                    regiaoContratante,
+                   
                     bairroContratante,
+                    cidadeContratante,
                 }),
             });
     
@@ -92,7 +93,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             const response = await Api.get(`/${cepContratante}/json/`);
             setBairroContratante(response.data.bairro);
             setRuaContratante(response.data.logradouro);
-            setRegiaoContratante(response.data.regiao);
+            setCidadeContratante(response.data.estado);
         } catch (error) {
             console.log('Erro ao buscar CEP:', error);
         }
@@ -141,6 +142,14 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                             placeholder=""
                             value={bairroContratante}
                             onChangeText={setBairroContratante}
+                            style={styles.input3}
+                        />
+
+                        <Text style={styles.title3}>Cidade</Text>
+                        <TextInput
+                            placeholder=""
+                            value={cidadeContratante}
+                            onChangeText={setCidadeContratante}
                             style={styles.input3}
                         />
 

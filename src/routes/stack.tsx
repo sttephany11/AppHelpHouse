@@ -90,7 +90,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="meusPedidos">
+        <Stack.Navigator initialRouteName="bemvindo">
         <Stack.Screen name="List" component={List} options={{ headerShown: false }} />
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />

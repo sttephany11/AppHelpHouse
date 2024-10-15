@@ -99,6 +99,7 @@ const AppNavigator = () => {
           <Stack.Screen name="login" component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name="cadastro" component={CadastroScreen} options={{ headerShown: false }} />
           <Stack.Screen name="cadastro2" component={CadastroScreen2} options={{ headerShown: false }} />
+          <Stack.Screen name="cadastro3" component={CadastroScreen3} options={{ headerShown: false }} />
           <Stack.Screen name="homeStack" component={Tabs} options={{ headerShown: false }} />
           <Stack.Screen name="telaPerfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
           <Stack.Screen name="profissionais" component={Profissionais} options={{ headerShown: false }} />

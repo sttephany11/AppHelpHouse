@@ -56,7 +56,7 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
           {userData ? userData.nomeContratante : 'Nome não disponível'}
             </Text>
           <TouchableOpacity onPress={perfilNav}>
-            <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfilUsuario} style={styles.ImgPerfil} />
+            <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfilUsuario4} style={styles.ImgPerfil} />
           </TouchableOpacity>
         </View>
 

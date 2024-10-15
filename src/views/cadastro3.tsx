@@ -2,11 +2,57 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Alert, Image, TextInput } from 'react-native';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
 import * as ImagePicker from 'expo-image-picker';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../firebase'
 import Imagens from '../../img/img';
 import styles from '../css/cadastro3Css';
+import { useImage } from '../ImageContext';
 import Entypo from '@expo/vector-icons/Entypo';
 
 const CadastroScreen3: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
+    const [uploading, setUploading] = useState<boolean>(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const { imageUrl, setImageUrl } = useImage();
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        });
+
+        if (!result.canceled) {
+            setSelectedImage(result.assets[0].uri);
+        }
+    };
+
+    const uploadMedia = async () => {
+        if (!selectedImage) {
+            Alert.alert('Erro', 'Nenhuma imagem selecionada.');
+            return;
+        }
+
+        setUploading(true);
+
+        try {
+            const response = await fetch(selectedImage);
+            const blob = await response.blob();
+            const filename = selectedImage.substring(selectedImage.lastIndexOf('/') + 1);
+            const storageRef = ref(storage, `images/${filename}`);
+            await uploadBytes(storageRef, blob);
+            const url = await getDownloadURL(storageRef);
+            setImageUrl(url);
+            setSelectedImage(null);
+            Alert.alert('Sucesso', 'Imagem enviada com sucesso!');
+        } catch (error) {
+            console.error('Erro ao enviar a imagem:', error);
+            Alert.alert('Erro', 'Falha ao enviar a imagem.');
+        } finally {
+            setUploading(false);
+        }
+    };
+
     const { nomeContratante, cpfContratante, telefoneContratante, nascContratante } = route.params;
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,9 +85,9 @@ const CadastroScreen3: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
                     <View style={styles.containerPerfil}>
                         <TouchableOpacity>
-                            <Image source={Imagens.perfil} style={styles.photo} />
+                            <Image source={selectedImage ?{ uri: selectedImage } : { uri: imageUrl }} style={styles.photo} />
                             <View style={styles.cameraIcon}>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={pickImage}>
                                     <Entypo name="camera" size={26} color="white" />
                                 </TouchableOpacity>
                             </View>
@@ -75,6 +121,11 @@ const CadastroScreen3: React.FC<{ route: any; navigation: any }> = ({ route, nav
                             secureTextEntry={true} 
                         />
 
+                        {selectedImage && (
+                            <TouchableOpacity onPress={uploadMedia} style={styles.button2} disabled={uploading}>
+                            <Text style={styles.buttonText2}>{uploading ? 'Confirmando...' : 'Confirmar foto'}</Text>
+                            </TouchableOpacity>
+                        )}
                         <TouchableOpacity style={styles.button2} onPress={dadosCli}>
                             <Text style={styles.buttonText2}>Próximo</Text>
                         </TouchableOpacity>

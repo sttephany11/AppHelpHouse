@@ -57,16 +57,15 @@ const styles = StyleSheet.create({
     marginTop:30,
   
    },
-   buttonCad:{
-    marginTop:'30%',
-    marginLeft:'22%',
-    width:160,
-    color:'#004AAD',
-   
-  },
+
+   button: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+},
 
 
- 
   button2:{
     backgroundColor:'#004AAD',
     borderRadius:25,
@@ -82,9 +81,6 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:'bold'
   },
-
-
-
 
 
   //buton buscar cep 
@@ -165,7 +161,11 @@ containerIcon:{
         fontWeight:'bold',
         marginLeft:150,
         },
+
+       
      
 });
+
+
 
 export default styles;

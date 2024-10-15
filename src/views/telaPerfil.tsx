@@ -10,50 +10,8 @@ import { useImage } from '../ImageContext'; // Ajuste o caminho conforme necess�
 import { useUser } from '../cliContext';
 
 const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [image, setImage] = useState<string | null>(null);
-  const [uploading, setUploading] = useState<boolean>(false);
-  const { imageUrl, setImageUrl } = useImage();
+  const { imageUrl } = useImage();
   const { userData } = useUser(); // Altere para userData
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
-
-  const uploadMedia = async () => {
-    if (!image) {
-      Alert.alert('Erro', 'Nenhuma imagem selecionada.');
-      return;
-    }
-
-    setUploading(true);
-
-    try {
-      const response = await fetch(image);
-      const blob = await response.blob();
-      const filename = image.substring(image.lastIndexOf('/') + 1);
-      const storageRef = ref(storage, `images/${filename}`);
-
-      await uploadBytes(storageRef, blob);
-      const url = await getDownloadURL(storageRef);
-      setImageUrl(url); // Atualiza a URL da imagem no contexto
-      setImage(null);
-      Alert.alert('Sucesso', 'Imagem enviada com sucesso!');
-    } catch (error) {
-      console.error('Erro ao enviar a imagem:', error);
-      Alert.alert('Erro', 'Falha ao enviar a imagem.');
-    } finally {
-      setUploading(false);
-    }
-  };
 
   const goToOutraTela = () => {
     if (imageUrl) {
@@ -78,7 +36,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           )}
 
           <View style={styles.cameraIcon}>
-            <TouchableOpacity onPress={pickImage}>
+            <TouchableOpacity>
               <Entypo name="camera" size={24} color="white" />
             </TouchableOpacity>
           </View>
@@ -97,15 +55,6 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             {userData && userData.bairroContratante ? userData.bairroContratante : 'Localização não disponível'}
           </Text>
 
-          {image && <Image source={{ uri: image }} style={styles.image} />}
-          {image && (
-            <TouchableOpacity onPress={uploadMedia} style={styles.button} disabled={uploading}>
-              <Text style={styles.buttonText}>{uploading ? 'Enviando...' : 'Enviar Imagem'}</Text>
-            </TouchableOpacity>
-          )}
-          <TouchableOpacity onPress={goToOutraTela} style={styles.button}>
-            <Text style={styles.buttonText}>Ir para Perfil Profissional</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>

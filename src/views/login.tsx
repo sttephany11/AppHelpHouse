@@ -58,7 +58,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
         <View style={styles.container}>
             <Image source={Imagens.helpHouse} style={styles.help} />
 
-            <View style={styles.input}>
+            <View style={[styles.input, { width: 340, height:70 }]}>
                 <FloatingLabelInput
                     label="Email"
                     value={emailContratante}
@@ -84,6 +84,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
                         backgroundColor: '#fff',
                         paddingHorizontal: 5,
                         color: '#FF8F49',
+                        fontSize:20
                     }}
                     inputStyles={{
                         color: '#000',
@@ -95,7 +96,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
 
             </View>
 
-            <View style={styles.input}>
+            <View style={[styles.input, { width: 340 }]}>
                 <FloatingLabelInput
                     label="Senha"
                     isPassword
@@ -124,6 +125,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
                         backgroundColor: '#fff',
                         paddingHorizontal: 5,
                         color: '#FF8F49',
+                        fontSize:20
                     }}
                     inputStyles={{
                         color: '#000',

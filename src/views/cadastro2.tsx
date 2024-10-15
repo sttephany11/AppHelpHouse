@@ -14,7 +14,6 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     const [regiaoContratante, setRegiaoContratante] = useState('');
     const [complementoContratante, setComplementoContratante] = useState('');
     
-    // Desestruturando corretamente
     const { userId, setUserId, setUserData } = useUser();
 
     const verificar = async () => {
@@ -47,35 +46,28 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             }
     
             const result = await response.json();
-            console.log('Resultado da criação:', result); // Log para depuração
-    
-            const idCli = result.data.idContratante; // Acesse idContratante dentro de data
+            const idCli = result.data.idContratante;
     
             if (idCli) {
-                setUserId(idCli); // Armazena o ID do usuário no contexto
-                console.log('Chamando fetchDadosCli com ID:', idCli); // Para depuração
+                setUserId(idCli);
                 await fetchDadosCli(idCli);
-            } else {
-                console.error('ID do contratante não foi retornado. Resposta:', result);
             }
     
             Alert.alert('Success', 'Dados salvos com sucesso!');
-            navigation.navigate('login'); // Navega para a tela 'login'
+            navigation.navigate('login');
         } catch (error) {
             Alert.alert('Error', 'Ocorreu um erro ao salvar os dados.');
             console.error('Error:', error);
         }
     };
         
-    
-    
     const fetchDadosCli = async (idCli) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/cli/${idCli}`); // Chamada à API com o ID do usuário
+            const response = await fetch(`http://localhost:8000/api/cli/${idCli}`);
             const data = await response.json();
     
             if (response.ok) {
-                setUserData(data); // Armazena os dados do usuário no contexto
+                setUserData(data);
             } else {
                 console.error('Error fetching user data:', data.message);
             }
@@ -90,10 +82,10 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             return;
         }
         try {
-            const response = await Api.get(`/${cepContratante}/json/`);
+            const response = await Api.get(`/${cepContratante.replace(/\D/g, '')}/json/`);
             setBairroContratante(response.data.bairro);
             setRuaContratante(response.data.logradouro);
-            setRegiaoContratante(response.data.regiao);
+            setRegiaoContratante(response.data.uf);
         } catch (error) {
             console.log('Erro ao buscar CEP:', error);
         }
@@ -111,7 +103,6 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
         const formattedCep = formatCep(text);
         setCepContratante(formattedCep);
 
-        // Chama a função buscarCep automaticamente quando o CEP tiver 8 dígitos
         if (formattedCep.replace(/\D/g, '').length === 8) {
             buscarCep();
         }
@@ -122,24 +113,27 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
-                        <Text style={styles.titulo2}>Para finalizar,<Text style={styles.passos}>  adicione </Text><Text style={styles.passos}>seu endereço</Text></Text>
-                       
+                        <Text style={styles.titulo2}>Para finalizar,<Text style={styles.passos}> adicione </Text><Text style={styles.passos}>seu endereço</Text></Text>
                     </View>
 
                     <View style={styles.input}>
-                        <View style={styles.inputsCep}>
-                            <Text style={styles.title3}>Cep</Text>
-                            <AntDesign style={styles.icon} name="search1" size={24} color="black" onPress={buscarCep} />
+                        <Text style={styles.title3}>Cep</Text>
+                        
+                        <View style={styles.inputContainer}> 
+                            {/* Ícone de lupa posicionado sobre o campo */}
+                            <AntDesign name="search1" size={24} color="white" style={styles.iconStyle} onPress={buscarCep} />
+                            
+                            {/* Campo de CEP */}
+                            <TextInput
+                                style={styles.input3}
+                                placeholder="Digite seu cep..."
+                                value={cepContratante}
+                                keyboardType="numeric"
+                                returnKeyType='done'
+                                maxLength={9}
+                                onChangeText={handleCepChange} 
+                            />
                         </View>
-                        <TextInput
-                            style={styles.input3}
-                            placeholder="Digite seu cep"
-                            value={cepContratante}
-                            keyboardType="numeric"
-                            returnKeyType='done'
-                            maxLength={9}
-                            onChangeText={handleCepChange} // Usa a função handleCepChange
-                        />
 
                         <Text style={styles.title3}>Bairro</Text>
                         <TextInput
@@ -156,25 +150,29 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                             onChangeText={setRuaContratante}
                             style={styles.input3}
                         />
-            
 
-                        <Text style={styles.title3}>Complemento</Text>
-                        <TextInput
-                            placeholder="Digite um complemento..."
-                            value={complementoContratante}
-                            onChangeText={setComplementoContratante}
-                            style={styles.input3}
-                        />
-
-                        <Text style={styles.title3}>Número</Text>
-                        <TextInput
-                            placeholder="Seu número..."
-                            value={numCasaContratante}
-                            onChangeText={setNumCasaContratante}
-                            keyboardType="numeric"
-                            style={styles.inputNum}
-                            returnKeyType='done'
-                        />
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View style={{ flex: 3, marginRight: 15 }}>
+                                <Text style={styles.title3}>Complemento</Text>
+                                <TextInput
+                                    placeholder="Digite um complemento..."
+                                    value={complementoContratante}
+                                    onChangeText={setComplementoContratante}
+                                    style={styles.input3}
+                                />
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.title3}>Número</Text>
+                                <TextInput
+                                    placeholder="Número..."
+                                    value={numCasaContratante}
+                                    onChangeText={setNumCasaContratante}
+                                    keyboardType="numeric"
+                                    style={styles.inputNum}
+                                    returnKeyType='done'
+                                />
+                            </View>
+                        </View>
 
                         <TouchableOpacity style={styles.button2} onPress={verificar}>
                             <Text style={styles.buttonText2}>Finalizar</Text>

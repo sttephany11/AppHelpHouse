@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize:20,
     right:2,
     top:9,
-   marginTop:10,
+    marginTop:10,
     },
   
     input3:{
@@ -115,38 +115,34 @@ const styles = StyleSheet.create({
    
     },
 
+    iconStyle: {
+      position: 'absolute',
+      right: 15,  // Ícone alinhado à direita
+      top: 2,    // Posicionamento vertical
+      zIndex: 1,  // Garante que o ícone fique sobre o input
+  },
+  
+  inputContainer: {
+      position: 'relative',  // Necessário para permitir o uso do ícone com absolute
+      justifyContent: 'center',
+  },
+
 
       //view de complemento e num
   
   inputNum:{
-    borderBottomWidth:5,
+    borderBottomWidth:3,
     borderColor: '#fff',
     height:40,
     marginBottom:10,
     fontSize:16,
     color:'#fff',
-    marginTop:5,
     width:80,
     justifyContent:'flex-start',
+    textAlign: 'center',
     },
-    inputComple:{
-      borderBottomWidth:5,
-      borderColor: '#fff',
-      height:40,
-      marginBottom:10,
-      fontSize:16,
-      color:'#fff',
-      marginTop:5,
-      width:120,
-      justifyContent:'flex-start',
-      },
 
-//icon
-icon:{
-color:'#fff',
-
-
-},
+    
 
 containerIcon:{
 

@@ -22,6 +22,8 @@ import { Image } from 'react-native';
 import { StyleSheet } from 'react-native';
 import List from '../functions/testeGet';
 import MeusPedidos from '../views/MeusPedidos';
+import Chat from '../views/Chat';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,6 +84,7 @@ const Tabs = () => {
           ),
         }} 
       />
+
     </Tab.Navigator>
   );
 };

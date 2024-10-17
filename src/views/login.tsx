@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 import Imagens from "../../img/img";
 import { FloatingLabelInput } from 'react-native-floating-label-input';
@@ -6,6 +6,7 @@ import { Button } from "../../componentes/Button/Button"; // Verifique se o cami
 import styles from '../css/loginCss';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Importa AsyncStorage para armazenar o token
+import myContext from '../functions/authContext';
 
 
 const Login: React.FC<{ navigation: any }> = ({navigation}) => {
@@ -15,6 +16,8 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
     const [message, setMessage]= useState ('')
     const [loading, setLoading] = useState(false);
    // Defina a função handleLoginPress para campos obrigatórios
+
+   const { user, setUser } = useContext(myContext); 
 
    // Função para fazer login
    const handleLogin = async () => {
@@ -32,15 +35,12 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
 
         console.log('datata',response);
 
-        // Verifica se o login foi bem-sucedido e se o token está presente
         if (response.data && response.data.status === 'Sucesso' && response.data.token) {
             console.log("Token recebido:", response.data.token);
-            console.log("Seja bem vindo novamente! ")
+            console.log("Seja bem-vindo novamente!");
 
-            // Armazena o token no AsyncStorage
+            setUser(response.data.user);
             await AsyncStorage.setItem('authToken', response.data.token);
-
-            // Navega para a próxima tela após login bem-sucedido
             navigation.navigate('homeStack', { screen: 'home' });
         } else {
             setMessage('Credenciais incorretas, tente novamente.');

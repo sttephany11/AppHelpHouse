@@ -50,6 +50,8 @@ const Imagens = {
    iconTab: require("../assets/iconTab.png"),
    iconTab2: require("../assets/iconTab2.png"),
    iconTab3: require("../assets/iconTab3.png"),
+   //img chat
+   iconEnviar:require("../assets/iconEnviar.png"),
 }
 export default Imagens;
 

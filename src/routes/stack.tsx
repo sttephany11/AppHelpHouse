@@ -96,6 +96,7 @@ const AppNavigator = () => {
         <Stack.Navigator initialRouteName="bemvindo">
         <Stack.Screen name="List" component={List} options={{ headerShown: false }} />
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
+         <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
           <Stack.Screen name="bemvindo" component={BemVindoScreen} options={{ headerShown: false }} />
           <Stack.Screen name="confirmeid" component={ConfirmedIdScreen} options={{ headerShown: false }} />
           <Stack.Screen name="loading" component={LoadingScreen} options={{ headerShown: false }} />

@@ -48,7 +48,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             {userData ? userData.nomeContratante : 'Nome não disponível'}
           </Text>
           <Text style={styles.textEmail}>
-            ste@gmail.com
+          {userData && userData.emailContratante ? userData.emailContratante : 'Email não disponível'}
           </Text>
           <Text style={styles.textLocalizacao}>
             <Entypo name="location-pin" size={24} color="red" /> 

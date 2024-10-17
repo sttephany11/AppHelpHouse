@@ -1,35 +1,40 @@
-
-
 import { getPro } from "../functions/getPro";
 import React, { useState, useEffect } from "react";
 import { Loading } from "../../componentes";
-import { TouchableOpacity, View, ScrollView, Text, ImageBackground } from "react-native";
+import { TouchableOpacity, View, ScrollView, Text, ImageBackground , TextInput , Image,ActivityIndicator,  } from "react-native";
 import { CheckBox } from "@ui-kitten/components"; // Importação correta do CheckBox
 import { Picker } from "@react-native-picker/picker"; // Picker para substituir os checkboxes das profissões
 import styles from "../css/profissionaisCss";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import Imagens from "../../img/img";
-import PedidoScreen from "./PedidoScreen";
+import api from '../../axios';
+import myContext from '../functions/authContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Tipagem dos dados do profissional
+
 interface Profissional {
   bairroContratado: any;
   nomeContratado: string;
   sobrenomeContratado: string;  
-  descContratado: string;
+  profissaoContratado: string;
   regiaoContratado: string;
-  idContratado:string;
+  idContratado: string;
+  descContratado:string;
+  cidadeContratado:string;
 }
 
 interface Props {
   navigation: any;
 }
 
+
+
 const List: React.FC<Props> = ({ navigation }) => {
   const [data, setData] = useState<Profissional[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+  //const [data1, setData1] = useState<Profissionais[]>([]);
 
   // Estado para a seleção de zonas
   const [selectedZones, setSelectedZones] = useState({
@@ -42,6 +47,9 @@ const List: React.FC<Props> = ({ navigation }) => {
   // Estado para a profissão selecionada (apenas uma no Picker)
   const [selectedProfession, setSelectedProfession] = useState<string>("");
 
+  // Estado para o nome do profissional
+  const [searchName, setSearchName] = useState<string>("");
+
   // Função para atualizar a seleção de zonas
   const toggleZone = (zone: keyof typeof selectedZones) => {
     setSelectedZones((prev) => ({
@@ -50,9 +58,9 @@ const List: React.FC<Props> = ({ navigation }) => {
     }));
   };
 
-  // Função para filtrar os profissionais pela zona e profissão
+  // Função para filtrar os profissionais pela zona, profissão e nome
   const filterProfessionals = (pro: Profissional) => {
-    const { regiaoContratado, descContratado } = pro;
+    const { regiaoContratado, profissaoContratado, nomeContratado } = pro;
 
     // Filtro por zona
     const zonesSelected = Object.keys(selectedZones).filter(
@@ -70,17 +78,20 @@ const List: React.FC<Props> = ({ navigation }) => {
 
     // Filtro por profissão
     const matchProfession =
-      !selectedProfession || descContratado.toLowerCase().includes(selectedProfession.toLowerCase());
+      !selectedProfession || profissaoContratado.toLowerCase().includes(selectedProfession.toLowerCase());
 
-    // Retorna true se o profissional atender a ambos os filtros
-    return matchZone && matchProfession;
+    // Filtro por nome
+    const matchName =
+      !searchName || nomeContratado.toLowerCase().includes(searchName.toLowerCase());
+
+    // Retorna true se o profissional atender a todos os filtros
+    return matchZone && matchProfession && matchName;
   };
 
   // Chama a API para buscar os profissionais
   useEffect(() => {
     getPro(setData, setLoading, setError);
   }, []);
-
 
   return (
     <>
@@ -94,11 +105,19 @@ const List: React.FC<Props> = ({ navigation }) => {
           {loading && <Loading />}
           {!loading && data?.length ? (
             <ScrollView>
-              {/* Filtros de Zona */}
               <Text style={styles.filtro}>Filtre por suas preferências</Text>
               <AntDesign name="menufold" size={24} color="#ff914d" style={styles.searchIcon2} />
 
+              <Text style={styles.tituloselect}>Busque por um profissional:</Text>
+              <TextInput
+                placeholder="Digite o nome do profissional..."
+                value={searchName}
+                onChangeText={value => setSearchName(value)}
+                style={styles.input3}
+              />
+              
               <Text style={styles.tituloselect}>Escolha a região:</Text>
+              <View style={styles.marginCheck}></View>
               <View style={styles.checkboxContainer}>
                 <View style={styles.row}>
                   <CheckBox
@@ -130,16 +149,15 @@ const List: React.FC<Props> = ({ navigation }) => {
                   </CheckBox>
                 </View>
               </View>
+              
 
-
-              <View style={styles.marginInput}></View>
-              {/* Filtro de Profissão - Picker */}
-              <Text style={styles.tituloselect}>Selecione a profissão:</Text>
+             
+              <Text style={styles.tituloselect}>Selecione uma profissão:</Text>
               <View style={styles.pickerContainer}>
                 <Picker
                   selectedValue={selectedProfession}
                   onValueChange={(itemValue) => setSelectedProfession(itemValue)}
-                  style={{ height: 50, width: 320, borderColor: '#ff914d',bottom:20 }}
+                  style={{ height: 50, width: 320, borderColor: '#ff914d', bottom: 20,  }}
                 >
                   <Picker.Item label="Selecione" value="" />
                   <Picker.Item label="Encanador" value="encanador" />
@@ -153,30 +171,47 @@ const List: React.FC<Props> = ({ navigation }) => {
                   <Picker.Item label="Remoção de Entulho" value="Remoção de Entulho" />
                   <Picker.Item label="Diarista" value="Diarista" />
                   <Picker.Item label="Mecânico" value="Mecânico" />
-
-
-                  {/* Adicione mais profissões conforme necessário */}
+                  <Picker.Item label="Eletricista" value="Eletricista" />
                 </Picker>
               </View>
+
               <View style={styles.marginInput}></View>
+
+
               {/* Lista de Profissionais Filtrados */}
               {data
                 .filter(filterProfessionals)
                 .map((data, i) => (
-                  <View key={i} style={styles.containerProfissionais} >
+                  <View key={i} style={styles.containerProfissionais}>
                     <View style={styles.containerDados}>
-                      <TouchableOpacity onPress={() => navigation.navigate('pedidoScreen', {
-                              nomeContratado: data.nomeContratado,
-                              bairroContratado: data.bairroContratado,
-                              idContratado: data.idContratado,
-                       })
-                      }
-                    >
+                      <TouchableOpacity
+                        onPress={() =>
+                          navigation.navigate('pedidoScreen', {
+                            nomeContratado: data.nomeContratado,
+                            bairroContratado: data.bairroContratado,
+                            idContratado: data.idContratado,
+                          })
+                        }
+                      >
+                        <TouchableOpacity  
+                         onPress={() => {
+                          navigation.navigate('perfilProfissional', {
+                            nomeContratado: data.nomeContratado,
+                            bairroContratado: data.bairroContratado,
+                            idContratado: data.idContratado,
+                            profissaoContratado: data.profissaoContratado,
+                            descContratado: data.descContratado,
+                            sobrenomeContratado: data.sobrenomeContratado,
+                            cidadeContratado: data.cidadeContratado,
+                          })
+                      
+                    }} >
+            <Image source={Imagens.perfilUsuario4} style={styles.imgPerfilPro}/></TouchableOpacity>
                         <Text style={styles.NomeProfissional}>
                           {data.nomeContratado} {data.sobrenomeContratado}
                         </Text>
                         <Text style={styles.descrPerfil}>
-                          {data.descContratado}
+                          {data.profissaoContratado}
                         </Text>
 
                         <View style={styles.containerAvaliacao}>

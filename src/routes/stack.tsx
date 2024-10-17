@@ -104,6 +104,7 @@ const AppNavigator = () => {
           <Stack.Screen name="telaPerfil" component={TelaPerfilScreen} options={{ headerShown: false }} />
           <Stack.Screen name="profissionais" component={Profissionais} options={{ headerShown: false }} />
           <Stack.Screen name="meusPedidos" component={MeusPedidos} options={{ headerShown: false }} />
+          <Stack.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </ImageProvider>
   );

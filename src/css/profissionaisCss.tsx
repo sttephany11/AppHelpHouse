@@ -67,25 +67,23 @@ const styles = StyleSheet.create({
         width:60,
         height:60,
         borderRadius:50,
-       
-       
       },
       containerDados:{
         width:300,
         height:80,
         marginLeft:20,
-        marginTop:30
+        bottom:25,
       },
       NomeProfissional:{
         fontWeight:'bold',
         fontSize:17,
         marginLeft:80,
-        bottom:40,
+        bottom:55,
      
       },
       descrPerfil:{
         marginLeft:80,
-        bottom:40,
+        bottom:50,
         //fontWeight:'bold',
       },
 
@@ -117,12 +115,10 @@ const styles = StyleSheet.create({
         width:200,
       },
 
-    
-
       filtro:{
         color:'#ff914d',
         fontWeight:'bold',
-        fontSize:23,
+        fontSize:25,
         marginLeft:14,
         top:15
       },
@@ -133,8 +129,8 @@ const styles = StyleSheet.create({
        tituloselect:{
         fontSize:19,
         color:'#ff914d',
-
-        marginTop:10,
+        fontWeight:'bold',
+        marginTop:15,
         marginLeft:15,
         
        },
@@ -152,11 +148,21 @@ const styles = StyleSheet.create({
        marginInput:{
         marginTop:20,
        },
-     
-      
-
-
-
+    
+          
+    input3:{
+      borderBottomWidth:3,
+      borderColor: '#ff914d',
+      height:40,
+      marginBottom:5,
+      fontSize:16,
+      color:'black',
+      paddingHorizontal:10,
+      width:300,
+      marginLeft:15,
+      },
+  
+  
 
 });
 

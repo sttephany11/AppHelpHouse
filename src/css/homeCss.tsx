@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         marginTop: 80,
-        marginLeft:25
+        marginRight:2,
     },
     frase: {
         color: '#004aad',
@@ -40,8 +40,7 @@ const styles = StyleSheet.create({
         height:70,
         borderColor:'white',
         marginTop: 80,
-        marginEnd:30,
-        marginLeft:10,
+        marginLeft:40,
     },
     lupa:{
         width:35,
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
 
     //inputs
     containerInput:{
-        marginTop:20,
+        marginTop:5,
         justifyContent:'center',
         alignItems:'center',
     },
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
       width:30,
       height:35,
       left:28,
-      top:58,
+      top:43,
       zIndex:1
     },
     

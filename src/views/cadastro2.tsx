@@ -49,10 +49,9 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             const idCli = result.data.idContratante;
     
             if (idCli) {
-                setUserId(idCli);
+                setUserId(idCli);   
                 await fetchDadosCli(idCli);
             }
-    
             Alert.alert('Success', 'Dados salvos com sucesso!');
             navigation.navigate('login');
         } catch (error) {

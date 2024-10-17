@@ -25,7 +25,7 @@ const Login: React.FC<{ navigation: any }> = ({navigation}) => {
 
     setLoading(true); // Inicia o estado de loading
     try {
-        const response = await axios.post('http://localhost:8000/api/auth', {
+        const response = await axios.post('http://192.168.1.13:8000/api/auth', {
             emailContratante,
             password,
         });

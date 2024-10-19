@@ -52,8 +52,7 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
     }
 
     try {
-      const response = await api.post(
-        "/pedido",
+      const response = await api.post("/pedido",
         { descricaoPedido, idServicos, idContratado, tituloPedido }, // Inclui idContratado e tituloPedido
         {
           headers: {

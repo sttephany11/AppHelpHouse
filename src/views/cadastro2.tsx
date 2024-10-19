@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Alert, TextInput } from 'react-native';
 import styles from '../css/cadastro2Css';
-import Api from '../../componentes/apiCep/api';
+import cep from '../../componentes/apiCep/api';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useUser } from '../cliContext';
+import api from '../../axios';
 
 const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
     const { nomeContratante, cpfContratante, telefoneContratante, nascContratante, emailContratante, password } = route.params;
@@ -18,61 +19,61 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
     const verificar = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/clii', {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    nomeContratante,
-                    cpfContratante,
-                    password,
-                    emailContratante,
-                    telefoneContratante,
-                    ruaContratante,
-                    cepContratante,
-                    numCasaContratante,
-                    complementoContratante,
-                    bairroContratante,
-                    cidadeContratante,
-                }),
+            // Using Axios to send the POST request
+            const response = await api.post('/clii', {
+                nomeContratante,
+                cpfContratante,
+                password,
+                emailContratante,
+                telefoneContratante,
+                ruaContratante,
+                cepContratante,
+                numCasaContratante,
+                complementoContratante,
+                bairroContratante,
+                cidadeContratante,
             });
     
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(`Erro ${response.status}: ${errorData.error}`);
-            }
-    
-            const result = await response.json();
+            // Axios automatically checks for 200-299 status codes as success
+            const result = response.data; // No need for .json()
+            
             const idCli = result.data.idContratante;
-    
+            console.log(result)
+            console.log(idCli)
             if (idCli) {
-                setUserId(idCli);   
-                await fetchDadosCli(idCli);
+                setUserId(idCli);
+                await fetchDadosCli(idCli); // Assuming fetchDadosCli uses Axios too
             }
+    
             Alert.alert('Success', 'Dados salvos com sucesso!');
             navigation.navigate('login');
+    
         } catch (error) {
-            Alert.alert('Error', 'Ocorreu um erro ao salvar os dados.');
+            // Axios error messages can be accessed via error.response
+            const errorMessage = error.response?.data?.message || 'Ocorreu um erro ao salvar os dados.';
+            Alert.alert('Error', errorMessage);
             console.error('Error:', error);
         }
     };
+    
         
     const fetchDadosCli = async (idCli) => {
-        try {
-            const response = await fetch(`http://localhost:8000/api/cli/${idCli}`);
-            const data = await response.json();
-    
-            if (response.ok) {
-                setUserData(data);
-            } else {
-                console.error('Error fetching user data:', data.message);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };  
+    try {
+        // Axios GET request to fetch user data
+        const response = await api.get(`cli/${idCli}`);
+
+        // Axios already parses the JSON response, no need for .json()
+        const data = response.data;
+
+        // No need for response.ok, Axios throws an error for non-200 responses
+        setUserData(data);
+    } catch (error) {
+        // Axios errors can be handled here
+        const errorMessage = error.response?.data?.message || 'Error fetching user data';
+        console.error('Error fetching user data:', errorMessage);
+    }
+};
+
 
     const buscarCep = async () => {
         if (cepContratante === "") {
@@ -80,7 +81,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             return;
         }
         try {
-            const response = await Api.get(`/${cepContratante.replace(/\D/g, '')}/json/`);
+            const response = await cep.get(`/${cepContratante.replace(/\D/g, '')}/json/`);
             setBairroContratante(response.data.bairro);
             setRuaContratante(response.data.logradouro);
             setCidadeContratante(response.data.estado);

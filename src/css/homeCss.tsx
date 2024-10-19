@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     boasVindas: {
         color: 'white',
         fontSize: 30,
-        fontWeight: '600',
+      
         justifyContent:'center',
         alignItems:'center',
         marginTop: 80,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     frase: {
         color: '#004aad',
         fontSize: 35,
-        fontWeight: '800',
+     
         justifyContent:'center',
         alignItems:'center',
     },
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         color:'#004aad',
         fontSize:30,
         top:25,
-        fontWeight:'bold',
+   
         left:28
       },
 
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
         marginLeft:37,
         marginTop:10,
         marginBottom:10,
-        fontWeight:'bold',
+
       },
       imgs:{
         marginTop:8,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 
       textInput:{
         marginRight:60,
-        fontWeight:500,
+
         fontSize:17,
         color:'#3669a4',
       },

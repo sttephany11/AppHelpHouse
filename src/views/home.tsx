@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, TextInput, ScrollView, Image, ImageBackground, TouchableOpacity, FlatList } from 'react-native';
 import Imagens from "../../img/img";
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -7,11 +7,13 @@ import { useImage } from '../ImageContext.js';
 import results from '../../results';
 import styles from '../css/homeCss';
 import { useUser } from '../cliContext';
+import myContext from '../functions/authContext';
 
 
 const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [list, setList] = useState(results);
+  const { user } = useContext(myContext);
   const { imageUrl } = useImage();
   const { userData } = useUser(); // Altere para userData
 
@@ -52,8 +54,7 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
     >
       <ScrollView>
         <View style={styles.containerBoasVindas}>
-          <Text style={styles.boasVindas}>Olá, 
-          {userData ? userData.nomeContratante : 'Nome não disponível'}
+          <Text style={styles.boasVindas}>Olá, {user.nomeContratante}
             </Text>
           <TouchableOpacity onPress={perfilNav}>
             <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfilUsuario4} style={styles.ImgPerfil} />

@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, TextInput, Image, Pressable, Animated, ScrollView } from 'react-native';
-import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
-import styles from '../css/chatCss'; // Importa o arquivo de estilos
+import styles from '../css/chatCss';  // Certifique-se de ajustar o estilo
 import Imagens from "../../img/img";
-import api from '../../axios'; // Para fazer requisições ao backend
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Para recuperar o token
-import Pusher from 'pusher-js';  // Pusher importado
+import api from '../../axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Pusher from 'pusher-js';
+import myContext from '../functions/authContext';  // Para pegar o ID do usuário autenticado
 
-const ChatContratante: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
-    const [mensagem, setMensagem] = useState(''); // Armazena a mensagem
-    const [mensagens, setMensagens] = useState<any[]>([]); // Armazena todas as mensagens da sala de chat
-    const [token, setToken] = useState<string | null>(null); // Armazena o token do usuário
-    const { idContratante } = route.params; // Recebe o idContratante passado pela rota
+const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
+    const [mensagem, setMensagem] = useState('');  // Armazena a mensagem atual
+    const [mensagens, setMensagens] = useState<any[]>([]);  // Armazena todas as mensagens
+    const { roomId } = route.params;  // Recebe o roomId da rota
+    const { user } = useContext(myContext);  // Pega o usuário autenticado do contexto
+    const [token, setToken] = useState<string | null>(null);  // Token de autenticação
     const [buttonScale] = useState(new Animated.Value(1));
-    const scrollViewRef = useRef<ScrollView>(null); // Ref para o ScrollView
+    const scrollViewRef = useRef<ScrollView>(null);  // Ref para ScrollView
 
     // Função para buscar mensagens da sala
     const fetchMensagens = async () => {
@@ -24,7 +25,7 @@ const ChatContratante: React.FC<{ route: any; navigation: any }> = ({ route, nav
                 console.error('Token não encontrado');
                 return;
             }
-            const response = await api.get(`/chat/messages/${idContratante}`, {
+            const response = await api.get(`/chat/messages/${roomId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setMensagens(response.data.messages);
@@ -35,7 +36,7 @@ const ChatContratante: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
     // Função para enviar mensagem
     const enviarMensagem = async () => {
-        if (!mensagem.trim()) return; // Evita enviar mensagens vazias
+        if (!mensagem.trim()) return;  // Evita enviar mensagens vazias
         try {
             const token = await AsyncStorage.getItem('authToken');
             if (!token) {
@@ -43,16 +44,16 @@ const ChatContratante: React.FC<{ route: any; navigation: any }> = ({ route, nav
                 return;
             }
             const response = await api.post('/chat/send', {
-                roomId: idContratante, // Usando o idContratante como roomId
-                message: mensagem, // Mensagem a ser enviada
+                roomId,  // ID da sala de chat
+                message: mensagem,  // Mensagem a ser enviada
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
-            setMensagens([...mensagens, response.data.message]); // Atualiza a lista de mensagens
-            setMensagem(''); // Limpa a mensagem
+            setMensagens([...mensagens, response.data.message]);  // Atualiza as mensagens
+            setMensagem('');  // Limpa a mensagem
         } catch (error) {
             console.error('Erro ao enviar mensagem:', error);
         }
@@ -64,22 +65,22 @@ const ChatContratante: React.FC<{ route: any; navigation: any }> = ({ route, nav
             cluster: 'sa1',
         });
 
-        const channel = pusher.subscribe(`chat-room-${idContratante}`);
+        const channel = pusher.subscribe(`chat-room-${roomId}`);
         channel.bind('new-message', (data: { message: any; }) => {
-            setMensagens((prevMensagens) => [...prevMensagens, data.message]); // Atualiza as mensagens
+            setMensagens((prevMensagens) => [...prevMensagens, data.message]);  // Atualiza as mensagens
         });
 
         return () => {
-            pusher.unsubscribe(`chat-room-${idContratante}`);
+            pusher.unsubscribe(`chat-room-${roomId}`);
         };
-    }, [idContratante]);
+    }, [roomId]);
 
-    // Carregar mensagens da sala quando o componente é montado
+    // Carregar mensagens da sala ao montar o componente
     useEffect(() => {
         fetchMensagens();
-    }, [idContratante]);
+    }, [roomId]);
 
-    // Rolar o ScrollView até o final sempre que as mensagens mudarem
+    // Rolar o ScrollView para o final sempre que as mensagens mudarem
     useEffect(() => {
         scrollViewRef.current?.scrollToEnd({ animated: true });
     }, [mensagens]);
@@ -107,13 +108,19 @@ const ChatContratante: React.FC<{ route: any; navigation: any }> = ({ route, nav
             {/* Exibe as mensagens do chat */}
             <ScrollView style={styles.mensagensContainer} ref={scrollViewRef}>
                 {mensagens.map((msg, index) => {
-                    const isCurrentUser = msg.senderId === 'currentUserId'; // Substitua 'currentUserId' pelo valor correto
+                    const isCurrentUser = msg.senderId === user?.id;  // Verifica se a mensagem foi enviada pelo usuário atual
                     return (
                         <View
                             key={index}
                             style={[
                                 styles.mensagemItem,
-                                { alignSelf: isCurrentUser ? 'flex-end' : 'flex-start', backgroundColor: isCurrentUser ? '#f1f1f1' : '#87CEFA' },
+                                { 
+                                  alignSelf: isCurrentUser ? 'flex-end' : 'flex-start',  // Mensagem do usuário à direita
+                                  backgroundColor: isCurrentUser ? '#87CEFA' : '#f1f1f1',  // Diferenciar cor entre mensagens
+                                  borderRadius: 10, 
+                                  padding: 10,
+                                  maxWidth: '70%'  // Limitar a largura da mensagem
+                                }
                             ]}
                         >
                             <Text>{msg.message}</Text>
@@ -122,20 +129,20 @@ const ChatContratante: React.FC<{ route: any; navigation: any }> = ({ route, nav
                 })}
             </ScrollView>
 
-            {/* Input de enviar mensagem */}
+            {/* Input para enviar mensagem */}
             <View style={styles.enviarMensagem}>
                 <View style={styles.inputContent}>
                     <TextInput
                         style={styles.input}
                         placeholder="Digite sua mensagem..."
                         value={mensagem}
-                        onChangeText={setMensagem} // Atualiza o estado com o valor digitado
+                        onChangeText={setMensagem}  // Atualiza o estado com o valor digitado
                     />
                     <Animated.View style={[styles.enviar, { transform: [{ scale: buttonScale }] }]}>
                         <Pressable
                             onPress={enviarMensagem}
-                            onPressIn={onPressIn} // Reduz a escala quando pressionado
-                            onPressOut={onPressOut} // Volta à escala normal ao soltar
+                            onPressIn={onPressIn}  // Animação ao pressionar
+                            onPressOut={onPressOut}  // Animação ao soltar
                         >
                             <Image source={Imagens.iconEnviar} style={styles.icon} />
                         </Pressable>
@@ -146,4 +153,4 @@ const ChatContratante: React.FC<{ route: any; navigation: any }> = ({ route, nav
     );
 };
 
-export default ChatContratante;
+export default Chat;

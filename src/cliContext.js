@@ -1,26 +1,19 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { MMKV } from 'react-native-mmkv';
+import React, { createContext, useState, useContext } from 'react';
 
-// Crie uma instância do MMKV
-const storage = new MMKV();
 
+// Create the UserContext
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [userId, setUserId] = useState(() => storage.getString('userId') || null);
-  const [userData, setUserData] = useState(() => {
-    const data = storage.getString('userData');
-    return data ? JSON.parse(data) : null;
-  });
+  const [userId, setUserId] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   const handleSetUserId = (id) => {
-    setUserId(id);
-    storage.set('userId', id); // Salva no MMKV
+    setUserId(id);  // Update state without persistent storage
   };
 
   const handleSetUserData = (data) => {
-    setUserData(data);
-    storage.set('userData', JSON.stringify(data)); // Salva no MMKV
+    setUserData(data);  // Update state without persistent storage
   };
 
   return (
@@ -30,7 +23,7 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-// Hook personalizado para usar o contexto
+// Custom hook to use the UserContext
 export const useUser = () => {
   return useContext(UserContext);
 };

@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, ToastAndroid, Alert } from 'react-
 import * as ImagePicker from 'expo-image-picker';
 import { StatusBar } from 'expo-status-bar';
 import styles from '../css/perfilCss';
-import axios from 'axios';
+import axios from '../../axios';
 
 function Perfil({ navigation }: { navigation: any }) {
   const [fotoPerfil, setFotoPerfil] =  useState<string | null>(null);
@@ -48,7 +48,7 @@ function Perfil({ navigation }: { navigation: any }) {
       })));
 
       try{
-        const cpp = await axios.post('http://localhost:8000/api/fotoPerfil',
+        const cpp = await axios.post('/fotoPerfil',
           formData, 
           {
             headers:
@@ -62,8 +62,8 @@ function Perfil({ navigation }: { navigation: any }) {
           Alert.alert('Erro', 'Não foi possovel enviar sua imagem. por favor, tente novamente.')
         }else{
           Alert.alert('Sucesso', 'foi possovel enviar sua imagem')
-          const response = await fetch('http://localhost:8000/api/fotoPerfilGet');
-          const jsno = await response.json();
+          const response = await axios.get('/fotoPerfilGet');
+          const jsno = response.data;
           setFotoPerfil(jsno)
           
         }

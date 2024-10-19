@@ -34,8 +34,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                 cidadeContratante,
             });
     
-            // Axios automatically checks for 200-299 status codes as success
-            const result = response.data; // No need for .json()
+            const result = response.data; 
             
             const idCli = result.data.idContratante;
             console.log(result)

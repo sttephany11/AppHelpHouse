@@ -97,32 +97,33 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   const createChatRoom = async (idContratante: string, idContratado: string, navigation: any) => {
     if (!idContratante || !idContratado) {
-      Alert.alert('Erro', 'ID do contratante ou contratado não encontrado.');
-      return;
+        Alert.alert('Erro', 'ID do contratante ou contratado não encontrado.');
+        return;
     }
-  
+
     try {
-      const response = await api.post(`/chat-room/${idContratante}`, null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      const roomId = response.data.chat_room?.id;
-  
-      // Navegar para a tela de chat se a sala de chat for criada
-      if (roomId) {
-        navigation.navigate('Chat', { roomId, });
-        console.log(roomId)
-      } else {
-        Alert.alert('Erro', 'Não foi possível criar ou encontrar a sala de chat.');
-      }
+        // Fazer a requisição para criar ou obter a sala de chat
+        const response = await api.post(`/chat-room/${idContratado}`, null, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const roomId = response.data.chat_room?.id;  // Obter o roomId da resposta da API
+
+        // Navegar para a tela de chat com o roomId
+        if (roomId) {
+            navigation.navigate('Chat', { roomId });  // Passa o roomId ao navegar para o chat
+        } else {
+            Alert.alert('Erro', 'Não foi possível criar ou encontrar a sala de chat.');
+        }
     } catch (error: any) {
-      console.error('Erro ao criar ou buscar a sala de chat:', error.response ? error.response.data : error.message);
-      Alert.alert('Erro', 'Houve um problema ao criar a sala.');
+        console.error('Erro ao criar ou buscar a sala de chat:', error.response ? error.response.data : error.message);
+        Alert.alert('Erro', 'Houve um problema ao criar a sala.');
     }
-  };
+};
+
 
 
 

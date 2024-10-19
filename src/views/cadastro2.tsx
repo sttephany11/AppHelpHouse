@@ -119,10 +119,9 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                         <Text style={styles.title3}>Cep</Text>
                         
                         <View style={styles.inputContainer}> 
-                            {/* Ícone de lupa posicionado sobre o campo */}
-                            <AntDesign name="search1" size={24} color="white" style={styles.iconStyle} onPress={buscarCep} />
+                           <AntDesign name="search1" size={24} color="white" style={styles.iconStyle} onPress={buscarCep} />
                             
-                            {/* Campo de CEP */}
+                          
                             <TextInput
                                 style={styles.input3}
                                 placeholder="Digite seu cep..."
@@ -180,6 +179,9 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                                 />
                             </View>
                         </View>
+
+
+
 
                         <TouchableOpacity style={styles.button2} onPress={verificar}>
                             <Text style={styles.buttonText2}>Finalizar</Text>

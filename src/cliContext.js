@@ -1,26 +1,33 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { MMKV } from 'react-native-mmkv';
-
-// Crie uma instância do MMKV
-const storage = new MMKV();
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [userId, setUserId] = useState(() => storage.getString('userId') || null);
-  const [userData, setUserData] = useState(() => {
-    const data = storage.getString('userData');
-    return data ? JSON.parse(data) : null;
-  });
+  const [userId, setUserId] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-  const handleSetUserId = (id) => {
+  // Função para carregar dados do AsyncStorage
+  useEffect(() => {
+    const loadData = async () => {
+      const storedUserId = await AsyncStorage.getItem('userId');
+      const storedUserData = await AsyncStorage.getItem('userData');
+
+      setUserId(storedUserId);
+      setUserData(storedUserData ? JSON.parse(storedUserData) : null);
+    };
+
+    loadData();
+  }, []);
+
+  const handleSetUserId = async (id) => {
     setUserId(id);
-    storage.set('userId', id); // Salva no MMKV
+    await AsyncStorage.setItem('userId', id); // Salva no AsyncStorage
   };
 
-  const handleSetUserData = (data) => {
+  const handleSetUserData = async (data) => {
     setUserData(data);
-    storage.set('userData', JSON.stringify(data)); // Salva no MMKV
+    await AsyncStorage.setItem('userData', JSON.stringify(data)); // Salva no AsyncStorage
   };
 
   return (

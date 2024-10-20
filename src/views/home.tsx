@@ -64,7 +64,7 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
         <Image source={Imagens.lupaAzul} style={styles.lupaAzul} />
         <View style={styles.containerInput}>
 
-        <TouchableOpacity style={styles.input} onPress={ profissionais} >
+        <TouchableOpacity style={styles.input} onPress={profissionais} >
       <Text style={styles.textInput}>Encontre um profissional ou serviço</Text>
       </TouchableOpacity>
 

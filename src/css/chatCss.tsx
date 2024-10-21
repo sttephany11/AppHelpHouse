@@ -83,6 +83,21 @@ const styles = StyleSheet.create({
     width: 20, // Ajuste o tamanho do ícone
     height: 20,
   },
+
+  textoBotao: {
+    color: '#FFFFFF', // Branco
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  botaoPDF: {
+    backgroundColor: '#4CAF50', 
+    paddingVertical: 10, 
+    paddingHorizontal: 15, 
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 3,
+  },
 });
 
 export default styles;

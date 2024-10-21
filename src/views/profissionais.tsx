@@ -84,8 +84,8 @@ const List: React.FC<Props> = ({ navigation, route }) => {
     const zoneMap: Record<string, string> = {
       leste: "Zona Leste",
       oeste: "Zona Oeste",
-      norte: "Zona Norte",
-      sul: "Zona Sul",
+      norte: "ZonaNorte",
+      sul: "ZonaSul",
     };
     const matchZone =
       zonesSelected.length === 0 ||
@@ -103,6 +103,10 @@ const List: React.FC<Props> = ({ navigation, route }) => {
     return matchZone && matchProfession && matchName;
   };
 
+  const home = () => {
+    navigation.navigate('homeStack'); // Nome correto da tela
+  };
+
   // Chama a API para buscar os profissionais
   useEffect(() => {
     getPro(setData, setLoading, setError);
@@ -115,32 +119,41 @@ const List: React.FC<Props> = ({ navigation, route }) => {
         style={styles.background}
         resizeMode="cover"
       >
+        <TouchableOpacity onPress={home}><AntDesign name="leftcircle" size={30} color="#004aad" style={{ marginLeft: 20,top:60 }} /></TouchableOpacity>
+        <Text style={styles.tituloPrincipal}>Encontre aqui um </Text>
+        <Text style={styles.tituloPrincipal2}>profissional</Text>
         <View style={styles.fundoBranco}>
           {loading && <Loading />}
           {!loading && data?.length ? (
             <>
-            <Text style={styles.filtro}>Filtre por suas preferências</Text>
-            <TouchableOpacity onPress={toggleModal}>
-            <AntDesign name="menufold" size={24} color="#ff914d" style={styles.searchIcon2} />
-            </TouchableOpacity>
+            <Text style={styles.filtro}>Filtre suas preferências para encontrar </Text>
+            <Text style={styles.filtro}>         profissionais perto de você!</Text>
+
+            
+            <TouchableOpacity style={styles.button3} onPress={toggleModal}>
+                <Text style={styles.buttonText3}>Filtrar</Text>
+              </TouchableOpacity>
+
+              <TextInput
+            value={searchName}
+            onChangeText={setSearchName}
+            style={styles.inputFront}
+          />
+
             
              {/* mODALLL DE FILTROOO */}
              
           <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+            <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex:1}}> 
           <View style={styles.modal}>
-          <Text style={styles.filtro}>Filtre aqui</Text>
-          
+            <View style={styles.containerTitulo}>
+          <Text style={styles.tituloModal}>Escolha suas preferências!</Text>
+          </View>
+          <Text style={styles.subtitulo}>  Para encontrarmos o profissional perfeito para</Text>
+          <Text style={styles.subtitulo}>suas necessidades preencha os campos a seguir!</Text>
 
-          <Text style={styles.filtro2}>Digite o nome de um profissional:</Text>
-          <TextInput
-            placeholder="Digite o nome do profissional..."
-            value={searchName}
-            onChangeText={setSearchName}
-            style={styles.input3}
-          />
-
-          {/* Regiões */}
-          <Text style={styles.tituloselect}>Escolha a região:</Text>
+            {/* Regiões */}
+          <Text style={styles.tituloselect2}>Região:</Text>
           <View style={styles.checkboxContainer}>
             <View style={styles.row}>
               <CheckBox
@@ -171,14 +184,15 @@ const List: React.FC<Props> = ({ navigation, route }) => {
               </CheckBox>
             </View>
           </View>
+          
 
           {/* Profissões */}
-          <Text style={styles.tituloselect}>Selecione uma profissão:</Text>
+          <Text style={styles.tituloselect2}>Categoria:</Text>
           <View style={styles.pickerContainer}>
             <Picker
               selectedValue={profissaoSelecionada}
               onValueChange={(itemValue) => setProfissaoSelecionada(itemValue)}
-              style={{ height: 50, width: 320 }}
+              style={{ height: 30, width: 300 , bottom:60}}
             >
               <Picker.Item label="Selecione" value="" />
               <Picker.Item label="Encanador" value="encanador" />
@@ -198,20 +212,24 @@ const List: React.FC<Props> = ({ navigation, route }) => {
             </Picker>
           </View>
 
-          <View style={styles.marginInput}></View>
-          <View style={styles.marginInput}></View>
-          <View style={styles.marginInput}></View>
-          <View style={styles.marginInput}></View>
-          <View style={styles.marginInput}></View>
-          <View style={styles.marginInput}></View>
-          <View style={styles.marginInput}></View>
-          {/* Botão para enviar os filtros */}
-          <Button
-            title="Aplicar Filtros"
-            onPress={() => {
-              toggleModal(); // Fecha o modal
-            }}
+          <View style={styles.margin3}></View>
+          <View style={{justifyContent:'center', marginTop:20}}>
+          <Text style={styles.tituloselectInput}>Se preferir, pesquise pelo nome do seu profissional</Text>
+          <TextInput
+            placeholder="Nome"
+            placeholderTextColor="#A9A9A9"
+            value={searchName}
+            onChangeText={setSearchName}
+            style={styles.input3}
           />
+           </View>
+
+
+        
+              <TouchableOpacity style={styles.button2} onPress={toggleModal}>
+                <Text style={styles.buttonText2}>Pesquisar</Text>
+              </TouchableOpacity>
+        </View>
         </View>
       </Modal>
     

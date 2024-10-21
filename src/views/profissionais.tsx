@@ -1,7 +1,7 @@
 import { getPro } from "../functions/getPro";
 import React, { useState, useEffect } from "react";
 import { Loading } from "../../componentes";
-import { TouchableOpacity, View, ScrollView, Text, ImageBackground , TextInput , Image,ActivityIndicator,  } from "react-native";
+import { TouchableOpacity, View, ScrollView, Text, ImageBackground , TextInput , Image,ActivityIndicator, Modal ,Button} from "react-native";
 import { CheckBox } from "@ui-kitten/components"; // Importação correta do CheckBox
 import { Picker } from "@react-native-picker/picker"; // Picker para substituir os checkboxes das profissões
 import styles from "../css/profissionaisCss";
@@ -26,15 +26,23 @@ interface Profissional {
 
 interface Props {
   navigation: any;
+  route: any;  // Adicionando a rota para receber parâmetros
 }
 
 
 
-const List: React.FC<Props> = ({ navigation }) => {
+const List: React.FC<Props> = ({ navigation, route }) => {
   const [data, setData] = useState<Profissional[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  //const [data1, setData1] = useState<Profissionais[]>([]);
+  const [idServicos, setIdServicos] = useState<string | number>(1);
+  const [isModalVisible, setModalVisible] = useState(false); // Estado do modal
+
+
+  // Toggle para exibir ou esconder o modal
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   // Estado para a seleção de zonas
   const [selectedZones, setSelectedZones] = useState({
@@ -44,11 +52,18 @@ const List: React.FC<Props> = ({ navigation }) => {
     sul: false,
   });
 
-  // Estado para a profissão selecionada (apenas uma no Picker)
-  const [selectedProfession, setSelectedProfession] = useState<string>("");
-
-  // Estado para o nome do profissional
+  // Estado para a profissão selecionada
+  const [profissaoSelecionada, setProfissaoSelecionada] = useState<string>("");
   const [searchName, setSearchName] = useState<string>("");
+
+  // Receber o parâmetro da profissão 
+  useEffect(() => {
+    const { profissao } = route.params || {};  // Extrai a profissão enviada 
+    if (profissao) {
+      setProfissaoSelecionada(profissao);  
+    }
+  }, [route.params]);
+
 
   // Função para atualizar a seleção de zonas
   const toggleZone = (zone: keyof typeof selectedZones) => {
@@ -76,9 +91,9 @@ const List: React.FC<Props> = ({ navigation }) => {
       zonesSelected.length === 0 ||
       zonesSelected.some((zone) => regiaoContratado === zoneMap[zone]);
 
-    // Filtro por profissão
+    // Filtro da profissão chamada da homeee
     const matchProfession =
-      !selectedProfession || profissaoContratado.toLowerCase().includes(selectedProfession.toLowerCase());
+      !profissaoSelecionada || profissaoContratado.toLowerCase().includes(profissaoSelecionada.toLowerCase());
 
     // Filtro por nome
     const matchName =
@@ -101,83 +116,107 @@ const List: React.FC<Props> = ({ navigation }) => {
         resizeMode="cover"
       >
         <View style={styles.fundoBranco}>
-
           {loading && <Loading />}
           {!loading && data?.length ? (
-            <ScrollView>
-              <Text style={styles.filtro}>Filtre por suas preferências</Text>
-              <AntDesign name="menufold" size={24} color="#ff914d" style={styles.searchIcon2} />
-
-              <Text style={styles.tituloselect}>Busque por um profissional:</Text>
-              <TextInput
-                placeholder="Digite o nome do profissional..."
-                value={searchName}
-                onChangeText={value => setSearchName(value)}
-                style={styles.input3}
-              />
-              
-              <Text style={styles.tituloselect}>Escolha a região:</Text>
-              <View style={styles.marginCheck}></View>
-              <View style={styles.checkboxContainer}>
-                <View style={styles.row}>
-                  <CheckBox
-                    checked={selectedZones.leste}
-                    onChange={() => toggleZone("leste")}
-                  >
-                    Zona Leste
-                  </CheckBox>
-                  <CheckBox
-                    checked={selectedZones.oeste}
-                    onChange={() => toggleZone("oeste")}
-                  >
-                    Zona Oeste
-                  </CheckBox>
-                </View>
-                <View style={styles.marginCheck}></View>
-                <View style={styles.row}>
-                  <CheckBox
-                    checked={selectedZones.norte}
-                    onChange={() => toggleZone("norte")}
-                  >
-                    Zona Norte
-                  </CheckBox>
-                  <CheckBox
-                    checked={selectedZones.sul}
-                    onChange={() => toggleZone("sul")}
-                  >
-                    Zona Sul
-                  </CheckBox>
-                </View>
-              </View>
-              
-
+            <>
+            <Text style={styles.filtro}>Filtre por suas preferências</Text>
+            <TouchableOpacity onPress={toggleModal}>
+            <AntDesign name="menufold" size={24} color="#ff914d" style={styles.searchIcon2} />
+            </TouchableOpacity>
+            
+             {/* mODALLL DE FILTROOO */}
              
-              <Text style={styles.tituloselect}>Selecione uma profissão:</Text>
-              <View style={styles.pickerContainer}>
-                <Picker
-                  selectedValue={selectedProfession}
-                  onValueChange={(itemValue) => setSelectedProfession(itemValue)}
-                  style={{ height: 50, width: 320, borderColor: '#ff914d', bottom: 20,  }}
-                >
-                  <Picker.Item label="Selecione" value="" />
-                  <Picker.Item label="Encanador" value="encanador" />
-                  <Picker.Item label="Instalador de Papel de Parede" value="Instalador de Papel de Parede" />
-                  <Picker.Item label="Jardineiro" value="Jardineiro" />
-                  <Picker.Item label="Montador de Móveis" value="Montador de Móveis" />
-                  <Picker.Item label="Construtor" value="Construtor" />
-                  <Picker.Item label="Engenheiro" value="Engenheiro" />
-                  <Picker.Item label="Limpeza pós obra" value="Limpeza pós obra" />
-                  <Picker.Item label="Pedreiro" value="Pedreiro" />
-                  <Picker.Item label="Remoção de Entulho" value="Remoção de Entulho" />
-                  <Picker.Item label="Diarista" value="Diarista" />
-                  <Picker.Item label="Mecânico" value="Mecânico" />
-                  <Picker.Item label="Eletricista" value="Eletricista" />
-                </Picker>
-              </View>
+          <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+          <View style={styles.modal}>
+          <Text style={styles.filtro}>Filtre aqui</Text>
+          
 
-              <View style={styles.marginInput}></View>
+          <Text style={styles.filtro2}>Digite o nome de um profissional:</Text>
+          <TextInput
+            placeholder="Digite o nome do profissional..."
+            value={searchName}
+            onChangeText={setSearchName}
+            style={styles.input3}
+          />
 
+          {/* Regiões */}
+          <Text style={styles.tituloselect}>Escolha a região:</Text>
+          <View style={styles.checkboxContainer}>
+            <View style={styles.row}>
+              <CheckBox
+                checked={selectedZones.leste}
+                onChange={() => toggleZone("leste")}
+              >
+                Zona Leste
+              </CheckBox>
+              <CheckBox
+                checked={selectedZones.oeste}
+                onChange={() => toggleZone("oeste")}
+              >
+                Zona Oeste
+              </CheckBox>
+            </View>
+            <View style={styles.row}>
+              <CheckBox
+                checked={selectedZones.norte}
+                onChange={() => toggleZone("norte")}
+              >
+                Zona Norte
+              </CheckBox>
+              <CheckBox
+                checked={selectedZones.sul}
+                onChange={() => toggleZone("sul")}
+              >
+                Zona Sul
+              </CheckBox>
+            </View>
+          </View>
 
+          {/* Profissões */}
+          <Text style={styles.tituloselect}>Selecione uma profissão:</Text>
+          <View style={styles.pickerContainer}>
+            <Picker
+              selectedValue={profissaoSelecionada}
+              onValueChange={(itemValue) => setProfissaoSelecionada(itemValue)}
+              style={{ height: 50, width: 320 }}
+            >
+              <Picker.Item label="Selecione" value="" />
+              <Picker.Item label="Encanador" value="encanador" />
+              <Picker.Item label="Instalador de Papel de Parede" value="Instalador de Papel de Parede" />
+              <Picker.Item label="Jardineiro" value="Jardineiro" />
+              <Picker.Item label="Montador de Móveis" value="Montador de Móveis" />
+              <Picker.Item label="Construtor" value="Construtor" />
+              <Picker.Item label="Pintor" value="Pintor" />
+              <Picker.Item label="Engenheiro" value="Engenheiro" />
+              <Picker.Item label="Limpeza pós obra" value="Limpeza pós obra" />
+              <Picker.Item label="Pedreiro" value="Pedreiro" />
+              <Picker.Item label="Remoção de Entulho" value="Remoção de Entulho" />
+              <Picker.Item label="Diarista" value="Diarista" />
+              <Picker.Item label="Mecânico" value="Mecânico" />
+              <Picker.Item label="Eletricista" value="Eletricista" />
+              <Picker.Item label="Marido de aluguel" value="Marido de aluguel" />
+            </Picker>
+          </View>
+
+          <View style={styles.marginInput}></View>
+          <View style={styles.marginInput}></View>
+          <View style={styles.marginInput}></View>
+          <View style={styles.marginInput}></View>
+          <View style={styles.marginInput}></View>
+          <View style={styles.marginInput}></View>
+          <View style={styles.marginInput}></View>
+          {/* Botão para enviar os filtros */}
+          <Button
+            title="Aplicar Filtros"
+            onPress={() => {
+              toggleModal(); // Fecha o modal
+            }}
+          />
+        </View>
+      </Modal>
+    
+
+            <ScrollView>
               {/* Lista de Profissionais Filtrados */}
               {data
                 .filter(filterProfessionals)
@@ -232,6 +271,7 @@ const List: React.FC<Props> = ({ navigation }) => {
                   </View>
                 ))}
             </ScrollView>
+            </>
           ) : null}
         </View>
       </ImageBackground>

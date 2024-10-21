@@ -1,50 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TextInput, ScrollView, Image, ImageBackground, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import Imagens from "../../img/img";
-import AntDesign from '@expo/vector-icons/AntDesign';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useImage } from '../ImageContext.js';
-import results from '../../results';
 import styles from '../css/homeCss';
+import { useImage } from '../ImageContext.js';
 import { useUser } from '../cliContext';
 import myContext from '../functions/authContext';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-
-const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
-  const [searchText, setSearchText] = useState('');
-  const [list, setList] = useState(results);
+const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const { user } = useContext(myContext);
   const { imageUrl } = useImage();
-  const { userData } = useUser(); // Altere para userData
+  const { userData } = useUser();
 
-  useEffect(() => {
-    if (searchText === '') {
-      setList(results);
-    } else {
-      setList(
-        results.filter(item => item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1)
-      );
-    }
-  }, [searchText]);
-
-  const handleOrderClick = () => {
-    const newList = [...results];
-    newList.sort((a, b) => a.name.localeCompare(b.name));
-    setList(newList);
+  // Função para navegar para a página de profissionais filtrados por profissão
+  const navigateToProfessionals = (profissao: string) => {
+    navigation.navigate('profissionais', { profissao }); // Envia a profissão como parâmetro
   };
 
   const perfilNav = () => {
-    navigation.navigate('telaPerfil'); // Nome correto da tela
+    navigation.navigate('telaPerfil');
   };
 
-  const profissionais = () => {
-    navigation.navigate('profissionais'); // Nome correto da tela
-  };
-
+  
   const meusPedidos = () => {
     navigation.navigate('meusPedidos'); // Nome correto da tela
   };
-
 
   return (
     <ImageBackground
@@ -54,8 +34,7 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
     >
       <ScrollView>
         <View style={styles.containerBoasVindas}>
-          <Text style={styles.boasVindas}>Olá, {user.nomeContratante}
-            </Text>
+          <Text style={styles.boasVindas}>Olá, {user.nomeContratante}</Text>
           <TouchableOpacity onPress={perfilNav}>
             <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfilUsuario4} style={styles.ImgPerfil} />
           </TouchableOpacity>
@@ -63,42 +42,42 @@ const HomeScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigati
 
         <Image source={Imagens.lupaAzul} style={styles.lupaAzul} />
         <View style={styles.containerInput}>
+          {/* Campo de busca por profissionais ou serviços */}
+          <TouchableOpacity style={styles.input} onPress={() => navigateToProfessionals('')}>
+            <Text style={styles.textInput}>Encontre um profissional ou serviço</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.input} onPress={ profissionais} >
-      <Text style={styles.textInput}>Encontre um profissional ou serviço</Text>
-      </TouchableOpacity>
-
-
-
+          {/* Lista de profissões com navegação para a tela de profissionais filtrados */}
           <View style={styles.containerProfissoes}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <TouchableOpacity style={styles.buttonProfissoes}>
+              <TouchableOpacity style={styles.buttonProfissoes} onPress={() => navigateToProfessionals('Diarista')}>
                 <Text style={styles.textButton}>Diarista</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonProfissoes2}>
+              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Marido de aluguel')}>
                 <Text style={styles.textButton}>Marido de Aluguel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonProfissoes2}>
-                <Text style={styles.textButton}>Montador de Móveis</Text>
+              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Jardineiro')}>
+                <Text style={styles.textButton}>Jardineiro</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonProfissoes2}>
+              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Pintor')}>
                 <Text style={styles.textButton}>Pintor</Text>
               </TouchableOpacity>
             </ScrollView>
           </View>
 
+
           <View style={styles.containerProfissoes2}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <TouchableOpacity style={styles.buttonProfissoes}>
+              <TouchableOpacity style={styles.buttonProfissoes} onPress={() => navigateToProfessionals('Encanador')}>
                 <Text style={styles.textButton}>Encanador</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonProfissoes2}>
-                <Text style={styles.textButton}>Profissional de limpeza</Text>
+              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Eletricista')}>
+                <Text style={styles.textButton}>Eletricista</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonProfissoes2}>
+              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Montador de Móveis')}>
                 <Text style={styles.textButton}>Montador de Móveis</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonProfissoes2}>
+              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Costura')}>
                 <Text style={styles.textButton}>Costura</Text>
               </TouchableOpacity>
             </ScrollView>

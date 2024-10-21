@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
         height:150,
         backgroundColor:'#e9e9e7',
         marginLeft:28,
-        marginTop:30,
+        marginTop:20,
         borderRadius:25,
-        top:120,
+        top:20,
       },
       margin:{
         marginTop:5,
@@ -120,11 +120,20 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:25,
         marginLeft:14,
-        top:15
+        top:30,
+        marginBottom:10,
+      },
+      filtro2:{
+        color:'#ff914d',
+        fontWeight:'bold',
+        fontSize:18,
+        marginLeft:14,
+        top:30,
+        marginTop:10,
       },
       searchIcon2: {
         marginLeft:320,
-      bottom:10,
+  
        },
        tituloselect:{
         fontSize:19,
@@ -160,8 +169,27 @@ const styles = StyleSheet.create({
       paddingHorizontal:10,
       width:300,
       marginLeft:15,
+      marginTop:20,
       },
-  
+      
+    
+   
+      modal: {
+      height: 550, 
+      backgroundColor: '#fff',
+      borderRadius:20,
+      marginTop:"40%",
+      width: 360,
+      marginLeft: 25,
+      borderColor: 'black',
+      borderWidth: 3, 
+
+      },
+      containerModal:{
+        justifyContent:'center',
+        marginTop:'20%'
+      },
+      
   
 
 });

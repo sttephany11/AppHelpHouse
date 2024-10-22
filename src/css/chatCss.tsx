@@ -83,21 +83,25 @@ const styles = StyleSheet.create({
     width: 20, // Ajuste o tamanho do ícone
     height: 20,
   },
+  onlineUsersContainer: {
+    padding: 10,
+    backgroundColor: '#f1f1f1',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+},
 
-  textoBotao: {
-    color: '#FFFFFF', // Branco
-    fontSize: 16,
+onlineTitle: {
     fontWeight: 'bold',
-  },
-  botaoPDF: {
-    backgroundColor: '#4CAF50', 
-    paddingVertical: 10, 
-    paddingHorizontal: 15, 
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 3,
-  },
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 5,
+},
+
+onlineUser: {
+    fontSize: 14,
+    color: '#555',
+    marginVertical: 2,
+},
 });
 
 export default styles;

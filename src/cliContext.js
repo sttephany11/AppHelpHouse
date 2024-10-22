@@ -7,6 +7,7 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [userToken, setUserToken] = useState(null)
 
   const handleSetUserId = (id) => {
     setUserId(id);  // Update state without persistent storage
@@ -16,8 +17,12 @@ export const UserProvider = ({ children }) => {
     setUserData(data);  // Update state without persistent storage
   };
 
+  const handleSetUserToken = (token) => {
+    setUserToken(token);  // Update state without persistent storage
+  };
+
   return (
-    <UserContext.Provider value={{ userId, setUserId: handleSetUserId, userData, setUserData: handleSetUserData }}>
+    <UserContext.Provider value={{ userId, setUserId: handleSetUserId, userData, setUserData: handleSetUserData, userToken, setUserToken: handleSetUserToken }}>
       {children}
     </UserContext.Provider>
   );

@@ -13,9 +13,23 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         width:370,
         borderRadius:25,
-        marginTop:50,
+        marginTop:100,
         marginLeft:22,
         flex:1
+    },
+    tituloPrincipal:{
+      color:'#fff',
+      top:70,
+      fontWeight:'bold',
+      fontSize:33,
+      marginLeft:85,
+    },
+    tituloPrincipal2:{
+      color:'#fff',
+      top:70,
+      fontWeight:'bold',
+      fontSize:33,
+      marginLeft:120,
     },
 
     //input que recebe valores
@@ -55,9 +69,9 @@ const styles = StyleSheet.create({
         height:150,
         backgroundColor:'#e9e9e7',
         marginLeft:28,
-        marginTop:30,
+        marginTop:20,
         borderRadius:25,
-        top:120,
+        top:5,
       },
       margin:{
         marginTop:5,
@@ -112,31 +126,60 @@ const styles = StyleSheet.create({
       //check box 
       checkboxContainer:{
         flexDirection:'column',
-        width:200,
+        width:200, 
+        
       },
-
-      filtro:{
-        color:'#ff914d',
-        fontWeight:'bold',
-        fontSize:25,
-        marginLeft:14,
-        top:15
-      },
-      searchIcon2: {
-        marginLeft:320,
-      bottom:10,
-       },
-       tituloselect:{
+      tituloselect2:{
         fontSize:19,
-        color:'#ff914d',
+        color:'#004aad',
         fontWeight:'bold',
         marginTop:15,
         marginLeft:15,
+        marginBottom:10
+      },
+
+      filtro:{
+        color:'black',
+        fontWeight:'bold',
+        fontSize:17,
+        marginLeft:35,
+        top:20,
+       
+      },
+      filtro2:{
+        color:'#ff914d',
+        fontWeight:'bold',
+        fontSize:18,
+        marginLeft:14,
+        top:30,
+        marginTop:10,
+      },
+      searchIcon2: {
+        marginLeft:320,
+  
+       },
+       tituloselect:{
+        fontSize:19,
+        color:'#004aad',
+        fontWeight:'bold',
+        marginTop:15,
+        marginLeft:15,
+      
         
        },
+       tituloselectInput:{
+        fontSize:18,
+        color:'#004aad',
+        fontWeight:'bold',
+        marginTop:15,
+        marginLeft:15,
+        top:10,
+       },
+
        row:{
         flexDirection:'row',
-        marginLeft:27
+        marginLeft:27,
+        marginBottom:5
        },
        pickerContainer:{
         marginLeft:20,
@@ -148,11 +191,14 @@ const styles = StyleSheet.create({
        marginInput:{
         marginTop:20,
        },
+       margin3:{
+        marginTop:90
+       },
     
           
     input3:{
       borderBottomWidth:3,
-      borderColor: '#ff914d',
+      borderColor: '#a6a6a6',
       height:40,
       marginBottom:5,
       fontSize:16,
@@ -160,8 +206,97 @@ const styles = StyleSheet.create({
       paddingHorizontal:10,
       width:300,
       marginLeft:15,
+      marginTop:10,
+     
       },
-  
+      
+    //MODAL
+   
+      modal: {
+      height: 570, 
+      backgroundColor: '#fff',
+      borderRadius:20,
+      marginTop:"40%",
+      width: 360,
+      marginLeft: 27,
+
+      },
+      containerModal:{
+        justifyContent:'center',
+        marginTop:'20%'
+      },
+      
+      tituloModal:{
+        color:'#fff',
+        fontWeight:'bold',
+        fontSize:25,
+        justifyContent:'center',
+        alignItems:'center',
+        marginLeft:28,
+        top:5,
+      },
+      containerTitulo:{
+        width:360,
+        height:42,
+        backgroundColor: '#ff914d',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        marginBottom:15,
+      },
+      subtitulo:{
+        fontWeight:'bold',
+        fontSize:14,
+        marginLeft:15,
+      },
+
+      button2:{
+        backgroundColor:'#ff914d',
+        borderRadius:25,
+        height:30,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:20,
+        marginLeft:110,
+        width:140,  
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5, 
+      },
+      buttonText2:{
+        color:'#fff',
+        fontSize:20,
+        fontWeight:'bold'
+      },
+
+      button3:{
+        backgroundColor:'#004aad',
+        borderRadius:25,
+        height:30,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:30,
+        marginLeft:120,
+        width:130,  
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 9 },
+        shadowOpacity: 0.5, 
+      },
+      buttonText3:{
+        color:'#fff',
+        fontSize:18,
+        fontWeight:'bold'
+      },
+
+      inputFront:{
+        borderBottomWidth:2,
+        borderColor: '#a6a6a6',
+        height:40,
+        marginBottom:5,
+        width:300,
+        marginLeft:35,
+        marginTop:5,
+        bottom:15,
+        },
   
 
 });

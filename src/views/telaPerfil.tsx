@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, Image, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 import Imagens from "../../img/img";
-import * as ImagePicker from 'expo-image-picker';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { storage } from '../../firebase';
 import styles from '../css/telaPerfilCss';
 import { useImage } from '../ImageContext'; // Ajuste o caminho conforme necessário
 import { useUser } from '../cliContext';
-
+import myContext from '../functions/authContext';
 const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const { imageUrl } = useImage();
   const { userData } = useUser(); // Altere para userData
+  const { user } = useContext(myContext);
 
   const goToOutraTela = () => {
     if (imageUrl) {
@@ -45,14 +43,14 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         <View style={styles.container}>
           {/* Exibindo as informações do usuário */}
           <Text style={styles.nome}>
-            {userData ? userData.nomeContratante : 'Nome não disponível'}
+            {user ? user.nomeContratante : 'Nome não disponível'}
           </Text>
           <Text style={styles.textEmail}>
-          {userData && userData.emailContratante ? userData.emailContratante : 'Email não disponível'}
+          {user ? user.emailContratante : 'Email não disponível'}
           </Text>
           <Text style={styles.textLocalizacao}>
             <Entypo name="location-pin" size={24} color="red" /> 
-            {userData && userData.bairroContratante ? userData.bairroContratante : 'Localização não disponível'}
+            {user ? user.bairroContratante : 'Localização não disponível'}
           </Text>
 
         </View>

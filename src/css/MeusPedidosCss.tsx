@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1, // O container ocupa toda a tela
-    padding: 20, // Espaçamento interno ao redor do conteúdo
+    padding: 10, // Espaçamento interno ao redor do conteúdo
     backgroundColor: '#F5F5F5', // Cor de fundo clara
   },
   navContent:{
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     width:393,
     height:50,
     marginTop:90,
-    marginLeft:10,
+    marginRight:20,
     
   },
   pedidoContainer: {

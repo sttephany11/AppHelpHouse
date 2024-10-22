@@ -134,11 +134,8 @@ const List: React.FC<Props> = ({ navigation, route }) => {
                 <Text style={styles.buttonText3}>Filtrar</Text>
               </TouchableOpacity>
 
-              <TextInput
-            value={searchName}
-            onChangeText={setSearchName}
-            style={styles.inputFront}
-          />
+              <View style={styles.inputFront}></View> 
+          <Text style={styles.filtro3}>Profissionais na área de <Text style={styles.area}>{profissaoSelecionada}</Text></Text>
 
             
              {/* mODALLL DE FILTROOO */}

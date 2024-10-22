@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         color:'#004aad',
         fontSize:30,
         top:25,
-   
+        fontWeight:'bold',
         left:28
       },
 
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
         marginLeft:37,
         marginTop:10,
         marginBottom:10,
-
+        fontWeight:'bold'
       },
       imgs:{
         marginTop:8,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 
       textInput:{
         marginRight:60,
-
+        
         fontSize:17,
         color:'#3669a4',
       },

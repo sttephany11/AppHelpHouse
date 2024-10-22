@@ -43,7 +43,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         <Image source={Imagens.lupaAzul} style={styles.lupaAzul} />
         <View style={styles.containerInput}>
           {/* Campo de busca por profissionais ou serviços */}
-          <TouchableOpacity style={styles.input} onPress={() => navigateToProfessionals('')}>
+          <TouchableOpacity style={styles.input} onPress={() => navigateToProfessionals('')} >
             <Text style={styles.textInput}>Encontre um profissional ou serviço</Text>
           </TouchableOpacity>
 

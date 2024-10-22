@@ -13,20 +13,20 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         width:370,
         borderRadius:25,
-        marginTop:100,
+        marginTop:70,
         marginLeft:22,
         flex:1
     },
     tituloPrincipal:{
       color:'#fff',
-      top:70,
+      top:50,
       fontWeight:'bold',
       fontSize:33,
       marginLeft:85,
     },
     tituloPrincipal2:{
       color:'#fff',
-      top:70,
+      top:50,
       fontWeight:'bold',
       fontSize:33,
       marginLeft:120,
@@ -146,6 +146,17 @@ const styles = StyleSheet.create({
         top:20,
        
       },
+      filtro3:{
+        color:'black',
+        fontWeight:'bold',
+        fontSize:17,
+        marginLeft:35,
+       
+      },
+      area:{
+        color:'#004aad',
+        fontWeight:'bold',
+      },
       filtro2:{
         color:'#ff914d',
         fontWeight:'bold',
@@ -172,7 +183,7 @@ const styles = StyleSheet.create({
         color:'#004aad',
         fontWeight:'bold',
         marginTop:15,
-        marginLeft:15,
+        marginLeft:16,
         top:10,
        },
 
@@ -182,7 +193,7 @@ const styles = StyleSheet.create({
         marginBottom:5
        },
        pickerContainer:{
-        marginLeft:20,
+        marginLeft:30,
        
        },
        marginCheck:{
@@ -217,8 +228,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       borderRadius:20,
       marginTop:"40%",
-      width: 360,
-      marginLeft: 27,
+      width: 370,
+      marginLeft: 22,
 
       },
       containerModal:{
@@ -232,11 +243,11 @@ const styles = StyleSheet.create({
         fontSize:25,
         justifyContent:'center',
         alignItems:'center',
-        marginLeft:28,
+        marginLeft:32,
         top:5,
       },
       containerTitulo:{
-        width:360,
+        width:370,
         height:42,
         backgroundColor: '#ff914d',
         borderTopLeftRadius: 20,
@@ -246,7 +257,7 @@ const styles = StyleSheet.create({
       subtitulo:{
         fontWeight:'bold',
         fontSize:14,
-        marginLeft:15,
+        marginLeft:24,
       },
 
       button2:{
@@ -264,7 +275,7 @@ const styles = StyleSheet.create({
       },
       buttonText2:{
         color:'#fff',
-        fontSize:20,
+        fontSize:19,
         fontWeight:'bold'
       },
 

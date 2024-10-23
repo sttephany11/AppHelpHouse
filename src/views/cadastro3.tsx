@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert, Image, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Image, TextInput, ScrollView } from 'react-native';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
 import * as ImagePicker from 'expo-image-picker';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -78,7 +78,7 @@ const CadastroScreen3: React.FC<{ route: any; navigation: any }> = ({ route, nav
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
@@ -148,7 +148,7 @@ const CadastroScreen3: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     </View>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 

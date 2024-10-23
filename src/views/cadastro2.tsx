@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, TextInput, ScrollView } from 'react-native';
 import styles from '../css/cadastro2Css';
 import cep from '../../componentes/apiCep/api';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -45,7 +45,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             }
     
             Alert.alert('Success', 'Dados salvos com sucesso!');
-            navigation.navigate('login');
+            navigation.navigate('homeStack');
     
         } catch (error) {
             // Axios error messages can be accessed via error.response
@@ -107,7 +107,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
@@ -188,7 +188,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     </View>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     );
 };
 

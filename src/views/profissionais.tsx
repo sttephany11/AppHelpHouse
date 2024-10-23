@@ -1,7 +1,7 @@
 import { getPro } from "../functions/getPro";
 import React, { useState, useEffect } from "react";
 import { Loading } from "../../componentes";
-import { TouchableOpacity, View, ScrollView, Text, ImageBackground , TextInput , Image,ActivityIndicator, Modal ,Button} from "react-native";
+import { TouchableOpacity, View, ScrollView, Text, ImageBackground , TextInput , Image,Platform, Modal ,KeyboardAvoidingView} from "react-native";
 import { CheckBox } from "@ui-kitten/components"; // Importação correta do CheckBox
 import { Picker } from "@react-native-picker/picker"; // Picker para substituir os checkboxes das profissões
 import styles from "../css/profissionaisCss";
@@ -114,12 +114,13 @@ const List: React.FC<Props> = ({ navigation, route }) => {
   }, []);
 
   return (
+
     <>
       <ImageBackground
         source={Imagens.fundoBemVindo}
         style={styles.background}
         resizeMode="cover"
-      >
+      >        
         <TouchableOpacity onPress={home}><AntDesign name="leftcircle" size={30} color="#004aad" style={{ marginLeft: 20,top:60 }} /></TouchableOpacity>
         <Text style={styles.tituloPrincipal}>Encontre aqui um </Text>
         <Text style={styles.tituloPrincipal2}>profissional</Text>
@@ -140,7 +141,8 @@ const List: React.FC<Props> = ({ navigation, route }) => {
 
             
              {/* mODALLL DE FILTROOO */}
-             
+            
+              
           <Modal visible={isModalVisible} animationType="slide" transparent={true}>
             <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex:1}}> 
           <View style={styles.modal}>
@@ -229,7 +231,11 @@ const List: React.FC<Props> = ({ navigation, route }) => {
               </TouchableOpacity>
         </View>
         </View>
+         
+       
       </Modal>
+  
+
     
 
             <ScrollView>

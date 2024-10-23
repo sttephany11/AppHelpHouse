@@ -32,6 +32,7 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={60}
             style={styles.container}>
+                
             <View style={styles.titleCadastro}>
                 <Text style={styles.titulo}>CADASTRO</Text>
             </View>

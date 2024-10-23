@@ -4,8 +4,9 @@ const styles = StyleSheet.create({
 
     container: {
         flexGrow: 1,
-        backgroundColor: '#e9e9e7',
-       
+      },
+      background:{
+        flex:1
       },
       navChat:{
         width:393,  
@@ -18,11 +19,12 @@ const styles = StyleSheet.create({
         alignItems:'center',
         width:393,
         height:50,
-        marginTop:30,
+        marginTop:50,
+        marginLeft:10,
         
       },
       navbar:{
-        backgroundColor:'#FF8F49',
+        backgroundColor:'#004AAD',
         height:50,
         width:360,
         borderRadius:20,
@@ -93,12 +95,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         padding: 8,
         borderRadius: 13,
-        marginBottom: 16,
+       
         position:'relative',
         left:19,
         zIndex:-1,
-        bottom:20
-      
+        bottom:20,
+       marginLeft:10,
 
       },
       tab: {
@@ -116,12 +118,14 @@ const styles = StyleSheet.create({
       card: {
         backgroundColor: '#fff',
         borderRadius: 10,
-        padding: 16,
+        padding: 14,
         shadowColor: '#000',
         shadowOpacity: 0.1,
         shadowOffset: { width: 0, height: 1 },
         shadowRadius: 5,
         marginBottom: 20,
+        width:390,
+        marginLeft:10,
       },
       cardTitle: {
         fontSize: 18,
@@ -165,10 +169,11 @@ const styles = StyleSheet.create({
         color: '#333',
       },
       submitButton: {
-        backgroundColor: '#00C851',
+        backgroundColor: '#004AAD',
         padding: 10,
         borderRadius: 8,
         alignItems: 'center',
+        bottom:40
       },
       submitButtonText: {
         color: 'white',
@@ -177,11 +182,18 @@ const styles = StyleSheet.create({
       },
       inputDesc:{
         width:360,
-        height:150
+        height:150,
+        fontSize:20,
       },
       inputTitulo:{
         width:360,
-        height:70
+        height:70,
+        fontSize:20,
+        marginBottom:15,
+        borderColor: '#000',
+        borderWidth: 1,
+        borderRadius: 8,
+        marginTop:10
       }
     });
     

@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         color:'#5169a2',
-        fontSize:17
+        fontSize:20
       },
 
       containerProfissoes:{

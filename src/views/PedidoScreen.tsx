@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Alert, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Alert, TextInput, ActivityIndicator, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import styles from '../css/criarPedidoCss';
 import api from "../../axios"; // Importa a instância do Axios
 import { getServicos } from "../functions/getServico";
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Imagens from "../../img/img";
 
 const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
   const { nomeContratado, bairroContratado, idContratado } = route.params; // Recebe o idContratado
@@ -16,6 +18,14 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
   const [error, setError] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(null);
   const [pedidoEnviado, setPedidoEnviado] = useState<boolean>(false);
+
+  const voltarPro = () => {
+    navigation.navigate('profissionais');
+  };
+
+  const voltarHome = () => {
+    navigation.navigate('homeStack');
+  };
 
   // Busca o token armazenado no AsyncStorage
   useEffect(() => {
@@ -73,10 +83,19 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
   };
 
   return (
+    <ImageBackground
+    source={Imagens.fundoBemVindo}
+    style={styles.background}
+    resizeMode="cover"
+  >
+
+  
     <ScrollView contentContainerStyle={styles.container}>
+      
       <View style={styles.navChat}>
         <View style={styles.navContent}>
           <View style={styles.navbar}>
+          <AntDesign name="leftcircle" size={30} color="#fff" style={{ marginLeft: 15 }} onPress={voltarPro} />
             <Text style={styles.textNav}>Pedido</Text>
           </View>
         </View>
@@ -94,6 +113,14 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
         <Text style={styles.category}>Categoria:</Text>
         <Text style={styles.location}>São Paulo, {bairroContratado} <Text style={styles.distance}>A 2 km de você</Text></Text>
 
+
+        <TextInput
+          style={styles.inputTitulo}
+          placeholder="Título"
+          value={tituloPedido}
+          onChangeText={setTituloPedido}
+        />
+
         <View style={styles.requestDescription}>
           <TextInput
             style={styles.inputDesc}
@@ -102,14 +129,9 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
             onChangeText={setDescricaoPedido}
           />
         </View>
-        <TextInput
-          style={styles.inputTitulo}
-          placeholder="Título"
-          value={tituloPedido}
-          onChangeText={setTituloPedido}
-        />
-
-        <Picker
+       
+     
+        <Picker  
           selectedValue={idServicos}
           onValueChange={(itemValue) => setIdServicos(itemValue as number)}
         >
@@ -122,15 +144,22 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
         {loading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
-          <TouchableOpacity style={styles.submitButton} onPress={() => postPedido({ descricaoPedido, idServicos })}>
-            <Text style={styles.submitButtonText}>Enviar</Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={() => {
+            postPedido({ descricaoPedido, idServicos });
+            voltarHome();
+          }}
+>
+  <Text style={styles.submitButtonText}>Enviar</Text>
+</TouchableOpacity>
         )}
 
         {error && <Text style={styles.errorText}>Ocorreu um erro ao enviar o pedido.</Text>}
         {pedidoEnviado && <Text style={styles.successText}>Pedido enviado com sucesso!</Text>}
       </View>
     </ScrollView>
+    </ImageBackground>
   );
 };
 

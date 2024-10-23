@@ -1,33 +1,19 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity, Text, View, TextInput, Image, Pressable, Animated, ScrollView, Alert, } from 'react-native';
+import { TouchableOpacity, Text, View, TextInput, Image, Pressable, Animated, ScrollView, Alert } from 'react-native';
 import styles from '../css/chatCss';
 import Imagens from "../../img/img";
 import api from '../../axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Pusher from 'pusher-js';
-import myContext from '../functions/authContext';
-
-import * as Print from 'expo-print';
-import * as Sharing from 'expo-sharing';
-
+import myContext from '../functions/authContext'; // Usando o contexto para acessar o Pusher
 
 const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
-
-    //chat
-    const [mensagem, setMensagem] = useState('');  // Armazena a mensagem atual
-    const [mensagens, setMensagens] = useState<any[]>([]);  // Armazena todas as mensagens
-    const { roomId, idContratante } = route.params;  // Recebe o roomId da rota
-    const { user } = useContext(myContext);  // Pega o usuário autenticado (o profissional) do contexto
-    const [token, setToken] = useState<string | null>(null);  // Token de autenticação
+    const [mensagem, setMensagem] = useState('');
+    const [mensagens, setMensagens] = useState<any[]>([]);
+    const { roomId } = route.params;
+    const { user } = useContext(myContext); // Acessa o contexto do usuário, incluindo o Pusher
+    const scrollViewRef = useRef<ScrollView>(null);
     const [buttonScale] = useState(new Animated.Value(1));
-    const scrollViewRef = useRef<ScrollView>(null); // Ref para ScrollView
-
-    //PDF
-    const [dataContratante, setDataContratante] = useState<any>(null);
-    const [dataContratado, setDataContratado] = useState<any>(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     // Função para buscar mensagens da sala
     const fetchMensagens = async () => {
@@ -40,67 +26,82 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
             const response = await api.get(`/chat/messages/${roomId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
+            console.log("Mensagens carregadas com sucesso:", response.data.messages); // Log das mensagens carregadas
             setMensagens(response.data.messages);
         } catch (error) {
             console.error('Erro ao buscar mensagens:', error);
+            Alert.alert('Erro', 'Não foi possível buscar mensagens.');
         }
     };
 
     // Função para enviar mensagem
     const enviarMensagem = async () => {
-        if (!mensagem.trim()) return; // Evita enviar mensagens vazias
+        if (!mensagem.trim()) return;
+        console.log("Enviando mensagem:", mensagem); // Log da mensagem que será enviada
+
         try {
             const token = await AsyncStorage.getItem('authToken');
             if (!token) {
                 console.error('Token não encontrado');
+                Alert.alert('Erro', 'Token de autenticação não encontrado.');
                 return;
             }
-            // Envia a mensagem para o backend
             await api.post('/chat/send', {
-                roomId, // ID da sala de chat
-                message: mensagem, // Mensagem a ser enviada
+                roomId,
+                message: mensagem,
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
+            console.log("Mensagem enviada com sucesso."); // Log de sucesso no envio
 
-            // A mensagem enviada é adicionada imediatamente no frontend
             setMensagens((prevMensagens) => [
                 ...prevMensagens,
-                { message: mensagem, senderId: user?.idContratado } // Adiciona senderId
+                { message: mensagem, senderId: user?.idContratado }
             ]);
-            setMensagem(''); // Limpa a mensagem
+            setMensagem('');
         } catch (error) {
             console.error('Erro ao enviar mensagem:', error);
+            Alert.alert('Erro', 'Houve um problema ao enviar a mensagem.');
         }
     };
 
-    // Conectar ao Pusher para mensagens em tempo real
+    // Usa o Pusher do contexto
     useEffect(() => {
-        const pusher = new Pusher('c58eb1455bc63e559d2c', {
-            cluster: 'sa1',
-        });
+        if (user?.pusher) {
+            console.log("Iniciando inscrição no Pusher..."); // Log do início da inscrição
 
-        // Subscribes to the roomId channel
-        const channel = pusher.subscribe(`chat-${roomId}`);
+            const channel = user.pusher.subscribe(`channel.${roomId}`);
 
-        // Listening for new messages
-        channel.bind('new-message', function (data: any) {
-            // Adiciona a nova mensagem recebida ao estado
-            setMensagens((prevMensagens) => [
-                ...prevMensagens,
-                { message: data.message, senderId: data.senderId }
-            ]);
-        });
+            channel.bind('pusher:subscription_succeeded', () => {
+                console.log('Inscrição no canal bem-sucedida!');
+            });
 
-        // Cleanup the subscription on component unmount
-        return () => {
-            channel.unbind_all();
-            channel.unsubscribe();
-        };
-    }, [roomId]);
+            channel.bind('SendRealTimeMessage', (data: { message: string; senderId: string }) => {
+                console.log("Mensagem recebida via Pusher:", data); // Log das mensagens recebidas em tempo real
+
+                if (data && data.message && data.senderId) {
+                    setMensagens((prevMensagens) => [
+                        ...prevMensagens,
+                        { message: data.message, senderId: data.senderId },
+                    ]);
+                } else {
+                    console.error('Dados recebidos não estão no formato esperado:', data);
+                }
+            });
+
+            return () => {
+                console.log("Desinscrevendo do canal..."); // Log quando o componente é desmontado
+
+                channel.unbind_all();
+                user.pusher.unsubscribe(`channel.${roomId}`);
+            };
+        } else {
+            console.error('Pusher não foi inicializado corretamente.');
+        }
+    }, [user, roomId]);
 
     // Carregar mensagens da sala ao montar o componente
     useEffect(() => {
@@ -112,117 +113,18 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         scrollViewRef.current?.scrollToEnd({ animated: true });
     }, [mensagens]);
 
-    // Animação do botão de envio
-    const onPressIn = () => {
-        Animated.spring(buttonScale, { toValue: 0.9, useNativeDriver: true }).start();
+    const logoutUser = () => {
+        if (user?.pusher) {
+            console.log("Desconectando e desinscrevendo o Pusher..."); // Log de logout e desconexão do Pusher
+
+            const channel = user.pusher.subscribe(`channel.${roomId}`);
+            channel.unbind_all();
+            channel.unsubscribe();
+        }
+        AsyncStorage.removeItem('authToken');
+        navigation.navigate('Login');
     };
 
-    const onPressOut = () => {
-        Animated.spring(buttonScale, { toValue: 1, useNativeDriver: true }).start();
-    };
-
-
-    // Buscar dados do contratado
-    useEffect(() => {
-        const fetchDataContratado = async () => {
-            setLoading(true);
-            try {
-                const response = await api.get(`/pro/${user.idContratado}`);
-                setDataContratado(response.data);
-            } catch (err: any) {
-                setError(err.message);
-                Alert.alert('Erro ao buscar dados do Contratado', err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDataContratado();
-    }, [user.idContratado]);
-
-    // Buscar dados do contratante
-    useEffect(() => {
-        const fetchDataContratante = async () => {
-            setLoading(true);
-            try {
-                const response = await api.get(`/cli/${idContratante}`);
-                setDataContratante(response.data);
-            } catch (err: any) {
-                setError(err.message);
-                Alert.alert('Erro ao buscar dados do Contratante', err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDataContratante();
-    }, [idContratante]);
-
-    const createPDF = async () => {
-        if (!dataContratante || !dataContratado) {
-          Alert.alert('Erro', 'Nenhum dado disponível para gerar o PDF.');
-          return;
-        }
-      
-        // Extraindo os campos específicos
-        const { nomeContratante, cpfContratante } = dataContratante;
-        const { nomeContratado, cpfContratado } = dataContratado;
-      
-        // HTML reduzido do contrato sem assinatura
-        const html = `
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <title>Contrato</title>
-            <style>
-              body { font-family: Arial, sans-serif; margin: 10px; font-size: 14px; }
-              h1 { text-align: center; color: navy; font-size: 18px; }
-              h2 { color: navy; font-size: 16px; margin-bottom: 5px; }
-              p { margin: 5px 0; }
-              .section { margin-bottom: 10px; }
-            </style>
-          </head>
-          <body>
-            <h1>Contrato de Serviços</h1>
-      
-            <div class="section">
-              <h2>Contratante</h2>
-              <p><strong>Nome:</strong> ${nomeContratante}</p>
-              <p><strong>CPF:</strong> ${cpfContratante}</p>
-            </div>
-      
-            <div class="section">
-              <h2>Contratado</h2>
-              <p><strong>Nome:</strong> ${nomeContratado}</p>
-              <p><strong>CPF:</strong> ${cpfContratado}</p>
-            </div>
-      
-            <div class="section">
-              <h2>Serviços</h2>
-              <p>O contratante solicita os serviços do contratado conforme acordado entre as partes.</p>
-            </div>
-      
-            <div class="section">
-              <h2>Termos</h2>
-              <p>1. O contratado prestará os serviços conforme descrito.</p>
-              <p>2. O contratante pagará o valor acordado pelos serviços.</p>
-            </div>
-          </body>
-          </html>
-        `;
-      
-        try {
-          // Gera o PDF
-          const { uri } = await Print.printToFileAsync({ html });
-      
-          // Compartilha o PDF gerado
-          await Sharing.shareAsync(uri);
-          Alert.alert('PDF gerado e compartilhado com sucesso!');
-        } catch (err) {
-          // Usar asserção de tipo para acessar a mensagem do erro
-          const error = err as Error;  // Asserindo que err é do tipo Error
-          Alert.alert('Erro ao gerar o PDF', error.message);
-        }
-      };
-      
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -230,48 +132,34 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                 <View style={styles.navContent}>
                     <View style={styles.navbar}>
                         <Text style={styles.textNav}>Chat</Text>
-                        <TouchableOpacity onPress={createPDF} style={styles.botaoPDF}>
-                            <Text style={styles.textoBotao}>Gerar PDF</Text>
-                        </TouchableOpacity>
                     </View>
+
+                    <TouchableOpacity onPress={logoutUser}>
+                        <Text style={{ color: 'red', fontWeight: 'bold' }}>Sair</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 
-            {/* Exibe as mensagens do chat */}
             <ScrollView style={styles.mensagensContainer} ref={scrollViewRef}>
                 {mensagens.map((msg, index) => {
                     const isContratado = msg.senderId === user?.idContratado;
-                    const isContratante = msg.senderId === user?.idContratante;
-                    
-                    let alignSelfStyle: "flex-start" | "flex-end" = "flex-start";
-                    let backgroundColor = '#f1f1f1';
-
-                    if (isContratado) {
-                        alignSelfStyle = 'flex-end';
-                        backgroundColor = '#87CEFA';
-                    }
 
                     return (
                         <View
                             key={index}
-                            style={[
-                                styles.mensagemItem,
-                                {
-                                    alignSelf: alignSelfStyle,
-                                    backgroundColor: backgroundColor,
-                                    borderRadius: 10,
-                                    padding: 10,
-                                    maxWidth: '70%',
-                                },
-                            ]}
-                        >
+                            style={[styles.mensagemItem, {
+                                alignSelf: isContratado ? 'flex-end' : 'flex-start',
+                                backgroundColor: isContratado ? '#87CEFA' : '#f1f1f1',
+                                borderRadius: 10,
+                                padding: 10,
+                                maxWidth: '70%',
+                            }]}>
                             <Text>{msg.message}</Text>
                         </View>
                     );
                 })}
             </ScrollView>
 
-            {/* Input para enviar mensagem */}
             <View style={styles.enviarMensagem}>
                 <View style={styles.inputContent}>
                     <TextInput
@@ -281,11 +169,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                         onChangeText={setMensagem}
                     />
                     <Animated.View style={[styles.enviar, { transform: [{ scale: buttonScale }] }]}>
-                        <Pressable
-                            onPress={enviarMensagem}
-                            onPressIn={onPressIn}
-                            onPressOut={onPressOut}
-                        >
+                        <Pressable onPress={enviarMensagem}>
                             <Image source={Imagens.iconEnviar} style={styles.icon} />
                         </Pressable>
                     </Animated.View>

@@ -7,6 +7,7 @@ import styles from '../css/loginCss';
 import api from '../../axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Importa AsyncStorage para armazenar o token
 import myContext from '../functions/authContext';
+import Pusher from 'pusher-js/react-native'; // Importando Pusher
 
 const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [emailContratante, setEmailContratante] = useState('');
@@ -14,44 +15,61 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
-
     const { user, setUser } = useContext(myContext);
 
-    // Função para fazer login
-    const handleLogin = async () => {
-        // Verificar se os campos estão preenchidos
+
+     // Função para lidar com o login
+     const handleLogin = async () => {
         if (!emailContratante || !password) {
             setMessage('Preencha todos os campos');
             return;
         }
 
-        setLoading(true); // Inicia o estado de loading
-        setMessage(''); // Limpa a mensagem anterior
+        setLoading(true); // Ativa o estado de loading
+        setMessage(''); // Limpa mensagens anteriores
 
         try {
-            const response = await api.post('/auth', {
-                emailContratante,
-                password,
+            // Inicializa o Pusher sem a necessidade de armazená-lo no estado
+            const pusherInstance = new Pusher('c58eb1455bc63e559d2c', {
+                cluster: 'sa1',
+                authEndpoint: 'http://10.0.0.121:8000/api/pusher/auth', // Endpoint de autenticação
             });
+            console.log("Pusher inicializado com sucesso");
+            //  Conecta ao Pusher e aguarda o evento de conexão
+            pusherInstance.connect();
 
-            console.log('data', response);
+            pusherInstance.connection.bind('connected', async () => {
+                const socketId = pusherInstance.connection.socket_id; // Obtém o socket_id
+                console.log("Socket ID obtido:", socketId);
+                if (!socketId) {
+                    setMessage('Erro ao obter socket_id. Tente novamente.');
+                    setLoading(false);
+                    return;
+                }
 
-            // Verificar se o login foi bem-sucedido
-            if (response.data && response.data.status === 'Sucesso' && response.data.token) {
-                console.log("Token recebido:", response.data.token);
-                console.log("Seja bem-vindo novamente!");
-
-                setUser(response.data.user);
-                await AsyncStorage.setItem('authToken', response.data.token); // Armazena o token no AsyncStorage
-                navigation.navigate('homeStack', { screen: 'home' });
-            } else {
-                setMessage('Credenciais incorretas, tente novamente.');
-            }
-
+                // Faz a requisição de login com o socket_id
+                const response = await api.post('/auth', {
+                    emailContratante,
+                    password,
+                    socket_id: socketId, // Passa o socket_id do Pusher
+                    channel_name: 'private-my-channel', // Define o canal privado
+                });
+                console.log("Resposta da API:", response.data);
+                if (response.data && response.data.status === 'Sucesso' && response.data.token) {
+                    // Armazena o usuário e o token no AsyncStorage
+                    await AsyncStorage.setItem('authToken', response.data.token);
+                    
+                    // Armazena o usuário autenticado no contexto, incluindo o Pusher
+                    setUser({ ...response.data.user, pusher: pusherInstance });
+                    
+                    // Redireciona para a página principal
+                    navigation.navigate('homeStack', { screen: 'home' });
+                } else {
+                    setMessage('Credenciais incorretas, tente novamente.');
+                }
+            });
         } catch (error) {
-            // Manipular o erro de login
-            const errorMessage = error.response?.data?.message || 'Erro ao fazer login. Verifique suas credenciais e tente novamente.';
-            console.error('Erro ao fazer login:', errorMessage);
+            const errorMessage = error.response?.data?.message || 'Erro ao fazer login. Verifique suas credenciais.';
             setMessage(errorMessage);
         } finally {
             setLoading(false); // Desativa o estado de loading
@@ -73,7 +91,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
                     containerStyles={{
                         borderWidth: 2,
                         paddingHorizontal: 10,
-                        backgroundColor: '#fff',
+                        backgroundColor: '#F5FCFF',
                         borderColor: '#FF8F49',
                         borderRadius: 50,
                         borderTopWidth: 5,
@@ -86,7 +104,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
                         fontSizeFocused: 12,
                     }}
                     labelStyles={{
-                        backgroundColor: '#fff',
+                        backgroundColor: '#F5FCFF',
                         paddingHorizontal: 5,
                         color: '#FF8F49',
                         fontSize: 22
@@ -114,7 +132,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
                     containerStyles={{
                         borderWidth: 2,
                         paddingHorizontal: 10,
-                        backgroundColor: '#fff',
+                        backgroundColor: '#F5FCFF',
                         borderColor: '#ff9238',
                         borderRadius: 50,
                         borderTopWidth: 5,
@@ -127,7 +145,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
                         fontSizeFocused: 12,
                     }}
                     labelStyles={{
-                        backgroundColor: '#fff',
+                        backgroundColor: '#F5FCFF',
                         paddingHorizontal: 5,
                         color: '#FF8F49',
                         fontSize: 22

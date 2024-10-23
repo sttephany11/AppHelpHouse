@@ -2,9 +2,11 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // O container ocupa toda a tela
-    padding: 10, // Espaçamento interno ao redor do conteúdo
-    backgroundColor: '#F5F5F5', // Cor de fundo clara
+    padding: 10, 
+  
+  },
+  background:{
+    flex: 1,
   },
   navContent:{
     display:'flex',
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     bottom:20
   },
   tab: {
-    color: '#FF6F00',
+    color: '#004aad',
     fontSize: 20,
     paddingRight:120,
     fontWeight:'800'
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
   },
   cardSubtitle: {
     fontSize: 16,
-    color: '#333',
+    color: '#004aad',
     marginTop: 5,
   },
   clienteName: {

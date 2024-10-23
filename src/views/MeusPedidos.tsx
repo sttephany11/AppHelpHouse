@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert , ImageBackground} from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../axios';
+import Imagens from "../../img/img";
 import styles from '../css/MeusPedidosCss';
 import myContext from '../functions/authContext'; 
 
@@ -128,13 +129,20 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
 
 
   return (
+    <ImageBackground
+      source={Imagens.fundoBemVindo}
+      style={styles.background}
+      resizeMode="cover"
+    >
+
+  
     <View style={styles.container}>
       <View style={styles.navContent}>
         <View style={styles.navbar}>
           <TouchableOpacity>
             <AntDesign name="leftcircle" size={30} color="#fff" style={{ marginLeft: 15 }} onPress={voltarHome} />
           </TouchableOpacity>
-          <Text style={styles.textNav}>Meus Pedidos</Text>
+          <Text style={styles.textNav}>Pedidos</Text>
         </View>
         <View style={styles.tabs}>
           <Text style={styles.tab}>Agendados</Text>
@@ -146,20 +154,20 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
       ) : error ? (
         <Text style={{ color: 'red' }}>{error}</Text>
       ) : pedidos.length === 0 ? (
-        <Text>Nenhum pedido encontrado.</Text>
+        <Text style={{marginTop:20,marginLeft:40}}>Nenhum pedido encontrado.</Text>
       ) : (
         <ScrollView>
           {pedidos.map((pedido) => (
             <View key={pedido.idSolicitarPedido} style={styles.cardContainer}>
               <Text style={styles.cardTitle}>{pedido.tituloPedido}</Text>
               <Text style={styles.cardSubtitle}>
-                Cliente: <Text style={styles.clienteName}>{pedido.contratado.nomeContratado ?? 'Desconhecido'}</Text>
+                Profissional: <Text style={styles.clienteName}>{pedido.contratado.nomeContratado ?? 'Desconhecido'}</Text>
               </Text>
               <Text style={styles.cardLocation}>
-                {user.cidadeContratante}, {user.bairroContratante} 
+                {user.cidadeContratado}, {user.bairroContratado} 
                 <Text style={styles.cardDistance}> à 2 km de você</Text>
               </Text>
-              <Text style={styles.cardDate}>Data e hora: 20/9 às 14:00</Text>
+              <Text style={styles.cardDate}>Data e hora: 24/10 às 14:00</Text>
               <Text style={styles.cardPayment}>Situação do pagamento: Sinal R$50,00</Text>
 
               <TouchableOpacity style={styles.conversarButton}
@@ -172,6 +180,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
         </ScrollView>
       )}
     </View>
+    </ImageBackground>
   );
 };
 

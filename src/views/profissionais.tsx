@@ -38,6 +38,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
   const [idServicos, setIdServicos] = useState<string | number>(1);
   const [isModalVisible, setModalVisible] = useState(false); // Estado do modal
 
+  
 
   // Toggle para exibir ou esconder o modal
   const toggleModal = () => {
@@ -84,8 +85,8 @@ const List: React.FC<Props> = ({ navigation, route }) => {
     const zoneMap: Record<string, string> = {
       leste: "Zona Leste",
       oeste: "Zona Oeste",
-      norte: "ZonaNorte",
-      sul: "ZonaSul",
+      norte: "Zona Norte",
+      sul: "Zona Sul",
     };
     const matchZone =
       zonesSelected.length === 0 ||
@@ -279,12 +280,15 @@ const List: React.FC<Props> = ({ navigation, route }) => {
 
                         <View style={styles.containerRegiao}>
                           <Entypo name="location-pin" size={24} color="red" />
-                          <Text> {data.regiaoContratado} </Text>
+                          <Text style={{top:5}}> {data.regiaoContratado} </Text>
                         </View>
                       </TouchableOpacity>
                     </View>
+                    
                   </View>
+                
                 ))}
+                <View style={{marginTop:40}}></View>
             </ScrollView>
             </>
           ) : null}

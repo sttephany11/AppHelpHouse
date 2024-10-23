@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         width:350,
         borderRadius:25,
-        marginTop:'30%',
+        marginTop:180,
         marginLeft:33,
-        flex:1
+        height:550
     },
     
     container:{
@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
     alignItems:'center',
    
     },
+    container2:{
+      justifyContent:'center',
+      alignItems:'center',
+      bottom:45
+      },
 
     imgPerfil: {
         borderRadius: 100,
@@ -32,14 +37,14 @@ const styles = StyleSheet.create({
     },
 //nome do usuario
     nome:{
-        fontSize:28,
+        fontSize:30,
         fontWeight:'bold',
         color:'#004aad',
         bottom: 65,
         marginTop:15,
     },
     textLocalizacao:{
-        bottom: 65,
+        bottom: 60,
     },
     textEmail:{
       bottom: 65,
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
     // mais procurados
     maisProcurados:{
         marginTop:40,
-        fontSize:15,
+        fontSize:20,
         fontWeight:'bold',
         color:'#004aad',
         bottom: 65,
@@ -87,6 +92,65 @@ const styles = StyleSheet.create({
       borderRadius: 20,
       padding: 5,
       marginRight:100
+    },
+    //MAIS PROCURADOS 
+    containerProfissoes:{
+      flexDirection:'row',
+      marginLeft:19,
+      marginTop:30,
+      bottom:80
+    },
+    buttonProfissoes:{
+      backgroundColor:'#ede6e6',
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderRadius:25,
+      
+    },
+
+    buttonProfissoes2:{
+      backgroundColor:'#ede6e6',
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderRadius:25,
+      marginLeft:10
+    },
+
+    textButton:{
+      justifyContent:'center',
+      alignItems:'center',
+      color:'#5169a2',
+      fontSize:17
+    },
+    butaoAzul:{
+      width:300,
+      height:50,
+      backgroundColor:'#004aad',
+      borderRadius:20,
+     
+
+    },
+    textButton2:{
+      justifyContent:'center',
+      alignItems:'center',
+      color:'#fff',
+      fontSize:20,
+      fontWeight:'bold',
+      marginLeft:105,
+      bottom:34
+    },
+    textButton3:{
+      justifyContent:'center',
+      alignItems:'center',
+      color:'#fff',
+      fontSize:20,
+      fontWeight:'bold',
+      marginLeft:85,
+      bottom:34
+    },
+    icon:{
+      marginLeft:30,
+      paddingVertical:8,
     },
    });
 export default styles;

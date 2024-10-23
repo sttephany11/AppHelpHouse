@@ -38,9 +38,10 @@ const styles = StyleSheet.create({
         borderRadius:50,
         width:70,
         height:70,
-        borderColor:'white',
+        borderColor:'#004aad',
         marginTop: 80,
         marginLeft:40,
+        borderWidth: 3,
     },
     lupa:{
         width:35,

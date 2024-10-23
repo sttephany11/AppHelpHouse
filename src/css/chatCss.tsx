@@ -83,6 +83,20 @@ const styles = StyleSheet.create({
     width: 20, // Ajuste o tamanho do ícone
     height: 20,
   },
+  botaoPDF: {
+    backgroundColor: '#4CAF50', // Verde
+    paddingVertical: 10, // Use paddingVertical para ajustar a altura do botão
+    paddingHorizontal: 15, // Ajusta o padding lateral
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 3,
+  },
+  textoBotao: {
+    color: '#FFFFFF', // Branco
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   onlineUsersContainer: {
     padding: 10,
     backgroundColor: '#f1f1f1',

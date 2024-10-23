@@ -103,7 +103,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
     }
 
     try {
-        // Fazer a requisição para criar ou obter a sala de chat
+        console.log(`Tentando  obter a sala de chat para ID do contratado: ${idContratado}`);
         const response = await api.post(`/chat-room/${idContratado}`, null, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -113,19 +113,18 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
 
         const roomId = response.data.chat_room?.id;  // Obter o roomId da resposta da API
 
-        // Navegar para a tela de chat com o roomId
         if (roomId) {
+            console.log(`Sala de chat criada ou encontrada com sucesso: ${roomId}`);
             navigation.navigate('Chat', { roomId });  // Passa o roomId ao navegar para o chat
         } else {
             Alert.alert('Erro', 'Não foi possível criar ou encontrar a sala de chat.');
+            console.error('Erro: roomId não encontrado na resposta da API.');
         }
     } catch (error: any) {
         console.error('Erro ao criar ou buscar a sala de chat:', error.response ? error.response.data : error.message);
         Alert.alert('Erro', 'Houve um problema ao criar a sala.');
     }
 };
-
-
 
 
   return (

@@ -5,9 +5,12 @@ import Imagens from "../../img/img";
 import styles from '../css/configuracaoCss';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+import { useUser } from '../cliContext';
+import myContext from '../functions/authContext';
 
 const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const { userData } = useUser(); // Altere para userData
+  const { user } = useContext(myContext);
 
   const navigateToProfessionals = (profissao: string) => {
     navigation.navigate('profissionais', { profissao }); // Envia a profissão como parâmetro
@@ -30,19 +33,20 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
       <View style={styles.fundoBranco}>
         <View style={styles.container}>
             <Text style={styles.TextmeuDados}>Meus dados </Text> 
-
+            
             <View style={{flexDirection:'row'}}>
-            <Text style={styles.dados}> CEP   <Text style={styles.cep}>   08150110</Text></Text>
+            <Text style={styles.dados}> CEP   <Text style={styles.cep}>   {user ? user.cepContratante : 'Cep não disponível'}</Text></Text>
             <Entypo name="edit" size={22} color="black" style={{marginLeft:20,top:5 }}/>
             </View>
-            <Text style={styles.dadosCli}> Rua pedro rodrigues, Sao Paulo</Text>
+            <Text style={styles.dadosCli}> {user ? user.cidadeContratante : 'Localização não disponível'} , {user ? user.bairroContratante : 'Localização não disponível'} </Text>
+            <Text style={styles.dadosCli}> {user ? user.ruaContratante : 'Localização não disponível'} , {user ? user.numCasaContratante : 'Localização não disponível'} </Text>
 
 
             <View style={{marginTop:15}}></View>
             
             <Text style={styles.dados}>Email</Text>   
             <View style={{flexDirection:'row'}}>
-            <Text style={styles.dadosCli}>shuwhjfwkadyfvf@ganshdld</Text>
+            <Text style={styles.dadosCli}><Text style={styles.dadosCli}> {user ? user.emailContratante : 'Email não disponível'} </Text></Text>
             <Entypo name="edit" size={22} color="black" style={{marginLeft:20,bottom:6 }}/> 
             </View>
 
@@ -50,7 +54,7 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
             
             <Text style={styles.dados}>Telefone</Text>   
             <View style={{flexDirection:'row'}}>
-            <Text style={styles.dadosCli}>(11) 2514-5629 </Text>
+            <Text style={styles.dadosCli}><Text style={styles.dadosCli}> {user ? user.telefoneContratante : 'Telefone não disponível'} </Text> </Text>
             <Entypo name="edit" size={22} color="black" style={{marginLeft:20,bottom:6 }}/> 
             </View>
 
@@ -62,7 +66,7 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
             <View style={{marginTop:15}}></View>
 
             <Text style={styles.dados}>CPF</Text> 
-            <Text style={styles.dadosCli}>54366203880 </Text>
+            <Text style={styles.dadosCli}>{user ? user.cpfContratante : 'Cep não disponível'} </Text>
 
             <View style={{marginTop:15}}></View> 
 

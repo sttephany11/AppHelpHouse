@@ -59,7 +59,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           
           <Text style={styles.textLocalizacao}>
             <Entypo name="location-pin" size={24} color="red" /> 
-            {user ? user.bairroContratante : 'Localização não disponível'}
+            {user ? user.cidadeContratante : 'Localização não disponível'}, {user ? user.bairroContratante : 'Localização não disponível'}
           </Text>
 
           <Text style={styles.maisProcurados}> Mais procurados </Text>

@@ -98,18 +98,19 @@ const styles = StyleSheet.create({
     fontWeight:'700',
     color: 'white',
     marginBottom:10,
-    fontSize:20,
+    fontSize:23,
     right:2,
     top:9,
     marginTop:10,
     },
+  
   
     input3:{
       borderBottomWidth:3,
       borderColor: '#fff',
       height:40,
       marginBottom:5,
-      fontSize:16,
+      fontSize:20,
       color:'#fff',
       paddingHorizontal:10,
    
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     marginBottom:10,
     fontSize:16,
     color:'#fff',
-    width:80,
+    width:98,
     justifyContent:'flex-start',
     textAlign: 'center',
     },

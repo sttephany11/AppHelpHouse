@@ -148,7 +148,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
                         <Text style={styles.title3}>Cidade</Text>
                         <TextInput
-                            placeholder=""
+                            placeholder="Sua cidade..."
                             value={cidadeContratante}
                             onChangeText={setCidadeContratante}
                             style={styles.input3}
@@ -163,7 +163,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                         />
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={{ flex: 3, marginRight: 15 }}>
+                            <View style={{ flex: 2, marginRight: 10 }}>
                                 <Text style={styles.title3}>Complemento</Text>
                                 <TextInput
                                     placeholder="Digite um complemento..."

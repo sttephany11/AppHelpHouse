@@ -15,7 +15,9 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const { user, setUser } = useContext(myContext);
+    
+    const userContext = useContext(myContext);
+    const { user, setUser } = useContext(myContext); 
 
 
      // Função para lidar com o login

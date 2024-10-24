@@ -23,6 +23,8 @@ import { StyleSheet } from 'react-native';
 import List from '../functions/testeGet';
 import MeusPedidos from '../views/MeusPedidos';
 import Chat from '../views/Chat';
+import Configuracao from '../views/configuracao';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -93,7 +95,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="bemvindo">
+        <Stack.Navigator initialRouteName="homeStack">
         <Stack.Screen name="List" component={List} options={{ headerShown: false }} />
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
          <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
@@ -109,6 +111,8 @@ const AppNavigator = () => {
           <Stack.Screen name="profissionais" component={Profissionais} options={{ headerShown: false }} />
           <Stack.Screen name="meusPedidos" component={MeusPedidos} options={{ headerShown: false }} />
           <Stack.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="configuracao" component={Configuracao} options={{ headerShown: false }} />
+
         </Stack.Navigator>
       </ImageProvider>
   );

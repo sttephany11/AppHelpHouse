@@ -52,6 +52,7 @@ const Imagens = {
    iconTab3: require("../assets/iconTab3.png"),
    //img chat
    iconEnviar:require("../assets/iconEnviar.png"),
+   cartao:require("../assets/imgApp/cartao.png"),
 }
 export default Imagens;
 

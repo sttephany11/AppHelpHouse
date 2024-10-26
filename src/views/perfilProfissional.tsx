@@ -6,6 +6,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { useImage } from '../ImageContext'; // Ajuste o caminho conforme necessário
 import { useUser } from '../cliContext';
 import { getPro } from '../functions/getPro';
+import { Ionicons } from '@expo/vector-icons'; // Para os ícones de estrela
 //import { getServicos } from "../functions/getServico";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -14,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ route, navigation }) => {
     const { nomeContratado,sobrenomeContratado, bairroContratado, idContratado, descContratado,profissaoContratado, cidadeContratado } = route.params; // Recebe o idContratado
-    const [searchText, setSearchText] = useState('');
+    const { rating = 0, idContratante } = route.params; // Obtém a avaliação e os dados do cliente
     const { imageUrl } = useImage(); // Obtém a URL da imagem do contexto
     const { userData } = useUser(); // Altere para userData
     const [loading, setLoading] = useState<boolean>(false);
@@ -86,14 +87,25 @@ const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ ro
                 </View>
                 
                 <Text style={styles.vejaMais}>Avaliações</Text>
-                
                 <View style={styles.containerBase}>
                     <Image source={Imagens.perfil} style={styles.imgAvaliacao} />
-                    <Text style={styles.nomeAvaliador}>João Felipe</Text>
-                    <Text style={styles.textAvaliacao}>Ótimo profissional, entrega no prazo!</Text>
+                    <Text style={styles.nomeAvaliador}>{idContratante}</Text>
+                    <Text style={styles.textAvaliacao}>Comentário do cliente.</Text>
+                    
+                    {/* Mostra a avaliação com base no número de estrelas */}
+                    <View style={{ flexDirection: 'row', bottom: 64, marginLeft: 90 }}>
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <Ionicons
+                                key={star}
+                                name={star <= rating ? 'star' : 'star-outline'}
+                                size={24}
+                                color={star <= rating ? '#FFD700' : '#D3D3D3'}
+                            />
+                        ))}
+                    </View>
                 </View>
 
-                <View style={styles.margin}></View>
+                <View style={{marginTop:30}}></View>
 
                 <View style={styles.containerBase}>
                     <Image source={Imagens.perfil} style={styles.imgAvaliacao} />

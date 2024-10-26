@@ -10,6 +10,8 @@ import myContext from '../functions/authContext';
 interface Profissional {
   idContratado: string;
   nomeContratado: string;
+  cidadeContratado: string;
+  bairroContratado: string;
 }
 
 interface Pedido {
@@ -144,8 +146,16 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Text style={styles.textNav}>Pedidos</Text>
         </View>
         <View style={styles.tabs}>
-          <Text style={styles.tab}>Agendados</Text>
+        <Text style={styles.tab}>Agendados</Text>
+          
         </View>
+        <View style={styles.tab2}>
+        <Text style={styles.Texttab}>Finalizados</Text>
+          
+        </View>
+      </View>
+      <View style={{marginTop:20}}> 
+        <Text></Text>
       </View>
 
       {loading ? (
@@ -155,7 +165,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
       ) : pedidos.length === 0 ? (
         <Text style={{marginTop:20,marginLeft:40}}>Nenhum pedido encontrado.</Text>
       ) : (
-        <ScrollView>
+        <ScrollView style={{bottom:20}}>
           {pedidos.map((pedido) => (
             <View key={pedido.idSolicitarPedido} style={styles.cardContainer}>
               <Text style={styles.cardTitle}>{pedido.tituloPedido}</Text>

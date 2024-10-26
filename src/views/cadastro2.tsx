@@ -119,7 +119,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     <View style={styles.title}>
                         <Text style={styles.titulo2}>Para finalizar,<Text style={styles.passos}> adicione </Text><Text style={styles.passos}>seu endereço</Text></Text>
                     </View>
-
+                    
                     <View style={styles.input}>
                         <Text style={styles.title3}>Cep</Text>
                         

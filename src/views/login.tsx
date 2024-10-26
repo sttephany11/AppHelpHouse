@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity , ActivityIndicator} from 'react-native';
 import Imagens from "../../img/img";
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
@@ -34,7 +34,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
             // Inicializa o Pusher sem a necessidade de armazená-lo no estado
             const pusherInstance = new Pusher('6aef362f6c720f776c8b', {
                 cluster: 'sa1',
-                authEndpoint: 'http://10.0.0.161:8000/api/pusher/auth', // Endpoint de autenticação
+                authEndpoint: 'http://192.168.1.13:8000/api/pusher/auth', // Endpoint de autenticação
             });
             console.log("Pusher inicializado com sucesso");
             //  Conecta ao Pusher e aguarda o evento de conexão
@@ -160,9 +160,13 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
                 />
             </View>
 
-            <TouchableOpacity style={styles.button3} onPress={handleLogin} disabled={loading}>
-                <Text style={styles.buttonText2}>{loading ? 'Entrando...' : 'Entrar'}</Text>
+            {loading ? (
+                <ActivityIndicator size="large" color="#004AAD" />
+            ) : (
+                <TouchableOpacity style={styles.button3} onPress={handleLogin} disabled={loading}>
+                <Text style={styles.buttonText2}>Entrar</Text>
             </TouchableOpacity>
+            )}
 
            
             <View>
@@ -172,9 +176,15 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro')}>
+
+            {loading ? (
+                <ActivityIndicator size="large" color="#004AAD" />
+            ) : (
+                <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro')} disabled={loading}>
                 <Text style={styles.buttonText2}>Cadastre-se</Text>
             </TouchableOpacity>
+            )}
+          
         </View>
     );
 };

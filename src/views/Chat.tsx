@@ -1,19 +1,33 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity, Text, View, TextInput, Image, Pressable, Animated, ScrollView, Alert } from 'react-native';
+import { TouchableOpacity, Text, View, TextInput, Image, Pressable, Animated, ScrollView, Alert, Modal } from 'react-native';
 import styles from '../css/chatCss';
 import Imagens from "../../img/img";
 import api from '../../axios';
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import myContext from '../functions/authContext'; // Usando o contexto para acessar o Pusher
+import modalAvaliacao from '../../componentes/Modal/avaliacao';
 
 const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
     const [mensagem, setMensagem] = useState('');
     const [mensagens, setMensagens] = useState<any[]>([]);
-    const { roomId } = route.params;
+    const { roomId , idContratante, } = route.params;
     const { user } = useContext(myContext); // Acessa o contexto do usuário, incluindo o Pusher
     const scrollViewRef = useRef<ScrollView>(null);
     const [buttonScale] = useState(new Animated.Value(1));
+    const [chamarModal, setChamarModal] = useState(false);
+    const [rating, setRating] = useState(0); // Estado para armazenar a quantidade de estrelas selecionadas
+    
+
+    //tentando mandar os dados do cli na avaliacao
+    const [dataContratante, setDataContratante] = useState<any>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    
+    
+   
 
     // Função para buscar mensagens da sala
     const fetchMensagens = async () => {
@@ -125,6 +139,40 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         navigation.navigate('Login');
     };
 
+    //Criando função para avaliar profissional
+
+     // Buscar dados do contratante
+     {/*useEffect(() => {
+        const fetchDataContratante = async () => {
+            setLoading(true);
+            try {
+                const response = await api.get(`/cli/${idContratante}`);
+                setDataContratante(response.data);
+            } catch (err: any) {
+                setError(err.message);
+                Alert.alert('Erro ao buscar dados do Contratante', err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchDataContratante();
+    }, [idContratante]);
+    */}
+
+    const handleStarPress = (star) => {
+        setRating(star);
+    };
+
+    const EnviarAvaliacao = () => {
+        setChamarModal(false);
+        //const { nomeContratante } = dataContratante;
+        navigation.navigate('perfilProfissional', { 
+            rating, 
+            idContratante, 
+           
+        });
+    };
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -132,6 +180,9 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                 <View style={styles.navContent}>
                     <View style={styles.navbar}>
                         <Text style={styles.textNav}>Chat</Text>
+                        <TouchableOpacity onPress={() => setChamarModal(true)} style={styles.botaoPDF}>
+                            <Text style={styles.textoBotao}>Avaliar profissional</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <TouchableOpacity onPress={logoutUser}>
@@ -174,6 +225,39 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                         </Pressable>
                     </Animated.View>
                 </View>
+
+                {/* Modal de Avaliação */}
+                <Modal
+                transparent={true}
+                visible={chamarModal}
+                animationType="slide"
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={{ fontSize: 18, marginBottom: 10 }}>Avalie com estrelas:</Text>
+                        <View style={styles.starsContainer}>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <TouchableOpacity key={star} onPress={() => handleStarPress(star)}>
+                                    <Ionicons
+                                        name={star <= rating ? 'star' : 'star-outline'}
+                                        size={32}
+                                        color={star <= rating ? '#FFD700' : '#D3D3D3'}
+                                    />
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+
+                        <TouchableOpacity style={styles.submitButton} onPress={EnviarAvaliacao}>
+                            <Text style={{ fontSize: 18, color: 'white' }}>Enviar Avaliação</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => setChamarModal(false)}>
+                            <Text style={{ fontSize: 16, color: 'red', marginTop: 10 }}>Cancelar</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
             </View>
         </View>
     );

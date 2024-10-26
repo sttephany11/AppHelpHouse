@@ -27,6 +27,7 @@ import Configuracao from '../views/configuracao';
 
 
 
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -95,7 +96,7 @@ const Tabs = () => {
 const AppNavigator = () => {
   return (
       <ImageProvider>
-        <Stack.Navigator initialRouteName="homeStack">
+        <Stack.Navigator initialRouteName="bemvindo">
         <Stack.Screen name="List" component={List} options={{ headerShown: false }} />
          <Stack.Screen name="pedidoScreen" component={PedidoScreen} options={{ headerShown: false }} />
          <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
@@ -112,6 +113,8 @@ const AppNavigator = () => {
           <Stack.Screen name="meusPedidos" component={MeusPedidos} options={{ headerShown: false }} />
           <Stack.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
           <Stack.Screen name="configuracao" component={Configuracao} options={{ headerShown: false }} />
+
+
 
         </Stack.Navigator>
       </ImageProvider>

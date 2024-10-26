@@ -16,6 +16,10 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.navigate('profissionais', { profissao }); // Envia a profissão como parâmetro
   };
 
+  const perfilNav = () => {
+    navigation.navigate('perfil');
+  };
+
  
 
   return (
@@ -26,7 +30,7 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
     >
         <View style={{marginTop:70}}>
             <TouchableOpacity>
-            <AntDesign name="leftcircle" size={35} color='#004aad' style={{ marginLeft: 24 }} />
+            <AntDesign name="leftcircle" size={35} color='#004aad' style={{ marginLeft: 24 }} onPress={ perfilNav}/>
           </TouchableOpacity>
         <Text style={styles.Textconfiguracao}> Configurações</Text>
         </View>

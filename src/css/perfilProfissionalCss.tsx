@@ -104,20 +104,20 @@ const styles = StyleSheet.create({
     },
 
     imgAvaliacao:{
-        width:70,
-        height:70,
-        borderRadius:70,
+        width:80,
+        height:80,
+        borderRadius:80,
     },
 
     nomeAvaliador:{
-        marginLeft:80,
-        bottom:55,
+        marginLeft:90,
+        bottom:75,
         fontWeight:'bold',
         fontSize:17
     },
     textAvaliacao:{
-        marginLeft:80,
-        bottom:50,
+        marginLeft:90,
+        bottom:70,
         fontWeight:'bold',
         fontSize:12
     },

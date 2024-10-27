@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Image, Text, TouchableOpacity , ActivityIndicator} from 'react-native';
 import Imagens from "../../img/img";
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
@@ -15,7 +15,9 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const { user, setUser } = useContext(myContext);
+    
+    const userContext = useContext(myContext);
+    const { user, setUser } = useContext(myContext); 
 
 
 
@@ -160,9 +162,13 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
                 />
             </View>
 
-            <TouchableOpacity style={styles.button3} onPress={handleLogin} disabled={loading}>
-                <Text style={styles.buttonText2}>{loading ? 'Entrando...' : 'Entrar'}</Text>
+            {loading ? (
+                <ActivityIndicator size="large" color="#004AAD" />
+            ) : (
+                <TouchableOpacity style={styles.button3} onPress={handleLogin} disabled={loading}>
+                <Text style={styles.buttonText2}>Entrar</Text>
             </TouchableOpacity>
+            )}
 
            
             <View>
@@ -172,9 +178,15 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro')}>
+
+            {loading ? (
+                <ActivityIndicator size="large" color="#004AAD" />
+            ) : (
+                <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('cadastro')} disabled={loading}>
                 <Text style={styles.buttonText2}>Cadastre-se</Text>
             </TouchableOpacity>
+            )}
+          
         </View>
     );
 };

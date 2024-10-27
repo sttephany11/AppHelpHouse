@@ -84,13 +84,14 @@ const styles = StyleSheet.create({
     height: 20,
   },
   botaoPDF: {
-    backgroundColor: '#4CAF50', // Verde
+    backgroundColor: '#004aad', // Verde
     paddingVertical: 10, // Use paddingVertical para ajustar a altura do botão
-    paddingHorizontal: 15, // Ajusta o padding lateral
+    paddingHorizontal:10, // Ajusta o padding lateral
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 3,
+    marginLeft:50,
   },
   textoBotao: {
     color: '#FFFFFF', // Branco
@@ -116,6 +117,32 @@ onlineUser: {
     color: '#555',
     marginVertical: 2,
 },
+
+//MODALLL
+modalContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+},
+modalContent: {
+  width: 300,
+  padding: 20,
+  backgroundColor: 'white',
+  borderRadius: 10,
+  alignItems: 'center',
+},
+starsContainer: {
+  flexDirection: 'row',
+  marginBottom: 20,
+},
+submitButton: {
+  paddingVertical: 10,
+  paddingHorizontal: 20,
+  backgroundColor: '#4CAF50',
+  borderRadius: 5,
+},
+
 });
 
 export default styles;

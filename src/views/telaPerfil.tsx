@@ -17,6 +17,10 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const navigateToProfessionals = (profissao: string) => {
     navigation.navigate('profissionais', { profissao }); // Envia a profissão como parâmetro
   };
+  
+  const configuracao = () => {
+    navigation.navigate('configuracao');
+  };
 
   const goToOutraTela = () => {
     if (imageUrl) {
@@ -55,7 +59,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           
           <Text style={styles.textLocalizacao}>
             <Entypo name="location-pin" size={24} color="red" /> 
-            {user ? user.bairroContratante : 'Localização não disponível'}
+            {user ? user.cidadeContratante : 'Localização não disponível'}, {user ? user.bairroContratante : 'Localização não disponível'}
           </Text>
 
           <Text style={styles.maisProcurados}> Mais procurados </Text>
@@ -83,7 +87,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
           <View style={{marginTop:20}}></View>
           <View style={styles.container2}>
-          <TouchableOpacity style={styles.butaoAzul}>
+          <TouchableOpacity style={styles.butaoAzul} onPress={ configuracao}>
           <AntDesign name="setting" size={30} color="white" style={styles.icon} />
           <Text style={styles.textButton3}>Configurações</Text>
           </TouchableOpacity>

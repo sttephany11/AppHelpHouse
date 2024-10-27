@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     width:393,
     height:50,
-    marginTop:90,
+    marginTop:110,
     marginRight:20,
     
   },
@@ -64,23 +64,44 @@ const styles = StyleSheet.create({
 
   tabs: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems:'flex-end',
-    width:354,
+    justifyContent: 'flex-start',
+    alignItems:'flex-start',
+    width:180,
     height:60,
-    backgroundColor: '#FFF',
+    backgroundColor: 'red',
     padding: 8,
     borderRadius: 13,
-    marginBottom: 16,
-    position:'relative',
+    
+    marginRight:150,
     zIndex:-1,
     bottom:20
   },
+  tab2: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems:'flex-start',
+    width:180,
+    height:60,
+    backgroundColor: '#fff',
+    padding: 8,
+    borderRadius: 13,
+    marginBottom: 5,
+    marginLeft:150,
+    zIndex:-1,
+    bottom:80
+  },
   tab: {
+    color: '#fff',
+    fontSize: 20,
+    top:20,
+    fontWeight:'bold',
+
+  },
+  Texttab: {
     color: '#004aad',
     fontSize: 20,
-    paddingRight:120,
-    fontWeight:'800'
+    top:20,
+    fontWeight:'bold',
 
   },
   tab1:{
@@ -99,6 +120,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 4,
+    bottom:10
   },
   cardTitle: {
     fontSize: 20,

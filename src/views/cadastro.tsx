@@ -37,6 +37,7 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
                 <Text style={styles.titulo}>CADASTRO</Text>
             </View>
             <View style={styles.fundo}>
+                <ScrollView>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
                         <Text style={styles.titulo2}>Dados <Text style={styles.pessoais}>Pessoais</Text></Text>
@@ -117,6 +118,7 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
                     </View>
 
                 </View>
+                </ScrollView>
             </View>
         </KeyboardAvoidingView>
         

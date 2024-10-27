@@ -1,19 +1,33 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity, Text, View, TextInput, Image, Pressable, Animated, ScrollView, Alert } from 'react-native';
+import { TouchableOpacity, Text, View, TextInput, Image, Pressable, Animated, ScrollView, Alert, Modal } from 'react-native';
 import styles from '../css/chatCss';
 import Imagens from "../../img/img";
 import api from '../../axios';
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import myContext from '../functions/authContext'; // Usando o contexto para acessar o Pusher
+import modalAvaliacao from '../../componentes/Modal/avaliacao';
 
 const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
-    const [mensagem, setMensagem] = useState(''); // Estado para armazenar a mensagem atual
-    const [mensagens, setMensagens] = useState<any[]>([]); // Estado para armazenar as mensagens
-    const { roomId } = route.params;
-    const { user, pusherRef } = useContext(myContext); // Acessa o contexto global (inclui o Pusher)
-    const scrollViewRef = useRef<ScrollView>(null); // Ref para scroll automático
-    const [buttonScale] = useState(new Animated.Value(1)); // Animação do botão de envio
+    const [mensagem, setMensagem] = useState('');
+    const [mensagens, setMensagens] = useState<any[]>([]);
+    const { roomId , idContratante, } = route.params;
+    const { user } = useContext(myContext); // Acessa o contexto do usuário, incluindo o Pusher
+    const scrollViewRef = useRef<ScrollView>(null);
+    const [buttonScale] = useState(new Animated.Value(1));
+    const [chamarModal, setChamarModal] = useState(false);
+    const [rating, setRating] = useState(0); // Estado para armazenar a quantidade de estrelas selecionadas
+    
+
+    //tentando mandar os dados do cli na avaliacao
+    const [dataContratante, setDataContratante] = useState<any>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    
+    
+   
 
 
     useEffect(() => {
@@ -72,58 +86,41 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         }
     };
 
-    // Usa o Pusher do contexto para lidar com eventos em tempo real
-    useEffect(() => {
-        if (pusherRef.current) {
-            const channel = pusherRef.current.subscribe(`channel.${roomId}`);
+    
+    //Criando função para avaliar profissional
 
-            // Lidar com a inscrição no canal
-            channel.bind('pusher:subscription_succeeded', () => {
-                console.log('Inscrição no canal bem-sucedida!');
-            });
+     // Buscar dados do contratante
+     {/*useEffect(() => {
+        const fetchDataContratante = async () => {
+            setLoading(true);
+            try {
+                const response = await api.get(`/cli/${idContratante}`);
+                setDataContratante(response.data);
+            } catch (err: any) {
+                setError(err.message);
+                Alert.alert('Erro ao buscar dados do Contratante', err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchDataContratante();
+    }, [idContratante]);
+    */}
 
-            // Lidar com o recebimento de novas mensagens em tempo real
-            channel.bind('SendRealTimeMessage', (data: { message: string; senderId: string }) => {
-                if (data && data.message && data.senderId) {
-                    setMensagens((prevMensagens) => [
-                        ...prevMensagens,
-                        { message: data.message, senderId: data.senderId },
-                    ]);
-                } else {
-                    console.error('Dados recebidos não estão no formato esperado:', data);
-                }
-            });
-
-            // Cleanup: Desinscreve-se do canal ao desmontar o componente
-            return () => {
-                channel.unbind_all();
-                pusherRef.current.unsubscribe(`channel.${roomId}`);
-            };
-        } else {
-            console.error('Pusher não foi inicializado corretamente.');
-        }
-    }, [pusherRef, roomId]);
-
-    // Carrega as mensagens da sala ao montar o componente
-    useEffect(() => {
-        fetchMensagens();
-    }, [roomId]);
-
-    // Rola o ScrollView para o final sempre que as mensagens mudarem
-    useEffect(() => {
-        scrollViewRef.current?.scrollToEnd({ animated: true });
-    }, [mensagens]);
-
-    // Função para sair da sala de chat
-    const logoutUser = () => {
-        if (pusherRef.current) {
-            const channel = pusherRef.current.subscribe(`channel.${roomId}`);
-            channel.unbind_all();
-            channel.unsubscribe();
-        }
-        AsyncStorage.removeItem('authToken');
-        navigation.navigate('Login');
+    const handleStarPress = (star) => {
+        setRating(star);
     };
+
+    const EnviarAvaliacao = () => {
+        setChamarModal(false);
+        //const { nomeContratante } = dataContratante;
+        navigation.navigate('perfilProfissional', { 
+            rating, 
+            idContratante, 
+           
+        });
+    };
+
 
     return (
         <View style={styles.container}>
@@ -132,10 +129,11 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                 <View style={styles.navContent}>
                     <View style={styles.navbar}>
                         <Text style={styles.textNav}>Chat</Text>
+                        <TouchableOpacity onPress={() => setChamarModal(true)} style={styles.botaoPDF}>
+                            <Text style={styles.textoBotao}>Avaliar profissional</Text>
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={logoutUser}>
-                        <Text style={{ color: 'red', fontWeight: 'bold' }}>Sair</Text>
-                    </TouchableOpacity>
+                 
                 </View>
             </View>
 
@@ -172,6 +170,39 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                         </Pressable>
                     </Animated.View>
                 </View>
+
+                {/* Modal de Avaliação */}
+                <Modal
+                transparent={true}
+                visible={chamarModal}
+                animationType="slide"
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={{ fontSize: 18, marginBottom: 10 }}>Avalie com estrelas:</Text>
+                        <View style={styles.starsContainer}>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <TouchableOpacity key={star} onPress={() => handleStarPress(star)}>
+                                    <Ionicons
+                                        name={star <= rating ? 'star' : 'star-outline'}
+                                        size={32}
+                                        color={star <= rating ? '#FFD700' : '#D3D3D3'}
+                                    />
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+
+                        <TouchableOpacity style={styles.submitButton} onPress={EnviarAvaliacao}>
+                            <Text style={{ fontSize: 18, color: 'white' }}>Enviar Avaliação</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => setChamarModal(false)}>
+                            <Text style={{ fontSize: 16, color: 'red', marginTop: 10 }}>Cancelar</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
             </View>
         </View>
     );

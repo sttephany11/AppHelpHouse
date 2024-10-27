@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Alert, TextInput, ScrollView } from 'react-native';
 import styles from '../css/cadastro2Css';
 import cep from '../../componentes/apiCep/api';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useUser } from '../cliContext';
 import api from '../../axios';
+import myContext from '../functions/authContext';
 
 const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
     const { nomeContratante, cpfContratante, telefoneContratante, nascContratante, emailContratante, password } = route.params;
@@ -16,6 +17,10 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     const [complementoContratante, setComplementoContratante] = useState('');
     
     const { userId, setUserId, setUserData } = useUser();
+
+    const userContext = useContext(myContext);
+    const { user, setUser } = useContext(myContext);
+
 
     const verificar = async () => {
         try {
@@ -66,6 +71,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
         // No need for response.ok, Axios throws an error for non-200 responses
         setUserData(data);
+        setUser(data);
     } catch (error) {
         // Axios errors can be handled here
         const errorMessage = error.response?.data?.message || 'Error fetching user data';
@@ -113,7 +119,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     <View style={styles.title}>
                         <Text style={styles.titulo2}>Para finalizar,<Text style={styles.passos}> adicione </Text><Text style={styles.passos}>seu endereço</Text></Text>
                     </View>
-
+                    
                     <View style={styles.input}>
                         <Text style={styles.title3}>Cep</Text>
                         
@@ -142,7 +148,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
 
                         <Text style={styles.title3}>Cidade</Text>
                         <TextInput
-                            placeholder=""
+                            placeholder="Sua cidade..."
                             value={cidadeContratante}
                             onChangeText={setCidadeContratante}
                             style={styles.input3}
@@ -157,7 +163,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                         />
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={{ flex: 3, marginRight: 15 }}>
+                            <View style={{ flex: 2, marginRight: 10 }}>
                                 <Text style={styles.title3}>Complemento</Text>
                                 <TextInput
                                     placeholder="Digite um complemento..."

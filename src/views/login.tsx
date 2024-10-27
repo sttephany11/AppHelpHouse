@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 import Imagens from "../../img/img";
 import { FloatingLabelInput } from 'react-native-floating-label-input';
@@ -18,6 +18,8 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
     const { user, setUser } = useContext(myContext);
 
 
+
+
      // Função para lidar com o login
      const handleLogin = async () => {
         if (!emailContratante || !password) {
@@ -32,7 +34,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
             // Inicializa o Pusher sem a necessidade de armazená-lo no estado
             const pusherInstance = new Pusher('6aef362f6c720f776c8b', {
                 cluster: 'sa1',
-                authEndpoint: 'http://10.0.0.161:8000/api/pusher/auth', // Endpoint de autenticação
+                authEndpoint: 'http://10.0.0.121:8000/api/pusher/auth', // Endpoint de autenticação
             });
             console.log("Pusher inicializado com sucesso");
             //  Conecta ao Pusher e aguarda o evento de conexão
@@ -178,3 +180,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
 };
 
 export default Login;
+
+function setReload(arg0: (prevReload: any) => boolean) {
+    throw new Error('Function not implemented.');
+}

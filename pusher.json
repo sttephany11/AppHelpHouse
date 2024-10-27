@@ -1,9 +1,0 @@
-{
-  "appId":"1858907",
-    "key": "c58eb1455bc63e559d2c",
-    "secret":"e4ce4d2e322e9a3105cd",
-    "cluster": "sa1",
-    "encrypted": true,
-    "restServer": "http://10.0.0.121:8000"
-  }
-  

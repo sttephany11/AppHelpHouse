@@ -8,13 +8,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import myContext from '../functions/authContext'; // Usando o contexto para acessar o Pusher
 
 const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
-    const [mensagem, setMensagem] = useState('');
-    const [mensagens, setMensagens] = useState<any[]>([]);
+    const [mensagem, setMensagem] = useState(''); // Estado para armazenar a mensagem atual
+    const [mensagens, setMensagens] = useState<any[]>([]); // Estado para armazenar as mensagens
     const { roomId } = route.params;
-    const { user } = useContext(myContext); // Acessa o contexto do usuário, incluindo o Pusher
-    const scrollViewRef = useRef<ScrollView>(null);
-    const [buttonScale] = useState(new Animated.Value(1));
+    const { user, pusherRef } = useContext(myContext); // Acessa o contexto global (inclui o Pusher)
+    const scrollViewRef = useRef<ScrollView>(null); // Ref para scroll automático
+    const [buttonScale] = useState(new Animated.Value(1)); // Animação do botão de envio
 
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setReload(prevReload => !prevReload); // Toggle state to force reload
+        }, 2000); // Reload every 5 seconds
+      
+        return () => clearInterval(interval); // Cleanup on component unmount
+      }, []);
     // Função para buscar mensagens da sala
     const fetchMensagens = async () => {
         try {
@@ -26,7 +34,6 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
             const response = await api.get(`/chat/messages/${roomId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log("Mensagens carregadas com sucesso:", response.data.messages); // Log das mensagens carregadas
             setMensagens(response.data.messages);
         } catch (error) {
             console.error('Erro ao buscar mensagens:', error);
@@ -37,8 +44,6 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     // Função para enviar mensagem
     const enviarMensagem = async () => {
         if (!mensagem.trim()) return;
-        console.log("Enviando mensagem:", mensagem); // Log da mensagem que será enviada
-
         try {
             const token = await AsyncStorage.getItem('authToken');
             if (!token) {
@@ -55,33 +60,30 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                     'Content-Type': 'application/json',
                 },
             });
-            console.log("Mensagem enviada com sucesso."); // Log de sucesso no envio
-
+            // Atualiza a lista de mensagens localmente
             setMensagens((prevMensagens) => [
                 ...prevMensagens,
-                { message: mensagem, senderId: user?.idContratado }
+                { message: mensagem, senderId: user?.idContratante }
             ]);
-            setMensagem('');
+            setMensagem(''); // Limpa o campo de mensagem após o envio
         } catch (error) {
             console.error('Erro ao enviar mensagem:', error);
             Alert.alert('Erro', 'Houve um problema ao enviar a mensagem.');
         }
     };
 
-    // Usa o Pusher do contexto
+    // Usa o Pusher do contexto para lidar com eventos em tempo real
     useEffect(() => {
-        if (user?.pusher) {
-            console.log("Iniciando inscrição no Pusher..."); // Log do início da inscrição
+        if (pusherRef.current) {
+            const channel = pusherRef.current.subscribe(`channel.${roomId}`);
 
-            const channel = user.pusher.subscribe(`channel.${roomId}`);
-
+            // Lidar com a inscrição no canal
             channel.bind('pusher:subscription_succeeded', () => {
                 console.log('Inscrição no canal bem-sucedida!');
             });
 
+            // Lidar com o recebimento de novas mensagens em tempo real
             channel.bind('SendRealTimeMessage', (data: { message: string; senderId: string }) => {
-                console.log("Mensagem recebida via Pusher:", data); // Log das mensagens recebidas em tempo real
-
                 if (data && data.message && data.senderId) {
                     setMensagens((prevMensagens) => [
                         ...prevMensagens,
@@ -92,32 +94,30 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                 }
             });
 
+            // Cleanup: Desinscreve-se do canal ao desmontar o componente
             return () => {
-                console.log("Desinscrevendo do canal..."); // Log quando o componente é desmontado
-
                 channel.unbind_all();
-                user.pusher.unsubscribe(`channel.${roomId}`);
+                pusherRef.current.unsubscribe(`channel.${roomId}`);
             };
         } else {
             console.error('Pusher não foi inicializado corretamente.');
         }
-    }, [user, roomId]);
+    }, [pusherRef, roomId]);
 
-    // Carregar mensagens da sala ao montar o componente
+    // Carrega as mensagens da sala ao montar o componente
     useEffect(() => {
         fetchMensagens();
     }, [roomId]);
 
-    // Rolar o ScrollView para o final sempre que as mensagens mudarem
+    // Rola o ScrollView para o final sempre que as mensagens mudarem
     useEffect(() => {
         scrollViewRef.current?.scrollToEnd({ animated: true });
     }, [mensagens]);
 
+    // Função para sair da sala de chat
     const logoutUser = () => {
-        if (user?.pusher) {
-            console.log("Desconectando e desinscrevendo o Pusher..."); // Log de logout e desconexão do Pusher
-
-            const channel = user.pusher.subscribe(`channel.${roomId}`);
+        if (pusherRef.current) {
+            const channel = pusherRef.current.subscribe(`channel.${roomId}`);
             channel.unbind_all();
             channel.unsubscribe();
         }
@@ -133,7 +133,6 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                     <View style={styles.navbar}>
                         <Text style={styles.textNav}>Chat</Text>
                     </View>
-
                     <TouchableOpacity onPress={logoutUser}>
                         <Text style={{ color: 'red', fontWeight: 'bold' }}>Sair</Text>
                     </TouchableOpacity>
@@ -142,14 +141,13 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
             <ScrollView style={styles.mensagensContainer} ref={scrollViewRef}>
                 {mensagens.map((msg, index) => {
-                    const isContratado = msg.senderId === user?.idContratado;
-
+                    const isContratante = msg.senderId === user?.idContratante;
                     return (
                         <View
                             key={index}
                             style={[styles.mensagemItem, {
-                                alignSelf: isContratado ? 'flex-end' : 'flex-start',
-                                backgroundColor: isContratado ? '#87CEFA' : '#f1f1f1',
+                                alignSelf: isContratante ? 'flex-end' : 'flex-start',
+                                backgroundColor: isContratante ? '#87CEFA' : '#f1f1f1',
                                 borderRadius: 10,
                                 padding: 10,
                                 maxWidth: '70%',
@@ -180,3 +178,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 };
 
 export default Chat;
+function setReload(arg0: (prevReload: any) => boolean) {
+    throw new Error('Function not implemented.');
+}
+

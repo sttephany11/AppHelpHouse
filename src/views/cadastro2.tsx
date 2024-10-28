@@ -5,6 +5,7 @@ import cep from '../../componentes/apiCep/api';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useUser } from '../cliContext';
 import api from '../../axios';
+import { useImage } from '../ImageContext';
 import myContext from '../functions/authContext';
 
 const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
@@ -15,7 +16,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     const [cidadeContratante, setCidadeContratante] = useState('');
     const [numCasaContratante, setNumCasaContratante] = useState('');
     const [complementoContratante, setComplementoContratante] = useState('');
-    
+    const { imageUrl } = useImage(); 
     const { userId, setUserId, setUserData } = useUser();
 
     const userContext = useContext(myContext);
@@ -37,6 +38,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                 complementoContratante,
                 bairroContratante,
                 cidadeContratante,
+                imagemContratante:imageUrl
             });
     
             const result = response.data; 

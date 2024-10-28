@@ -22,6 +22,7 @@ interface Profissional {
   idContratado: string;
   descContratado:string;
   cidadeContratado:string;
+  imagemContratado:string;
 }
 
 interface Props {
@@ -264,6 +265,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
                             descContratado: data.descContratado,
                             sobrenomeContratado: data.sobrenomeContratado,
                             cidadeContratado: data.cidadeContratado,
+                            imagemContratado: data.imagemContratado,
                           })
                       
                     }} >

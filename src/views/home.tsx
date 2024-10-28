@@ -36,7 +36,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         <View style={styles.containerBoasVindas}>
           <Text style={styles.boasVindas}>Olá, {user.nomeContratante}</Text>
           <TouchableOpacity onPress={perfilNav}>
-            <Image source={imageUrl ? { uri: imageUrl } : Imagens.perfilUsuario4} style={styles.ImgPerfil} />
+            <Image source={user.imagemContratante ? { uri: user.imagemContratante } : Imagens.perfilUsuario4} style={styles.ImgPerfil} />
           </TouchableOpacity>
         </View>
 

@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ route, navigation }) => {
-    const { nomeContratado,sobrenomeContratado, bairroContratado, idContratado, descContratado,profissaoContratado, cidadeContratado } = route.params; // Recebe o idContratado
+    const { nomeContratado,sobrenomeContratado, bairroContratado, idContratado, descContratado,profissaoContratado, cidadeContratado, imagemContratado } = route.params; // Recebe o idContratado
     const { rating = 0, idContratante } = route.params; // Obtém a avaliação e os dados do cliente
     const { imageUrl } = useImage(); // Obtém a URL da imagem do contexto
     const { userData } = useUser(); // Altere para userData
@@ -61,7 +61,7 @@ const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ ro
                 
                 {/* Verifica se há uma URL de imagem e exibe-a, caso contrário, exibe a imagem padrão */}
                 <TouchableOpacity>
-                    <Image source={ Imagens.perfilUsuario4} style={styles.imgPerfil} />
+                    <Image source={ imagemContratado ? { uri: imagemContratado } : Imagens.perfilUsuario4 } style={styles.imgPerfil} />
                 </TouchableOpacity>
                 
                 <Text style={styles.nome}> {nomeContratado} {sobrenomeContratado}</Text>

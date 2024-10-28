@@ -74,7 +74,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
       }
 
       if (!token) {
-        Alert.alert('Erro', 'Token de autenticação não encontrado.');
+        console.log('Erro', 'Token de autenticação não encontrado.');
         return;
       }
 

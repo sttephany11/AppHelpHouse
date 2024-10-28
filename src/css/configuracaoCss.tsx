@@ -13,7 +13,26 @@ const styles = StyleSheet.create({
         marginLeft:33,
         height:680
     },
-    
+    // styles.input e styles.saveButton
+input: {
+    borderColor: '#ddd',
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
+    flex: 1
+  },
+  saveButton: {
+    backgroundColor: '#004aad',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 20
+  },
+  saveButtonText: {
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+  
     container:{
     marginLeft:30,
     marginTop:20,

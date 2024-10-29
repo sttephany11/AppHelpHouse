@@ -31,7 +31,6 @@ interface Props {
 }
 
 
-
 const List: React.FC<Props> = ({ navigation, route }) => {
   const [data, setData] = useState<Profissional[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -269,7 +268,8 @@ const List: React.FC<Props> = ({ navigation, route }) => {
                           })
                       
                     }} >
-            <Image source={Imagens.perfilUsuario4} style={styles.imgPerfilPro}/></TouchableOpacity>
+                    
+            <Image source={ data.imagemContratado ? { uri: data.imagemContratado } : Imagens.perfilUsuario4 } style={styles.imgPerfilPro}/></TouchableOpacity>
                         <Text style={styles.NomeProfissional}>
                           {data.nomeContratado} {data.sobrenomeContratado}
                         </Text>

@@ -12,7 +12,7 @@ import modalAvaliacao from '../../componentes/Modal/avaliacao';
 const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
     const [mensagem, setMensagem] = useState('');
     const [mensagens, setMensagens] = useState<any[]>([]);
-    const { roomId , idContratante, } = route.params;
+    const { roomId } = route.params;
     const { user } = useContext(myContext); // Acessa o contexto do usuário, incluindo o Pusher
     const scrollViewRef = useRef<ScrollView>(null);
     const [buttonScale] = useState(new Animated.Value(1));
@@ -164,12 +164,12 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     };
 
     const EnviarAvaliacao = () => {
+        const idContratante = user.idContratante
         setChamarModal(false);
         //const { nomeContratante } = dataContratante;
         navigation.navigate('perfilProfissional', { 
-            rating, 
-            idContratante, 
-           
+            rating,
+            idContratante 
         });
     };
 

@@ -8,6 +8,7 @@ import { useUser } from '../cliContext';
 import { getPro } from '../functions/getPro';
 import { Ionicons } from '@expo/vector-icons'; // Para os ícones de estrela
 //import { getServicos } from "../functions/getServico";
+import myContext from '../functions/authContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -21,7 +22,7 @@ const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ ro
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
-    //const { user } = useContext(myContext);
+    const { user } = useContext(myContext);
     const [token, setToken] = useState<string | null>(null);
       
       // Busca o token armazenado no AsyncStorage
@@ -89,7 +90,7 @@ const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ ro
                 <Text style={styles.vejaMais}>Avaliações</Text>
                 <View style={styles.containerBase}>
                     <Image source={Imagens.perfil} style={styles.imgAvaliacao} />
-                    <Text style={styles.nomeAvaliador}>{idContratante}</Text>
+                    <Text style={styles.nomeAvaliador}>{user.nomeContratante}</Text>
                     <Text style={styles.textAvaliacao}>Comentário do cliente.</Text>
                     
                     {/* Mostra a avaliação com base no número de estrelas */}

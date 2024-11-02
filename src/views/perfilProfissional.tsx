@@ -89,7 +89,7 @@ const PerfilProfissionalScreen: React.FC<{route: any, navigation: any }> = ({ ro
                 
                 <Text style={styles.vejaMais}>Avaliações</Text>
                 <View style={styles.containerBase}>
-                    <Image source={Imagens.perfil} style={styles.imgAvaliacao} />
+                    <Image source={ user.imagemContratante ? { uri: user.imagemContratante } : Imagens.perfilUsuario4 } style={styles.imgAvaliacao} />
                     <Text style={styles.nomeAvaliador}>{user.nomeContratante}</Text>
                     <Text style={styles.textAvaliacao}>Comentário do cliente.</Text>
                     

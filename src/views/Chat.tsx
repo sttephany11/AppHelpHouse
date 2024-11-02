@@ -117,6 +117,17 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         }
     }, [user, roomId]);
 
+    // Busca mensagens a cada 5 segundos
+useEffect(() => {
+    fetchMensagens(); // Busca inicial de mensagens
+    const intervalId = setInterval(() => {
+        fetchMensagens(); // Recarregar mensagens a cada 5 segundos
+    }, 1000);
+
+    return () => clearInterval(intervalId); // Limpa o intervalo ao desmontar
+}, [roomId]);
+
+
     // Carregar mensagens da sala ao montar o componente
     useEffect(() => {
         fetchMensagens();

@@ -12,12 +12,12 @@ import modalAvaliacao from '../../componentes/Modal/avaliacao';
 const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
     const [mensagem, setMensagem] = useState('');
     const [mensagens, setMensagens] = useState<any[]>([]);
-    const { roomId } = route.params;
+    const { roomId, idContratado } = route.params;
     const { user } = useContext(myContext); // Acessa o contexto do usuário, incluindo o Pusher
     const scrollViewRef = useRef<ScrollView>(null);
     const [buttonScale] = useState(new Animated.Value(1));
     const [chamarModal, setChamarModal] = useState(false);
-    const [rating, setRating] = useState(0); // Estado para armazenar a quantidade de estrelas selecionadas
+    const [ratingAvaliacao, setRating] = useState(0); // Estado para armazenar a quantidade de estrelas selecionadas
     
 
     //tentando mandar os dados do cli na avaliacao
@@ -167,15 +167,38 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         setRating(star);
     };
 
-    const EnviarAvaliacao = () => {
-        const idContratante = user.idContratante
+    const EnviarAvaliacao = async () => {
+        const idContratante = user.idContratante;
         setChamarModal(false);
-        //const { nomeContratante } = dataContratante;
-        navigation.navigate('perfilProfissional', { 
-            rating,
-            idContratante 
-        });
+    
+        try {
+            // Recupera o token de autenticação do AsyncStorage
+            const token = await AsyncStorage.getItem('authToken');
+            if (!token) {
+                console.error('Token não encontrado');
+                return;
+            }
+    
+            // Envio da avaliação usando Axios, com o token incluído nos cabeçalhos
+            const response = await api.post('/avaliacao', {
+                ratingAvaliacao,
+                idContratado,
+                idContratante
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            console.log("Avaliação enviada com sucesso:", response.data);
+    
+        } catch (error) {
+            console.error("Erro ao enviar avaliação:", error);
+        }
     };
+    
+    
 
     return (
         <View style={styles.container}>
@@ -243,9 +266,9 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                             {[1, 2, 3, 4, 5].map((star) => (
                                 <TouchableOpacity key={star} onPress={() => handleStarPress(star)}>
                                     <Ionicons
-                                        name={star <= rating ? 'star' : 'star-outline'}
+                                        name={star <= ratingAvaliacao ? 'star' : 'star-outline'}
                                         size={32}
-                                        color={star <= rating ? '#FFD700' : '#D3D3D3'}
+                                        color={star <= ratingAvaliacao ? '#FFD700' : '#D3D3D3'}
                                     />
                                 </TouchableOpacity>
                             ))}

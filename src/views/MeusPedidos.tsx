@@ -117,7 +117,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
 
         if (roomId) {
             console.log(`Sala de chat criada ou encontrada com sucesso: ${roomId}`);
-            navigation.navigate('Chat', { roomId });  // Passa o roomId ao navegar para o chat
+            navigation.navigate('Chat', { roomId, idContratado });  // Passa o roomId ao navegar para o chat
         } else {
             Alert.alert('Erro', 'Não foi possível criar ou encontrar a sala de chat.');
             console.error('Erro: roomId não encontrado na resposta da API.');

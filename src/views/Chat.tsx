@@ -9,6 +9,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import myContext from '../functions/authContext'; // Usando o contexto para acessar o Pusher
 import modalAvaliacao from '../../componentes/Modal/avaliacao';
 
+interface Avaliacao {
+    ratingAvaliacao,
+
+  }
+  
+  interface Props {
+    navigation: any;
+    route: any;  // Adicionando a rota para receber parâmetros
+  }
+
+  
 const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
     const [mensagem, setMensagem] = useState('');
     const [mensagens, setMensagens] = useState<any[]>([]);

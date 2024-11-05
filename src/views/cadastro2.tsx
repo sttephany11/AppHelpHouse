@@ -115,7 +115,6 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     };
 
     return (
-        <ScrollView style={styles.container}>
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
@@ -196,7 +195,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     </View>
                 </View>
             </View>
-        </ScrollView>
+        
     );
 };
 

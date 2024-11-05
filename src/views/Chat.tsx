@@ -51,7 +51,6 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
             const response = await api.get(`/chat/messages/${roomId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log("Mensagens carregadas com sucesso:", response.data.messages); // Log das mensagens carregadas
             setMensagens(response.data.messages);
         } catch (error) {
             console.error('Erro ao buscar mensagens:', error);
@@ -128,21 +127,15 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         }
     }, [user, roomId]);
 
-    // Busca mensagens a cada 5 segundos
-useEffect(() => {
-    fetchMensagens(); // Busca inicial de mensagens
-    const intervalId = setInterval(() => {
-        fetchMensagens(); // Recarregar mensagens a cada 5 segundos
-    }, 1000);
-
-    return () => clearInterval(intervalId); // Limpa o intervalo ao desmontar
-}, [roomId]);
-
-
-    // Carregar mensagens da sala ao montar o componente
-    useEffect(() => {
-        fetchMensagens();
-    }, [roomId]);
+         // Recarregar as mensagens a cada 5 segundos
+         useEffect(() => {
+            fetchMensagens(); // Busca inicial de mensagens
+            const intervalId = setInterval(() => {
+                fetchMensagens(); // Recarregar mensagens a cada 5 segundos
+            }, 1000);
+    
+            return () => clearInterval(intervalId); // Limpa o intervalo ao desmontar
+        }, [roomId]);
 
     // Rolar o ScrollView para o final sempre que as mensagens mudarem
     useEffect(() => {

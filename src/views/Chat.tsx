@@ -7,12 +7,7 @@ import api from '../../axios';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import myContext from '../functions/authContext'; // Usando o contexto para acessar o Pusher
-import modalAvaliacao from '../../componentes/Modal/avaliacao';
 
-interface Avaliacao {
-    ratingAvaliacao,
-
-  }
   
   interface Props {
     navigation: any;
@@ -28,8 +23,8 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     const scrollViewRef = useRef<ScrollView>(null);
     const [buttonScale] = useState(new Animated.Value(1));
     const [chamarModal, setChamarModal] = useState(false);
-    const [ratingAvaliacao, setRating] = useState(0); // Estado para armazenar a quantidade de estrelas selecionadas
-    
+    const [ratingAvaliacao, setRating] = useState(0); 
+    const [descavaliacao, setDescavaliacao] = useState('');    
 
     //tentando mandar os dados do cli na avaliacao
     const [dataContratante, setDataContratante] = useState<any>(null);
@@ -154,25 +149,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         navigation.navigate('Login');
     };
 
-    //Criando função para avaliar profissional
-
-     // Buscar dados do contratante
-     {/*useEffect(() => {
-        const fetchDataContratante = async () => {
-            setLoading(true);
-            try {
-                const response = await api.get(`/cli/${idContratante}`);
-                setDataContratante(response.data);
-            } catch (err: any) {
-                setError(err.message);
-                Alert.alert('Erro ao buscar dados do Contratante', err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDataContratante();
-    }, [idContratante]);
-    */}
+   
 
     const handleStarPress = (star) => {
         setRating(star);
@@ -180,6 +157,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
     const EnviarAvaliacao = async () => {
         const idContratante = user.idContratante;
+        
         setChamarModal(false);
     
         try {
@@ -190,24 +168,27 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                 return;
             }
     
-            // Envio da avaliação usando Axios, com o token incluído nos cabeçalhos
-            const response = await api.post('/avaliacao', {
-                ratingAvaliacao,
-                idContratado,
-                idContratante
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-    
-            console.log("Avaliação enviada com sucesso:", response.data);
-    
-        } catch (error) {
-            console.error("Erro ao enviar avaliação:", error);
+         // Envio da avaliação com todos os dados
+      const response = await api.post('/avaliacao', {
+        ratingAvaliacao,
+        descavaliacao,
+        idContratado,
+        idContratante: user.idContratante
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-    };
+      });
+
+      Alert.alert('Sucesso', 'Avaliação enviada com sucesso!');
+      setRating(0);
+      setDescavaliacao('');
+    } catch (error) {
+      console.error("Erro ao enviar avaliação:", error);
+      Alert.alert('Erro', 'Houve um problema ao enviar a avaliação.');
+    }
+  };
     
     
 
@@ -284,6 +265,15 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                                 </TouchableOpacity>
                             ))}
                         </View>
+                        <Text style={{ fontSize: 18,  }}>Adicione um comentário:</Text>
+                        <TextInput
+                        style={styles.input2}
+                        placeholder="Escreva um comentário..."
+                        placeholderTextColor="#888"
+                        value={descavaliacao}
+                        onChangeText={setDescavaliacao}
+                        
+                    />
 
                         <TouchableOpacity style={styles.submitButton} onPress={EnviarAvaliacao}>
                             <Text style={{ fontSize: 18, color: 'white' }}>Enviar Avaliação</Text>

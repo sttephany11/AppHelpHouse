@@ -195,7 +195,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
               style={{ height: 30, width: 300 , bottom:60}}
             >
               <Picker.Item label="Selecione" value="" />
-              <Picker.Item label="Encanador" value="encanador" />
+              <Picker.Item label="Encanador" value="Encanador" />
               <Picker.Item label="Instalador de Papel de Parede" value="Instalador de Papel de Parede" />
               <Picker.Item label="Jardineiro" value="Jardineiro" />
               <Picker.Item label="Montador de Móveis" value="Montador de Móveis" />

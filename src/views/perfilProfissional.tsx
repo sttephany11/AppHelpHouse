@@ -27,7 +27,7 @@ const PerfilProfissionalScreen: React.FC<{ route: any, navigation: any }> = ({ r
   const [data, setData] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { user } = useContext(myContext);
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null> (null);
   const [avaliacao, setAvaliacao] = useState<Avaliacao[]>([]);
 
   // Busca o token armazenado no AsyncStorage
@@ -98,10 +98,10 @@ const PerfilProfissionalScreen: React.FC<{ route: any, navigation: any }> = ({ r
         <Text style={styles.vejaMais}>Veja mais de Clodoaldo</Text>
         <View style={styles.containerVerical}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity><Image source={Imagens.mestreDeObra} style={styles.fotosRolagem} /></TouchableOpacity>
-            <TouchableOpacity><Image source={Imagens.mestreDeObra} style={styles.fotosRolagem2} /></TouchableOpacity>
-            <TouchableOpacity><Image source={Imagens.mestreDeObra} style={styles.fotosRolagem2} /></TouchableOpacity>
-            <TouchableOpacity><Image source={Imagens.mestreDeObra} style={styles.fotosRolagem2} /></TouchableOpacity>
+            <TouchableOpacity><Image source={Imagens.imgPortifolio} style={styles.fotosRolagem} /></TouchableOpacity>
+            <TouchableOpacity><Image source={Imagens.imgPortifolio} style={styles.fotosRolagem2} /></TouchableOpacity>
+            <TouchableOpacity><Image source={Imagens.imgPortifolio} style={styles.fotosRolagem2} /></TouchableOpacity>
+            
           </ScrollView>
         </View>
 
@@ -126,6 +126,7 @@ const PerfilProfissionalScreen: React.FC<{ route: any, navigation: any }> = ({ r
               ))}
             </View>
           </View>
+          
         ))}
       </View>
     </ScrollView>

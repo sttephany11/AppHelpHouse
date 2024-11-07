@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
         width:360,
         height:150,
         fontSize:20,
+        textAlignVertical: 'top',
       },
       inputTitulo:{
         width:360,

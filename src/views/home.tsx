@@ -18,7 +18,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   };
 
   const perfilNav = () => {
-    navigation.navigate('telaPerfil');
+    navigation.navigate('perfil');
   };
 
   
@@ -62,8 +62,8 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
               <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Pintor')}>
                 <Text style={styles.textButton}>Pintor</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Mecânico')}>
-                <Text style={styles.textButton}>Mecânico</Text>
+              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Pedreiro')}>
+                <Text style={styles.textButton}>Pedreiro</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Chaveiro')}>
                 <Text style={styles.textButton}>Chaveiro</Text>
@@ -82,6 +82,9 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Montador de Móveis')}>
                 <Text style={styles.textButton}>Montador de Móveis</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Mecânico')}>
+                <Text style={styles.textButton}>Mecânico</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonProfissoes2} onPress={() => navigateToProfessionals('Costureira')}>
                 <Text style={styles.textButton}>Costureira</Text>

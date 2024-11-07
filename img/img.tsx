@@ -53,6 +53,7 @@ const Imagens = {
    //img chat
    iconEnviar:require("../assets/iconEnviar.png"),
    cartao:require("../assets/imgApp/cartao.png"),
+   imgPortifolio:require("../assets/imgApp/mais.png"),
    
 }
 export default Imagens;

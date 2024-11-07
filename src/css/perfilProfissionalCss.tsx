@@ -121,6 +121,12 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:12
     },
+    mediaEstrelas:{
+
+    },
+    semAvaliacoes:{
+
+    },
 
 });
 

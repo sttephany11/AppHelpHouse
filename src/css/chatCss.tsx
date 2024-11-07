@@ -139,10 +139,20 @@ starsContainer: {
 submitButton: {
   paddingVertical: 10,
   paddingHorizontal: 20,
-  backgroundColor: '#4CAF50',
+  backgroundColor: '#004aad',
   borderRadius: 5,
 },
-
+input2: {
+  height: 40,
+  width: 250,
+  borderColor: '#ccc',
+  borderWidth: 1,
+  borderRadius: 8,
+  padding: 10,
+  marginTop: 15,
+  marginBottom: 10,
+  textAlignVertical: 'top', // Para que o texto comece no topo
+},
 });
 
 export default styles;

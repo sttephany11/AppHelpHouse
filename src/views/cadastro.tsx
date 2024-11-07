@@ -5,6 +5,7 @@ import { TextInputMask } from 'react-native-masked-text';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
 import styles from '../css/cadastroCss';
 import dayjs from 'dayjs';
+import moment from 'moment';
 
 
 const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
@@ -24,7 +25,15 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
         });
     }
     
-
+     const handleDateChange = (text : any) => {
+        setNascContratante(text);
+        
+        // Convertendo a data para o formato do backend (YYYY-MM-DD)
+        const formattedDate = moment(text, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        
+        // Aqui você pode usar 'formattedDate' para enviar para o backend
+        console.log('Data formatada para o backend:', formattedDate);
+    };
 
 
     return (
@@ -63,10 +72,7 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
                            
                      
                             value={nascContratante}
-                            onChangeText={text => {
-                                // Atualiza o estado com o valor formatado para exibição
-                                setNascContratante(text);
-                            }}
+                            onChangeText={handleDateChange}
                             style={{
                                 borderBottomWidth: 2,
                                 borderColor: '#fff',

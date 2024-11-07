@@ -36,6 +36,7 @@
     "install": "^0.13.0",
     "laravel-echo": "^1.16.1",
     "mmkv": "^1.0.4",
+    "moment": "^2.30.1",
     "pusher-js": "^8.4.0-rc2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

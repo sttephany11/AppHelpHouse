@@ -34,7 +34,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
             // Inicializa o Pusher sem a necessidade de armazená-lo no estado
             const pusherInstance = new Pusher('6aef362f6c720f776c8b', {
                 cluster: 'sa1',
-                authEndpoint: 'http://localhost:8000/api/pusher/auth', // Endpoint de autenticação
+                authEndpoint: 'http://10.0.0.121:8000/api/pusher/auth', // Endpoint de autenticação
             });
             console.log("Pusher inicializado com sucesso");
             //  Conecta ao Pusher e aguarda o evento de conexão

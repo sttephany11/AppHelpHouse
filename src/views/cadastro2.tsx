@@ -36,6 +36,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                 cepContratante,
                 numCasaContratante,
                 complementoContratante,
+                nascContratante,
                 bairroContratante,
                 cidadeContratante,
                 imagemContratante:imageUrl

@@ -43,10 +43,11 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                 console.error('Token não encontrado');
                 return;
             }
-            const response = await api.get(`/chat/messages/${roomId}`, {
+            const response = await api.get(`/chat/messages/${roomId}`, {    
                 headers: { Authorization: `Bearer ${token}` },
             });
             setMensagens(response.data.messages);
+            console.log("mensagemmm: ",response.data.messages);
         } catch (error) {
             console.error('Erro ao buscar mensagens:', error);
             Alert.alert('Erro', 'Não foi possível buscar mensagens.');
@@ -209,26 +210,32 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                     </TouchableOpacity>
                 </View>
             </View>
-
             <ScrollView style={styles.mensagensContainer} ref={scrollViewRef}>
-                {mensagens.map((msg, index) => {
-                    const isContratado = msg.senderId === user?.idContratado;
+  {mensagens.map((msg, index) => {
+    // Verificar se a mensagem foi enviada pelo contratante ou pelo contratado
+    const isContratante = msg.idContratante === user.idContratante;
+    const cor = isContratante ? "#FFD580" : "#ADD8E6"; // Laranja claro para contratante, azul claro para contratado
+    const alinhamento = isContratante ? "flex-end" : "flex-start";
 
-                    return (
-                        <View
-                            key={index}
-                            style={[styles.mensagemItem, {
-                                alignSelf: isContratado ? 'flex-end' : 'flex-start',
-                                backgroundColor: isContratado ? '#87CEFA' : '#f1f1f1',
-                                borderRadius: 10,
-                                padding: 10,
-                                maxWidth: '70%',
-                            }]}>
-                            <Text>{msg.message}</Text>
-                        </View>
-                    );
-                })}
-            </ScrollView>
+    return (
+      <View
+        key={index}
+        style={[
+          styles.mensagemItem,
+          {
+            alignSelf: alinhamento,
+            backgroundColor: cor,
+            borderRadius: 10,
+            padding: 10,
+            maxWidth: '70%',
+          },
+        ]}
+      >
+        <Text>{msg.message}</Text>
+      </View>
+    );
+  })}
+</ScrollView>
 
             <View style={styles.enviarMensagem}>
                 <View style={styles.inputContent}>

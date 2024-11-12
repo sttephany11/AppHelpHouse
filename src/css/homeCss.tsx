@@ -194,8 +194,7 @@ const styles = StyleSheet.create({
       },
 
       textInput:{
-        marginRight:60,
-        
+        marginRight:40, //60
         fontSize:17,
         color:'#3669a4',
       },

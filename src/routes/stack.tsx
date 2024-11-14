@@ -28,6 +28,7 @@ import Configuracao from '../views/configuracao';
 
 
 
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 

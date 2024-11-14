@@ -4,7 +4,7 @@ import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { TextInputMask } from 'react-native-masked-text';
 import { Button } from "../../componentes/Button/Button"; // Verifique se o caminho está correto
 import styles from '../css/cadastroCss';
-import dayjs from 'dayjs';
+
 import moment from 'moment';
 
 

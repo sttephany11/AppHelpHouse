@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
     textLocalizacao:{
         bottom: 110,
-        marginLeft:20,
+        marginLeft:15,
         marginTop:5,
     },
     textBiografia:{
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
        // backgroundColor:'red',
         bottom: 90,
         marginLeft:20,
+        marginBottom:15,
         
     },
 
@@ -124,9 +125,15 @@ const styles = StyleSheet.create({
     mediaEstrelas:{
 
     },
-    semAvaliacoes:{
 
+    textMedia:{
+        bottom:95,
+        marginLeft:18,
+        fontSize:12
     },
+    media:{
+        fontWeight:'bold',
+    }
 
 });
 

@@ -7,6 +7,8 @@ import api from '../../axios';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import myContext from '../functions/authContext'; // Usando o contexto para acessar o Pusher
+import { KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
+
 
   
   interface Props {
@@ -24,14 +26,16 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     const [buttonScale] = useState(new Animated.Value(1));
     const [chamarModal, setChamarModal] = useState(false);
     const [ratingAvaliacao, setRating] = useState(0); 
-    const [descavaliacao, setDescavaliacao] = useState('');    
+    const [descavaliacao, setDescavaliacao] = useState('');
+    const [nomeContratante, setNome] = useState('');   
+    const [imagemContratante, setImagem] = useState('');   
 
     //tentando mandar os dados do cli na avaliacao
     const [dataContratante, setDataContratante] = useState<any>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    
+    const idCli = user.idContratante
     
    
 
@@ -170,11 +174,17 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
             }
     
          // Envio da avaliação com todos os dados
+         const nome = user.nomeContratante
+         const imagem = user.imagemContratante
+         
       const response = await api.post('/avaliacao', {
         ratingAvaliacao,
         descavaliacao,
         idContratado,
-        idContratante: user.idContratante
+        idContratante: user.idContratante,
+        nome,
+        imagem
+       
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -193,7 +203,27 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     
     
 
+  useEffect(() => {
+  
+    const fetchDadosCli = async () => {
+      try {
+        const response = await api.get(`cli/${idCli}`);
+        const nomeContratante = response.data.nomeContratante;
+        console.log(nomeContratante);
+      } catch (error) {
+        const errorMessage = error.response?.data?.message || 'Error fetching user data';
+        console.error('Error fetching user data:', errorMessage);
+      }
+    };
+    fetchDadosCli();
+  }, []);
+  
+
     return (
+        <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
         <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.navChat}>
@@ -295,6 +325,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
             </View>
         </View>
+        </KeyboardAvoidingView>
     );
 };
 

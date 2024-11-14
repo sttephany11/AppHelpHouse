@@ -53,7 +53,7 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
             }
     
             Alert.alert('Success', 'Dados salvos com sucesso!');
-            navigation.navigate('homeStack');
+            navigation.navigate('login');
     
         } catch (error) {
             // Axios error messages can be accessed via error.response

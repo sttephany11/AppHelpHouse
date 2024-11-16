@@ -23,7 +23,8 @@ interface Avaliacao {
 }
 
 const PerfilProfissionalScreen: React.FC<{ route: any, navigation: any }> = ({ route, navigation }) => {
-  const { nomeContratado, sobrenomeContratado, bairroContratado, idContratado, descContratado, profissaoContratado, cidadeContratado, imagemContratado } = route.params;
+  const { nomeContratado, sobrenomeContratado, bairroContratado, idContratado, descContratado, profissaoContratado,
+     cidadeContratado, imagemContratado, portifilioPro1, portifilioPro2, portifilioPro3 } = route.params;
   const { imageUrl } = useImage();
   const { userData, userId } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
@@ -119,9 +120,9 @@ const PerfilProfissionalScreen: React.FC<{ route: any, navigation: any }> = ({ r
         <Text style={styles.vejaMais}>Veja mais de {nomeContratado}</Text>
         <View style={styles.containerVerical}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity><Image source={Imagens.imgPortifolio} style={styles.fotosRolagem} /></TouchableOpacity>
-            <TouchableOpacity><Image source={Imagens.imgPortifolio} style={styles.fotosRolagem2} /></TouchableOpacity>
-            <TouchableOpacity><Image source={Imagens.imgPortifolio} style={styles.fotosRolagem2} /></TouchableOpacity>
+            <TouchableOpacity><Image source={portifilioPro1 ? {uri: portifilioPro1} : Imagens.imgPortifolio} style={styles.fotosRolagem}/></TouchableOpacity>
+            <TouchableOpacity><Image source={portifilioPro2 ? {uri: portifilioPro2} : Imagens.imgPortifolio} style={styles.fotosRolagem}/></TouchableOpacity>
+            <TouchableOpacity><Image source={portifilioPro3 ? {uri: portifilioPro3} : Imagens.imgPortifolio} style={styles.fotosRolagem}/></TouchableOpacity>
           </ScrollView>
         </View>
 

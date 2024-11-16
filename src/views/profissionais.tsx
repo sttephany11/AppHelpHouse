@@ -129,7 +129,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
           {!loading && data?.length ? (
             <>
             <Text style={styles.filtro}>Filtre suas preferências para encontrar </Text>
-            <Text style={styles.filtro}>         profissionais perto de você!</Text>
+            <Text style={styles.filtro}>            profissionais perto de você!</Text>
 
             
             <TouchableOpacity style={styles.button3} onPress={toggleModal}>

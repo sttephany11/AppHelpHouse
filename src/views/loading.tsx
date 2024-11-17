@@ -27,7 +27,7 @@ import styles from '../css/loadingCss';
     >
       <View style={styles.container}>
         <Text style={styles.title}> AGORA MAIS</Text>
-        <Text style={styles.title}> CLIENTES PERTO </Text>
+        <Text style={styles.title}> PROFISSIONAIS PERTO </Text>
         <Text style={styles.title}> DE <Text style={styles.voce}>VOCÊ.</Text></Text>
         <StatusBar style="auto" />
       </View>

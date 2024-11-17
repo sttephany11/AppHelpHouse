@@ -144,10 +144,9 @@ const List: React.FC<Props> = ({ navigation, route }) => {
 
             
              {/* mODALLL DE FILTROOO */}
-            
-              
+          
           <Modal visible={isModalVisible} animationType="slide" transparent={true}>
-            <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex:1}}> 
+          <ScrollView style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex:1}}> 
           <View style={styles.modal}>
             <View style={styles.containerTitulo}>
           <Text style={styles.tituloModal}>Escolha suas preferências!</Text>
@@ -195,7 +194,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
             <Picker
               selectedValue={profissaoSelecionada}
               onValueChange={(itemValue) => setProfissaoSelecionada(itemValue)}
-              style={{ height: 30, width: 300 , bottom:60}}
+              style={{ height: 30, width: 300 , bottom:34}}
             >
               <Picker.Item label="Selecione" value="" />
               <Picker.Item label="Encanador" value="Encanador" />
@@ -216,6 +215,8 @@ const List: React.FC<Props> = ({ navigation, route }) => {
           </View>
 
           <View style={styles.margin3}></View>
+            
+         
           <View style={{justifyContent:'center', marginTop:20}}>
           <Text style={styles.tituloselectInput}>Se preferir, pesquise pelo nome do seu profissional</Text>
           <TextInput
@@ -226,18 +227,18 @@ const List: React.FC<Props> = ({ navigation, route }) => {
             style={styles.input3}
           />
            </View>
-
+      
 
         
               <TouchableOpacity style={styles.button2} onPress={toggleModal}>
                 <Text style={styles.buttonText2}>Pesquisar</Text>
               </TouchableOpacity>
         </View>
-        </View>
+        </ScrollView>
          
        
       </Modal>
-  
+
 
     
 

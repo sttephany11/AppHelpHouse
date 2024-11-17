@@ -114,7 +114,7 @@ const PerfilProfissionalScreen: React.FC<{ route: any, navigation: any }> = ({ r
         
         {/* Exibe a média das avaliações */}
         <View style={styles.textMedia}>
-          <Text style={styles.media}>Média de avaliações: {mediaAvaliacoes ? mediaAvaliacoes.toFixed(1) : 'Sem avaliações'}</Text>
+          <Text style={styles.media}>Média de avaliações: {mediaAvaliacoes ? mediaAvaliacoes.toFixed(1) : 'Sem avaliações'} <Text style={{fontSize:20}}>⭐</Text></Text>
         </View>
 
         <Text style={styles.vejaMais}>Veja mais de {nomeContratado}</Text>

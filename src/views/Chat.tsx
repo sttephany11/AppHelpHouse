@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity, Text, View, TextInput, Image, Pressable, Animated, ScrollView, Alert, Modal } from 'react-native';
+import { TouchableOpacity, Text, View, TextInput, Image, Pressable, Animated, ScrollView, Alert, Modal, TouchableWithoutFeedback , ActivityIndicator} from 'react-native';
 import styles from '../css/chatCss';
 import Imagens from "../../img/img";
 import api from '../../axios';
@@ -15,7 +15,23 @@ import { KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
     navigation: any;
     route: any;  // Adicionando a rota para receber parâmetros
   }
-
+  interface Pedido {
+    idSolicitarPedido: number;
+    descricaoPedido: string;
+    tituloPedido: string;
+    contrato: Contrato; // Verifique se a estrutura corresponde à resposta da API
+  }
+  
+  
+  interface Contrato {
+    id: number;
+    idSolicitarPedido: number;
+    valor: string;
+    data: string;
+    hora: string;
+    desc_servicoRealizado: string;
+    forma_pagamento: string;
+  }
   
 const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
     const [mensagem, setMensagem] = useState('');
@@ -27,16 +43,47 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     const [chamarModal, setChamarModal] = useState(false);
     const [ratingAvaliacao, setRating] = useState(0); 
     const [descavaliacao, setDescavaliacao] = useState('');
-    const [nomeContratante, setNome] = useState('');   
-    const [imagemContratante, setImagem] = useState('');   
-
-    //tentando mandar os dados do cli na avaliacao
-    const [dataContratante, setDataContratante] = useState<any>(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [contratos, setContratos] = useState<Pedido[]>([]); 
+    const [isModalVisible, setModalVisible] = useState(false); // Estado do modal
+    const [loading, setLoading] = useState(true);
 
     const idCli = user.idContratante
     
+    //CONTRATOS
+
+  useEffect(() => {
+    const fetchContratos = async () => {
+      try {
+        const response = await api.get(`/contratos/recebidos/${user.idContratante}`);
+        console.log(response.data); // Inspecione a estrutura dos dados aqui
+        setContratos(response.data);
+      } catch (error) {
+        Alert.alert('Erro', 'Não foi possível carregar os contratos.');
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchContratos();
+  }, []);
+  
+
+  const handleAcaoContrato = async (idSolicitarPedido, acao) => {
+    try {
+      const response = await api.patch(`/contratos/${idSolicitarPedido}/acao`, { acao });
+      Alert.alert('Sucesso', response.data.message);
+  
+      // Remover contrato da lista após a ação
+      setContratos((prevContratos) => prevContratos.filter(pedido => pedido.idSolicitarPedido !== idSolicitarPedido));
+    } catch (error) {
+      Alert.alert('Erro', error.response?.data?.error || 'Erro ao realizar a ação');
+    }
+  };
+
+  // Toggle para exibir ou esconder o modal
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
    
 
     // Função para buscar mensagens da sala
@@ -231,7 +278,10 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                     <View style={styles.navbar}>
                         <Text style={styles.textNav}>Chat</Text>
                         <TouchableOpacity onPress={() => setChamarModal(true)} style={styles.botaoPDF}>
-                            <Text style={styles.textoBotao}>Avaliar profissional</Text>
+                            <Text style={styles.textoBotao}>Avaliação</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={toggleModal} style={styles.botaoPDF}>
+                            <Text style={styles.textoBotao}>Contrato</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -322,6 +372,92 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                     </View>
                 </View>
             </Modal>
+
+
+             {/* Modal de Contrato */}
+       <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+  <TouchableWithoutFeedback onPress={toggleModal}>
+    <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 }}>
+      <TouchableWithoutFeedback>
+        <ScrollView>
+          {loading ? (
+            <ActivityIndicator size="large" color="#0000ff" />
+          ) : (
+            contratos.map((pedido) =>
+              pedido.contrato ? (
+                <View key={pedido.contrato.id} style={styles.containerPedidos}>
+                  <View style={styles.tituloFundo}>
+                    <Text style={styles.tituloModal}>Confirme os dados</Text>
+                  </View>
+                  <Text style={styles.tituloModal2}>
+                    O contrato foi criado, confirme se você
+                  </Text>
+                  <Text style={styles.tituloModal3}>
+                   está de acordo com os dados!
+                  </Text>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.opcoes}>Serviço: </Text> <Text style={styles.opcoes2}>{pedido.contrato.desc_servicoRealizado}</Text>
+                  </View>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.opcoes}>
+                    Data: </Text> <Text style={styles.opcoes2}> {pedido.contrato.data}</Text>
+                  </View>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.opcoes}>
+                    Valor: </Text><Text style={styles.opcoes2}> R$ {pedido.contrato.valor}</Text>
+                  </View>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.opcoes}>
+                    Forma de pagamento: </Text> <Text style={styles.opcoes2}> {pedido.contrato.forma_pagamento}</Text>
+                  </View>
+
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 5 }}>
+                    <TouchableOpacity
+                      onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'aceitar')}
+                      style={styles.botaoAceitar}
+                    >
+                      <Text
+                        style={{
+                          color: '#fff',
+                          marginLeft: 25,
+                          top: 5,
+                          fontWeight: 'bold',
+                          fontSize: 18,
+                        }}
+                      >
+                        Aceitar
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'recusar')}
+                      style={styles.botaoRecusar}
+                    >
+                      <Text
+                        style={{
+                          color: '#fff',
+                          marginLeft: 20,
+                          top: 5,
+                          fontWeight: 'bold',
+                          fontSize: 18,
+                        }}
+                      >
+                        Recusar
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ) : null
+            )
+          )}
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </View>
+  </TouchableWithoutFeedback>
+</Modal>
 
             </View>
         </View>

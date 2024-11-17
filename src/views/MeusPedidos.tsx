@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert , ImageBackground} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert , ImageBackground, Modal, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../axios';
@@ -21,12 +21,69 @@ interface Pedido {
   contratado: Profissional;
 }
 
+interface Pedido {
+  idSolicitarPedido: number;
+  descricaoPedido: string;
+  tituloPedido: string;
+  contrato: Contrato; // Verifique se a estrutura corresponde à resposta da API
+}
+
+
+interface Contrato {
+  id: number;
+  idSolicitarPedido: number;
+  valor: string;
+  data: string;
+  hora: string;
+  desc_servicoRealizado: string;
+  forma_pagamento: string;
+}
+
 const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const { user } = useContext(myContext); 
+  const [contratos, setContratos] = useState<Pedido[]>([]);
+  const [isModalVisible, setModalVisible] = useState(false); // Estado do modal
+  //CONTRATOS
+
+  useEffect(() => {
+    const fetchContratos = async () => {
+      try {
+        const response = await api.get(`/contratos/recebidos/${user.idContratante}`);
+        console.log(response.data); // Inspecione a estrutura dos dados aqui
+        setContratos(response.data);
+      } catch (error) {
+        Alert.alert('Erro', 'Não foi possível carregar os contratos.');
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchContratos();
+  }, []);
+  
+
+  const handleAcaoContrato = async (idSolicitarPedido, acao) => {
+    try {
+      const response = await api.patch(`/contratos/${idSolicitarPedido}/acao`, { acao });
+      Alert.alert('Sucesso', response.data.message);
+  
+      // Remover contrato da lista após a ação
+      setContratos((prevContratos) => prevContratos.filter(pedido => pedido.idSolicitarPedido !== idSolicitarPedido));
+    } catch (error) {
+      Alert.alert('Erro', error.response?.data?.error || 'Erro ao realizar a ação');
+    }
+  };
+
+  // Toggle para exibir ou esconder o modal
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  
 
   // Fetch token from AsyncStorage
   useEffect(() => {
@@ -98,10 +155,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.navigate('homeStack');
   };
 
-const meusContratos = () =>{
-  navigation.navigate('meusContratos');
 
-}
 const meuHistorico = () =>{
   navigation.navigate('meuHistorico');
 
@@ -162,12 +216,10 @@ const meuHistorico = () =>{
          <View style={styles.navContainer}>
         <View style={styles.tabs}>
         <TouchableOpacity>
-        <Text style={styles.Texttab}onPress={meusContratos}>Contratos</Text>
+        <Text style={styles.Texttab}>Em andamento</Text>
         </TouchableOpacity>
         </View>
-        <View style={styles.tab2}>
-        <Text style={styles.Texttab} onPress={meuHistorico}>Finalizados</Text>
-        </View>
+       
       </View>
 
       
@@ -175,6 +227,7 @@ const meuHistorico = () =>{
         <Text></Text>
       </View>
       </View>
+      
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : error ? (
@@ -182,7 +235,7 @@ const meuHistorico = () =>{
       ) : pedidos.length === 0 ? (
         <Text style={{marginTop:20,marginLeft:40}}>Nenhum pedido encontrado.</Text>
       ) : (
-        <ScrollView style={{bottom:20}}>
+        <ScrollView style={{bottom:10, marginTop:10}}>
           {pedidos.map((pedido) => (
             <View key={pedido.idSolicitarPedido} style={styles.cardContainer}>
               <Text style={styles.cardTitle}>{pedido.tituloPedido}</Text>
@@ -196,15 +249,22 @@ const meuHistorico = () =>{
               <Text style={styles.cardDate}>Data e hora: 24/10 às 14:00</Text>
               <Text style={styles.cardPayment}>Situação do pagamento: Sinal R$50,00</Text>
 
+              <View style={{flexDirection:'row', alignItems: 'center',}}> 
               <TouchableOpacity style={styles.conversarButton}
               onPress={()=>createChatRoom(user.idContratante, pedido.contratado.idContratado, navigation )}>
-
                 <Text style={styles.conversarText}>Conversar</Text>
               </TouchableOpacity>
+              
+              </View>
+
             </View>
           ))}
         </ScrollView>
       )}
+
+
+      
+
     </View>
     </ImageBackground>
   );

@@ -153,6 +153,89 @@ input2: {
   marginBottom: 10,
   textAlignVertical: 'top', // Para que o texto comece no topo
 },
+
+
+//styles do modal contrato 
+
+containerPedidos:{
+  justifyContent:'center',
+  width:340,
+  height:340,
+  backgroundColor:'#e9e9e7',
+  marginLeft:25,
+  marginTop:260,
+  borderRadius:25,
+},
+botaoAceitar: {
+  backgroundColor: 'green',
+  padding: 10,
+  borderRadius: 30,
+  width:130,
+  height:50,
+  marginLeft:25,
+},
+botaoRecusar: {
+  backgroundColor: 'red',
+  padding: 10,
+  borderRadius: 30,
+  width:130,
+  height:50,
+  marginRight:30
+},
+
+tituloFundo:{
+  backgroundColor: '#0044CC',
+  justifyContent:'center',
+  alignItems:'center',
+  width:340,
+  height:50,
+  bottom:60,
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+},
+tituloModal:{
+  color:'#fff',
+  fontWeight:'bold',
+  fontSize:25,
+  justifyContent:'center',
+  alignItems:'center',
+},
+tituloModal2:{
+  color:'#0044CC',
+  fontWeight:'bold',
+  fontSize:17,
+  justifyContent:'center',
+  alignItems:'center',
+  bottom:50,
+  marginLeft:18,
+},
+tituloModal3:{
+  color:'#0044CC',
+  fontWeight:'bold',
+  fontSize:17,
+  justifyContent:'center',
+  alignItems:'center',
+  bottom:50,
+  marginLeft:45,
+},
+opcoes:{
+  fontWeight:'bold',
+  fontSize:20,
+  justifyContent:'flex-start',
+  marginLeft:35,
+  bottom:25,
+  marginBottom:5,
+  color:'#0044CC',
+},
+opcoes2:{
+  fontWeight:'bold',
+  fontSize:18,
+  justifyContent:'flex-start',
+
+  bottom:22,
+  marginBottom:5,
+},
+
 });
 
 export default styles;

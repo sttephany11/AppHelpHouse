@@ -44,7 +44,9 @@ const styles = StyleSheet.create({
     justifyContent:'flex-start',
     flexDirection:'row',
     alignItems:'center',
-    zIndex:2
+    zIndex:2,
+    marginRight:20,
+    marginTop:40,
   },
 
   textNav:{
@@ -56,29 +58,27 @@ const styles = StyleSheet.create({
 
   containerPedidos:{
     justifyContent:'center',
-    alignItems:'center',
-    width:370,
-    height:190,
+    width:340,
+    height:340,
     backgroundColor:'#e9e9e7',
-    marginLeft:20,
-    marginTop:30,
+    marginLeft:25,
+    marginTop:260,
     borderRadius:25,
   },
   navContainer:{
     width:'100%',
-      height:140
+    height:140
 },
   tabs: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems:'flex-start',
-    width:180,
+    width:330,
     height:60,
-    backgroundColor: 'red',
+    backgroundColor: '#fff',
     padding: 8,
     borderRadius: 13,
-    marginRight:150,
-   
+    marginLeft:20,
     bottom:20
   },
   tab2: {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 13,
     marginBottom: 5,
-    marginLeft:150,
+    marginLeft:180,
     zIndex:1,
     bottom:80
   },
@@ -103,12 +103,13 @@ const styles = StyleSheet.create({
 
   },
   Texttab: {
-    color: '#004aad',
+    color: '#ff914d',
     fontSize: 20,
     top:20,
     fontWeight:'bold',
-
+    marginLeft:30,
   },
+  
   tab1:{
    position:'relative',
     fontSize: 14,
@@ -162,27 +163,39 @@ const styles = StyleSheet.create({
   },
   conversarButton: {
     backgroundColor: '#0044CC',
-    borderRadius: 8,
+    borderRadius: 20,
     paddingVertical: 10,
     marginTop: 10,
     alignItems: 'center',
+    width:280,
+    height:40,
+    marginLeft:10,
   },
+ 
   conversarText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   botaoAceitar: {
     backgroundColor: 'green',
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 30,
+    width:130,
+    height:50,
+    marginLeft:25,
   },
   botaoRecusar: {
     backgroundColor: 'red',
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 30,
+    width:130,
+    height:50,
+    marginRight:30
   },
-  
+
+ 
+
  
 });
 

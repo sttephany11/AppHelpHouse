@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Imagens from "../../img/img";
+
 // Telas
 import BemVindoScreen from '../views/bemVindo';
 import CadastroScreen from '../views/cadastro';
@@ -19,12 +20,12 @@ import { ImageProvider } from '../ImageContext';
 import Profissionais from '../views/profissionais';
 import PedidoScreen from '../views/PedidoScreen';
 import { Image } from 'react-native';
-import { StyleSheet } from 'react-native';
 import List from '../functions/testeGet';
 import MeusPedidos from '../views/MeusPedidos';
 import Chat from '../views/Chat';
 import Configuracao from '../views/configuracao';
-
+import MeusContratos from '../views/meusContratos';
+import MeuHistorico from '../views/meuHistorico';
 
 
 
@@ -114,6 +115,8 @@ const AppNavigator = () => {
           <Stack.Screen name="meusPedidos" component={MeusPedidos} options={{ headerShown: false }} />
           <Stack.Screen name="perfilProfissional" component={PerfilProfissionalScreen} options={{ headerShown: false }} />
           <Stack.Screen name="configuracao" component={Configuracao} options={{ headerShown: false }} />
+          <Stack.Screen name="meusContratos" component={MeusContratos} options={{ headerShown: false }} />
+          <Stack.Screen name="meuHistorico" component={MeuHistorico} options={{ headerShown: false }} />
 
 
 

@@ -116,7 +116,7 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
 
         <TextInput
           style={styles.inputTitulo}
-          placeholder="Título"
+          placeholder="Título do pedido"
           value={tituloPedido}
           onChangeText={setTituloPedido}
         />
@@ -124,7 +124,7 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
         <View style={styles.requestDescription}>
           <TextInput
             style={styles.inputDesc}
-            placeholder="Solicitação"
+            placeholder="Descrição do pedido"
             value={descricaoPedido}
             onChangeText={setDescricaoPedido}
           />

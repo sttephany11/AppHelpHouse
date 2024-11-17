@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     marginTop:110,
     marginRight:20,
     
+    
   },
   pedidoContainer: {
     padding: 15,
@@ -42,8 +43,10 @@ const styles = StyleSheet.create({
     borderRadius:20,
     justifyContent:'flex-start',
     flexDirection:'row',
-    alignItems:'center'
+    alignItems:'center',
+    zIndex:2
   },
+
   textNav:{
     fontSize:25,
     color:'#fefefe',
@@ -61,7 +64,10 @@ const styles = StyleSheet.create({
     marginTop:30,
     borderRadius:25,
   },
-
+  navContainer:{
+    width:'100%',
+      height:140
+},
   tabs: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -71,9 +77,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     padding: 8,
     borderRadius: 13,
-    
     marginRight:150,
-    zIndex:-1,
+   
     bottom:20
   },
   tab2: {
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 13,
     marginBottom: 5,
     marginLeft:150,
-    zIndex:-1,
+    zIndex:1,
     bottom:80
   },
   tab: {
@@ -138,7 +143,7 @@ const styles = StyleSheet.create({
   },
   cardLocation: {
     fontSize: 14,
-    color: '#666',
+    color: '#004aad',
     marginTop: 5,
   },
   cardDistance: {
@@ -167,6 +172,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  botaoAceitar: {
+    backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 10,
+  },
+  botaoRecusar: {
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 10,
+  },
+  
  
 });
 

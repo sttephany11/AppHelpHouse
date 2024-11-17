@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert,Imag
 import AntDesign from '@expo/vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../axios';
-import styles from '../css/MeusPedidosCss';
+import styles from '../css/meuHistoricoCss';
 import myContext from '../functions/authContext';
 import Imagens from "../../img/img";
 
@@ -68,14 +68,12 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
               onPress={() => navigation.navigate('homeStack')}
             />
           </TouchableOpacity>
-          <Text style={styles.textNav}>Pedidos</Text>
+          <Text style={styles.textNav}>Histórico</Text>
         </View>
         <View style={styles.tabs}>
-          <Text style={styles.Texttab}>Contratos</Text>
+          <Text style={styles.Texttab}>Pedidos finalizados</Text>
         </View>
-        <View style={styles.tab2}>
-          <Text style={styles.Texttab}>Finalizados</Text>
-        </View>
+       
       </View>
 
       {loading ? (
@@ -87,17 +85,42 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
       ) : (
         <ScrollView>
           {pedidos.map((pedido) => (
-            <View key={pedido.idSolicitarPedido} >
+            <View key={pedido.idSolicitarPedido} style={styles.cardContainer} >
               <Text style={styles.cardTitle}>{pedido.tituloPedido}</Text>
-              <Text>Status: {pedido.andamentoPedido}</Text>
+              <View style={{flexDirection:'row'}}>
+              <Text style={styles.clienteName}>Profissional:</Text> <Text style={{ fontSize: 16,marginLeft:5,fontWeight:'bold', color: '#0044CC',}}>{pedido.andamentoPedido}</Text>
+              </View>
+              <View style={{flexDirection:'row'}}>
+              <Text style={styles.clienteName}>Status:</Text> <Text style={{ fontSize: 16,marginLeft:5,fontWeight:'bold', color: '#0044CC',}}>{pedido.andamentoPedido}</Text>
+              </View>
               {pedido.contrato && (
                 <>
-                  <Text>Valor: R$ {pedido.contrato.valor}</Text>
-                  <Text>Data: {pedido.contrato.data} às {pedido.contrato.hora}</Text>
-                  <Text>Descrição: {pedido.contrato.desc_servicoRealizado}</Text>
-                  <Text>Forma de pagamento: {pedido.contrato.forma_pagamento}</Text>
+                <View style={{flexDirection:'row', marginTop:15}}>
+                  <Text style={styles.cardLocation}>Valor:</Text> <Text style={{ fontSize: 16,marginLeft:5,}}>R$ {pedido.contrato.valor} </Text>
+                  </View>
+                  
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.cardDistance}>Data:</Text> <Text style={{ fontSize: 16,marginLeft:5,}}>{pedido.contrato.data} às {pedido.contrato.hora}</Text>
+                  </View>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.cardDate}>Descrição:</Text> <Text style={{ fontSize: 16,marginLeft:5,}}> {pedido.contrato.desc_servicoRealizado}</Text>
+                  </View>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.cardDate}>Forma de pagamento:</Text> <Text style={{ fontSize: 16,marginLeft:5,}}> {pedido.contrato.forma_pagamento} </Text>
+                  </View>
                 </>
               )}
+              <View style={{flexDirection:'row', alignItems: 'center',}}> 
+              <TouchableOpacity style={styles.conversarButton}>
+                <Text style={styles.conversarText}>Conversar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.conversarButton}>
+                <Text style={styles.conversarText}>Contrato</Text>
+              </TouchableOpacity>
+              
+              </View>
             </View>
           ))}
         </ScrollView>

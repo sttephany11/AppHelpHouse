@@ -22,6 +22,10 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.navigate('configuracao');
   };
 
+  const historico = () => {
+    navigation.navigate('meuHistorico');
+  };
+
   const goToOutraTela = () => {
     if (imageUrl) {
       navigation.navigate('perfilProfissional'); // Navegar para a tela desejada
@@ -79,7 +83,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           </View>
 
           <View style={styles.container2}>
-          <TouchableOpacity style={styles.butaoAzul}>
+          <TouchableOpacity style={styles.butaoAzul} onPress={ historico}>
           <AntDesign name="star" size={30} color="white" style={styles.icon} />
           <Text style={styles.textButton2}> Histórico</Text>
           </TouchableOpacity>

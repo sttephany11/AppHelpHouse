@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         width:350,
         borderRadius:25,
         marginTop:180,
-        marginLeft:33,
+        marginLeft:23,
         height:550
     },
     

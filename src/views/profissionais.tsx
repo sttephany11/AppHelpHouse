@@ -23,6 +23,9 @@ interface Profissional {
   descContratado:string;
   cidadeContratado:string;
   imagemContratado:string;
+  portifilioPro1:string;
+  portifilioPro2:string;
+  portifilioPro3:string
 }
 
 interface Props {
@@ -129,7 +132,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
           {!loading && data?.length ? (
             <>
             <Text style={styles.filtro}>Filtre suas preferências para encontrar </Text>
-            <Text style={styles.filtro}>         profissionais perto de você!</Text>
+            <Text style={styles.filtro}>            profissionais perto de você!</Text>
 
             
             <TouchableOpacity style={styles.button3} onPress={toggleModal}>
@@ -265,6 +268,9 @@ const List: React.FC<Props> = ({ navigation, route }) => {
                             sobrenomeContratado: data.sobrenomeContratado,
                             cidadeContratado: data.cidadeContratado,
                             imagemContratado: data.imagemContratado,
+                            portifilioPro1: data.portifilioPro1,
+                            portifilioPro2: data.portifilioPro2,
+                            portifilioPro3: data.portifilioPro3,
                           })
                       
                     }} >

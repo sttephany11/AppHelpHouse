@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
       filtro:{
         color:'black',
         fontWeight:'bold',
-        fontSize:17,
+        fontSize:15, //17
         marginLeft:35,
         top:20,
        

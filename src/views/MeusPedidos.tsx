@@ -46,6 +46,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
     fetchToken();
   }, []);
 
+
   // Function to fetch pedidos of the contratante
   const getContratantePedidos = async (idContratante: string) => {
     try {
@@ -97,6 +98,18 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.navigate('homeStack');
   };
 
+const meusContratos = () =>{
+  navigation.navigate('meusContratos');
+
+}
+const meuHistorico = () =>{
+  navigation.navigate('meuHistorico');
+
+}
+
+  useEffect(() => {
+    console.log('Propriedades de user:', user);
+  }, [user]);
 
   const createChatRoom = async (idContratante: string, idContratado: string, navigation: any) => {
     if (!idContratante || !idContratado) {
@@ -145,19 +158,23 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
           </TouchableOpacity>
           <Text style={styles.textNav}>Pedidos</Text>
         </View>
+
+         <View style={styles.navContainer}>
         <View style={styles.tabs}>
-        <Text style={styles.tab}>Agendados</Text>
-          
+        <TouchableOpacity>
+        <Text style={styles.Texttab}onPress={meusContratos}>Contratos</Text>
+        </TouchableOpacity>
         </View>
         <View style={styles.tab2}>
-        <Text style={styles.Texttab}>Finalizados</Text>
-          
+        <Text style={styles.Texttab} onPress={meuHistorico}>Finalizados</Text>
         </View>
       </View>
+
+      
       <View style={{marginTop:20}}> 
         <Text></Text>
       </View>
-
+      </View>
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : error ? (
@@ -173,7 +190,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
                 Profissional: <Text style={styles.clienteName}>{pedido.contratado.nomeContratado ?? 'Desconhecido'}</Text>
               </Text>
               <Text style={styles.cardLocation}>
-                {user.cidadeContratado}, {user.bairroContratado} 
+              {user.cidadeContratante}, {user.bairroContratante} 
                 <Text style={styles.cardDistance}> à 2 km de você</Text>
               </Text>
               <Text style={styles.cardDate}>Data e hora: 24/10 às 14:00</Text>

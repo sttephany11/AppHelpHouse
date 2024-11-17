@@ -21,7 +21,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',    
     
   },
+  tituloBuscarCep:{
+    fontSize: 15,
+    marginTop: 15,
+    color: '#fff',
+    fontWeight: 'bold',
+    left:215,
+    top:40
 
+  },
+  title5: {
+    overflow: 'hidden',
+    fontSize: 23,
+    color: '#fff',
+    fontWeight: 'bold',
+    marginLeft:300,
+    zIndex:2,
+    position:'absolute',
+    top: 55,
+  },
   containerCadastro: {
     width: '100%',
     height:'100%',

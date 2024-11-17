@@ -123,12 +123,15 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                     </View>
                     
                     <View style={styles.input}>
-                        <Text style={styles.title3}>Cep</Text>
+                    
                         
                         <View style={styles.inputContainer}> 
-                           <AntDesign name="search1" size={24} color="white" style={styles.iconStyle} onPress={buscarCep} />
-                            
-                          
+
+                        <View style={styles.inputsCep}>
+                            <Text style={styles.tituloBuscarCep}>Buscar Cep</Text>
+                           <AntDesign style={styles.title5} name="search1" size={24} color="white"  onPress={buscarCep} />
+                        </View>
+                        <Text style={styles.title3}>Cep</Text>
                             <TextInput
                                 style={styles.input3}
                                 placeholder="Digite seu cep..."

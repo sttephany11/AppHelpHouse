@@ -25,6 +25,9 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const historico = () => {
     navigation.navigate('meuHistorico');
   };
+  const suporte = () => {
+    navigation.navigate('suporte');
+  };
 
   const goToOutraTela = () => {
     if (imageUrl) {
@@ -99,7 +102,7 @@ const TelaPerfilScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
           <View style={{marginTop:20}}></View>
           <View style={styles.container2}>
-          <TouchableOpacity style={styles.butaoAzul}>
+          <TouchableOpacity style={styles.butaoAzul} onPress={ suporte}>
           <AntDesign name="customerservice" size={32} color="white"  style={styles.icon}  />
           <Text style={styles.textButton2}> Suporte</Text>
           </TouchableOpacity>

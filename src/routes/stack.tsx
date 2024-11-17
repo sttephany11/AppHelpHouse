@@ -26,7 +26,7 @@ import Chat from '../views/Chat';
 import Configuracao from '../views/configuracao';
 import MeusContratos from '../views/meusContratos';
 import MeuHistorico from '../views/meuHistorico';
-
+import Suporte from '../views/suporte';
 
 
 
@@ -117,7 +117,7 @@ const AppNavigator = () => {
           <Stack.Screen name="configuracao" component={Configuracao} options={{ headerShown: false }} />
           <Stack.Screen name="meusContratos" component={MeusContratos} options={{ headerShown: false }} />
           <Stack.Screen name="meuHistorico" component={MeuHistorico} options={{ headerShown: false }} />
-
+          <Stack.Screen name="suporte" component={Suporte} options={{ headerShown: false }} />
 
 
         </Stack.Navigator>

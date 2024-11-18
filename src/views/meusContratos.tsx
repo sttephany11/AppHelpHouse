@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert, ImageBackground, TouchableWithoutFeedback,Modal } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../axios';
 import Imagens from "../../img/img";
-import styles from '../css/MeusPedidosCss';
+import styles1 from '../css/MeusPedidosCss';
 import myContext from '../functions/authContext';
-
+import styles from '../css/chatCss';
 
 
 interface Pedido {
@@ -30,9 +30,16 @@ interface Contrato {
 
 const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [contratos, setContratos] = useState<Pedido[]>([]);
+  const [isModalVisible, setModalVisible] = useState(false); // Estado do modal
+
 
   const [loading, setLoading] = useState(true);
   const { user } = useContext(myContext);
+
+   // Toggle para exibir ou esconder o modal
+   const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   useEffect(() => {
     const fetchContratos = async () => {
@@ -68,12 +75,12 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
   return (
     <ImageBackground
       source={Imagens.fundoBemVindo}
-      style={styles.background}
+      style={styles1.background}
       resizeMode="cover"
     >
-      <View style={styles.container}>
-        <View style={styles.navContent}>
-          <View style={styles.navbar}>
+      <View style={styles1.container}>
+        <View style={styles1.navContent}>
+          <View style={styles1.navbar}>
             <TouchableOpacity>
               <AntDesign
                 name="leftcircle"
@@ -83,13 +90,10 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
                 onPress={() => navigation.navigate('homeStack')}
               />
             </TouchableOpacity>
-            <Text style={styles.textNav}>Pedidos</Text>
+            <Text style={styles1.textNav}>Pedidos</Text>
           </View>
-          <View style={styles.tabs}>
-            <Text style={styles.Texttab}>Contratos</Text>
-          </View>
-          <View style={styles.tab2}>
-            <Text style={styles.Texttab}>Finalizados</Text>
+          <View style={styles1.tabs}>
+            <Text style={styles1.Texttab}>Contratos</Text>
           </View>
         </View>
 
@@ -120,11 +124,94 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
 
           </ScrollView>
         )}
+
+          {/* Modal de Contrato */}
+       <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+  <TouchableWithoutFeedback onPress={toggleModal}>
+    <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 }}>
+      <TouchableWithoutFeedback>
+        <ScrollView>
+          {loading ? (
+            <ActivityIndicator size="large" color="#0000ff" />
+          ) : (
+            contratos.map((pedido) =>
+              pedido.contrato ? (
+                <View key={pedido.contrato.id} style={styles.containerPedidos}>
+                  <View style={styles.tituloFundo}>
+                    <Text style={styles.tituloModal}>Confirme os dados</Text>
+                  </View>
+                  <Text style={styles.tituloModal2}>
+                    O contrato foi criado, confirme se você
+                  </Text>
+                  <Text style={styles.tituloModal3}>
+                   está de acordo com os dados!
+                  </Text>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.opcoes}>Serviço: </Text> <Text style={styles.opcoes2}>{pedido.contrato.desc_servicoRealizado}</Text>
+                  </View>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.opcoes}>
+                    Data: </Text> <Text style={styles.opcoes2}> {pedido.contrato.data}</Text>
+                  </View>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.opcoes}>
+                    Valor: </Text><Text style={styles.opcoes2}> R$ {pedido.contrato.valor}</Text>
+                  </View>
+
+                  <View style={{flexDirection:'row'}}>
+                  <Text style={styles.opcoes}>
+                    Forma de pagamento: </Text> <Text style={styles.opcoes2}> {pedido.contrato.forma_pagamento}</Text>
+                  </View>
+
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 5 }}>
+                    <TouchableOpacity
+                      onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'aceitar')}
+                      style={styles.botaoAceitar}
+                    >
+                      <Text
+                        style={{
+                          color: '#fff',
+                          marginLeft: 25,
+                          top: 5,
+                          fontWeight: 'bold',
+                          fontSize: 18,
+                        }}
+                      >
+                        Aceitar
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'recusar')}
+                      style={styles.botaoRecusar}
+                    >
+                      <Text
+                        style={{
+                          color: '#fff',
+                          marginLeft: 20,
+                          top: 5,
+                          fontWeight: 'bold',
+                          fontSize: 18,
+                        }}
+                      >
+                        Recusar
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ) : null
+            )
+          )}
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </View>
+  </TouchableWithoutFeedback>
+</Modal>
       </View>
     </ImageBackground>
   );
 };
 
 export default MeusContratos;
-
-

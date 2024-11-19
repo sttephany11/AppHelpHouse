@@ -158,12 +158,11 @@ input2: {
 //styles do modal contrato 
 
 containerPedidos:{
-  justifyContent:'center',
   width:340,
-  height:340,
+  height:730,
   backgroundColor:'#e9e9e7',
   marginLeft:25,
-  marginTop:260,
+  marginTop:60,
   borderRadius:25,
 },
 botaoAceitar: {
@@ -184,46 +183,43 @@ botaoRecusar: {
 },
 
 tituloFundo:{
-  backgroundColor: '#0044CC',
+  backgroundColor: '#bc000f',
   justifyContent:'center',
   alignItems:'center',
   width:340,
   height:50,
-  bottom:60,
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
+  flexDirection:'row',
 },
 tituloModal:{
   color:'#fff',
   fontWeight:'bold',
-  fontSize:25,
-  justifyContent:'center',
-  alignItems:'center',
+  fontSize:28,
+ marginRight:160
 },
 tituloModal2:{
-  color:'#0044CC',
+  color:'#545454',
   fontWeight:'bold',
   fontSize:17,
   justifyContent:'center',
-  alignItems:'center',
-  bottom:50,
   marginLeft:18,
+  marginTop:15,
 },
 tituloModal3:{
-  color:'#0044CC',
+  color:'#545454',
   fontWeight:'bold',
   fontSize:17,
   justifyContent:'center',
-  alignItems:'center',
-  bottom:50,
-  marginLeft:45,
+  marginLeft:18,
+  
 },
 opcoes:{
   fontWeight:'bold',
   fontSize:20,
   justifyContent:'flex-start',
   marginLeft:35,
-  bottom:25,
+  marginTop:20,
   marginBottom:5,
   color:'#0044CC',
 },
@@ -231,11 +227,98 @@ opcoes2:{
   fontWeight:'bold',
   fontSize:18,
   justifyContent:'flex-start',
+  marginTop:20,
 
-  bottom:22,
   marginBottom:5,
 },
 
+
+// check box 
+container2: {
+  padding: 20,
+ 
+},
+checkboxContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginBottom: 10,
+},
+label: {
+  marginLeft: 10,
+  fontSize: 16,
+  color: '#333',
+},
+
+
+  input3:{
+    borderBottomWidth:3,
+    borderColor: '#545454',
+    height:40,
+    marginBottom:5,
+    fontSize:16,
+    color:'black',
+    paddingHorizontal:5,
+    width:300,
+    marginLeft:20,
+    bottom:20
+  },
+
+  anexo:{
+  width:290,
+  height:40,
+  backgroundColor:'#a6a6a6',
+  },
+  iconAnexo:{
+    marginLeft:20,
+    top:5,
+  },
+  iconReportar:{
+
+  },
+  textAnexo:{
+    marginLeft:20,
+    top:9,
+    fontSize:18,
+    color:'#fff',
+    fontWeight:'bold',
+  },
+  buttonEnviar:{
+
+    backgroundColor:'#bc000f',
+    width:125, 
+    borderRadius:25,
+    height:38,
+    shadowColor: 'black',
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 0.5, 
+    
+  },
+  buttonEnviar2:{
+    backgroundColor:'#a6a6a6',
+    width:100, 
+    borderRadius:25,
+    height:35,
+    shadowColor: 'black',
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 0.5, 
+    marginTop:15,
+  },
+  textButton:{
+    fontSize:22,
+    color:'#fff',
+    fontWeight:'bold',
+    marginLeft:25,
+    top:7
+  },
+  textButton2:{
+    fontSize:18,
+    color:'#fff',
+    fontWeight:'bold',
+    marginLeft:10,
+    top:7,
+  },
 });
 
 export default styles;

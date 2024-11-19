@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     top:20,
     fontWeight:'bold',
-    marginLeft:30,
+    marginLeft:10,
   },
   
   tab1:{

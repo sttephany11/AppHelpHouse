@@ -10,6 +10,6 @@
     "allowSyntheticDefaultImports": true
   },
   "extends": "expo/tsconfig.base",
-  "include": ["src//*"],
+  "include": ["src//*", "src/css/contratosCss.tsx"],
   "exclude": ["node_modules"]
 }

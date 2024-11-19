@@ -149,7 +149,6 @@ const meuHistorico = () =>{
       resizeMode="cover"
     >
 
-  
     <View style={styles.container}>
       <View style={styles.navContent}>
         <View style={styles.navbar}>
@@ -206,6 +205,9 @@ const meuHistorico = () =>{
         </ScrollView>
       )}
     </View>
+
+
+    
     </ImageBackground>
   );
 };

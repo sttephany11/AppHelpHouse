@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert, ImageBackground, TouchableWithoutFeedback,Modal } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert, ImageBackground, Image } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../axios';
 import Imagens from "../../img/img";
 import styles1 from '../css/MeusPedidosCss';
 import myContext from '../functions/authContext';
-import styles from '../css/chatCss';
+import styles from '../css/contratosCss';
 
 
 interface Pedido {
@@ -69,6 +69,11 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
       Alert.alert('Erro', error.response?.data?.error || 'Erro ao realizar a ação');
     }
   };
+
+  const pedidos = () =>{
+    navigation.navigate('meusPedidos');
+  
+  }
   
 
 
@@ -79,23 +84,28 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
       resizeMode="cover"
     >
       <View style={styles1.container}>
-        <View style={styles1.navContent}>
-          <View style={styles1.navbar}>
-            <TouchableOpacity>
-              <AntDesign
-                name="leftcircle"
-                size={30}
-                color="#fff"
-                style={{ marginLeft: 15 }}
-                onPress={() => navigation.navigate('homeStack')}
-              />
-            </TouchableOpacity>
-            <Text style={styles1.textNav}>Pedidos</Text>
-          </View>
-          <View style={styles1.tabs}>
-            <Text style={styles1.Texttab}>Contratos</Text>
-          </View>
+      <View style={styles.navContent}>
+        <View style={styles.navbar}>
+          <TouchableOpacity>
+            <AntDesign name="leftcircle" size={30} color="#fff" style={{ marginLeft: 15 }} onPress={pedidos} />
+          </TouchableOpacity>
+          <Text style={styles.textNav}>Contratos</Text>
         </View>
+
+         <View style={styles.navContainer}>
+        <View style={styles.tabs}>
+        <TouchableOpacity>
+        <Text style={styles.Texttab}>Analise seus contratos</Text>
+        </TouchableOpacity>
+        </View>
+    
+      </View>
+
+      
+      <View style={{marginTop:20}}> 
+        <Text></Text>
+      </View>
+      </View>
 
         {loading ? (
           <ActivityIndicator size="large" color="#0000ff" />
@@ -104,20 +114,66 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
             {contratos.map((pedido) => (
               pedido.contrato ? (
                 <View key={pedido.contrato.id} style={styles.containerPedidos}>
-                  <Text>Serviço: {pedido.contrato.desc_servicoRealizado}</Text>
-                  <Text>Data: {pedido.contrato.data}</Text>
-                  <Text>Valor: R$ {pedido.contrato.valor}</Text>
-                  <Text>Forma de pagamento: {pedido.contrato.forma_pagamento}</Text>
 
-                  <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10 }}>
-                    <TouchableOpacity onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'aceitar')} style={styles.botaoAceitar}>
-                      <Text style={{ color: '#fff' }}>Aceitar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'recusar')} style={styles.botaoRecusar}>
-                      <Text style={{ color: '#fff' }}>Recusar</Text>
-                    </TouchableOpacity>
-
+                  <View style={styles.tituloFundo}>
+                    <Text style={styles.tituloModal}>Comprovante contratual de</Text>
+                    <Text style={styles.tituloModal2}>prestação de serviços</Text>
                   </View>
+
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes}>Tipo de serviço:</Text>
+                  <Text style={styles.variaveis}> {pedido.contrato.desc_servicoRealizado}</Text>
+                  </View>
+
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Data marcada:</Text>
+                  <Text style={styles.variaveis2}> {pedido.contrato.data}</Text>
+                  </View>
+
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Hórario:</Text>
+                  <Text style={styles.variaveis2}>{pedido.contrato.hora}</Text>
+                  </View>
+
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Valor pago:</Text>
+                  <Text style={styles.variaveis2}>R$ {pedido.contrato.valor}</Text>
+                  </View>
+
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Forma de pagamento:</Text>
+                  <Text style={styles.variaveis2}>{pedido.contrato.forma_pagamento}</Text>
+                  </View>
+
+                  
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row', marginTop:20,}}>
+                  <Text style={styles.nomes2}>Contratante:</Text>
+                  <Text style={styles.variaveis2}>{pedido.contrato.forma_pagamento}</Text>
+                  </View>
+
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Contratado:</Text>
+                  <Text style={styles.variaveis2}>{pedido.contrato.forma_pagamento}</Text>
+                  </View>
+
+
+                  <View style={{justifyContent:'center', alignItems:'center',marginTop:70,}}>
+                  <Image source={Imagens.logoContrato} />
+                  <Text style={{fontSize:12,}}>Este contrato é autenticado por lei pelo ministério do</Text>
+                  <Text style={{fontSize:12,}}>trabalho e previdência social lei n°150, e válido em </Text>
+                  <Text style={{fontSize:12,}}>casos e alegações legais. </Text>
+                  </View>
+
+                  <View style={{justifyContent:'center', alignItems:'center',marginTop:20,flexDirection: 'row'}}>
+                  <TouchableOpacity style={styles.buttonFinal}>
+                    <Text style={styles.textButtonFinal}> Aceitar </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={styles.buttonFinal}>
+                    <Text style={styles.textButtonFinal}> Recusar </Text>
+                  </TouchableOpacity>
+                  </View>
+
                 </View>
               ) : null
             ))}
@@ -125,90 +181,7 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
           </ScrollView>
         )}
 
-          {/* Modal de Contrato */}
-       <Modal visible={isModalVisible} animationType="slide" transparent={true}>
-  <TouchableWithoutFeedback onPress={toggleModal}>
-    <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 }}>
-      <TouchableWithoutFeedback>
-        <ScrollView>
-          {loading ? (
-            <ActivityIndicator size="large" color="#0000ff" />
-          ) : (
-            contratos.map((pedido) =>
-              pedido.contrato ? (
-                <View key={pedido.contrato.id} style={styles.containerPedidos}>
-                  <View style={styles.tituloFundo}>
-                    <Text style={styles.tituloModal}>Confirme os dados</Text>
-                  </View>
-                  <Text style={styles.tituloModal2}>
-                    O contrato foi criado, confirme se você
-                  </Text>
-                  <Text style={styles.tituloModal3}>
-                   está de acordo com os dados!
-                  </Text>
 
-                  <View style={{flexDirection:'row'}}>
-                  <Text style={styles.opcoes}>Serviço: </Text> <Text style={styles.opcoes2}>{pedido.contrato.desc_servicoRealizado}</Text>
-                  </View>
-
-                  <View style={{flexDirection:'row'}}>
-                  <Text style={styles.opcoes}>
-                    Data: </Text> <Text style={styles.opcoes2}> {pedido.contrato.data}</Text>
-                  </View>
-
-                  <View style={{flexDirection:'row'}}>
-                  <Text style={styles.opcoes}>
-                    Valor: </Text><Text style={styles.opcoes2}> R$ {pedido.contrato.valor}</Text>
-                  </View>
-
-                  <View style={{flexDirection:'row'}}>
-                  <Text style={styles.opcoes}>
-                    Forma de pagamento: </Text> <Text style={styles.opcoes2}> {pedido.contrato.forma_pagamento}</Text>
-                  </View>
-
-                  <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 5 }}>
-                    <TouchableOpacity
-                      onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'aceitar')}
-                      style={styles.botaoAceitar}
-                    >
-                      <Text
-                        style={{
-                          color: '#fff',
-                          marginLeft: 25,
-                          top: 5,
-                          fontWeight: 'bold',
-                          fontSize: 18,
-                        }}
-                      >
-                        Aceitar
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'recusar')}
-                      style={styles.botaoRecusar}
-                    >
-                      <Text
-                        style={{
-                          color: '#fff',
-                          marginLeft: 20,
-                          top: 5,
-                          fontWeight: 'bold',
-                          fontSize: 18,
-                        }}
-                      >
-                        Recusar
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              ) : null
-            )
-          )}
-        </ScrollView>
-      </TouchableWithoutFeedback>
-    </View>
-  </TouchableWithoutFeedback>
-</Modal>
       </View>
     </ImageBackground>
   );

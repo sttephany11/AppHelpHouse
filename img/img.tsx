@@ -54,6 +54,7 @@ const Imagens = {
    iconEnviar:require("../assets/iconEnviar.png"),
    cartao:require("../assets/imgApp/cartao.png"),
    imgPortifolio:require("../assets/imgApp/mais.png"),
+   logoContrato:require("../assets/logoContrato.png"),
    
 }
 export default Imagens;

@@ -10,6 +10,24 @@ const styles = StyleSheet.create({
     height: 230,
     display: 'flex',
   },
+  buttonText2:{
+    color:'#fff',
+    fontSize:20,
+    fontWeight:'bold'
+  },
+  button3:{
+    backgroundColor:'#004AAD',
+    borderRadius:25,
+    height:40,
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:10,
+    width:160, 
+    shadowColor: 'black',
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 9 },
+    shadowOpacity: 0.5, 
+  }, 
   navContent: {
     display: 'flex',
     justifyContent: 'flex-start',

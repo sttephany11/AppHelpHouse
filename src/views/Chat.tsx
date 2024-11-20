@@ -11,6 +11,16 @@ import { KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; // Expo Icons
 import AntDesign from '@expo/vector-icons/AntDesign';
 
+
+//imagem
+import { useImage } from '../ImageContext';
+import * as ImagePicker from 'expo-image-picker';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../firebase'
+
+
+
+
 interface Props {
   navigation: any;
   route: any;  // Adicionando a rota para receber parâmetros
@@ -104,12 +114,14 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     }
 
     try {
+      const idContratante = user.idContratante;
       const response = await api.post("/denuncia", {
         descricao,
         categoria: selectedCategory,
-        idContratado, // Certifique-se de que está definido
-
+        idContratante,
+        idContratado,
         status: "emAberto",
+        imagemDenuncia : imageUrl
       });
 
       Alert.alert("Sucesso", response.data.message);
@@ -320,6 +332,50 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
   }, []);
 
 
+
+  //funções para imagem funcionar
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { imageUrl, setImageUrl } = useImage();
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1
+    });
+
+    if (!result.canceled) {
+        setSelectedImage(result.assets[0].uri);
+    }
+};
+
+const uploadMedia = async () => {
+    if (!selectedImage) {
+        Alert.alert('Erro', 'Nenhuma imagem selecionada.');
+        return;
+    }
+
+    setUploading(true);
+
+    try {
+        const response = await fetch(selectedImage);
+        const blob = await response.blob();
+        const filename = selectedImage.substring(selectedImage.lastIndexOf('/') + 1);
+        const storageRef = ref(storage, `images/${filename}`);
+        await uploadBytes(storageRef, blob);
+        const url = await getDownloadURL(storageRef);
+        setImageUrl(url);
+        setSelectedImage(null);
+        Alert.alert('Sucesso', 'Imagem enviada com sucesso!');
+    } catch (error) {
+        console.error('Erro ao enviar a imagem:', error);
+        Alert.alert('Erro', 'Falha ao enviar a imagem.');
+    } finally {
+        setUploading(false);
+    }
+};
 
 
   return (
@@ -533,13 +589,18 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
                             </View>
 
                             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
-                              <TouchableOpacity style={styles.anexo}>
+                              <TouchableOpacity onPress={pickImage} style={styles.anexo}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                                   <AntDesign name="addfolder" size={29} color="white" style={styles.iconAnexo} />
                                   <Text style={styles.textAnexo}>Anexar arquivos </Text>
                                 </View>
                               </TouchableOpacity>
                             </View>
+                            {selectedImage && (
+                            <TouchableOpacity onPress={uploadMedia} style={styles.button3} disabled={uploading}>
+                            <Text style={styles.buttonText2}>{uploading ? 'Confirmando...' : 'Confirmar foto'}</Text>
+                            </TouchableOpacity>
+                        )}
 
                             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 80 }}>
                               <TouchableOpacity

@@ -165,11 +165,11 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
                   </View>
 
                   <View style={{justifyContent:'center', alignItems:'center',marginTop:20,flexDirection: 'row'}}>
-                  <TouchableOpacity style={styles.buttonFinal}>
+                  <TouchableOpacity  onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'aceitar')} style={styles.buttonFinal}>
                     <Text style={styles.textButtonFinal}> Aceitar </Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity style={styles.buttonFinal}>
+                  <TouchableOpacity  onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'recusar')} style={styles.buttonFinal}>
                     <Text style={styles.textButtonFinal}> Recusar </Text>
                   </TouchableOpacity>
                   </View>

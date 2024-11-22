@@ -12,6 +12,8 @@ interface Pedido {
   descricaoPedido: string;
   tituloPedido: string;
   andamentoPedido: string;
+  contratado:Contratado;
+
   contrato?: {
     valor: string;
     data: string;
@@ -19,6 +21,10 @@ interface Pedido {
     desc_servicoRealizado: string;
     forma_pagamento: string;
   };
+}
+interface Contratado{
+  idContratado:string;
+  nomeContratado:string;
 }
 
 const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {

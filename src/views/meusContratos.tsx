@@ -33,18 +33,40 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
   const { user } = useContext(myContext);
 
   useEffect(() => {
+    let isMounted = true; // Para evitar atualizações após desmontagem
+    let delay = 1000; // Começa com 1 segundo
+
+
     const fetchContratos = async () => {
       try {
         const response = await api.get(`/contratos/recebidos/${user.idContratante}`);
-        setContratos(response.data);
+
+        if(isMounted){
+          // Variaveis que serão atualizadas pelo Polling
+        setContratos(response.data || []);
+
+        delay = 2000;
+
+        }
+
+
       } catch (error) {
         Alert.alert('Erro', 'Não foi possível carregar os contratos.');
+
+        delay = Math.min(delay * 2, 30000); // Máximo de 30 segundos
       } finally {
+        if (isMounted) {
+          setTimeout(fetchContratos, delay);
+        }
         setLoading(false);
       }
     };
 
     fetchContratos();
+
+    return ()=>{
+      isMounted = false; 
+    };
   }, []);
 
   const handleAcaoContrato = async (idSolicitarPedido: number, acao: string) => {

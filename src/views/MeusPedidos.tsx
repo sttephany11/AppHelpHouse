@@ -15,7 +15,6 @@ interface Profissional {
 }
 
 interface Pedido {
- 
   idSolicitarPedido: number;
   tituloPedido: string;
   contratado: Profissional;
@@ -58,7 +57,7 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
           'Content-Type': 'application/json',
         },
       });
-      console.log('Dados dos pedidos:', response.data.pedidos);  // Verifique a resposta da API
+      // console.log('Dados dos pedidos:', response.data.pedidos);  // Verifique a resposta da API
       return response.data.pedidos;
     } catch (error: any) {
       console.error('Erro ao buscar pedidos:', error.response ? error.response.data : error.message);

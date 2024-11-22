@@ -72,7 +72,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     const fetchContratos = async () => {
       try {
         const response = await api.get(`/contratos/recebidos/${user.idContratante}`);
-        console.log(response.data); // Inspecione a estrutura dos dados aqui
+        // console.log(response.data); // Inspecione a estrutura dos dados aqui
         setContratos(response.data);
       } catch (error) {
         Alert.alert('Erro', 'Não foi possível carregar os contratos.');
@@ -164,7 +164,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         headers: { Authorization: `Bearer ${token}` },
       });
       setMensagens(response.data.messages);
-      console.log("mensagem: ", response.data.messages);
+      // console.log("mensagem: ", response.data.messages);
     } catch (error) {
       console.error('Erro ao buscar mensagens:', error);
       Alert.alert('Erro', 'Não foi possível buscar mensagens.');

@@ -72,7 +72,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     const fetchContratos = async () => {
       try {
         const response = await api.get(`/contratos/recebidos/${user.idContratante}`);
-        console.log(response.data); // Inspecione a estrutura dos dados aqui
+        // console.log(response.data); // Inspecione a estrutura dos dados aqui
         setContratos(response.data);
       } catch (error) {
         Alert.alert('Erro', 'Não foi possível carregar os contratos.');
@@ -89,8 +89,6 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
   // Toggle para exibir ou esconder o modal denuncia e o back do check box
   const toggleModal = () => {
-
-
     setModalVisible(true);
 
   };
@@ -164,7 +162,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         headers: { Authorization: `Bearer ${token}` },
       });
       setMensagens(response.data.messages);
-      console.log("mensagem: ", response.data.messages);
+      // console.log("mensagem: ", response.data.messages);
     } catch (error) {
       console.error('Erro ao buscar mensagens:', error);
       Alert.alert('Erro', 'Não foi possível buscar mensagens.');
@@ -486,143 +484,146 @@ const uploadMedia = async () => {
           </Modal>
 
 
-          {/* Modal de Contrato */}
-          <Modal visible={isModalVisible} animationType="slide" transparent={true}>
-            <TouchableWithoutFeedback onPress={toggleModal}>
-              <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 }}>
-                <TouchableWithoutFeedback>
-                  <ScrollView>
-                    {loading ? (
-                      <ActivityIndicator size="large" color="#0000ff" />
-                    ) : (
-                      contratos.map((pedido) =>
-                        pedido.contrato ? (
-                          <View key={pedido.contrato.id} style={styles.containerPedidos}>
+          {/* Modal de Denuncia */}
+         <Modal
+            transparent={true}
+            visible={isModalVisible}
+            animationType="slide"
+          >
+             <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 }}>
+        
+        <ScrollView>
+          {loading ? (
+            <ActivityIndicator size="large" color="#0000ff" />
+          ) : (
+            contratos.map((pedido) =>
+              pedido.contrato ? (
+                <View key={pedido.contrato.id} style={styles.containerPedidos}>
 
-                            <View style={styles.tituloFundo}>
-                              <Text style={styles.tituloModal}>Reportar</Text>
-                              <AntDesign name="exclamationcircle" size={29} color="white" style={styles.iconReportar} />
-                            </View>
+                  <View style={styles.tituloFundo}>
+                    <Text style={styles.tituloModal}>Reportar</Text>
+                    <AntDesign name="exclamationcircle" size={29} color="white" style={styles.iconReportar} />
+                  </View>
 
-                            <Text style={styles.tituloModal2}>
-                              Houve algum problema? Por favor, nos informe o ocorrido, com uma descrição
-                            </Text>
-                            <Text style={styles.tituloModal3}>
-                              e
-                              fotos, para que possamos analisar a situação e tomar as medidas cabíveis.
-                            </Text>
+                  <Text style={styles.tituloModal2}>
+                    Houve algum problema? Por favor, nos informe o ocorrido, com uma descrição
+                  </Text>
+                  <Text style={styles.tituloModal3}>
+                    e
+                    fotos, para que possamos analisar a situação e tomar as medidas cabíveis.
+                  </Text>
 
-                            <View style={styles.container2}>
-                              <View style={styles.checkboxContainer}>
-                                <Pressable onPress={() => handleCheckboxChange('pagamentos')}>
-                                  {selectedOptions.pagamentos ? (
-                                    <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                                  ) : (
-                                    <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                                  )}
-                                </Pressable>
-                                <Text style={styles.label}>Golpe ou fraude</Text>
-                              </View>
-
-
-                              <View style={styles.checkboxContainer}>
-                                <Pressable onPress={() => handleCheckboxChange('comportamento')}>
-                                  {selectedOptions.comportamento ? (
-                                    <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                                  ) : (
-                                    <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                                  )}
-                                </Pressable>
-                                <Text style={styles.label}>Assédio sexual</Text>
-                              </View>
-
-                              <View style={styles.checkboxContainer}>
-                                <Pressable onPress={() => handleCheckboxChange('comportamento')}>
-                                  {selectedOptions.comportamento ? (
-                                    <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                                  ) : (
-                                    <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                                  )}
-                                </Pressable>
-                                <Text style={styles.label}>Injúria racial</Text>
-                              </View>
-
-                              <View style={styles.checkboxContainer}>
-                                <Pressable onPress={() => handleCheckboxChange('inacabado')}>
-                                  {selectedOptions.inacabado ? (
-                                    <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                                  ) : (
-                                    <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                                  )}
-                                </Pressable>
-                                <Text style={styles.label}>Simbolos ou discurso de ódio</Text>
-                              </View>
-
-
-                              <View style={styles.checkboxContainer}>
-                                <Pressable onPress={() => handleCheckboxChange('outros')}>
-                                  {selectedOptions.outros ? (
-                                    <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                                  ) : (
-                                    <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                                  )}
-                                </Pressable>
-                                <Text style={styles.label}>Outros...</Text>
-                              </View>
-                            </View>
-
-                            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                              <Text style={{ color: '#545454', fontWeight: 'bold', bottom: 25, fontSize: 18, marginTop: 15, }}>Fale um pouco sobre o problema </Text>
-                            </View>
-
-                            <TextInput
-                              placeholder="Digite aqui..."
-                              placeholderTextColor="#545454"
-                              value={descricao}
-                              onChangeText={setDescricao}
-                              style={styles.input3}
-                            />
-
-                            <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                              <Text style={{ color: '#545454', fontWeight: 'bold', fontSize: 18, marginLeft: 35 }}>Se houver provas como fotos ou </Text>
-                              <Text style={{ color: '#545454', fontWeight: 'bold', fontSize: 18, marginLeft: 35 }}>prints adicione por favor </Text>
-                            </View>
-
-                            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
-                              <TouchableOpacity onPress={pickImage} style={styles.anexo}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                  <AntDesign name="addfolder" size={29} color="white" style={styles.iconAnexo} />
-                                  <Text style={styles.textAnexo}>Anexar arquivos </Text>
-                                </View>
-                              </TouchableOpacity>
-                            </View>
-                            {selectedImage && (
-                            <TouchableOpacity onPress={uploadMedia} style={styles.button3} disabled={uploading}>
-                            <Text style={styles.buttonText2}>{uploading ? 'Confirmando...' : 'Confirmar foto'}</Text>
-                            </TouchableOpacity>
+                  <View style={styles.container2}>
+                    <View style={styles.checkboxContainer}>
+                      <Pressable onPress={() => handleCheckboxChange('pagamentos')}>
+                        {selectedOptions.pagamentos ? (
+                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
+                        ) : (
+                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
                         )}
-
-                            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 80 }}>
-                              <TouchableOpacity
-                                style={styles.buttonEnviar}
-                                onPress={() => fetchDenuncia({ descricao })}
-                              >
-                                <Text style={styles.textButton}>Enviar</Text>
-                              </TouchableOpacity>
+                      </Pressable>
+                      <Text style={styles.label}>Golpe ou fraude</Text>
+                    </View>
 
 
-                              <TouchableOpacity style={styles.buttonEnviar2}>
-                                <Text style={styles.textButton2} onPress={fechaModal}> Cancelar </Text>
-                              </TouchableOpacity>
-                            </View>
-                          </View>
-                        ) : null
-                      )
-                    )}
-                  </ScrollView>
-                </TouchableWithoutFeedback>
-              </View>
-            </TouchableWithoutFeedback>
+                    <View style={styles.checkboxContainer}>
+                      <Pressable onPress={() => handleCheckboxChange('comportamento')}>
+                        {selectedOptions.comportamento ? (
+                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
+                        ) : (
+                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
+                        )}
+                      </Pressable>
+                      <Text style={styles.label}>Assédio sexual</Text>
+                    </View>
+
+                    <View style={styles.checkboxContainer}>
+                      <Pressable onPress={() => handleCheckboxChange('comportamento')}>
+                        {selectedOptions.comportamento ? (
+                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
+                        ) : (
+                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
+                        )}
+                      </Pressable>
+                      <Text style={styles.label}>Injúria racial</Text>
+                    </View>
+
+                    <View style={styles.checkboxContainer}>
+                      <Pressable onPress={() => handleCheckboxChange('inacabado')}>
+                        {selectedOptions.inacabado ? (
+                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
+                        ) : (
+                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
+                        )}
+                      </Pressable>
+                      <Text style={styles.label}>Simbolos ou discurso de ódio</Text>
+                    </View>
+
+
+                    <View style={styles.checkboxContainer}>
+                      <Pressable onPress={() => handleCheckboxChange('outros')}>
+                        {selectedOptions.outros ? (
+                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
+                        ) : (
+                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
+                        )}
+                      </Pressable>
+                      <Text style={styles.label}>Outros...</Text>
+                    </View>
+                  </View>
+
+                  <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ color: '#545454', fontWeight: 'bold', bottom: 25, fontSize: 18, marginTop: 15, }}>Fale um pouco sobre o problema </Text>
+                  </View>
+
+                  <TextInput
+                    placeholder="Digite aqui..."
+                    placeholderTextColor="#545454"
+                    value={descricao}
+                    onChangeText={setDescricao}
+                    style={styles.input3}
+                  />
+
+                  <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                    <Text style={{ color: '#545454', fontWeight: 'bold', fontSize: 18, marginLeft: 35 }}>Se houver provas como fotos ou </Text>
+                    <Text style={{ color: '#545454', fontWeight: 'bold', fontSize: 18, marginLeft: 35 }}>prints adicione por favor </Text>
+                  </View>
+
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
+                    <TouchableOpacity onPress={pickImage} style={styles.anexo}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                        <AntDesign name="addfolder" size={29} color="white" style={styles.iconAnexo} />
+                        <Text style={styles.textAnexo}>Anexar arquivos </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                  {selectedImage && (
+                  <TouchableOpacity onPress={uploadMedia} style={styles.button3} disabled={uploading}>
+                  <Text style={styles.buttonText2}>{uploading ? 'Confirmando...' : 'Confirmar foto'}</Text>
+                  </TouchableOpacity>
+              )}
+
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 80 }}>
+                    <TouchableOpacity
+                      style={styles.buttonEnviar}
+                      onPress={() => fetchDenuncia({ descricao })}
+                    >
+                      <Text style={styles.textButton}>Enviar</Text>
+                    </TouchableOpacity>
+
+
+                    <TouchableOpacity style={styles.buttonEnviar2}>
+                      <Text style={styles.textButton2} onPress={fechaModal}> Cancelar </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ) : null
+            )
+          )}
+        </ScrollView>
+
+    </View>
+
           </Modal>
 
         </View>

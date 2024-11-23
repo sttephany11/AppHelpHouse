@@ -89,6 +89,8 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
   // Toggle para exibir ou esconder o modal denuncia e o back do check box
   const toggleModal = () => {
+
+
     setModalVisible(true);
 
   };
@@ -119,7 +121,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         idContratante,
         idContratado,
         status: "emAberto",
-        imagemDenuncia : imageUrl
+        imagemDenuncia: imageUrl
       });
 
       Alert.alert("Sucesso", response.data.message);
@@ -338,42 +340,42 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
     });
 
     if (!result.canceled) {
-        setSelectedImage(result.assets[0].uri);
+      setSelectedImage(result.assets[0].uri);
     }
-};
+  };
 
-const uploadMedia = async () => {
+  const uploadMedia = async () => {
     if (!selectedImage) {
-        Alert.alert('Erro', 'Nenhuma imagem selecionada.');
-        return;
+      Alert.alert('Erro', 'Nenhuma imagem selecionada.');
+      return;
     }
 
     setUploading(true);
 
     try {
-        const response = await fetch(selectedImage);
-        const blob = await response.blob();
-        const filename = selectedImage.substring(selectedImage.lastIndexOf('/') + 1);
-        const storageRef = ref(storage, `images/${filename}`);
-        await uploadBytes(storageRef, blob);
-        const url = await getDownloadURL(storageRef);
-        setImageUrl(url);
-        setSelectedImage(null);
-        Alert.alert('Sucesso', 'Imagem enviada com sucesso!');
+      const response = await fetch(selectedImage);
+      const blob = await response.blob();
+      const filename = selectedImage.substring(selectedImage.lastIndexOf('/') + 1);
+      const storageRef = ref(storage, `images/${filename}`);
+      await uploadBytes(storageRef, blob);
+      const url = await getDownloadURL(storageRef);
+      setImageUrl(url);
+      setSelectedImage(null);
+      Alert.alert('Sucesso', 'Imagem enviada com sucesso!');
     } catch (error) {
-        console.error('Erro ao enviar a imagem:', error);
-        Alert.alert('Erro', 'Falha ao enviar a imagem.');
+      console.error('Erro ao enviar a imagem:', error);
+      Alert.alert('Erro', 'Falha ao enviar a imagem.');
     } finally {
-        setUploading(false);
+      setUploading(false);
     }
-};
+  };
 
 
   return (
@@ -442,189 +444,87 @@ const uploadMedia = async () => {
             </Animated.View>
           </View>
 
-          {/* Modal de Avaliação */}
-          <Modal
-            transparent={true}
-            visible={chamarModal}
-            animationType="slide"
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                <Text style={{ fontSize: 18, marginBottom: 10 }}>Avalie com estrelas:</Text>
-                <View style={styles.starsContainer}>
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <TouchableOpacity key={star} onPress={() => handleStarPress(star)}>
-                      <Ionicons
-                        name={star <= ratingAvaliacao ? 'star' : 'star-outline'}
-                        size={32}
-                        color={star <= ratingAvaliacao ? '#FFD700' : '#D3D3D3'}
-                      />
-                    </TouchableOpacity>
-                  ))}
-                </View>
-                <Text style={{ fontSize: 18, }}>Adicione um comentário:</Text>
-                <TextInput
-                  style={styles.input2}
-                  placeholder="Escreva um comentário..."
-                  placeholderTextColor="#888"
-                  value={descavaliacao}
-                  onChangeText={setDescavaliacao}
-
-                />
-
-                <TouchableOpacity style={styles.submitButton} onPress={EnviarAvaliacao}>
-                  <Text style={{ fontSize: 18, color: 'white' }}>Enviar Avaliação</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => setChamarModal(false)}>
-                  <Text style={{ fontSize: 16, color: 'red', marginTop: 10 }}>Cancelar</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
 
 
-          {/* Modal de Denuncia */}
-         <Modal
-            transparent={true}
-            visible={isModalVisible}
-            animationType="slide"
-          >
-             <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 }}>
-        
-        <ScrollView>
-          {loading ? (
-            <ActivityIndicator size="large" color="#0000ff" />
-          ) : (
-            contratos.map((pedido) =>
-              pedido.contrato ? (
-                <View key={pedido.contrato.id} style={styles.containerPedidos}>
 
-                  <View style={styles.tituloFundo}>
-                    <Text style={styles.tituloModal}>Reportar</Text>
-                    <AntDesign name="exclamationcircle" size={29} color="white" style={styles.iconReportar} />
-                  </View>
-
-                  <Text style={styles.tituloModal2}>
-                    Houve algum problema? Por favor, nos informe o ocorrido, com uma descrição
-                  </Text>
-                  <Text style={styles.tituloModal3}>
-                    e
-                    fotos, para que possamos analisar a situação e tomar as medidas cabíveis.
-                  </Text>
-
-                  <View style={styles.container2}>
-                    <View style={styles.checkboxContainer}>
-                      <Pressable onPress={() => handleCheckboxChange('pagamentos')}>
-                        {selectedOptions.pagamentos ? (
-                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                        ) : (
-                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                        )}
-                      </Pressable>
-                      <Text style={styles.label}>Golpe ou fraude</Text>
-                    </View>
-
-
-                    <View style={styles.checkboxContainer}>
-                      <Pressable onPress={() => handleCheckboxChange('comportamento')}>
-                        {selectedOptions.comportamento ? (
-                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                        ) : (
-                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                        )}
-                      </Pressable>
-                      <Text style={styles.label}>Assédio sexual</Text>
-                    </View>
-
-                    <View style={styles.checkboxContainer}>
-                      <Pressable onPress={() => handleCheckboxChange('comportamento')}>
-                        {selectedOptions.comportamento ? (
-                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                        ) : (
-                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                        )}
-                      </Pressable>
-                      <Text style={styles.label}>Injúria racial</Text>
-                    </View>
-
-                    <View style={styles.checkboxContainer}>
-                      <Pressable onPress={() => handleCheckboxChange('inacabado')}>
-                        {selectedOptions.inacabado ? (
-                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                        ) : (
-                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                        )}
-                      </Pressable>
-                      <Text style={styles.label}>Simbolos ou discurso de ódio</Text>
-                    </View>
-
-
-                    <View style={styles.checkboxContainer}>
-                      <Pressable onPress={() => handleCheckboxChange('outros')}>
-                        {selectedOptions.outros ? (
-                          <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-                        ) : (
-                          <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-                        )}
-                      </Pressable>
-                      <Text style={styles.label}>Outros...</Text>
-                    </View>
-                  </View>
-
-                  <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ color: '#545454', fontWeight: 'bold', bottom: 25, fontSize: 18, marginTop: 15, }}>Fale um pouco sobre o problema </Text>
-                  </View>
-
-                  <TextInput
-                    placeholder="Digite aqui..."
-                    placeholderTextColor="#545454"
-                    value={descricao}
-                    onChangeText={setDescricao}
-                    style={styles.input3}
-                  />
-
-                  <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                    <Text style={{ color: '#545454', fontWeight: 'bold', fontSize: 18, marginLeft: 35 }}>Se houver provas como fotos ou </Text>
-                    <Text style={{ color: '#545454', fontWeight: 'bold', fontSize: 18, marginLeft: 35 }}>prints adicione por favor </Text>
-                  </View>
-
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
-                    <TouchableOpacity onPress={pickImage} style={styles.anexo}>
-                      <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                        <AntDesign name="addfolder" size={29} color="white" style={styles.iconAnexo} />
-                        <Text style={styles.textAnexo}>Anexar arquivos </Text>
+          {/* Modal denuncia */}
+          <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+            <TouchableWithoutFeedback onPress={toggleModal}>
+              <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 }}>
+                <TouchableWithoutFeedback>
+                  <ScrollView>
+                    <View style={styles.containerPedidos}>
+                      <View style={styles.tituloFundo}>
+                        <Text style={styles.tituloModal}>Reportar Problema</Text>
+                        <AntDesign name="exclamationcircle" size={29} color="white" style={styles.iconReportar} />
                       </View>
-                    </TouchableOpacity>
-                  </View>
-                  {selectedImage && (
-                  <TouchableOpacity onPress={uploadMedia} style={styles.button3} disabled={uploading}>
-                  <Text style={styles.buttonText2}>{uploading ? 'Confirmando...' : 'Confirmar foto'}</Text>
-                  </TouchableOpacity>
-              )}
 
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 80 }}>
-                    <TouchableOpacity
-                      style={styles.buttonEnviar}
-                      onPress={() => fetchDenuncia({ descricao })}
-                    >
-                      <Text style={styles.textButton}>Enviar</Text>
-                    </TouchableOpacity>
+                      <Text style={styles.tituloModal2}>
+                        Informe o problema encontrado e anexe fotos, se necessário.
+                      </Text>
+
+                      {/* Categorias de Denúncia */}
+                      <View style={styles.container2}>
+                        {['pagamentos', 'comportamento', 'inacabado', 'outros'].map((category) => (
+                          <View style={styles.checkboxContainer} key={category}>
+                            <Pressable onPress={() => handleCheckboxChange(category)}>
+                              {selectedOptions[category] ? (
+                                <MaterialIcons name="check-circle" size={24} color="#6200EE" />
+                              ) : (
+                                <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
+                              )}
+                            </Pressable>
+                            <Text style={styles.label}>{category}</Text>
+                          </View>
+                        ))}
+                      </View>
+
+                      {/* Campo de Descrição */}
+                      <TextInput
+                        placeholder="Descreva o problema..."
+                        placeholderTextColor="#545454"
+                        value={descricao}
+                        onChangeText={setDescricao}
+                        style={styles.input3}
+                        multiline={true}
+                      />
+
+                      {/* Anexar Imagens */}
+                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
+                        <TouchableOpacity onPress={pickImage} style={styles.anexo}>
+                          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <AntDesign name="addfolder" size={29} color="white" style={styles.iconAnexo} />
+                            <Text style={styles.textAnexo}>Anexar Imagens</Text>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                      {selectedImage && (
+                        <TouchableOpacity onPress={uploadMedia} style={styles.button3} disabled={uploading}>
+                          <Text style={styles.buttonText2}>{uploading ? 'Enviando...' : 'Confirmar Imagem'}</Text>
+                        </TouchableOpacity>
+                      )}
+
+                      {/* Botões de Ação */}
+                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
+                        <TouchableOpacity
+                          onPress={() => fetchDenuncia({ descricao })} // Passando parâmetros
+                          style={styles.buttonEnviar}
+                        >
+                          <Text style={styles.textButton}>Enviar</Text>
+                        </TouchableOpacity>
 
 
-                    <TouchableOpacity style={styles.buttonEnviar2}>
-                      <Text style={styles.textButton2} onPress={fechaModal}> Cancelar </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              ) : null
-            )
-          )}
-        </ScrollView>
-
-    </View>
-
+                        <TouchableOpacity style={styles.buttonEnviar2} onPress={fechaModal}>
+                          <Text style={styles.textButton2}>Cancelar</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </ScrollView>
+                </TouchableWithoutFeedback>
+              </View>
+            </TouchableWithoutFeedback>
           </Modal>
+
 
         </View>
       </View>

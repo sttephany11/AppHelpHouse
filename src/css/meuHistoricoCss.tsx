@@ -171,7 +171,41 @@ const styles = StyleSheet.create({
     marginRight:30
   },
 
- 
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  starsContainer: {
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  submitButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#004aad',
+    borderRadius: 5,
+  },
+  input2: {
+    height: 40,
+    width: 250,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    marginTop: 15,
+    marginBottom: 10,
+    textAlignVertical: 'top', // Para que o texto comece no topo
+  },
+  
 
  
 });

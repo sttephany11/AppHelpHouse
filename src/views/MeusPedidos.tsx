@@ -46,8 +46,17 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
   }, []);
 
 
+
+
+
+
+
+
+
   // Function to fetch pedidos of the contratante
   const getContratantePedidos = async (idContratante: string) => {
+
+
     try {
       console.log('Fazendo requisição para ID:', idContratante);  // Log do ID do contratante
       console.log('Token enviado:', token);  // Log do token
@@ -64,6 +73,8 @@ const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
       throw new Error(error.response?.data?.error || 'Erro ao buscar pedidos.');
     }
   };
+  
+
   
   // Fetch pedidos when the component loads
   useEffect(() => {

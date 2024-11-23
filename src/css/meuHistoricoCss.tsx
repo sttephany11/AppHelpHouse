@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 4,
-    marginTop:40,
+    marginTop:30,
+    top:15,
   },
 
   cardTitle: {
@@ -105,7 +106,6 @@ const styles = StyleSheet.create({
     color: '#0044CC', // Azul mais escuro
     justifyContent:'center',
     alignItems:'center',
-    marginLeft:70,
     marginBottom: 10,
   },
   cardSubtitle: {
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FF6600', // Laranja do cliente
     fontSize: 18,
+    top:12,
   },
   cardLocation: {
     fontSize: 17,
@@ -153,6 +154,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+    bottom:2
   },
   botaoAceitar: {
     backgroundColor: 'green',
@@ -170,6 +172,43 @@ const styles = StyleSheet.create({
     height:50,
     marginRight:30
   },
+
+  
+//MODALLL AVALIAÇÃO
+modalContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+},
+modalContent: {
+  width: 300,
+  padding: 20,
+  backgroundColor: 'white',
+  borderRadius: 10,
+  alignItems: 'center',
+},
+starsContainer: {
+  flexDirection: 'row',
+  marginBottom: 20,
+},
+submitButton: {
+  paddingVertical: 10,
+  paddingHorizontal: 20,
+  backgroundColor: '#004aad',
+  borderRadius: 5,
+},
+input2: {
+  height: 40,
+  width: 250,
+  borderColor: '#ccc',
+  borderWidth: 1,
+  borderRadius: 8,
+  padding: 10,
+  marginTop: 15,
+  marginBottom: 10,
+  textAlignVertical: 'top', // Para que o texto comece no topo
+},
 
  
 

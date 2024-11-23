@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         width:370,
         borderRadius:25,
         marginTop:70,
-        marginLeft:22,
+        marginLeft:13,
         flex:1
     },
     tituloPrincipal:{
@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
       top:50,
       fontWeight:'bold',
       fontSize:33,
-      marginLeft:85,
+     
     },
     tituloPrincipal2:{
       color:'#fff',
       top:50,
       fontWeight:'bold',
       fontSize:33,
-      marginLeft:120,
+
     },
 
     //input que recebe valores
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
       borderRadius:20,
       marginTop:"40%",
       width: 370,
-      marginLeft: 22,
+      marginLeft:13,
 
       },
       containerModal:{

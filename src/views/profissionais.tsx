@@ -124,9 +124,11 @@ const List: React.FC<Props> = ({ navigation, route }) => {
         style={styles.background}
         resizeMode="cover"
       >        
-        <TouchableOpacity onPress={home}><AntDesign name="leftcircle" size={30} color="#004aad" style={{ marginLeft: 20,top:60 }} /></TouchableOpacity>
+        <TouchableOpacity onPress={home}><AntDesign name="leftcircle" size={30} color="#004aad" style={{ marginLeft: 10,top:60 }} /></TouchableOpacity>
+        <View style={{justifyContent:'center', alignItems:'center'}}> 
         <Text style={styles.tituloPrincipal}>Encontre aqui um </Text>
         <Text style={styles.tituloPrincipal2}>profissional</Text>
+        </View>
         <View style={styles.fundoBranco}>
           {loading && <Loading />}
           {!loading && data?.length ? (

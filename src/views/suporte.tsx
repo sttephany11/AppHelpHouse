@@ -6,7 +6,8 @@ import api from '../../axios';
 import styles from '../css/suporteCss';
 import myContext from '../functions/authContext';
 import Imagens from "../../img/img";
-import { MaterialIcons } from '@expo/vector-icons'; // Expo Icons
+import { MaterialIcons } from '@expo/vector-icons'; 
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
@@ -51,8 +52,8 @@ const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
 
     <View style={{alignItems:'center', justifyContent:'center'}}>
     <Text style={styles.titulo}>Precisa de ajuda?</Text>
-    <Text style={styles.subTitulo}>Entre em contato conosco através do nosso email:</Text>
-    <Text style={styles.subTitulo2}>sevensevensoraul77@gmail.com</Text>
+    <Text style={styles.subTitulo}>Encontre sua dúvida aqui ou entre em contato conosco!</Text>
+    
     </View>
 
 
@@ -76,7 +77,20 @@ const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
         </View>
 
 
+        <Text style={styles.problema2}>Não achou o que procurava?</Text>
+        <View style={{justifyContent:'center', alignItems:'center'}}> 
+        <Text style={styles.subTitulo3}>Entre em contato conosco através dos canais:</Text>
 
+        <View style={{flexDirection:'row', marginTop:5}}>
+        <Icon name="envelope" size={20} color="black" style={styles.iconEmail}/>
+        <Text style={styles.subTitulo2}>sevensevensoraul77@gmail.com</Text>
+        </View>
+        
+        <View style={{flexDirection:'row'}}>
+        <Icon name="whatsapp" size={30} color="green" style={styles.iconWhats} />
+        <Text style={styles.subTitulo4}>1197777-7777</Text>
+        </View>
+        </View>
 
       </View>
 

@@ -1,9 +1,9 @@
 import { getPro } from "../functions/getPro";
 import React, { useState, useEffect } from "react";
 import { Loading } from "../../componentes";
-import { TouchableOpacity, View, ScrollView, Text, ImageBackground , TextInput , Image,Platform, Modal ,KeyboardAvoidingView} from "react-native";
+import { TouchableOpacity, View, ScrollView, Text, ImageBackground , TextInput , Image,Platform, Modal ,KeyboardAvoidingView,} from "react-native";
 import { CheckBox } from "@ui-kitten/components"; // Importação correta do CheckBox
-import { Picker } from "@react-native-picker/picker"; // Picker para substituir os checkboxes das profissões
+import { Picker } from "@react-native-picker/picker";
 import styles from "../css/profissionaisCss";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -11,7 +11,7 @@ import Imagens from "../../img/img";
 import api from '../../axios';
 import myContext from '../functions/authContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { getServicos } from "../functions/getServico";
 
 interface Profissional {
   bairroContratado: any;
@@ -33,6 +33,15 @@ interface Props {
   route: any;  // Adicionando a rota para receber parâmetros
 }
 
+interface Avaliacao {
+  idAvaliacao: number;
+  ratingAvaliacao: number;
+  descavaliacao: string;
+  idContratado: string;
+  idContratante: string;
+  nome: string;
+  imagem: string;
+}
 
 const List: React.FC<Props> = ({ navigation, route }) => {
   const [data, setData] = useState<Profissional[]>([]);
@@ -40,15 +49,76 @@ const List: React.FC<Props> = ({ navigation, route }) => {
   const [error, setError] = useState<boolean>(false);
   const [idServicos, setIdServicos] = useState<string | number>(1);
   const [isModalVisible, setModalVisible] = useState(false); // Estado do modal
-
   
 
-  // Toggle para exibir ou esconder o modal
+  const [token, setToken] = useState<string | null> (null);
+  const [avaliacao, setAvaliacao] = useState<Avaliacao[]>([]);
+  const [mediaAvaliacoes, setMediaAvaliacoes] = useState<number | null>(null);  
+  const idContratado = data[0]?.idContratado;
+  
+
+    // Chama a API para buscar os serviços
+    useEffect(() => {
+      getServicos(setData, setLoading, setError);
+    }, []);
+  
+
+  //ttestanto filtro de profissionais
+
+    // Função para calcular a média 
+    const calcularMediaAvaliacoes = (avaliacoes: Avaliacao[]) => {
+      if (avaliacoes.length === 0) return null;
+      const soma = avaliacoes.reduce((total, item) => total + item.ratingAvaliacao, 0);
+      return soma / avaliacoes.length;
+    };
+   
+    // Busca o token armazenado no AsyncStorage
+    useEffect(() => {
+      const fetchToken = async () => {
+        try {
+          const savedToken = await AsyncStorage.getItem('authToken');
+          if (savedToken) {
+            setToken(savedToken);
+            console.log('Token obtido do AsyncStorage:', savedToken);
+          } else {
+            console.log('Nenhum token encontrado no AsyncStorage');
+          }
+        } catch (error) {
+          console.error('Erro ao buscar o token:', error);
+        }
+      };
+      fetchToken();
+    }, []);
+  
+    // Busca as avaliações e calcula a média
+    useEffect(() => {
+      const fetchAvaliacoes = async () => {
+        try {
+          const response = await api.get(`/avaliacoes/${idContratado}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          });
+          const avaliacoes = response.data.avaliacoes;
+          setAvaliacao(avaliacoes); 
+          setMediaAvaliacoes(calcularMediaAvaliacoes(avaliacoes)); // Calcula e salva a média
+        } catch (error: any) {
+          console.error('Erro ao buscar avaliações:', error.response?.data?.error || 'Erro desconhecido');
+        }
+      };
+  
+      if (token) {
+        fetchAvaliacoes();
+      }
+    }, [token, idContratado]);
+  
+
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  // Estado para a seleção de zonas
   const [selectedZones, setSelectedZones] = useState({
     leste: false,
     oeste: false,
@@ -56,11 +126,11 @@ const List: React.FC<Props> = ({ navigation, route }) => {
     sul: false,
   });
 
-  // Estado para a profissão selecionada
+
   const [profissaoSelecionada, setProfissaoSelecionada] = useState<string>("");
   const [searchName, setSearchName] = useState<string>("");
 
-  // Receber o parâmetro da profissão 
+
   useEffect(() => {
     const { profissao } = route.params || {};  // Extrai a profissão enviada 
     if (profissao) {
@@ -115,6 +185,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
   useEffect(() => {
     getPro(setData, setLoading, setError);
   }, []);
+  
 
   return (
 
@@ -249,6 +320,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
               {data
                 .filter(filterProfessionals)
                 .map((data, i) => (
+                  
                   <View key={i} style={styles.containerProfissionais}>
                     <View style={styles.containerDados}>
                       <TouchableOpacity
@@ -287,12 +359,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
                         </Text>
 
                         <View style={styles.containerAvaliacao}>
-                          <AntDesign name="staro" size={18} color="black" />
-                          <AntDesign name="staro" size={18} color="black" />
-                          <AntDesign name="staro" size={18} color="black" />
-                          <AntDesign name="staro" size={18} color="black" />
-                          <AntDesign name="staro" size={18} color="black" />
-                          <Text style={styles.textOpinioes}>150 avaliações</Text>
+                        <Text style={styles.media}>Média de avaliações: {mediaAvaliacoes ? mediaAvaliacoes.toFixed(1) : 'Sem avaliações'} <Text style={{fontSize:20}}>⭐</Text></Text>
                         </View>
 
                         <View style={styles.containerRegiao}>

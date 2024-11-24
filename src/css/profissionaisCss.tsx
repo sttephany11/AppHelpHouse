@@ -108,6 +108,9 @@ const styles = StyleSheet.create({
         bottom:30,
         marginRight:90,
       },
+      media:{
+        fontWeight:'bold',
+    },
       textOpinioes:{
         marginLeft:5,
         fontSize:10,
@@ -194,7 +197,7 @@ const styles = StyleSheet.create({
        },
        pickerContainer:{
         marginLeft:30,
-       
+       color:'black'
        },
        marginCheck:{
         marginTop:10,

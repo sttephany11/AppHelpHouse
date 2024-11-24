@@ -9,9 +9,7 @@ const styles = StyleSheet.create({
         flex:1
       },
       navChat:{
-        width:393,  
-        display:'flex',
-        paddingBottom:40,
+        marginRight:50,
       },
       navContent:{
         display:'flex',
@@ -19,8 +17,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         width:393,
         height:50,
-        marginTop:50,
-        marginLeft:10,
+        marginTop:55,
+    
         
       },
       navbar:{
@@ -100,7 +98,7 @@ const styles = StyleSheet.create({
         left:19,
         zIndex:-1,
         bottom:20,
-       marginLeft:10,
+  
 
       },
       tab: {
@@ -124,8 +122,9 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowRadius: 5,
         marginBottom: 20,
-        width:390,
-        marginLeft:10,
+        width:370,
+        marginLeft:12,
+        height:600
       },
       cardTitle: {
         fontSize: 18,
@@ -156,8 +155,8 @@ const styles = StyleSheet.create({
         borderColor: '#000',
         borderWidth: 1,
         borderRadius: 8,
-        padding: 10,
-        marginBottom: 20,
+        padding: 8,
+     
       },
       descriptionLabel: {
         fontSize: 16,
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 8,
         alignItems: 'center',
-        bottom:20
+        bottom:32
       },
       submitButtonText: {
         color: 'white',
@@ -181,13 +180,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
       },
       inputDesc:{
-        width:360,
         height:150,
         fontSize:20,
-        textAlignVertical: 'top',
+        textAlignVertical: 'top', // Alinha o texto ao topo
+        lineHeight: 20, // Controla o espaçamento entre linhas
+        width: '100%', 
       },
+
+      
       inputTitulo:{
-        width:360,
+        width:340,
         height:70,
         fontSize:20,
         marginBottom:15,

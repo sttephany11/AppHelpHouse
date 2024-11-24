@@ -253,7 +253,7 @@ const uploadMedia = async () => {
     <ScrollView>
       <View style={styles.containerCapaFundo}>
         <TouchableOpacity>
-          <Image source={Imagens.fotoFundo} style={styles.capaFundo} />
+          <Image source={Imagens.fotoFundo2} style={styles.capaFundo} />
         </TouchableOpacity>
       </View>
 
@@ -271,7 +271,7 @@ const uploadMedia = async () => {
 
         <Text style={styles.nome}>{nomeContratado} {sobrenomeContratado}</Text>
         <Text style={styles.textBiografia}>
-          <Text style={{color:'#004aad', fontSize:16, marginBottom:10}}>{profissaoContratado}{'\n'}</Text>
+          <Text style={{color:'#004aad', fontSize:18, marginBottom:15}}>{profissaoContratado}{'\n'}</Text>
           {descContratado}
         </Text>
         <Text style={styles.textLocalizacao}>

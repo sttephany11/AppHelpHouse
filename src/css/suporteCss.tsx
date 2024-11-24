@@ -10,9 +10,10 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     width:350,
     borderRadius:25,
-    marginTop:20,
+    marginTop:5,
     marginLeft:22,
-    height:450
+    height:550,
+    bottom:20,
 },
 TextSuporte:{
     fontSize:32,
@@ -37,9 +38,24 @@ subTitulo:{
 subTitulo2:{
   color:'#004aad',
   fontWeight:'bold',
-  bottom:25,
-  fontSize:20,
+  bottom:8,
+  fontSize:18,
 },
+subTitulo3:{
+  color:'#004aad',
+  bottom:28,
+  fontSize:16,
+  marginTop:2
+},
+subTitulo4:{
+  color:'#004aad',
+  fontWeight:'bold',
+  bottom:3,
+  fontSize:18,
+  marginTop:10
+},
+
+
 
 problema:{
     fontSize:28,
@@ -47,7 +63,15 @@ problema:{
     color:'#004aad',
     marginLeft:35,
     marginTop:15,
-    marginBottom: 30,
+    marginBottom: 15,
+},
+problema2:{
+  fontSize:24,
+  fontWeight:'bold',
+  color:'#004aad',
+  marginLeft:25,
+  marginTop:40,
+  marginBottom: 30,
 },
 container: {
     padding: 20,
@@ -85,7 +109,7 @@ container: {
       marginBottom: 20,
     },
     faqItem: {
-      marginBottom: 5,
+      marginBottom: 3,
       marginLeft:10
     },
     questionContainer: {
@@ -105,6 +129,17 @@ container: {
       fontWeight: 'bold',
       marginBottom: 20,
     },
+
+    iconEmail:{
+marginRight:10,
+bottom:7
+    },
+    
+    iconWhats:{
+      marginRight:10,
+      bottom:7,
+      marginTop:10
+          },
 });
 
 export default styles;

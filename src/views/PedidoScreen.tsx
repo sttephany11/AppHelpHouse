@@ -121,14 +121,17 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
           onChangeText={setTituloPedido}
         />
 
-        <View style={styles.requestDescription}>
-          <TextInput
-            style={styles.inputDesc}
-            placeholder="Descrição do pedido"
-            value={descricaoPedido}
-            onChangeText={setDescricaoPedido}
-          />
-        </View>
+      <View style={styles.requestDescription}>
+        <TextInput
+          style={styles.inputDesc}
+          placeholder="Descrição do pedido"
+          value={descricaoPedido}
+          onChangeText={setDescricaoPedido}
+          multiline={true} 
+          textAlignVertical="top" 
+        />
+      </View>
+
        
      
         <Picker  
@@ -150,9 +153,9 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
             postPedido({ descricaoPedido, idServicos });
             voltarHome();
           }}
->
-  <Text style={styles.submitButtonText}>Enviar</Text>
-</TouchableOpacity>
+        >
+          <Text style={styles.submitButtonText}>Enviar</Text>
+        </TouchableOpacity>
         )}
 
         {error && <Text style={styles.errorText}>Ocorreu um erro ao enviar o pedido.</Text>}

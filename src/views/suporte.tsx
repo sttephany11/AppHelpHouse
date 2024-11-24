@@ -11,24 +11,27 @@ import { MaterialIcons } from '@expo/vector-icons'; // Expo Icons
 
 const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const perfilNav = () => {
     navigation.navigate('perfil');
   };
-  
-    const [selectedOptions, setSelectedOptions] = useState({
-      pagamentos: false,
-      comportamento: false,
-      inacabado: false,
-      outros: false,
-    });
-  
-    const handleCheckboxChange = (option: string) => {
-      setSelectedOptions((prevState) => ({
-        ...prevState,
-        [option]: !prevState[option],
-      }));
-    };
+  const toggleAnswer = (index) => {
+    if (activeIndex === index) {
+      setActiveIndex(null); // Fecha a resposta se já estiver aberta
+    } else {
+      setActiveIndex(index); // Abre a resposta clicada
+    }
+  };
+
+  // Perguntas e respostas
+  const faqs = [
+    { question: 'O HelpHouse é seguro? ', answer: 'Nosso horário de atendimento é das 9h às 18h, de segunda a sexta-feira.' },
+    { question: 'Como posso alterar minhas informações? ', answer: 'Você pode entrar em contato pelo telefone ou e-mail disponíveis na nossa página de contato.' },
+    { question: 'Como cadastrar um cartão de crédito?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
+    { question: 'Como contrato um profissional?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
+    { question: 'Como contrato um profissional?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
+  ];
   
 
   return (
@@ -48,76 +51,31 @@ const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
 
     <View style={{alignItems:'center', justifyContent:'center'}}>
     <Text style={styles.titulo}>Precisa de ajuda?</Text>
-    <Text style={styles.subTitulo}>Entre em contato conosco através dos canais</Text>
+    <Text style={styles.subTitulo}>Entre em contato conosco através do nosso email:</Text>
+    <Text style={styles.subTitulo2}>sevensevensoraul77@gmail.com</Text>
     </View>
 
 
       <View style={styles.fundoBranco}>
         <View>
-            <Text style={styles.problema}>Qual o problema?</Text>
+            <Text style={styles.problema}>Perguntas frequentes</Text>
+            {faqs.map((faq, index) => (
+        <View key={index} style={styles.faqItem}>
+
+          <View style={{flexDirection:'row',alignItems:'center'}}>
+
+          <AntDesign name="down" size={18} color="black" style={{color:'#0044CC'}} />
+          <TouchableOpacity onPress={() => toggleAnswer(index)} style={styles.questionContainer}>
+            <Text style={styles.question}>{faq.question}</Text>
+          </TouchableOpacity> </View>
+          {activeIndex === index && (
+            <Text style={styles.answer}>{faq.answer}</Text>
+          )}
         </View>
-        
-    <View style={styles.container}>
-      <View style={styles.checkboxContainer}>
-        <Pressable onPress={() => handleCheckboxChange('pagamentos')}>
-          {selectedOptions.pagamentos ? (
-            <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-          ) : (
-            <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-          )}
-        </Pressable>
-        <Text style={styles.label}>Pagamentos</Text>
-      </View>
+      ))}
+        </View>
 
 
-      <View style={styles.checkboxContainer}>
-        <Pressable onPress={() => handleCheckboxChange('comportamento')}>
-          {selectedOptions.comportamento ? (
-            <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-          ) : (
-            <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-          )}
-        </Pressable>
-        <Text style={styles.label}>Denúncia de comportamento</Text>
-      </View>
-
-      <View style={styles.checkboxContainer}>
-        <Pressable onPress={() => handleCheckboxChange('inacabado')}>
-          {selectedOptions.inacabado ? (
-            <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-          ) : (
-            <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-          )}
-        </Pressable>
-        <Text style={styles.label}>Serviço inacabado</Text>
-      </View>
-
-   
-      <View style={styles.checkboxContainer}>
-        <Pressable onPress={() => handleCheckboxChange('outros')}>
-          {selectedOptions.outros ? (
-            <MaterialIcons name="check-circle" size={24} color="#6200EE" />
-          ) : (
-            <MaterialIcons name="radio-button-unchecked" size={24} color="#333" />
-          )}
-        </Pressable>
-        <Text style={styles.label}>Outros...</Text>
-      </View>
-    </View>
-
-
-    <View style={{alignItems:'center', justifyContent:'center'}}> 
-        <Text style={{color:'#004aad',fontWeight:'bold',bottom:25,fontSize:15,marginTop:15,}}>
-            Fale pra nós sobre o ocorrido/dúvida</Text>
-            </View>
-
-             <TextInput
-             placeholder="Digite aqui..."
-             placeholderTextColor="#004aad" 
-             // value={}
-             //onChangeText=}
-             style={styles.input3}
-             />
 
 
       </View>

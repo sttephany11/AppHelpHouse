@@ -140,7 +140,7 @@ navbar:{
   alignItems:'center',
   zIndex:2,
   marginRight:20,
-  marginTop:40,
+  marginTop:3,
 },
 
 textNav:{
@@ -188,7 +188,7 @@ tab2: {
 },
 
 nomes:{
-  color: 'black',
+  color: '#004aad',
   fontSize: 18,
   fontWeight:'bold',
   marginLeft:30,
@@ -198,11 +198,11 @@ variaveis:{
   color: 'black',
   fontSize: 18,
   fontWeight:'bold',
-  marginLeft:10,
+  marginLeft:5,
   marginTop:20,
 },
 nomes2:{
-  color: 'black',
+  color: '#004aad',
   fontSize: 18,
   fontWeight:'bold',
   marginLeft:30,
@@ -212,15 +212,35 @@ variaveis2:{
   color: 'black',
   fontSize: 18,
   fontWeight:'bold',
-  marginLeft:10,
+  marginLeft:5,
   marginTop:10,
 },
 buttonFinal:{
+  width:100,
+  height:40,
+  backgroundColor:'white',
 
+},
+buttonFinal2:{
+  width:100,
+  height:40,
+  marginLeft:30,
+  backgroundColor:'white',
 
 },
 textButtonFinal:{
-
+  color: 'black',
+  fontSize: 20,
+  marginLeft:13,
+  top:8,
+  fontWeight:'bold',
+},
+textButtonFinal2:{
+  color: 'black',
+  fontSize: 20,
+  marginLeft:10,
+  top:8,
+  fontWeight:'bold',
 },
 
 

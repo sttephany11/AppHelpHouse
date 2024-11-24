@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert, ImageBackground, Modal, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert, ImageBackground, Modal, TextInput,  } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../axios';
@@ -13,6 +13,7 @@ interface Pedido {
   descricaoPedido: string;
   tituloPedido: string;
   andamentoPedido: string;
+
   contrato?: {
     valor: string;
     data: string;
@@ -58,8 +59,6 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
     };
     fetchToken();
   }, []);
-
-
 
 
   useEffect(() => {
@@ -154,7 +153,11 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
 
 
   return (
-    <ImageBackground source={Imagens.fundoBemVindo} style={styles.background} resizeMode="cover">
+    <ImageBackground
+      source={Imagens.fundoBemVindo}
+      style={styles.background}
+      resizeMode="cover"
+    >
       <View style={styles.container}>
         <View style={styles.navContent}>
           <View style={styles.navbar}>
@@ -179,12 +182,12 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
         ) : error ? (
           <Text style={{ color: 'red', textAlign: 'center' }}>{error}</Text>
         ) : pedidos.length === 0 ? (
-          <Text style={{ marginTop: 20, textAlign: 'center' }}>Nenhum pedido finalizado encontrado.</Text>
+          <Text style={{marginTop:20,marginLeft:30, fontSize: 25,fontWeight:'bold', color:'white'}}>Nenhum pedido finalizado encontrado.</Text>
         ) : (
           <ScrollView >
             {pedidos.map((pedido) => (
               <View key={pedido.idSolicitarPedido} style={styles.cardContainer}>
-                <Text style={styles.cardTitle}>{pedido.tituloPedido || 'Título não disponível'}</Text>
+                <Text style={styles.cardTitle}>{pedido.tituloPedido || "Título não disponível"}</Text>
 
                 <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.clienteName}>Status:</Text>
@@ -208,7 +211,21 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
                     <View style={{ flexDirection: 'row' }}>
                       <Text style={styles.cardDistance}>Data:</Text>
                       <Text style={{ fontSize: 16, marginLeft: 5 }}>
-                        {pedido.contrato.data || 'Data indisponível'} às {pedido.contrato.hora || 'Hora indisponível'}
+                        {pedido.contrato.data || "Data indisponível"} às {pedido.contrato.hora || "Hora indisponível"}
+                      </Text>
+                    </View>
+
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={styles.cardDate}>Descrição:</Text>
+                      <Text style={{ fontSize: 16, marginLeft: 5 }}>
+                        {pedido.contrato.desc_servicoRealizado || "Sem descrição"}
+                      </Text>
+                    </View>
+
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={styles.cardDate}>Forma de pagamento:</Text>
+                      <Text style={{ fontSize: 16, marginLeft: 5 }}>
+                        {pedido.contrato.forma_pagamento || "Não especificada"}
                       </Text>
                     </View>
                   </>
@@ -232,39 +249,6 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
             ))}
           </ScrollView>
         )}
-
-        <Modal transparent={true} visible={chamarModal} animationType="slide">
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Text style={{ fontSize: 18, marginBottom: 10 }}>Avalie com estrelas:</Text>
-              <View style={styles.starsContainer}>
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <TouchableOpacity key={star} onPress={() => handleStarPress(star)}>
-                    <Ionicons
-                      name={star <= ratingAvaliacao ? 'star' : 'star-outline'}
-                      size={32}
-                      color={star <= ratingAvaliacao ? '#FFD700' : '#D3D3D3'}
-                    />
-                  </TouchableOpacity>
-                ))}
-              </View>
-              <Text style={{ fontSize: 18 }}>Adicione um comentário:</Text>
-              <TextInput
-                style={styles.input2}
-                placeholder="Escreva um comentário..."
-                placeholderTextColor="#888"
-                value={descavaliacao}
-                onChangeText={setDescavaliacao}
-              />
-              <TouchableOpacity style={styles.submitButton} onPress={EnviarAvaliacao}>
-                <Text style={{ fontSize: 18, color: 'white' }}>Enviar Avaliação</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setChamarModal(false)}>
-                <Text style={{ fontSize: 16, color: 'red', marginTop: 10 }}>Cancelar</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
       </View>
 
        {/* Modal de Avaliação */}
@@ -275,7 +259,20 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
           >
             <View style={styles.modalContainer}>
               <View style={styles.modalContent}>
-                <Text style={{ fontSize: 18, marginBottom: 10 }}>Avalie com estrelas:</Text>
+              <Text style={styles.textSuperior}> Avalie seu profissional  😊</Text>
+                  <Text style={styles.textSuperior2}>Sua avaliação é muito importante para nós!</Text>
+           
+                  <Text style={{ fontSize: 18, color: '#004aad',fontWeight: 'bold',top:10}}>Adicione um comentário:</Text>
+                <TextInput
+                  style={styles.input2}
+                  placeholder="Escreva um comentário..."
+                  placeholderTextColor="#888"
+                  value={descavaliacao}
+                  onChangeText={setDescavaliacao}
+
+                />
+
+                <Text style={{ fontSize: 18, marginBottom: 10,top:10 ,color: '#004aad',fontWeight: 'bold' }}>Avalie com estrelas:</Text>
                 <View style={styles.starsContainer}>
                   {[1, 2, 3, 4, 5].map((star) => (
                     <TouchableOpacity key={star} onPress={() => handleStarPress(star)}>
@@ -287,15 +284,7 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
                     </TouchableOpacity>
                   ))}
                 </View>
-                <Text style={{ fontSize: 18, }}>Adicione um comentário:</Text>
-                <TextInput
-                  style={styles.input2}
-                  placeholder="Escreva um comentário..."
-                  placeholderTextColor="#888"
-                  value={descavaliacao}
-                  onChangeText={setDescavaliacao}
-
-                />
+               
 
                 <TouchableOpacity style={styles.submitButton} onPress={EnviarAvaliacao}>
                   <Text style={{ fontSize: 18, color: 'white' }}>Enviar Avaliação</Text>

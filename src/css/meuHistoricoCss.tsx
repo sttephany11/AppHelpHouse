@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 13,
     bottom:20,
-    marginBottom:20,
+    marginBottom:50,
     marginRight:20,
   },
  
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 4,
-    marginTop:30,
+    marginTop:20,
     top:15,
   },
 
@@ -196,7 +196,7 @@ submitButton: {
   paddingVertical: 10,
   paddingHorizontal: 20,
   backgroundColor: '#004aad',
-  borderRadius: 5,
+  borderRadius: 20,
 },
 input2: {
   height: 40,
@@ -210,7 +210,16 @@ input2: {
   textAlignVertical: 'top', // Para que o texto comece no topo
 },
 
- 
+textSuperior:{
+  color: '#ff8f49',
+  fontSize: 22,
+  fontWeight: 'bold',
+  marginBottom:8,
+},
+textSuperior2:{
+  marginBottom:15,
+  fontSize: 15,
+},
 
  
 });

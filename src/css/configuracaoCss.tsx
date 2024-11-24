@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         width:350,
         borderRadius:25,
-        
-        marginLeft:33,
-        height:680
+        marginLeft:22,
+        height:680,
+        bottom:15
     },
     
     container:{
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         fontSize:27,
         fontWeight:'bold',
         color:'#004aad',
-        marginBottom:20
+        marginBottom:10
     },
     cep:{
         fontSize:15,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         fontSize:20,
         fontWeight:'bold',
         color:'#004aad',
-        marginTop:10,
+        marginTop:5,
     },
     dadosCli:{
         marginTop:5,
@@ -67,18 +67,35 @@ input: {
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
-    flex: 1
+    width:130,
+  },
+  input2: {
+    borderColor: '#ddd',
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
+    width:200,
+  },
+  input3: {
+    borderColor: '#ddd',
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
+    width:170,
   },
   saveButton: {
     backgroundColor: '#004aad',
-    padding: 15,
-    borderRadius: 5,
+    padding: 10,
+    borderRadius: 20,
     alignItems: 'center',
-    marginTop: 20
+    marginTop: 20,
+    width:260,
+    marginLeft:15,
   },
   saveButtonText: {
     color: '#fff',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize:18,
   }
   
 

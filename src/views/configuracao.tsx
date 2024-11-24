@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, ImageBackground, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { View, Text, Image, ImageBackground, TouchableOpacity, Alert, ScrollView,TextInput ,} from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
-import AntDesign from '@expo/vector-icons/AntDesign';
 import Imagens from "../../img/img";
 import styles from '../css/configuracaoCss';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useUser } from '../cliContext';
 import myContext from '../functions/authContext';
 import api from '../../axios';
@@ -54,24 +55,26 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.navigate('perfil');
   };
 
+
   return (
     <ImageBackground 
       source={Imagens.fundoBemVindo}
       style={styles.background}
       resizeMode="cover"
     >
-      <View style={{ marginTop: 70 }}>
-        <TouchableOpacity>
-          <AntDesign name="leftcircle" size={35} color='#004aad' style={{ marginLeft: 24 }} onPress={perfilNav} />
-        </TouchableOpacity>
+        <View style={{marginTop:70}}>
+            <TouchableOpacity>
+            <AntDesign name="leftcircle" size={35} color='#004aad' style={{ marginLeft: 24 }} />
+          </TouchableOpacity>
         <Text style={styles.Textconfiguracao}> Configurações</Text>
-      </View>
-
+        </View>
       <View style={styles.fundoBranco}>
         <View style={styles.container}>
-          <Text style={styles.TextmeuDados}>Meus dados</Text> 
+            <Text style={styles.TextmeuDados}>Meus dados </Text> 
 
-          {/* Campo para editar o CEP */}
+      
+
+              {/* Campo para editar o CEP */}
           <Text style={styles.dados}>CEP</Text>
           <View style={{ flexDirection: 'row' }}>
             <TextInput
@@ -81,39 +84,69 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
               keyboardType="numeric"
               placeholder="Digite o CEP"
             />
-            <Entypo name="edit" size={22} color="black" style={{ marginLeft: 20, top: 5 }} />
+            <Entypo name="edit" size={22} color="black" style={{ marginLeft: 10, top: 3 }} />
           </View>
 
-          {/* Campo para editar o email */}
+        
+            <Text style={styles.dadosCli}> {user.cidadeContratante} {user.bairroContratante}</Text>
+            <Text style={styles.dadosCli}> {user.ruaContratante}, {user.numCasaContratante}</Text>
+
+            <View style={{marginTop:15}}></View>
+            
+            {/* Campo para editar o email */}
           <Text style={styles.dados}>Email</Text>
           <View style={{ flexDirection: 'row' }}>
             <TextInput
-              style={styles.input}
+              style={styles.input2}
               value={email}
               onChangeText={setEmail}
               keyboardType="email-address"
               placeholder="Digite o email"
             />
-            <Entypo name="edit" size={22} color="black" style={{ marginLeft: 20, bottom: 6 }} />
+            <Entypo name="edit" size={22} color="black" style={{ marginLeft: 10,}} />
           </View>
 
-          {/* Campo para editar o telefone */}
+            <View style={{marginTop:15}}></View>
+            
+            {/* Campo para editar o telefone */}
           <Text style={styles.dados}>Telefone</Text>
           <View style={{ flexDirection: 'row' }}>
             <TextInput
-              style={styles.input}
+              style={styles.input3}
               value={telefone}
               onChangeText={setTelefone}
               keyboardType="phone-pad"
               placeholder="Digite o telefone"
             />
-            <Entypo name="edit" size={22} color="black" style={{ marginLeft: 20, bottom: 6 }} />
+            <Entypo name="edit" size={22} color="black" style={{ marginLeft: 10,}} />
           </View>
 
-          {/* Botão de salvar */}
-          <TouchableOpacity style={styles.saveButton} onPress={update}>
+
+            <View style={{marginTop:15}}></View>
+            
+            <Text style={styles.dados}>Senha</Text>   
+            <TouchableOpacity><Text style={styles.dadosCli}>Trocar minha senha </Text> </TouchableOpacity>
+            
+            <View style={{marginTop:15}}></View>
+
+            <Text style={styles.dados}>CPF</Text> 
+            <Text style={styles.dadosCli}>{user.cpfContratante}</Text>
+
+            <View style={{marginTop:15}}></View> 
+
+            <Text style={styles.dados}>Métodos de pagamento</Text> 
+            <View style={{flexDirection:'row', marginTop:10}}>
+            <Ionicons name="card" size={45} color="black"  style={styles.cartao}/>
+            <Text style={styles.nomeCartao}> Mastercard </Text>
+            </View>
+            <Text style={styles.numeroCartao}> 2589.7845.156.25</Text>
+
+            <Text style={styles.adicionar}>+ Adicionar Cartão </Text>
+
+            <TouchableOpacity style={styles.saveButton} onPress={update}>
             <Text style={styles.saveButtonText}>Salvar</Text>
           </TouchableOpacity>
+
 
         </View>
       </View>

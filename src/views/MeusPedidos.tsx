@@ -189,7 +189,7 @@ const meuHistorico = () =>{
       ) : error ? (
         <Text style={{ color: 'red' }}>{error}</Text>
       ) : pedidos.length === 0 ? (
-        <Text style={{marginTop:20,marginLeft:40}}>Nenhum pedido encontrado.</Text>
+        <Text style={{marginTop:20,marginLeft:30, fontSize: 25,fontWeight:'bold', color:'white'}}>Nenhum pedido encontrado.</Text>
       ) : (
         <ScrollView style={{bottom:20}}>
           {pedidos.map((pedido) => (

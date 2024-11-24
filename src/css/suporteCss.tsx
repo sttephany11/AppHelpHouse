@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     width:350,
     borderRadius:25,
-    marginTop:5,
+    marginTop:20,
     marginLeft:22,
-    flex:1
+    height:450
 },
 TextSuporte:{
     fontSize:32,
@@ -22,7 +22,7 @@ TextSuporte:{
     bottom:35,
 },
 titulo:{
-    fontSize:35,
+    fontSize:37,
     color:'#fff',
     fontWeight:'bold',
     bottom:25,
@@ -30,15 +30,24 @@ titulo:{
 subTitulo:{
     color:'#fff',
     fontWeight:'bold',
-    bottom:25,
-    fontSize:15,
+    bottom:28,
+    fontSize:16,
+    marginTop:10
 },
+subTitulo2:{
+  color:'#004aad',
+  fontWeight:'bold',
+  bottom:25,
+  fontSize:20,
+},
+
 problema:{
-    fontSize:25,
+    fontSize:28,
     fontWeight:'bold',
     color:'#004aad',
     marginLeft:35,
     marginTop:15,
+    marginBottom: 30,
 },
 container: {
     padding: 20,
@@ -67,6 +76,34 @@ container: {
       width:300,
       marginLeft:20,
       bottom:20
+    },
+
+
+    title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 20,
+    },
+    faqItem: {
+      marginBottom: 5,
+      marginLeft:10
+    },
+    questionContainer: {
+      padding: 5,
+      borderRadius: 5,
+      marginBottom: 5,
+    },
+    question: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color:'#0044CC'
+    },
+    answer: {
+      fontSize: 17,
+      color: '#555',
+      paddingHorizontal: 10,
+      fontWeight: 'bold',
+      marginBottom: 20,
     },
 });
 

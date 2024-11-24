@@ -13,7 +13,15 @@ interface Pedido {
   descricaoPedido: string;
   tituloPedido: string;
   contrato: Contrato;
-}
+
+  contratado?:{
+    idContratado:string;
+    nomeContratado:string;
+    };
+
+
+};
+
 
 interface Contrato {
   id: number;
@@ -121,74 +129,74 @@ const MeusContratos: React.FC<{ navigation: any }> = ({ navigation }) => {
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
           <ScrollView>
-            {contratos.map((pedido) =>
+            {contratos.map((pedido) => (
               pedido.contrato ? (
                 <View key={pedido.contrato.id} style={styles.containerPedidos}>
+
                   <View style={styles.tituloFundo}>
                     <Text style={styles.tituloModal}>Comprovante contratual de</Text>
                     <Text style={styles.tituloModal2}>prestação de serviços</Text>
                   </View>
 
-                  <View style={{ justifyContent: 'flex-start', flexDirection: 'row' }}>
-                    <Text style={styles.nomes}>Tipo de serviço:</Text>
-                    <Text style={styles.variaveis}> {pedido.contrato.desc_servicoRealizado}</Text>
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes}>Tipo de serviço:</Text>
+                  <Text style={styles.variaveis}> {pedido.contrato.desc_servicoRealizado}</Text>
                   </View>
 
-                  <View style={{ justifyContent: 'flex-start', flexDirection: 'row' }}>
-                    <Text style={styles.nomes2}>Data marcada:</Text>
-                    <Text style={styles.variaveis2}> {pedido.contrato.data}</Text>
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Data marcada:</Text>
+                  <Text style={styles.variaveis2}> {pedido.contrato.data}</Text>
                   </View>
 
-                  <View style={{ justifyContent: 'flex-start', flexDirection: 'row' }}>
-                    <Text style={styles.nomes2}>Horário:</Text>
-                    <Text style={styles.variaveis2}>{pedido.contrato.hora}</Text>
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Hórario:</Text>
+                  <Text style={styles.variaveis2}>{pedido.contrato.hora}</Text>
                   </View>
 
-                  <View style={{ justifyContent: 'flex-start', flexDirection: 'row' }}>
-                    <Text style={styles.nomes2}>Valor pago:</Text>
-                    <Text style={styles.variaveis2}>R$ {pedido.contrato.valor}</Text>
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Valor pago:</Text>
+                  <Text style={styles.variaveis2}>R$ {pedido.contrato.valor}</Text>
                   </View>
 
-                  <View style={{ justifyContent: 'flex-start', flexDirection: 'row' }}>
-                    <Text style={styles.nomes2}>Forma de pagamento:</Text>
-                    <Text style={styles.variaveis2}>{pedido.contrato.forma_pagamento}</Text>
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Forma de pagamento:</Text>
+                  <Text style={styles.variaveis2}>{pedido.contrato.forma_pagamento}</Text>
                   </View>
 
-                  <View style={{ justifyContent: 'flex-start', flexDirection: 'row', marginTop: 20 }}>
-                    <Text style={styles.nomes2}>Contratante:</Text>
-                    <Text style={styles.variaveis2}>{pedido.contrato.contratante}</Text>
+                  
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row', marginTop:20,}}>
+                  <Text style={styles.nomes2}>Contratante:</Text>
+                  <Text style={styles.variaveis2}>{user.nomeContratante}</Text>
                   </View>
 
-                  <View style={{ justifyContent: 'flex-start', flexDirection: 'row' }}>
-                    <Text style={styles.nomes2}>Contratado:</Text>
-                    <Text style={styles.variaveis2}>{pedido.contrato.contratado}</Text>
+                  <View style={{justifyContent:'flex-start',flexDirection: 'row',}}>
+                  <Text style={styles.nomes2}>Contratado:</Text>
+                  <Text style={styles.variaveis2}>{pedido.contratado?.nomeContratado}</Text>
                   </View>
 
-                  <View
-                    style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      marginTop: 20,
-                      flexDirection: 'row',
-                    }}
+
+                  <View style={{justifyContent:'center', alignItems:'center',marginTop:50,}}>
+                  <Image source={Imagens.logoContrato} />
+                  <Text style={{fontSize:12,}}>Este contrato é autenticado por lei pelo ministério do</Text>
+                  <Text style={{fontSize:12,}}>trabalho e previdência social lei n°150, e válido em </Text>
+                  <Text style={{fontSize:12,}}>casos e alegações legais. </Text>
+                  </View>
+
+                  <View style={{justifyContent:'center', alignItems:'center',marginTop:20,flexDirection: 'row'}}>
+                  <TouchableOpacity style={styles.buttonFinal} onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'aceitar')}>
+                    <Text style={styles.textButtonFinal}> Aceitar </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={styles.buttonFinal2} onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'recusar')}
                   >
-                    <TouchableOpacity
-                      style={styles.buttonFinal}
-                      onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'aceitar')}
-                    >
-                      <Text style={styles.textButtonFinal}>Aceitar</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      style={styles.buttonFinal}
-                      onPress={() => handleAcaoContrato(pedido.idSolicitarPedido, 'recusar')}
-                    >
-                      <Text style={styles.textButtonFinal}>Recusar</Text>
-                    </TouchableOpacity>
+                    <Text style={styles.textButtonFinal2}> Recusar </Text>
+                  </TouchableOpacity>
                   </View>
+
                 </View>
               ) : null
-            )}
+            ))}
+
           </ScrollView>
         )}
       </View>

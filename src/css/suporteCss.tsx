@@ -70,7 +70,7 @@ problema2:{
   fontWeight:'bold',
   color:'#004aad',
   marginLeft:25,
-  marginTop:40,
+  marginTop:110,
   marginBottom: 30,
 },
 container: {

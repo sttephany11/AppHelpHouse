@@ -87,13 +87,14 @@ const styles = StyleSheet.create({
     alignItems:'flex-start',
     width:180,
     height:60,
-    backgroundColor: '#fff',
+    backgroundColor: '#ff914d',
     padding: 8,
     borderRadius: 13,
     marginBottom: 5,
     marginLeft:180,
     zIndex:1,
-    bottom:80
+    bottom:80,
+   
   },
   tab: {
     color: '#fff',
@@ -104,6 +105,13 @@ const styles = StyleSheet.create({
   },
   Texttab: {
     color: '#ff914d',
+    fontSize: 20,
+    top:20,
+    fontWeight:'bold',
+    marginLeft:10,
+  },
+  Texttab2: {
+    color: '#fff',
     fontSize: 20,
     top:20,
     fontWeight:'bold',

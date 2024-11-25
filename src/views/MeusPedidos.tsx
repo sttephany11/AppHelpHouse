@@ -18,6 +18,7 @@ interface Pedido {
   idSolicitarPedido: number;
   tituloPedido: string;
   contratado: Profissional;
+  descricaoPedido: string;
 }
 
 const MeusPedidos: React.FC<{ navigation: any }> = ({ navigation }) => {
@@ -175,7 +176,7 @@ const meuHistorico = () =>{
         </TouchableOpacity>
         </View>
         <View style={styles.tab2}>
-        <Text style={styles.Texttab} onPress={meusContratos}>Contratos</Text>
+        <Text style={styles.Texttab2} onPress={meusContratos}>Contratos</Text>
         </View>
       </View>
 
@@ -200,10 +201,9 @@ const meuHistorico = () =>{
               </Text>
               <Text style={styles.cardLocation}>
               {user.cidadeContratante}, {user.bairroContratante} 
-                <Text style={styles.cardDistance}> à 2 km de você</Text>
               </Text>
-              <Text style={styles.cardDate}>Data e hora: 24/10 às 14:00</Text>
-              <Text style={styles.cardPayment}>Situação do pagamento: Sinal R$50,00</Text>
+              <Text style={styles.cardDate}>Dia da solicitação do serviço 26/11/2024</Text>
+              <Text style={styles.cardPayment}>colocar a descrição pronta</Text>
 
               <TouchableOpacity style={styles.conversarButton}
               onPress={()=>createChatRoom(user.idContratante, pedido.contratado.idContratado, navigation )}>

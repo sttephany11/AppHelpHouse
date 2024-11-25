@@ -63,8 +63,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Suporte"
-        component={Suporte}
+        name="meusPedidos"
+        component={MeusPedidos}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (

@@ -111,7 +111,7 @@ const PedidoScreen: React.FC<{ route: any; navigation: any }> = ({ route, naviga
           Solicitação para <Text style={styles.highlightedText}>{nomeContratado}</Text>
         </Text>
         <Text style={styles.category}>Categoria:</Text>
-        <Text style={styles.location}>São Paulo, {bairroContratado} <Text style={styles.distance}>A 2 km de você</Text></Text>
+        <Text style={styles.location}>São Paulo, {bairroContratado} <Text style={styles.distance}>A 10 km de você</Text></Text>
 
 
         <TextInput

@@ -52,25 +52,9 @@ const List: React.FC<Props> = ({ navigation, route }) => {
   
 
   const [token, setToken] = useState<string | null> (null);
-  const [avaliacao, setAvaliacao] = useState<Avaliacao[]>([]);
-  const [mediaAvaliacoes, setMediaAvaliacoes] = useState<number | null>(null);  
-  const idContratado = data[0]?.idContratado;
-  
 
-    // Chama a API para buscar os serviços
-    useEffect(() => {
-      getServicos(setData, setLoading, setError);
-    }, []);
-  
 
-  //ttestanto filtro de profissionais
 
-    // Função para calcular a média 
-    const calcularMediaAvaliacoes = (avaliacoes: Avaliacao[]) => {
-      if (avaliacoes.length === 0) return null;
-      const soma = avaliacoes.reduce((total, item) => total + item.ratingAvaliacao, 0);
-      return soma / avaliacoes.length;
-    };
    
     // Busca o token armazenado no AsyncStorage
     useEffect(() => {
@@ -90,28 +74,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
       fetchToken();
     }, []);
   
-    // Busca as avaliações e calcula a média
-    useEffect(() => {
-      const fetchAvaliacoes = async () => {
-        try {
-          const response = await api.get(`/avaliacoes/${idContratado}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          });
-          const avaliacoes = response.data.avaliacoes;
-          setAvaliacao(avaliacoes); 
-          setMediaAvaliacoes(calcularMediaAvaliacoes(avaliacoes)); // Calcula e salva a média
-        } catch (error: any) {
-          console.error('Erro ao buscar avaliações:', error.response?.data?.error || 'Erro desconhecido');
-        }
-      };
   
-      if (token) {
-        fetchAvaliacoes();
-      }
-    }, [token, idContratado]);
   
 
 
@@ -280,7 +243,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
               <Picker.Item label="Limpeza pós obra" value="Limpeza pós obra" />
               <Picker.Item label="Pedreiro" value="Pedreiro" />
               <Picker.Item label="Remoção de Entulho" value="Remoção de Entulho" />
-              <Picker.Item label="Diarista" value="Diarista" />
+              <Picker.Item label="Diarista" value="Diarista" /> 
               <Picker.Item label="Mecânico" value="Mecânico" />
               <Picker.Item label="Eletricista" value="Eletricista" />
               <Picker.Item label="Marido de aluguel" value="Marido de aluguel" />
@@ -359,7 +322,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
                         </Text>
 
                         <View style={styles.containerAvaliacao}>
-                        <Text style={styles.media}>Média de avaliações: {mediaAvaliacoes ? mediaAvaliacoes.toFixed(1) : 'Sem avaliações'} <Text style={{fontSize:20}}>⭐</Text></Text>
+                       
                         </View>
 
                         <View style={styles.containerRegiao}>

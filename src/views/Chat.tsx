@@ -60,7 +60,10 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
   const [denuncia, setDenuncia] = useState('');
   const [descricao, setDescricao] = useState('');
 
-  const [isModalVisible, setModalVisible] = useState(false); // Estado do modal
+  const [dataContratado, setDataContratado] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+  //const { nomeContratado, cpfContratado } = dataContratado;
+  const nomeContratado = dataContratado ? dataContratado.nomeContratado : 'Chat';
 
   const [loading, setLoading] = useState(true);
 
@@ -85,6 +88,22 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
   }, []);
 
 
+      // Buscar dados do contratado
+      useEffect(() => {
+        const fetchDataContratado = async () => {
+            setLoading(true);
+            try {
+                const response = await api.get(`/pro/${user.idContratado}`);
+                setDataContratado(response.data);
+            } catch (err: any) {
+                setError(err.message);
+                //Alert.alert('Erro ao buscar dados do Contratado', err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchDataContratado();
+    }, [user.idContratado]);
 
   // Função para buscar mensagens da sala
   const fetchMensagens = async () => {
@@ -134,7 +153,7 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       ]);
       setMensagem('');
     } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
+      //console.error('Erro ao enviar mensagem:', error);
       Alert.alert('Erro', 'Houve um problema ao enviar a mensagem.');
     }
   };
@@ -233,12 +252,12 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         <View style={styles.navChat}>
           <View style={styles.navContent}>
             <View style={styles.navbar}>
-              <Text style={styles.textNav}>Chat</Text>
+              <Text style={styles.textNav}>{nomeContratado}</Text>
   
             </View>
 
             <TouchableOpacity onPress={logoutUser}>
-              <Text style={{ color: 'red', fontWeight: 'bold' }}>Sair</Text>
+              <Text style={{ color: 'red', fontWeight: 'bold',top:20 }}>Sair</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -278,9 +297,9 @@ const Chat: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
               onChangeText={setMensagem}
             />
             <Animated.View style={[styles.enviar, { transform: [{ scale: buttonScale }] }]}>
-              <Pressable onPress={enviarMensagem}>
+              <TouchableOpacity onPress={enviarMensagem}>
                 <Image source={Imagens.iconEnviar} style={styles.icon} />
-              </Pressable>
+              </TouchableOpacity>
             </Animated.View>
           </View>
 

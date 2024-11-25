@@ -322,9 +322,14 @@ const List: React.FC<Props> = ({ navigation, route }) => {
                         </Text>
 
                         <View style={styles.containerAvaliacao}>
-                       
+                          <AntDesign name="staro" size={18} color="black" />
+                          <AntDesign name="staro" size={18} color="black" />
+                          <AntDesign name="staro" size={18} color="black" />
+                          <AntDesign name="staro" size={18} color="black" />
+                          <AntDesign name="staro" size={18} color="black" />
+                          <Text style={styles.textOpinioes}>150 avaliações</Text>
                         </View>
-
+                        
                         <View style={styles.containerRegiao}>
                           <Entypo name="location-pin" size={24} color="red" />
                           <Text style={{top:5}}> {data.regiaoContratado} </Text>

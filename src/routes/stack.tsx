@@ -69,11 +69,11 @@ const Tabs = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image 
-              source={Imagens.iconTabSuporte} 
+              source={Imagens.iconTab4} 
               style={{
-                width: 42, 
+                width: 46, 
                 height: 46, 
-               
+               top:5
               }} 
             />
           ),

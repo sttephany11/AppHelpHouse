@@ -51,6 +51,7 @@ const Imagens = {
    iconTab: require("../assets/iconTab.png"),
    iconTab2: require("../assets/iconTab2.png"),
    iconTab3: require("../assets/iconTab3.png"),
+   iconTab4: require("../assets/iconPedidos.png"),
    iconTabSuporte: require("../assets/iconTabSuporte.png"),
    iconTabSuporte2: require("../assets/iconTabSuporte2.png"),
    //img chat

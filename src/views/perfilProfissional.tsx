@@ -366,7 +366,7 @@ const uploadMedia = async () => {
                   </View>
 
                   <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ color: '#545454', fontWeight: 'bold', bottom: 15, fontSize: 18, marginTop: 15, }}>Fale um pouco sobre o problema </Text>
+                    <Text style={{ color: '#545454', fontWeight: 'bold', bottom: 25, fontSize: 18, marginTop: 15, }}>Fale um pouco sobre o problema </Text>
                   </View>
 
                   <TextInput

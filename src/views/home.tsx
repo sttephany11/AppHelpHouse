@@ -7,6 +7,7 @@ import { useUser } from '../cliContext';
 import myContext from '../functions/authContext';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
+
 const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const { user } = useContext(myContext);
   const { imageUrl } = useImage();

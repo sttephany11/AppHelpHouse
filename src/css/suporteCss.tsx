@@ -127,12 +127,12 @@ container: {
       color: '#555',
       paddingHorizontal: 10,
       fontWeight: 'bold',
-      marginBottom: 20,
+      marginBottom: 10,
     },
 
     iconEmail:{
-marginRight:10,
-bottom:7
+    marginRight:10,
+    bottom:7
     },
     
     iconWhats:{

@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
     },
     adicionar:{
         fontWeight:'bold',
+        marginTop:10,
+        marginBottom:15
     },
     // styles.input e styles.saveButton
 input: {

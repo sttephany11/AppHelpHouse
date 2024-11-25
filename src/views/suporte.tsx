@@ -27,11 +27,11 @@ const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   // Perguntas e respostas
   const faqs = [
-    { question: 'O HelpHouse é seguro? ', answer: 'Nosso horário de atendimento é das 9h às 18h, de segunda a sexta-feira.' },
-    { question: 'Como posso alterar minhas informações? ', answer: 'Você pode entrar em contato pelo telefone ou e-mail disponíveis na nossa página de contato.' },
+    { question: 'O HelpHouse é seguro? ', answer: 'Sim, garantimos segunrança dos seus dados.' },
+    { question: 'Como posso alterar minhas informações? ', answer: 'Você pode entrar na tela de configurações e alterar seus dados.' },
     { question: 'Como cadastrar um cartão de crédito?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
-    { question: 'Como contrato um profissional?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
-    { question: 'Como contrato um profissional?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
+    { question: 'Como contrato um profissional?', answer: 'Pesquisando um profissional cadastrado e fazendo um pedido a ele.' },
+    { question: 'Como visualizo os contratos?', answer: 'Indo no terceiro icon e clicando em contratos.' },
   ];
   
 

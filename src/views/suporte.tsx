@@ -6,7 +6,8 @@ import api from '../../axios';
 import styles from '../css/suporteCss';
 import myContext from '../functions/authContext';
 import Imagens from "../../img/img";
-import { MaterialIcons } from '@expo/vector-icons'; // Expo Icons
+import { MaterialIcons } from '@expo/vector-icons'; 
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
@@ -26,11 +27,11 @@ const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   // Perguntas e respostas
   const faqs = [
-    { question: 'O HelpHouse é seguro? ', answer: 'Nosso horário de atendimento é das 9h às 18h, de segunda a sexta-feira.' },
-    { question: 'Como posso alterar minhas informações? ', answer: 'Você pode entrar em contato pelo telefone ou e-mail disponíveis na nossa página de contato.' },
+    { question: 'O HelpHouse é seguro? ', answer: 'Sim, garantimos segunrança dos seus dados.' },
+    { question: 'Como posso alterar minhas informações? ', answer: 'Você pode entrar na tela de configurações e alterar seus dados.' },
     { question: 'Como cadastrar um cartão de crédito?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
-    { question: 'Como contrato um profissional?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
-    { question: 'Como contrato um profissional?', answer: 'Aceitamos cartões de crédito, débito e transferências bancárias.' },
+    { question: 'Como contrato um profissional?', answer: 'Pesquisando um profissional cadastrado e fazendo um pedido a ele.' },
+    { question: 'Como visualizo os contratos?', answer: 'Indo no terceiro icon e clicando em contratos.' },
   ];
   
 
@@ -51,8 +52,8 @@ const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
 
     <View style={{alignItems:'center', justifyContent:'center'}}>
     <Text style={styles.titulo}>Precisa de ajuda?</Text>
-    <Text style={styles.subTitulo}>Entre em contato conosco através do nosso email:</Text>
-    <Text style={styles.subTitulo2}>sevensevensoraul77@gmail.com</Text>
+    <Text style={styles.subTitulo}>Encontre sua dúvida aqui ou entre em contato conosco!</Text>
+    
     </View>
 
 
@@ -76,7 +77,20 @@ const Suporte: React.FC<{ navigation: any }> = ({ navigation }) => {
         </View>
 
 
+        <Text style={styles.problema2}>Não achou o que procurava?</Text>
+        <View style={{justifyContent:'center', alignItems:'center'}}> 
+        <Text style={styles.subTitulo3}>Entre em contato conosco através dos canais:</Text>
 
+        <View style={{flexDirection:'row', marginTop:5}}>
+        <Icon name="envelope" size={20} color="black" style={styles.iconEmail}/>
+        <Text style={styles.subTitulo2}>sevensevensoraul77@gmail.com</Text>
+        </View>
+        
+        <View style={{flexDirection:'row'}}>
+        <Icon name="whatsapp" size={30} color="green" style={styles.iconWhats} />
+        <Text style={styles.subTitulo4}>1197777-7777</Text>
+        </View>
+        </View>
 
       </View>
 

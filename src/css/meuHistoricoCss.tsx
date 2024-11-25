@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     zIndex:2,
     marginRight:20,
-    marginTop:40,
+    marginTop:75,
   },
 
   textNav:{

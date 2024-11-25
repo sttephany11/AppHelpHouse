@@ -52,7 +52,7 @@ containerPedidos:{
   backgroundColor:'#e9e9e7',
   marginLeft:15,
   marginTop:10,
-
+  borderRadius: 20,
 },
 botaoAceitar: {
   backgroundColor: 'green',
@@ -77,6 +77,8 @@ tituloFundo:{
   alignItems:'center',
   width:340,
   height:50,
+  borderTopLeftRadius: 20, 
+  borderTopRightRadius: 20,
 },
 tituloModal:{
   color:'#fff',

@@ -176,6 +176,7 @@ const MeuHistorico: React.FC<{ navigation: any }> = ({ navigation }) => {
             <Text style={styles.Texttab}>Pedidos finalizados</Text>
           </View>
         </View>
+        <View style={{marginTop:20}}></View>
 
         {loading ? (
           <ActivityIndicator size="large" color="#0000ff" />

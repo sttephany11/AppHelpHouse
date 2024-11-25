@@ -248,12 +248,15 @@ const uploadMedia = async () => {
        setUploading(false);
    }
 };
+  const voltarPro = () => {
+    navigation.navigate('profissionais');
+  };
 
   return (
     <ScrollView>
       <View style={styles.containerCapaFundo}>
         <TouchableOpacity>
-          <Image source={Imagens.fotoFundo} style={styles.capaFundo} />
+          <Image source={Imagens.fotoFundo2} style={styles.capaFundo} />
         </TouchableOpacity>
       </View>
 
@@ -269,11 +272,14 @@ const uploadMedia = async () => {
           <Image source={imagemContratado ? { uri: imagemContratado } : Imagens.perfilUsuario4} style={styles.imgPerfil} />
         </TouchableOpacity>
 
+        <AntDesign name="leftcircle" size={30} color="#fff" style={{ marginLeft: 15, bottom:410 }} onPress={voltarPro} />
+
         <Text style={styles.nome}>{nomeContratado} {sobrenomeContratado}</Text>
-        <Text style={styles.textBiografia}>
-          <Text style={{color:'#004aad', fontSize:16, marginBottom:10}}>{profissaoContratado}{'\n'}</Text>
-          {descContratado}
-        </Text>
+        <View style={styles.textBiografia}>
+          <Text style={{color:'#004aad', fontSize:18, fontWeight:'bold',bottom:25,}}>{profissaoContratado}{'\n'}</Text>
+          <Text style={{bottom:40,fontSize:16,}}>{descContratado}
+          </Text> 
+          </View>
         <Text style={styles.textLocalizacao}>
           <Entypo name="location-pin" size={24} color="red" />
           Atua em {cidadeContratado}, {bairroContratado}
@@ -287,9 +293,9 @@ const uploadMedia = async () => {
         <Text style={styles.vejaMais}>Veja mais de {nomeContratado}</Text>
         <View style={styles.containerVerical}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity><Image source={portifilioPro1 ? {uri: portifilioPro1} : Imagens.imgPortifolio} style={styles.fotosRolagem}/></TouchableOpacity>
-            <TouchableOpacity><Image source={portifilioPro2 ? {uri: portifilioPro2} : Imagens.imgPortifolio} style={styles.fotosRolagem}/></TouchableOpacity>
-            <TouchableOpacity><Image source={portifilioPro3 ? {uri: portifilioPro3} : Imagens.imgPortifolio} style={styles.fotosRolagem}/></TouchableOpacity>
+            <TouchableOpacity><Image source={portifilioPro1 ? {uri: portifilioPro1} : Imagens.imgPortifolio2} style={styles.fotosRolagem}/></TouchableOpacity>
+            <TouchableOpacity><Image source={portifilioPro2 ? {uri: portifilioPro2} : Imagens.imgPortifolio2} style={styles.fotosRolagem}/></TouchableOpacity>
+            <TouchableOpacity><Image source={portifilioPro3 ? {uri: portifilioPro3} : Imagens.imgPortifolio2} style={styles.fotosRolagem}/></TouchableOpacity>
           </ScrollView>
         </View>
 
@@ -344,7 +350,7 @@ const uploadMedia = async () => {
                   </Text>
 
                   <View style={styles.container2}>
-                  {['pagamentos', 'comportamento', 'inacabado', 'outros'].map((category) => (
+                  {['pagamentos', 'comportamento', 'inacabado', 'assédio', 'outros'].map((category) => (
                           <View style={styles.checkboxContainer} key={category}>
                             <Pressable onPress={() => handleCheckboxChange(category)}>
                               {selectedOptions[category] ? (
@@ -360,7 +366,7 @@ const uploadMedia = async () => {
                   </View>
 
                   <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ color: '#545454', fontWeight: 'bold', bottom: 15, fontSize: 18, marginTop: 15, }}>Fale um pouco sobre o problema </Text>
+                    <Text style={{ color: '#545454', fontWeight: 'bold', bottom: 25, fontSize: 18, marginTop: 15, }}>Fale um pouco sobre o problema </Text>
                   </View>
 
                   <TextInput

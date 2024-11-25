@@ -35,6 +35,7 @@ const Imagens = {
     iconLocalizacaoPerfil: require("../assets/imgApp/iconLocalizacaoPerfil.png"),
     //tela de perfil do profissional
     fotoFundo: require("../assets/imgApp/fotoFundo.jpg"),
+    fotoFundo2: require("../assets/imgApp/fundoPerfilPro.png"),
     perfil2:require("../assets/imgApp/perfil2.png"),
    perfilUsuario:require("../assets/perfilUsuario.jpg"),
    perfilUsuario3:require("../assets/perfilUsuario3.png"),
@@ -50,11 +51,15 @@ const Imagens = {
    iconTab: require("../assets/iconTab.png"),
    iconTab2: require("../assets/iconTab2.png"),
    iconTab3: require("../assets/iconTab3.png"),
+   iconTab4: require("../assets/iconPedidos.png"),
+   iconTabSuporte: require("../assets/iconTabSuporte.png"),
+   iconTabSuporte2: require("../assets/iconTabSuporte2.png"),
    //img chat
    iconEnviar:require("../assets/iconEnviar.png"),
    cartao:require("../assets/imgApp/cartao.png"),
    imgPortifolio:require("../assets/imgApp/mais.png"),
    logoContrato:require("../assets/logoContrato.png"),
+   imgPortifolio2:require("../assets/imgApp/imgPortifolio2.png"),
    
 }
 export default Imagens;

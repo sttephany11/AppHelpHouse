@@ -63,17 +63,17 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="PerfilScreen"
-        component={TelaPerfilScreen}
+        name="meusPedidos"
+        component={MeusPedidos}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image 
-              source={Imagens.iconTab3} 
+              source={Imagens.iconTab4} 
               style={{
                 width: 46, 
                 height: 46, 
-               
+               top:5
               }} 
             />
           ),
@@ -85,7 +85,7 @@ const Tabs = () => {
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <Image source={Imagens.iconTab2} style={{ width: 44, height: 40 }} />
+            <Image source={Imagens.iconTab2} style={{ width: 42, height: 40 }} />
           ),
         }} 
       />

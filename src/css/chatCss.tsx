@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
+    top:20
   },
   textNav: {
     fontSize: 25,

@@ -135,12 +135,7 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
             <View style={{marginTop:15}}></View> 
 
             <Text style={styles.dados}>Métodos de pagamento</Text> 
-            <View style={{flexDirection:'row', marginTop:10}}>
-            <Ionicons name="card" size={45} color="black"  style={styles.cartao}/>
-            <Text style={styles.nomeCartao}> Mastercard </Text>
-            </View>
-            <Text style={styles.numeroCartao}> 2589.7845.156.25</Text>
-
+           
             <Text style={styles.adicionar}>+ Adicionar Cartão </Text>
 
             <TouchableOpacity style={styles.saveButton} onPress={update}>

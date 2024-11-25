@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
         fontSize:25,
         fontWeight:'bold',
         color:'black',
-        bottom: 110,
+        bottom: 140,
         marginTop:15,
         marginLeft:20
     },
     textLocalizacao:{
-        bottom: 110,
+        bottom: 150,
         marginLeft:15,
         marginTop:5,
     },
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         fontSize:22,
         fontWeight:'bold',
         color:'black',
-        bottom: 110,
+        bottom: 140,
         marginTop:40,
         marginLeft:25
     },
@@ -74,14 +74,15 @@ const styles = StyleSheet.create({
     containerVerical:{
     justifyContent:'center',
     flexDirection:'row',
-    bottom: 90,
+    bottom: 120,
    
     },
 
     fotosRolagem:{
         width:150,
         height:150,
-        marginLeft:15
+        marginLeft:15,
+        borderRadius:20
     },
     fotosRolagem2:{
         width:150,
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     },
 
     textMedia:{
-        bottom:95,
+        bottom:130,
         marginLeft:18,
         fontSize:12
     },

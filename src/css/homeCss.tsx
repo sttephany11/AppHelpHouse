@@ -74,19 +74,13 @@ const styles = StyleSheet.create({
       },
 
       //butons profissoes com rolagem lateral
-      buttonProfissoes:{
-        backgroundColor:'#ede6e6',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        borderRadius:25,
-      },
-
+    
       buttonProfissoes2:{
         backgroundColor:'#ede6e6',
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius:25,
-        marginLeft:10
+        marginLeft:10,
       },
 
       textButton:{
@@ -198,7 +192,19 @@ const styles = StyleSheet.create({
         fontSize:17,
         color:'#3669a4',
       },
-
+      pontoPai:{
+        flexDirection : 'row',
+        justifyContent:'center',
+        marginTop:20,
+        top:5,
+        zIndex:10
+    },
+    ponto:{
+        width:10,
+        height:10,
+        borderRadius:5,
+        marginHorizontal:4
+    }
 
 });
 export default styles;

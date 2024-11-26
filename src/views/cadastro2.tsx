@@ -116,12 +116,14 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
     };
 
     return (
+        
             <View style={styles.fundo}>
                 <View style={styles.containerCadastro}>
                     <View style={styles.title}>
                         <Text style={styles.titulo2}>Para finalizar,<Text style={styles.passos}> adicione </Text><Text style={styles.passos}>seu endereço</Text></Text>
                     </View>
-                    
+
+                     
                     <View style={styles.input}>
                     
                         
@@ -197,8 +199,10 @@ const CadastroScreen2: React.FC<{ route: any; navigation: any }> = ({ route, nav
                             <Text style={styles.buttonText2}>Finalizar</Text>
                         </TouchableOpacity>
                     </View>
+                   
                 </View>
             </View>
+       
         
     );
 };

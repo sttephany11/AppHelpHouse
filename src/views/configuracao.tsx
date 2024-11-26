@@ -115,7 +115,8 @@ const Configuracao: React.FC<{ navigation: any }> = ({ navigation }) => {
               style={styles.input3}
               value={telefone}
               onChangeText={setTelefone}
-              keyboardType="phone-pad"
+              keyboardType="numeric"
+              returnKeyType='done'
               placeholder="Digite o telefone"
             />
             <Entypo name="edit" size={22} color="black" style={{ marginLeft: 10,}} />

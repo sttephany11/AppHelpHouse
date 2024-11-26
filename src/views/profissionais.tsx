@@ -11,7 +11,8 @@ import Imagens from "../../img/img";
 import api from '../../axios';
 import myContext from '../functions/authContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getServicos } from "../functions/getServico";
+import DropDownPicker from 'react-native-dropdown-picker';
+import { LogBox } from 'react-native';
 
 interface Profissional {
   bairroContratado: any;
@@ -47,13 +48,11 @@ const List: React.FC<Props> = ({ navigation, route }) => {
   const [data, setData] = useState<Profissional[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  const [idServicos, setIdServicos] = useState<string | number>(1);
+ 
   const [isModalVisible, setModalVisible] = useState(false); // Estado do modal
   
 
   const [token, setToken] = useState<string | null> (null);
-
-
 
    
     // Busca o token armazenado no AsyncStorage
@@ -74,7 +73,9 @@ const List: React.FC<Props> = ({ navigation, route }) => {
       fetchToken();
     }, []);
   
-  
+    LogBox.ignoreLogs([
+      'VirtualizedLists should never be nested inside plain ScrollViews',
+    ]);
   
 
 
@@ -93,6 +94,27 @@ const List: React.FC<Props> = ({ navigation, route }) => {
   const [profissaoSelecionada, setProfissaoSelecionada] = useState<string>("");
   const [searchName, setSearchName] = useState<string>("");
 
+ //const do select novo
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+      { label: 'Encanador', value: 'Encanador' },
+      { label: 'Instalador de Papel de Parede', value: 'Instalador de Papel de Parede' },
+      { label: 'Jardineiro', value: 'Jardineiro' },
+      { label: 'Montador de Móveis', value: 'Montador de Móveis' },
+      { label: 'Pedreiro', value: 'Pedreiro' },
+      { label: 'Pintor', value: 'Pintor' },
+      { label: 'Engenheiro', value: 'Engenheiro' },
+      { label: 'Limpeza pós obra', value: 'Limpeza pós obra' },
+      { label: 'Remoção de Entulho', value: 'Remoção de Entulho' },
+      { label: 'Diarista', value: 'Diarista' },
+      { label: 'Mecânico', value: 'Mecânico' },
+      { label: 'Marido de aluguel', value: 'Marido de aluguel' },
+      { label: 'Costureira', value: 'Costureira' },
+      { label: 'Babá', value: 'Babá' },
+      { label: 'Personal Organizer', value: 'Personal Organizer' },
+
+    ]);
 
   useEffect(() => {
     const { profissao } = route.params || {};  // Extrai a profissão enviada 
@@ -177,7 +199,9 @@ const List: React.FC<Props> = ({ navigation, route }) => {
 
               <View style={styles.inputFront}></View> 
           <Text style={styles.filtro3}>Profissionais na área de <Text style={styles.area}>{profissaoSelecionada}</Text></Text>
-
+          <View style={{ justifyContent:'center'}}>
+          <Text style={styles.click}>Clique na foto do profissional para explorar      seu perfil! </Text>
+          </View>
             
              {/* mODALLL DE FILTROOO */}
           
@@ -227,33 +251,26 @@ const List: React.FC<Props> = ({ navigation, route }) => {
           {/* Profissões */}
           <Text style={styles.tituloselect2}>Categoria:</Text>
           <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={profissaoSelecionada}
-              onValueChange={(itemValue) => setProfissaoSelecionada(itemValue)}
-              style={{ height: 30, width: 300 , bottom:34}}
-            >
-              <Picker.Item label="Selecione" value="" />
-              <Picker.Item label="Encanador" value="Encanador" />
-              <Picker.Item label="Instalador de Papel de Parede" value="Instalador de Papel de Parede" />
-              <Picker.Item label="Jardineiro" value="Jardineiro" />
-              <Picker.Item label="Montador de Móveis" value="Montador de Móveis" />
-              <Picker.Item label="Construtor" value="Construtor" />
-              <Picker.Item label="Pintor" value="Pintor" />
-              <Picker.Item label="Engenheiro" value="Engenheiro" />
-              <Picker.Item label="Limpeza pós obra" value="Limpeza pós obra" />
-              <Picker.Item label="Pedreiro" value="Pedreiro" />
-              <Picker.Item label="Remoção de Entulho" value="Remoção de Entulho" />
-              <Picker.Item label="Diarista" value="Diarista" /> 
-              <Picker.Item label="Mecânico" value="Mecânico" />
-              <Picker.Item label="Eletricista" value="Eletricista" />
-              <Picker.Item label="Marido de aluguel" value="Marido de aluguel" />
-            </Picker>
+          <DropDownPicker
+          open={open}
+          value={profissaoSelecionada} // Sincroniza com o estado profissaoSelecionada
+          items={items}
+          setOpen={setOpen}
+          setValue={(val) => {
+            setValue(val); // Atualiza o valor interno do DropDownPicker
+            setProfissaoSelecionada(val || ""); // Atualiza a lógica de seleção existente
+          }}
+          setItems={setItems}
+          placeholder="Selecione sua profissão"
+          style={styles.dropdown}
+          dropDownContainerStyle={[styles.dropdownContainer, { width: 30 }]}
+        />
           </View>
 
-          <View style={styles.margin3}></View>
+
             
          
-          <View style={{justifyContent:'center', marginTop:20}}>
+          <View style={{justifyContent:'center', marginTop:10}}>
           <Text style={styles.tituloselectInput}>Se preferir, pesquise pelo nome do seu profissional</Text>
           <TextInput
             placeholder="Nome"
@@ -264,7 +281,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
           />
            </View>
       
-
+          <View style={styles.margin3}></View>
         
               <TouchableOpacity style={styles.button2} onPress={toggleModal}>
                 <Text style={styles.buttonText2}>Pesquisar</Text>
@@ -321,15 +338,7 @@ const List: React.FC<Props> = ({ navigation, route }) => {
                           {data.profissaoContratado}
                         </Text>
 
-                        <View style={styles.containerAvaliacao}>
-                          <AntDesign name="staro" size={18} color="black" />
-                          <AntDesign name="staro" size={18} color="black" />
-                          <AntDesign name="staro" size={18} color="black" />
-                          <AntDesign name="staro" size={18} color="black" />
-                          <AntDesign name="staro" size={18} color="black" />
-                          <Text style={styles.textOpinioes}>150 avaliações</Text>
-                        </View>
-                        
+
                         <View style={styles.containerRegiao}>
                           <Entypo name="location-pin" size={24} color="red" />
                           <Text style={{top:5}}> {data.regiaoContratado} </Text>

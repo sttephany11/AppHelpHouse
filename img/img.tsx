@@ -60,6 +60,8 @@ const Imagens = {
    imgPortifolio:require("../assets/imgApp/mais.png"),
    logoContrato:require("../assets/logoContrato.png"),
    imgPortifolio2:require("../assets/imgApp/imgPortifolio2.png"),
+   iconTeste:require("../assets/iconTeste.png"),
+   iconTeste2:require("../assets/iconTeste2.png"),
    
 }
 export default Imagens;

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: '#fff',
     fontWeight: 'bold',
-    left:215,
+    left:200,
     top:40
 
   },
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     fontSize: 23,
     color: '#fff',
     fontWeight: 'bold',
-    marginLeft:300,
+    marginLeft:290,
     zIndex:2,
     position:'absolute',
-    top: 55,
+    top: 52,
   },
   containerCadastro: {
     width: '100%',

@@ -56,7 +56,8 @@ const Cadastro: React.FC<{ route: any, navigation: any }> = ({ route, navigation
 
                         {/* Nome */}
                         <Text style={styles.title3}>Nome</Text>
-                        <TextInput placeholder="Digite seu nome..."
+                        <TextInput
+                         placeholder="Digite seu nome..."
                             value={nomeContratante}
                             onChangeText={value => setNomeContratante(value)}
                             style={styles.input3}

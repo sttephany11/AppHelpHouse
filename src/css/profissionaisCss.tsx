@@ -66,9 +66,9 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         width:310,
-        height:150,
+        height:120,
         backgroundColor:'#e9e9e7',
-        marginLeft:28,
+        marginLeft:30,
         marginTop:20,
         borderRadius:25,
         top:5,
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
         width:60,
         height:60,
         borderRadius:50,
+        top:14
       },
       containerDados:{
         width:300,
@@ -90,14 +91,14 @@ const styles = StyleSheet.create({
       },
       NomeProfissional:{
         fontWeight:'bold',
-        fontSize:17,
+        fontSize:19,
         marginLeft:80,
-        bottom:55,
+        bottom:40,
      
       },
       descrPerfil:{
         marginLeft:80,
-        bottom:50,
+        bottom:35,
         //fontWeight:'bold',
       },
 
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
       //parte da regiao
       containerRegiao:{
         flexDirection:'row',
-        bottom:20,
+        bottom:15,
         marginRight:170,
         fontWeight:'bold'
       },
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
       filtro3:{
         color:'black',
         fontWeight:'bold',
-        fontSize:17,
+        fontSize:18,
         marginLeft:35,
        
       },
@@ -196,8 +197,8 @@ const styles = StyleSheet.create({
         marginBottom:5
        },
        pickerContainer:{
-        marginLeft:30,
-       color:'black'
+        marginLeft:17,
+        color:'black'
        },
        marginCheck:{
         marginTop:10,
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
         marginTop:20,
        },
        margin3:{
-        marginTop:90
+        marginTop:20
        },
     
           
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
       fontSize:16,
       color:'black',
       paddingHorizontal:10,
-      width:300,
+      width:330,
       marginLeft:15,
       marginTop:10,
      
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
     //MODAL
    
       modal: {
-      height: 570, 
+      height: 550, 
       backgroundColor: '#fff',
       borderRadius:20,
       marginTop:"40%",
@@ -266,7 +267,7 @@ const styles = StyleSheet.create({
       button2:{
         backgroundColor:'#ff914d',
         borderRadius:25,
-        height:30,
+        height:38,
         justifyContent:'center',
         alignItems:'center',
         marginTop:20,
@@ -311,7 +312,21 @@ const styles = StyleSheet.create({
         marginTop:5,
         bottom:15,
         },
-  
+        click:{
+          color:'black',
+          fontWeight:'bold',
+          fontSize:15,
+          marginLeft:30,
+          marginTop:15
+        },
+        dropdown: {
+          backgroundColor: '#f0f0f0',
+          width:330,
+        },
+        dropdownContainer: {
+          backgroundColor: '#ffffff',
+       
+        },
 
 });
 

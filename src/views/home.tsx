@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, Image, ImageBackground, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import { View, Text, Image, ImageBackground, TouchableOpacity, FlatList, Dimensions,ScrollView } from 'react-native';
 import Imagens from "../../img/img";
 import styles from '../css/homeCss';
 import { useImage } from '../ImageContext.js';
@@ -34,13 +34,19 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     { id: '5', nome: 'Pedreiro', estilo: styles.buttonProfissoes2 },
     { id: '6', nome: 'Chaveiro', estilo: styles.buttonProfissoes2 },
     { id: '7', nome: 'Encanador', estilo: styles.buttonProfissoes2 },
-    { id: '8', nome: 'Eletricista', estilo: styles.buttonProfissoes2 },
-    { id: '9', nome: 'Montador de Móveis', estilo: styles.buttonProfissoes2 },
-    { id: '10', nome: 'Mecânico', estilo: styles.buttonProfissoes2 },
-    { id: '11', nome: 'Costureira', estilo: styles.buttonProfissoes2 },
-    { id: '12', nome: 'Babá', estilo: styles.buttonProfissoes2 },
-    { id: '13', nome: 'Personal Organizer', estilo: styles.buttonProfissoes2 },
+   
   ];
+    // Array de profissões
+    const profissoes1 = [
+
+      { id: '8', nome: 'Eletricista', estilo: styles.buttonProfissoes2 },
+      { id: '9', nome: 'Montador de Móveis', estilo: styles.buttonProfissoes2 },
+      { id: '10', nome: 'Mecânico', estilo: styles.buttonProfissoes2 },
+      { id: '11', nome: 'Costureira', estilo: styles.buttonProfissoes2 },
+      { id: '12', nome: 'Babá', estilo: styles.buttonProfissoes2 },
+      { id: '13', nome: 'Personal Organizer', estilo: styles.buttonProfissoes2 },
+    ];
+     
    
   const { width } = Dimensions.get('window');
 
@@ -53,7 +59,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       style={styles.background}
       resizeMode="cover"
     >
-      <View>
+      <ScrollView>
 
         <View style={styles.containerBoasVindas}>
           <Text style={styles.boasVindas}>Olá, {user.nomeContratante}</Text>
@@ -74,6 +80,31 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
           <FlatList
             data={profissoes}
+            keyExtractor={(item) => item.id}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={item.estilo}
+                onPress={() => navigateToProfessionals(item.nome)}
+              >
+                <Text style={styles.textButton}>{item.nome}</Text>
+              </TouchableOpacity>
+            )}
+            pagingEnabled
+            onMomentumScrollEnd={(event) => {
+              const currentIndex = Math.round(event.nativeEvent.contentOffset.x / width);
+              setPontinho(currentIndex);
+            }}
+            scrollEventThrottle={16}
+            contentContainerStyle={{
+              marginTop: 20,
+              paddingHorizontal: 2,
+            }}
+          />
+        
+          <FlatList
+            data={profissoes1}
             keyExtractor={(item) => item.id}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -139,7 +170,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </ImageBackground>
   );
 };
